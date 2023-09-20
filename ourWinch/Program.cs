@@ -1,5 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// Set the server to listen on localhost:5002
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenLocalhost(5002);
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -22,6 +28,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();
