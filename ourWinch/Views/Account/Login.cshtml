@@ -31,6 +31,7 @@
         padding: 25px;
         box-shadow: 7px 7px 12px rgba(0, 0, 0, 0.3);
         border-radius: 8px;
+        background-color: #C0D0D7;
     }
 
     .login-header {
@@ -95,28 +96,27 @@
 
             <!-- Yeni eklenen başlıklar -->
             <h2 class="text-center mb-2 font-weight-bold">Login</h2>
-            <p class="text-center mb-5">Sign in to your account</p>
+            <p class="text-center mb-5">Logg på kontoen din</p>
 
             <form asp-action="Login" asp-controller="Account" method="post">
                 <!-- Username input -->
                 <div class="form-group position-relative">
                     <i class="fas fa-user position-absolute" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
-                    <input type="email" class="form-control pl-5" id="Email" asp-for="Email" required placeholder="Username">
+                    <input type="mobil" class="form-control pl-5" id="mobil" asp-for="Mobil" required placeholder="Mobil No">
                 </div>
 
                 <!-- Password input -->
                 <div class="form-group position-relative">
-                    <i class="fas fa-lock position-absolute" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
-                    <input type="password" class="form-control pl-5" id="Password" asp-for="Password" required placeholder="Password">
+                    <i class="fas fa-key position-absolute" style="top: 50%; left: 10px; transform: translateY(-50%);"></i>
+                    <input type="password" class="form-control pl-5 rounded-lg" id="Password" asp-for="Password" required placeholder="Password">
                 </div>
-
                 <!-- Submit button -->
                 <div class="form-group mt-4 mb-1">
                     <input type="submit" class="form-control pl-5 btn-outline-dark btn-block btn btn-hover" value="Login">
                 </div>
 
                 <div class="text-right">
-                    <a href="#">I forgot my password</a>
+                    <a href="#">Jeg glemte passordet mitt</a>
                 </div>
 
                 <div class="form-group mt-5">

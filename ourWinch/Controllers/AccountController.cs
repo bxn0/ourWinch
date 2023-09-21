@@ -14,7 +14,7 @@ public class AccountController : Controller
         if (ModelState.IsValid)
         {
             // Örnek olarak:
-            if (model.Email == "test@test.com" && model.Password == "12345")
+            if (model.Mobil == "test@test.com" && model.Password == "12345")
             {
                 return RedirectToAction("Index", "Home"); // Başarılı giriş sonrası yönlendirme
             }
