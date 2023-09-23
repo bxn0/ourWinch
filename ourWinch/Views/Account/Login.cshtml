@@ -71,6 +71,18 @@
         margin-bottom: 20px;
     }
 
+    .error-message strong {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 20px;
+        margin-right: 10px;
+    }
+
 </style>
 
 <main class="container mt-6 text-center">
@@ -105,3 +117,32 @@
         </div>
     </div>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const errorMsg = document.createElement("div");
+        errorMsg.className = "error-message";
+        errorMsg.style.color = "red";
+        errorMsg.style.marginTop = "10px";
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const usernameInput = document.querySelector("#mobil").value;
+            const passwordInput = document.querySelector("#Password").value;
+
+            const mockUsername = "123456";
+            const mockPassword = "password";
+
+            if (usernameInput === mockUsername && passwordInput === mockPassword) {
+                window.location.href = "/home";
+            } else {
+                errorMsg.innerHTML = `
+                    <strong>X</strong> Feil mobil nummer eller password! Password må være på minst 8 tegn! Prøv igjen!
+                `;
+                form.appendChild(errorMsg);  // Hata mesajını formun en altına ekliyor.
+            }
+        });
+    });
+</script>
