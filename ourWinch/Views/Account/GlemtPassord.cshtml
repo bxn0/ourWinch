@@ -47,13 +47,18 @@
             <form asp-action="SendCode" asp-controller="Account" method="post">
                 <div class="form-group position-relative m-5  mb-1">
                     <i class="fas fa-user position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
-                    <input type="tel" class="form-control pl-5" id="mobil" asp-for="Mobil" required placeholder="     Mobil No"> <!-- Placeholder içerisine boşluk ekleyerek yazıyı sağa kaydırdım -->
+                    <input type="tel" class="form-control pl-5 text-center" id="mobil" asp-for="Mobil" required placeholder="     Mobil No"> <!-- Placeholder içerisine boşluk ekleyerek yazıyı sağa kaydırdım -->
                 </div>
 
                 <!-- Kode Gönder Butonu -->
                 <div class="form-group mt-4 mb-1 m-5">
                     <input type="submit" class="form-control pl-5 btn-outline-dark btn-bg-primary btn-block btn btn-hover" style="background-color: #4945F9; color: white; border-radius: 5px;" value="Send Innloggingskode">
                 </div>
+                @if (ViewBag.CodeSent == true)
+                {
+                    <p class="text-success">Koden din er sendt! Vennligst sjekk telefonen din og skriv inn koden nedenfor.</p>
+                }
+
             </form>
 
             <!-- Kodenin girileceği bölüm -->
@@ -75,3 +80,9 @@
         </div>
     </div>
 </main>
+
+<script>
+    document.querySelector(".send-label").addEventListener("click", function () {
+        this.closest("form").submit();
+    });
+</script>

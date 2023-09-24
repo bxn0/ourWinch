@@ -4,10 +4,10 @@ public class ResetPasswordViewModel
 {
     [Required]
     [DataType(DataType.Password)]
-    public string NewPassword { get; set; }
+    public string? NewPassword { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
-    [Compare("NewPassword")]
-    public string ConfirmPassword { get; set; }
+    [Compare("NewPassword", ErrorMessage = "Wrong password.")]
+    public string? ConfirmPassword { get; set; }
 }

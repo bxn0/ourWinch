@@ -2,6 +2,40 @@
 
 public class AccountController : Controller
 {
+    private static string VerificationCode = "123456"; // Bu kısmı JavaScript'te belirttiğiniz değere göre güncelledim.
+
+    [HttpPost]
+    public IActionResult SendCode(ForgotPasswordViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            ViewBag.CodeSent = true;
+        }
+        return View("GlemtPassord", model);
+    }
+
+    [HttpPost]
+    public IActionResult VerifyCode(string code)
+    {
+        if (code == VerificationCode)
+        {
+            return RedirectToAction("ResetPassword");
+        }
+        ViewBag.ErrorMessage = "VerifyCode Wrong!";
+        return View("ResetPassword");
+    }
+
+
+    [HttpPost]
+    public IActionResult ResetPassword(ResetPasswordViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            return RedirectToAction("Login");
+        }
+        return View(model);
+    }
+
     public IActionResult Login()
     {
         return View();
@@ -10,75 +44,22 @@ public class AccountController : Controller
     [HttpPost]
     public IActionResult Login(LoginViewModel model)
     {
-        // Giriş işlemleri burada gerçekleştirilir.
         if (ModelState.IsValid)
         {
-            // Örnek olarak:
-            if (model.Mobil == "123456" && model.Password == "password")
+            if (model.Mobil == "123456" && model.Password == "password") // Burası JavaScript kodu ile uyumlu.
             {
-                return RedirectToAction("Index", "Dashboard"); // Başarılı giriş sonrası yönlendirme
+                return RedirectToAction("Index", "Dashboard");
             }
             else
             {
-                ModelState.AddModelError("", "Geçersiz giriş denemesi.");
+                ViewBag.ErrorMessage = "Feil mobil nummer eller password! Password må være på minst 8 tegn! Prøv igjen!";
             }
         }
-
         return View(model);
     }
 
-    //! Glemt Passord
-
-    [HttpGet]
     public IActionResult GlemtPassord()
     {
         return View();
     }
-
-    [HttpPost]
-    public IActionResult SendCode(ForgotPasswordViewModel model)
-    {
-        if (ModelState.IsValid)
-        {
-            // Simüle edilmiş kod gönderme. Gerçekte bir SMS API'si kullanarak telefon numarasına bir kod gönderilir.
-            TempData["VerificationCode"] = "1234"; // Örnek olarak sabit bir kod kullandım.
-            TempData["UserMobil"] = model.Mobil;
-            return RedirectToAction("VerifyCode");
-        }
-        return View("GlemtPassord", model);
-    }
-
-    [HttpGet]
-    public IActionResult VerifyCode()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult VerifyCode(string code)
-    {
-        if (code == TempData["VerificationCode"].ToString())
-        {
-            return RedirectToAction("ResetPassword");
-        }
-        ModelState.AddModelError("", "Feil kode. Vennligst prøv igjen.");
-        return View();
-    }
-
-    [HttpGet]
-    public IActionResult ResetPassword()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult ResetPassword(ResetPasswordViewModel model)
-    {
-        if (ModelState.IsValid)
-        {
-            // TODO: Kullanıcının şifresini güncelleyin.
-            return RedirectToAction("Login");
-        }
-        return View(model);
-    }
-} // Bu satırdaki süslü parantezi kaldırdım.
+}
