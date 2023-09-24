@@ -128,8 +128,6 @@
         errorMsg.style.marginTop = "10px";
 
         form.addEventListener("submit", function (e) {
-            e.preventDefault();
-
             const usernameInput = document.querySelector("#mobil").value;
             const passwordInput = document.querySelector("#Password").value;
 
@@ -137,12 +135,13 @@
             const mockPassword = "password";
 
             if (usernameInput === mockUsername && passwordInput === mockPassword) {
-                window.location.href = "/home";
+                form.submit(); // Formu sunucuya gönder
             } else {
+                e.preventDefault();
                 errorMsg.innerHTML = `
-                    <strong>X</strong> Feil mobil nummer eller password! Password må være på minst 8 tegn! Prøv igjen!
-                `;
-                form.appendChild(errorMsg);  // Hata mesajını formun en altına ekliyor.
+                <strong>X</strong> Feil mobil nummer eller password! Password må være på minst 8 tegn! Prøv igjen!
+            `;
+                form.appendChild(errorMsg);
             }
         });
     });
