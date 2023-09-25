@@ -30,38 +30,31 @@
 
 
 <main class="container mt-5 text-center" style="max-width: 500px; border: 1px solid #ccc; background-color: #C0D0D7; padding: 20px; border-radius: 10px;">
-    <!-- Border ve arka plan rengi ekledim -->
     <div class="login-container">
         <div class="login-box">
-
-            <!-- Kilit simgesi -->
             <div style="border: 2px solid black; display: inline-block; padding: 10px; margin-bottom: 15px;">
                 <i class="fas fa-lock" style="font-size: 24px;"></i>
             </div>
 
-            <!-- Başlık ve Açıklama -->
-            <h6 class="font-weight-bold">Har du problemer med å logge på?</h6> <!-- Yazı boyutunu h2'den h3'e düşürdüm -->
+            <h6 class="font-weight-bold">Har du problemer med å logge på?</h6>
             <p class="font-weight-bold small">Skriv inn ditt mobilnummer så sender vi deg en kode slik at du kan logge inn på kontoen din igjen.</p>
 
-            <!-- Mobil numarası girişi -->
             <form asp-action="SendCode" asp-controller="Account" method="post">
-                <div class="form-group position-relative m-5  mb-1">
+                <div class="form-group position-relative m-5 mb-1">
                     <i class="fas fa-user position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);"></i>
-                    <input type="tel" class="form-control pl-5 text-center" id="mobil" asp-for="Mobil" required placeholder="     Mobil No"> <!-- Placeholder içerisine boşluk ekleyerek yazıyı sağa kaydırdım -->
+                    <input type="tel" class="form-control pl-5 text-center" id="mobil" asp-for="Mobil" required placeholder="     Mobil No">
                 </div>
 
-                <!-- Kode Gönder Butonu -->
                 <div class="form-group mt-4 mb-1 m-5">
                     <input type="submit" class="form-control pl-5 btn-outline-dark btn-bg-primary btn-block btn btn-hover" style="background-color: #4945F9; color: white; border-radius: 5px;" value="Send Innloggingskode">
                 </div>
+
                 @if (ViewBag.CodeSent == true)
                 {
                     <p class="text-success">Koden din er sendt! Vennligst sjekk telefonen din og skriv inn koden nedenfor.</p>
                 }
-
             </form>
 
-            <!-- Kodenin girileceği bölüm -->
             <div class="mt-4 m-5">
                 <form asp-action="VerifyCode" asp-controller="Account" method="post">
                     <div class="code-container">
@@ -71,11 +64,12 @@
                 </form>
             </div>
 
-
-            <!-- Alternatif Giriş Yöntemi -->
             <div class="mt-4">
                 <h4 style="font-size: 0.9rem;">ELLERS</h4>
-                <button class="btn mt-4" style="background-color: #4945F9; color: white; border-radius: 5px;">Fortsett til Login side</button>
+                <!-- Butonu bir <a> etiketi içerisine aldım ve yönlendirme işlevi ekledim -->
+                <a href="/">
+                    <button class="btn mt-4" style="background-color: #4945F9; color: white; border-radius: 5px;">Fortsett til Login side</button>
+                </a>
             </div>
         </div>
     </div>
