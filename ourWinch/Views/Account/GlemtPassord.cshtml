@@ -1,5 +1,9 @@
 ﻿@model ForgotPasswordViewModel
 
+@{
+Layout = null;
+}
+
 <style>
     .code-container {
         display: flex;
@@ -15,7 +19,6 @@
     }
 
     .send-label {
-        
         padding: 6px 12px;
         background-color: #4945F9;
         color: white;
@@ -25,7 +28,6 @@
         align-items: center;
         cursor: pointer;
     }
-    
 </style>
 
 
@@ -51,7 +53,7 @@
 
                 @if (ViewBag.CodeSent == true)
                 {
-                    <p class="text-success">Koden din er sendt! Vennligst sjekk telefonen din og skriv inn koden nedenfor.</p>
+                <p class="text-success">Koden din er sendt! Vennligst sjekk telefonen din og skriv inn koden nedenfor.</p>
                 }
             </form>
 
