@@ -11,7 +11,7 @@ public class AccountController : Controller
         {
             ViewBag.CodeSent = true;
         }
-        return View("GlemtPassord", model);
+        return View("ForgotPassword", model);
     }
 
     [HttpPost]
@@ -58,7 +58,7 @@ public class AccountController : Controller
         return View(model);
     }
 
-    public IActionResult GlemtPassord()
+    public IActionResult ForgotPassword()
     {
         return View();
     }
