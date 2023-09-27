@@ -3,47 +3,92 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ourWinch</title>
+    <title>ourWinch</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ourWinch.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="~/ourWinch.styles.css" />
+    //********************************************************
+    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 0.5rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ourWinch</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1 shadow">
+        <a class="text-center navbar-brand col-sm-3 col-md-2 mr-0 fs-2 fw-bold" href="#">nøsted</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" asp-controller="Account" asp-action="Login">Login</a>
+
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column mb-3">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                Dashboard <span class="sr-only">(current)</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        <ul class="fs-4 fw-bold ">
+
+                            <li class="nav-item mt-4 ">
+                                <a class="nav-link text-dark" href="#">
+                                    <span data-feather="shopping-cart"></span>
+                                    Aktive Serviser
+                                </a>
+                            </li>
+                            <li class="nav-item mt-4">
+                                <a class="nav-link text-dark" href="#">
+                                    <span data-feather="users"></span>
+                                    Servis Status
+                                </a>
+                            </li>
+                            <li class="nav-item mt-4">
+                                <a class="nav-link text-dark" href="#">
+                                    <span data-feather="bar-chart-2"></span>
+                                    NyRegistering
+                                </a>
+                            </li>
+                            <li class="nav-item mt-4">
+                                <a class="nav-link text-dark" href="#">
+                                    <span data-feather="layers"></span>
+                                    Raportering
+                                </a>
+                            </li>
+                        </ul>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+            </nav>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - ourWinch - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-5">
+                @RenderBody()
+            </main>
+
+
+            <footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2023 - ourWinch - <a href="#">Privacy</a>
+                </div>
+            </footer>
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js"></script>
 </body>
 </html>
