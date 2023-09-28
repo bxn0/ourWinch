@@ -1,4 +1,4 @@
-
+﻿
 
 <body>
     <section>
@@ -39,7 +39,7 @@
                     <strong>Mobil No:</strong> 87654321
                 </div>
                 <div class="col-md-4 border border-black p-1">
-                    <strong>Feilbeskrivelse:</strong> Trekker med s� lite kraft
+                    <strong>Feilbeskrivelse:</strong> Trekker med så lite kraft
                 </div>
                 <div class="col-md-4 border border-black p-1">
                     <strong>Kommentar fra kunde:</strong> Jeg tror problemet ligger i clutch og lameller
@@ -48,19 +48,71 @@
 
         </div>
     </section>
-    <section>
+    <section class="mt-3">
+        <!-- Butonlar -->
+        <div class="container">
+            <div class="row">
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form1')">Mekanisk</button>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form2')">Hydrolisk</button>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form3')">Elektro</button>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form4')">Funksjons Test</button>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form5')">Trykk Settinger</button>
+                </div>
+            </div>
+        </div>
 
 
+        <!-- Forms -->
+        <div class="container mt-3">
+            <!-- Form 1 -->
+            <div class="row" id="form1" style="display:none;">
+                <!-- Form content -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 1 için bir input" />
+                </div>
+            </div>
 
+            <!-- Form 2 -->
+            <div class="row" id="form2" style="display:none;">
+                <!-- Form içeriği... -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 2 için bir input" />
+                </div>
+            </div>
 
-
-
-
+            <!-- Form 3 -->
+            <div class="row" id="form3" style="display:none;">
+                <!-- Form içeriği... -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 3 için bir input" />
+                </div>
+            </div>
+        </div>
     </section>
 
+    <!-- JavaScript -->
+    <script>
+        function showForm(formId) {
+            // Tüm formları gizle
+            document.getElementById('form1').style.display = 'none';
+            document.getElementById('form2').style.display = 'none';
+            document.getElementById('form3').style.display = 'none';
 
-
-
-
+            // Sadece istenen formu göster
+            document.getElementById(formId).style.display = 'block';
+        }
+    </script>
 </body>
 
