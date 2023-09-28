@@ -2,10 +2,7 @@
 using OurWinch.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
-=======
 
->>>>>>> master
 public class DashboardController : Controller
 {
     public IActionResult Index()
