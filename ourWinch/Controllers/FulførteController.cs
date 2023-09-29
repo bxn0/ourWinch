@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 public class FulførteController : Controller
 {
-    public IActionResult Fulførte()
+    public IActionResult Dashboard()
     {
-        return View(Fulførte);
+        return View("~/Views/Dashboard/Fulførte.cshtml");
     }
 }

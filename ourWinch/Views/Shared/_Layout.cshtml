@@ -46,15 +46,17 @@
                                 <i class="fas fa-home"></i> Hjem
                             </a>
                         <li class="nav-item mt-3">
-                            <a class="nav-link active-link" href="#">
+                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
                                 <i class="fas fa-cog"></i> Aktive Servicer
                             </a>
                         </li>
                         <li class="nav-item mt-3">
-                            <a class="nav-link" href="#">
+                            <a asp-controller="Fulførte" asp-action="Dashboard" class="nav-link">
                                 <i class="fas fa-check-circle"></i> Fulførte Servicer
                             </a>
+
                         </li>
+
                         <li class="nav-item mt-3">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-pen"></i> Ny service
