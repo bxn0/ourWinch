@@ -1,4 +1,10 @@
-﻿.sidebar {
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
     background-color: black;
     color: #9CB7C2;
     height: 100vh;
