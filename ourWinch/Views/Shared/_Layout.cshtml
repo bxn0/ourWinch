@@ -18,13 +18,20 @@
             <img class="logo-image" src="/img/nøsted2.jpeg" alt="nøsted Logo">
         </div>
         <div class="search-wrapper position-relative ml-auto">
-            <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
-            <i class="fa fa-search search-icon position-absolute"></i>
+            <div class="input-group">
+                <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-dark border-0">
+                        <i class="fa fa-search text-white"></i>
+                    </span>
+                </div>
+            </div>
         </div>
+
         <div class="user-info d-flex align-items-center ml-3">
             <i class="fas fa-bell text-white mr-3"></i>
             <span class="text-white mr-2">Lars Olsen</span>
-            <i class="fas fa-user text-white ml-2"></i>
+            <i class="fas fa-user text-white ml-2 mr-4"></i>
         </div>
     </nav>
 
@@ -38,41 +45,33 @@
                             <a class="nav-link active-link" href="#">
                                 <i class="fas fa-home"></i> Hjem
                             </a>
-                        </li>
                         <li class="nav-item mt-3">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-cogs"></i> Aktive Servicer
+                                <i class="fas fa-cog"></i> Aktive Servicer
                             </a>
                         </li>
                         <li class="nav-item mt-3">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-check"></i> Fulførte Servicer
+                                <i class="fas fa-check-circle"></i> Fulførte Servicer
                             </a>
                         </li>
                         <li class="nav-item mt-3">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-plus"></i> Ny service
+                                <i class="fas fa-pen"></i> Ny service
                             </a>
                         </li>
+
                     </ul>
                 </div>
             </nav>
         </div>
     </div>
 
-
-
-
-
     <!-- İçerik Kısmı -->
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-5">
-        <div class="dashboard-text text-center">
-            Dashboard - Active Services
-        </div>
         @RenderBody()
     </main>
-    </div>
-    </div>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>

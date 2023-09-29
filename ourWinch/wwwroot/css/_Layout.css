@@ -2,7 +2,7 @@
     background-color: black;
     color: #9CB7C2;
     height: 100vh;
-    padding-top:0px; /* Bu değeri ayarlayarak "Hjem" öğesinin konumunu kontrol edebilirsiniz. */
+    padding-top: 0px; /* Bu değeri ayarlayarak "Hjem" öğesinin konumunu kontrol edebilirsiniz. */
 }
 
     /* ... diğer CSS kodları ... */
@@ -78,4 +78,36 @@
 
 .sidebar-sticky ul.nav {
     padding-top: 10px; /* Hjem'in daha yukarıda olması için ayarlandı */
+}
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+        .navbar .search-wrapper,
+        .navbar .user-info {
+            flex: 100%;
+            text-align: center;
+        }
+
+        .navbar .search-wrapper {
+            margin-top: 10px;
+            margin-right: 0;
+        }
+
+        .navbar .user-info {
+            margin-left: 0;
+        }
+
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        bottom: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    main {
+        padding-top: 30px;
+    }
 }
