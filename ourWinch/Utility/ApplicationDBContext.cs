@@ -10,8 +10,15 @@ namespace ourWinch.Utility
 
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options): base(options) { }  
 
-        public DbSet<AktiveServiser> AktivServis {  get; set; }
-        public DbSet<FulførteService> FulførtService { get; set; }
+        public DbSet<Kunde> Kunde {  get; set; }
+        public DbSet<Order> Order { get; set; }
+
+        public DbSet<Service> Service{ get; set; }
+
+        public DbSet<ServisType> ServisType { get; set; }
+
+        public DbSet<SjekkListe> SjekkListe { get; set; }
+
     }
 }
 

@@ -5,7 +5,7 @@
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class AktivServiserTableAdded : Migration
+    public partial class Order : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
