@@ -10,6 +10,7 @@
     <!-- FontAwesome (ikonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
+    <link rel="stylesheet" href="~/css/Dashboard/dashboard.css" />
 </head>
 <body>
     <!-- Navbar Kısmı -->
@@ -19,7 +20,7 @@
         </div>
         <div class="search-wrapper position-relative ml-auto">
             <div class="input-group">
-                <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control form-control-dark" type="text" placeholder="Søk" aria-label="Search">
                 <div class="input-group-append">
                     <span class="input-group-text bg-dark border-0">
                         <i class="fa fa-search text-white"></i>
@@ -27,14 +28,12 @@
                 </div>
             </div>
         </div>
-
         <div class="user-info d-flex align-items-center ml-3">
             <i class="fas fa-bell text-white mr-3"></i>
             <span class="text-white mr-2">Lars Olsen</span>
             <i class="fas fa-user text-white ml-2 mr-4"></i>
         </div>
     </nav>
-
     <!-- Sidebar Kısmı -->
     <div class="container-fluid">
         <div class="row">
@@ -46,7 +45,7 @@
                                 <i class="fas fa-home"></i> Hjem
                             </a>
                         <li class="nav-item mt-3">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link active-link" href="#">
                                 <i class="fas fa-cog"></i> Aktive Servicer
                             </a>
                         </li>
@@ -60,18 +59,13 @@
                                 <i class="fas fa-pen"></i> Ny service
                             </a>
                         </li>
-
                     </ul>
                 </div>
             </nav>
+            @RenderBody()
         </div>
     </div>
 
-    <!-- İçerik Kısmı -->
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-5">
-        @RenderBody()
-    </main>
-    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
