@@ -2,8 +2,11 @@
     background-color: black;
     color: #9CB7C2;
     height: 100vh;
-    padding-top: 60px;
+    padding-top:0px; /* Bu değeri ayarlayarak "Hjem" öğesinin konumunu kontrol edebilirsiniz. */
 }
+
+    /* ... diğer CSS kodları ... */
+
 
     .sidebar .active-link {
         color: #A8C29C;
@@ -11,7 +14,7 @@
 
     .sidebar .nav-link {
         color: #9CB7C2;
-        background-color: black; /* Menü öğelerinin arkaplan rengini siyah yap */
+        background-color: black;
     }
 
         .sidebar .nav-link:hover {
@@ -25,13 +28,14 @@
 
     .navbar .search-wrapper {
         position: relative;
-        width: 220px; /* Arama kutusunun genişliğini sabitlemek için bir değer ekledim */
+        width: 250px;
     }
 
     .navbar .search-icon {
         position: absolute;
-        right: 10px;
-        top: 15px; /* ikonun dikey konumunu ayarla */
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
         color: white;
     }
 
@@ -41,23 +45,37 @@
     top: 50%;
     transform: translateY(-50%);
     color: white;
-    pointer-events: none; /* Bu, ikonun tıklanabilir olmamasını sağlar. */
+    pointer-events: none;
 }
 
 .navbar .form-control.form-control-dark {
-    padding-right: 20px; /* Sağ padding değerini artırarak, ikonun metinle üst üste gelmesini engelliyoruz. */
+    padding-right: 40px;
 }
 
 .navbar-brand {
-    font-size: 18px; /* nøsted yazısını küçültmek için bu değeri ayarlayın. */
+    font-size: 18px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
-.navbar .search-wrapper {
-    position: relative;
-    width: 250px; /* Arama kutusunun genişliğini ayarlamak için bu değeri düzenleyin. */
+.logo-image {
+    margin-right: 10px;
 }
 
-.navbar .search-icon {
-    right: 15px; /* Bu değeri ayarlayarak arama ikonunun konumunu değiştirebilirsiniz. */
+.navbar-brand .logo-image {
+    height: 40px; /* İconun boyutunu ayarlamak için */
+    background-color: black; /* Sidebar arka plan rengi ile aynı olmalı */
+}
+
+.search-wrapper .search-icon {
+    right: 10px; /* İconun içerisine daha yakın olması için ayarlandı */
+}
+
+.user-info {
+    margin-left: 15px; /* Kullanıcı ikonunu sola yaklaştırmak için ayarlandı */
+}
+
+.sidebar-sticky ul.nav {
+    padding-top: 10px; /* Hjem'in daha yukarıda olması için ayarlandı */
 }
