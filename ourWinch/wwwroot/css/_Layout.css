@@ -1,0 +1,63 @@
+﻿.sidebar {
+    background-color: black;
+    color: #9CB7C2;
+    height: 100vh;
+    padding-top: 60px;
+}
+
+    .sidebar .active-link {
+        color: #A8C29C;
+    }
+
+    .sidebar .nav-link {
+        color: #9CB7C2;
+        background-color: black; /* Menü öğelerinin arkaplan rengini siyah yap */
+    }
+
+        .sidebar .nav-link:hover {
+            color: #A8C29C;
+        }
+
+.navbar {
+    background-color: black;
+    height: 60px;
+}
+
+    .navbar .search-wrapper {
+        position: relative;
+        width: 220px; /* Arama kutusunun genişliğini sabitlemek için bir değer ekledim */
+    }
+
+    .navbar .search-icon {
+        position: absolute;
+        right: 10px;
+        top: 15px; /* ikonun dikey konumunu ayarla */
+        color: white;
+    }
+
+.search-wrapper .search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none; /* Bu, ikonun tıklanabilir olmamasını sağlar. */
+}
+
+.navbar .form-control.form-control-dark {
+    padding-right: 20px; /* Sağ padding değerini artırarak, ikonun metinle üst üste gelmesini engelliyoruz. */
+}
+
+.navbar-brand {
+    font-size: 18px; /* nøsted yazısını küçültmek için bu değeri ayarlayın. */
+    font-weight: bold;
+}
+
+.navbar .search-wrapper {
+    position: relative;
+    width: 250px; /* Arama kutusunun genişliğini ayarlamak için bu değeri düzenleyin. */
+}
+
+.navbar .search-icon {
+    right: 15px; /* Bu değeri ayarlayarak arama ikonunun konumunu değiştirebilirsiniz. */
+}
