@@ -8,10 +8,11 @@ namespace ourWinch.Utility
 {
     public class ApplicationDBContext : DbContext
     {
+        internal object Brukere;
 
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options): base(options) { }
 
-        public DbSet<SjekkListe> Bruker { get; set; }
+        public DbSet<Bruker> Bruker { get; set; }
         public DbSet<Kunde> Kunde {  get; set; }
         public DbSet<Order> Order { get; set; }
 
