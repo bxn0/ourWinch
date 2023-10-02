@@ -5,7 +5,7 @@
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class Bruker : Migration
+    public partial class Checkpoints : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

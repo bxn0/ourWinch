@@ -5,7 +5,7 @@
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class ServisType : Migration
+    public partial class InspectionForm : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

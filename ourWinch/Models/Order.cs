@@ -1,27 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ourWinch.Models
 {
     public class Order
     {
-        [Key]   // primary key tanimlandi.
+        [Key]   // Primary key defined.
         public int OrderId { get; set; }
 
-        [Required]  // not null
-        public string KundeId { get; set; }
+        [Required]  // Not null
+
+    
+        public int CustomerId { get; set; }
 
         public string ProductType { get; set; }
 
+        public DateTime ReceivedDate { get; set; }
 
-        public DateTime MottattDato { get; set;}
+        public int YearModel { get; set; }
 
-        public int Årsmodel{ get; set; }  
-
-        public string KommentarFelte{ get; set; } 
-
-        
-
-
-
+        public string CommentField { get; set; }
     }
 }

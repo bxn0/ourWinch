@@ -5,7 +5,7 @@
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class SjekkListe : Migration
+    public partial class ServiceType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

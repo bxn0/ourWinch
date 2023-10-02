@@ -1,31 +1,29 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ourWinch.Models
 {
     public class Service
     {
-        [Key]   // primary key tanimlandi.
-        public int ServisId { get; set; }
+        [Key]   // Primary key defined.
+        public int ServiceId { get; set; }
 
-        [Required]  // not null
+        
+      
         public int OrderId { get; set; }
 
-        public string KundeNavn { get; set; }
+        public string CustomerName { get; set; }
 
         public string ProductType { get; set; }
 
+        public DateTime AgreedDelivery { get; set; }
 
-        public decimal AvtaltLevering { get; set; }
+      
+        public string ServiceStatus { get; set; }
 
+        public string ServiceForm { get; set; }
 
-        public string ServisStatus { get; set;}
-
-        public string ServisSkjema { get; set; }  
-
-        public  int JobTimer { get; set; } 
-
-       
-
-
+        public int LaborHours { get; set; }
     }
 }

@@ -1,27 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ourWinch.Models;
-using System.Collections.Generic;
 
-
-// Utility veritabani ile etnititiler arasinda kopru kurar asp. mekanizmasina gore
 namespace ourWinch.Utility
 {
     public class ApplicationDBContext : DbContext
     {
-        internal object Brukere;
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
 
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options): base(options) { }
+        // DbSet özellikleri ile veritabanı tablolarını tanımlayın
+        public DbSet<User> Users { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
+        public DbSet<Checkpoints> Checkpoints { get; set; }
+        public DbSet<InspectionForm> InspectionForms { get; set; }
+        public DbSet<PressureSettings> PressureSettings { get; set; }
 
-        public DbSet<Bruker> Bruker { get; set; }
-        public DbSet<Kunde> Kunde {  get; set; }
-        public DbSet<Order> Order { get; set; }
+        // Veritabanı tablolarını temsil eden diğer DbSet özelliklerini ekleyebilirsiniz
 
-        public DbSet<Service> Service{ get; set; }
-
-        public DbSet<ServisType> ServisType { get; set; }
-
-        public DbSet<SjekkListe> SjekkListe { get; set; }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PressureSettings>()
+                .HasOne(p => p.InspectionForm)
+                .WithOne(f => f.PressureSetting)
+                .HasForeignKey<PressureSettings>(p => p.FormId);
+        }
     }
 }
-
