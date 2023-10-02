@@ -13,8 +13,11 @@ namespace ourWinch
             var builder = WebApplication.CreateBuilder(args);
 
             // App Configuration
-            string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
+            string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("Connection string is missing.");
+            }
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
@@ -37,8 +40,9 @@ namespace ourWinch
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
             }
+
             else
             {
                 app.UseExceptionHandler("/Home/Error");

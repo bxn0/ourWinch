@@ -20,5 +20,6 @@
         public bool Servis { get; set; }
         public bool Reperasjon { get; set; }
         public string? KommentarFraKunde { get; set; }
+
     }
 }
