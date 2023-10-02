@@ -1,7 +1,9 @@
 ﻿
 
-<body>
-    <section>
+<mainv class="dflex mx-auto mt-3">
+
+    <!--************************* TABLE *****************************-->
+    <div>
         <div class="container mt-2">
             @*@foreach (var order in Model.Orders){} *@
             <div class="row">
@@ -47,9 +49,9 @@
             </div>
 
         </div>
-    </section>
+    </div>
     <section class="mt-3">
-        <!-- Butonlar -->
+        <!--************************* BUTONLAR ******************************** -->
         <div class="container">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
@@ -71,173 +73,282 @@
         </div>
 
 
-        <!-- Form for Mekasanisk -->
-        <div class="container mt-3">
+        <!-- ************************** Form for Mekasanisk ******************************* -->
+
+        <div class="container mt-3" onclick="eventHandler(event)">
 
             <!-- Form 1 -->
-            <div class="row" id="form1" style="display:none;">
-                <h4 class="text-center mb-3"> Mekanisk Sjekkliste </h4>
-                <!-- Form content -->
-                <div class="row border-bottom">
-                    <div class="col-4 text-left mr-5">
+            <form class="row" id="form1" style="display:none;">
+                <!-- Option 1 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
                         <label for="mechanicalOption1">Sjekk clutch lameller for slitasje</label>
                     </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption1" name="choice" value="option1">
-                        <label for="mechanicalOption1">OK</label>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption1" id="mechanicalOption11" value="OK">
+                            <label class="form-check-label" for="emechanicalOption11">
+                                OK
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption2" name="choice" value="option2">
-                        <label for="mechanicalOption2">Bør skiftes</label>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption1" id="mechanicalOption12" value="Bør skiftes">
+                            <label class="form-check-label" for="mechanicalOption12">
+                                Bør skiftes
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption3" name="choice" value="option3">
-                        <label for="mechanicalOption3">Defekt</label>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption1" id="mechanicalOption13" value="Defekt">
+                            <label class="form-check-label" for="mechanicalOption13">
+                                Defekt
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-4 text-left mr-5">
-                        <label for="mechanicalOption1">Sjekk bremser. Bånd/Pal</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption1" name="choice" value="option1">
-                        <label for="mechanicalOption1">OK</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption2" name="choice" value="option2">
-                        <label for="mechanicalOption2">Bør skiftes</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption3" name="choice" value="option3">
-                        <label for="mechanicalOption3">Defekt</label>
-                    </div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-4 text-left mr-5">
-                        <label for="mechanicalOption1">Sjekk lager for trommel</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption1" name="choice" value="option1">
-                        <label for="mechanicalOption1">OK</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption2" name="choice" value="option2">
-                        <label for="mechanicalOption2">Bør skiftes</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption3" name="choice" value="option3">
-                        <label for="mechanicalOption3">Defekt</label>
-                    </div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-4 text-left mr-5">
-                        <label for="mechanicalOption1">Sjekk PTO og opplagring</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption1" name="choice" value="option1">
-                        <label for="mechanicalOption1">OK</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption2" name="choice" value="option2">
-                        <label for="mechanicalOption2">Bør skiftes</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption3" name="choice" value="option3">
-                        <label for="mechanicalOption3">Defekt</label>
-                    </div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-4 text-left mr-5">
-                        <label for="mechanicalOption1">Sjekk kjedestrammer</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption1" name="choice" value="option1">
-                        <label for="mechanicalOption1">OK</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption2" name="choice" value="option2">
-                        <label for="mechanicalOption2">Bør skiftes</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption3" name="choice" value="option3">
-                        <label for="mechanicalOption3">Defekt</label>
-                    </div>
-                </div>
-                <div class="row border-bottom">
-                    <div class="col-4 text-left mr-5">
-                        <label for="mechanicalOption1">Sjekk wire</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption1" name="choice" value="option1">
-                        <label for="mechanicalOption1">OK</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption2" name="choice" value="option2">
-                        <label for="mechanicalOption2">Bør skiftes</label>
-                    </div>
-                    <div class="col-2">
-                        <input type="radio" id="mechanicalOption3" name="choice" value="option3">
-                        <label for="mechanicalOption3">Defekt</label>
-                    </div>
+
                 </div>
 
+                <!-- Option 2 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="mechanicalOption2">Sjekk bremser. Bånd/Pål</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption2" id="mechanicalOption21" value="OK">
+                            <label class="form-check-label" for="emechanicalOption21">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption2" id="mechanicalOption22" value="Bør skiftes">
+                            <label class="form-check-label" for="mechanicalOption22">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption2" id="mechanicalOption23" value="Defekt">
+                            <label class="form-check-label" for="mechanicalOption23">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Option 3 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="mechanicalOption3">Sjekk lager for trommel</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption3" id="mechanicalOption31" value="OK">
+                            <label class="form-check-label" for="emechanicalOption31">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption3" id="mechanicalOption32" value="Bør skiftes">
+                            <label class="form-check-label" for="mechanicalOption32">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mechanicalOption3" id="mechanicalOption33" value="Defekt">
+                            <label class="form-check-label" for="mechanicalOption33">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12 d-flex align-items-center" id="inputRow">
+                    <div class="col-md-6">
+                        <input type="text" id="userInput" placeholder="Label girin..." class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" onclick="addItem()" class="btn btn-primary">Ekle</button>
+                    </div>
+                </div>
+                <!--***************************Comment****************************-->
+                <div class="form-floating col-12">
+                    <textarea class="form-control w-100" placeholder="Skriv en kommentar" id="MechanicTextArea" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2"></label>
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <!-- Added text-center and mt-3 for spacing -->
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Form 2 -->
+            <div class="row" id="form2" style="display:none;">
+                <!-- Form içeriği... -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 2 için bir input" />
+                </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Form 2 -->
-        <div class="row" id="form2" style="display:none;">
-            <!-- Form içeriği... -->
-            <div class="col-md-12">
-                <!-- Örnek form elemanı -->
-                <input type="text" class="form-control" placeholder="Form 2 için bir input" />
+            <!-- Form 3 -->
+            <div class="row" id="form3" style="display:none;">
+                <!-- Form içeriği... -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 3 için bir input" />
+                </div>
             </div>
-        </div>
 
-        <!-- Form 3 -->
-        <div class="row" id="form3" style="display:none;">
-            <!-- Form içeriği... -->
-            <div class="col-md-12">
-                <!-- Örnek form elemanı -->
-                <input type="text" class="form-control" placeholder="Form 3 için bir input" />
+            <!-- Form 4 -->
+            <div class="row" id="form4" style="display:none;">
+                <!-- Form içeriği... -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 4 için bir input" />
+                </div>
             </div>
-        </div>
 
-    </section>
+            <!-- Form 5 -->
+            <div class="row" id="form5" style="display:none;">
+                <!-- Form içeriği... -->
+                <div class="col-md-12">
+                    <!-- Örnek form elemanı -->
+                    <input type="text" class="form-control" placeholder="Form 5 için bir input" />
+                </div>
+            </div>
 
-    <!-- JavaScript -->
+</section>
+
+
+
+                                                 <!-- JavaScript -->
+
     <script>
         function showForm(formId) {
-            ['form1', 'form2', 'form3'].forEach(function (id) {
+            ['form1', 'form2', 'form3', 'form4', 'form5'].forEach(function (id) {
                 document.getElementById(id).style.display = (id === formId) ? 'flex' : 'none';
             });
         }
 
-                //************************************************* */
+        //************************************************* */
+        function addItem() {
+            // Kullanıcıdan alınan girdiyi oku
+            let labelText = document.getElementById('userInput').value;
+
+            if (labelText === '') return; // Eğer boşsa işlem yapma
+
+            // Yeni bir element oluştur
+            let newItem = document.createElement('div');
+            newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
+
+            newItem.innerHTML = `
+        <div class="col-md-6">
+            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
+        </div>
+        <div class="col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="${labelText}" value="OK">
+                <label class="form-check-label">OK</label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="${labelText}" value="Bør skiftes">
+                <label class="form-check-label">Bør skiftes</label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="${labelText}" value="Defekt">
+                <label class="form-check-label">Defekt</label>
+            </div>
+        </div>
+    `;
+
+            // Oluşturulan elementi formda inputRow'un hemen üstüne ekle
+            document.getElementById('form1').insertBefore(newItem, document.getElementById('inputRow'));
+
+            // Girdi alanını temizle
+            document.getElementById('userInput').value = '';
+        }
+        
+
+
+
+
+        /************************ EVENTS **************************************/
+
+        const eventHandler = (event) => {
+            if (event.target.type === 'radio') {
+                console.log(event.target.value);
+            }
+        }
+
+
+
+                                 /* Writes forms to console */
+        document.getElementById("form1").addEventListener("submit", function (event) {
+            
+            event.preventDefault();
+
+            
+            var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
+
+            
+            inputs.forEach(function (input) {
+                console.log(input.name + ": " + input.value);
+            });
+
+           
+        });
 
     </script>
-</body>
+</mainv>
 
