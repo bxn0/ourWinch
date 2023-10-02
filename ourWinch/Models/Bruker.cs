@@ -14,7 +14,7 @@ namespace ourWinch.Models
         public string Etternavn { get; set; }
 
 
-        public string Mobil_no { get; set;}
+        public int Mobil_no { get; set;}
 
         public string Email { get; set; }  
 
