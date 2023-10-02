@@ -3,10 +3,10 @@ using OurWinch.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-public class NyServiceController : Controller
+public class CompletedController : Controller
 {
     public IActionResult Dashboard()
     {
-        return View("~/Views/Dashboard/NyService.cshtml");
+        return View("~/Views/Dashboard/Completed.cshtml");
     }
 }
