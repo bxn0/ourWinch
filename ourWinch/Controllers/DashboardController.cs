@@ -7,9 +7,6 @@ public class DashboardController : Controller
 {
     public IActionResult Index()
     {
-        DashboardModel model = new DashboardModel();
-        // model'in özelliklerini doldurabilirsiniz eğer gerekliyse
-        return View(model);
+        return View();
     }
-
 }
