@@ -148,7 +148,7 @@ namespace ourWinch.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("ourWinch.Models.PressureSettings", b =>

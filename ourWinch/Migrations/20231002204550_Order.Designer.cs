@@ -12,7 +12,7 @@ using ourWinch.Utility;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231002144359_Order")]
+    [Migration("20231002204550_Order")]
     partial class Order
     {
         /// <inheritdoc />
@@ -151,7 +151,7 @@ namespace ourWinch.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("ourWinch.Models.PressureSettings", b =>

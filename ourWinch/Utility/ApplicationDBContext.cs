@@ -10,7 +10,7 @@ namespace ourWinch.Utility
         // DbSet özellikleri ile veritabanı tablolarını tanımlayın
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Order { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<Checkpoints> Checkpoints { get; set; }
