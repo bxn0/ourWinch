@@ -1,0 +1,30 @@
+﻿.rounded-input {
+    border-radius: 5px !important;
+}
+
+.container-max-height {
+    max-height: 685px;
+    overflow-y: auto;
+}
+
+.text-dark {
+    font-weight: 500;
+}
+
+.form-group {
+    margin-bottom: 12px; /* Bu değer form elemanları arasındaki boşluğu azaltmak için ekledim. */
+}
+.mottatt-dato {
+    margin-right: 15px; /* Mottatt Dato ile Årsmodell arasındaki boşluğu arttırmak için */
+}
+
+.flex-textarea-kommentar {
+    min-height: 100px; /* Feilbeskrivelse ve Kommentar'ın yüksekliğini eşitlemek için */
+}
+
+.flex-textarea-feil {
+    min-height: 100px; /* Feilbeskrivelse ve Kommentar'ın yüksekliğini eşitlemek için */
+}
+.navbar {
+    min-height: 60px; /* Bu değeri navbar'ınıza göre ayarlayabilirsiniz */
+}
