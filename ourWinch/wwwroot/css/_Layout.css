@@ -1,0 +1,120 @@
+﻿html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background-color: black;
+    color: #9CB7C2;
+    height: 140vh;
+    padding-top: 0px; /* Bu değeri ayarlayarak "Hjem" öğesinin konumunu kontrol edebilirsiniz. */
+}
+
+    /* ... diğer CSS kodları ... */
+
+
+    .sidebar .active-link {
+        color: #A8C29C;
+    }
+
+    .sidebar .nav-link {
+        color: #9CB7C2;
+        background-color: black;
+    }
+
+        .sidebar .nav-link:hover {
+            color: #A8C29C;
+        }
+
+.navbar {
+    background-color: black;
+    height: 60px;
+}
+
+    .navbar .search-wrapper {
+        position: relative;
+        width: 250px;
+    }
+
+    .navbar .search-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+    }
+
+.search-wrapper .search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+}
+
+.navbar .form-control.form-control-dark {
+    padding-right: 40px;
+}
+
+.navbar-brand {
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    margin-right: 10px;
+}
+
+.navbar-brand .logo-image {
+    height: 40px; /* İconun boyutunu ayarlamak için */
+    background-color: black; /* Sidebar arka plan rengi ile aynı olmalı */
+}
+
+.search-wrapper .search-icon {
+    right: 10px; /* İconun içerisine daha yakın olması için ayarlandı */
+}
+
+.user-info {
+    margin-left: 15px; /* Kullanıcı ikonunu sola yaklaştırmak için ayarlandı */
+}
+
+.sidebar-sticky ul.nav {
+    padding-top: 10px; /* Hjem'in daha yukarıda olması için ayarlandı */
+}
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+
+        .navbar .search-wrapper,
+        .navbar .user-info {
+            flex: 100%;
+            text-align: center;
+        }
+
+        .navbar .search-wrapper {
+            margin-top: 10px;
+            margin-right: 0;
+        }
+
+        .navbar .user-info {
+            margin-left: 0;
+        }
+
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        bottom: 0;
+        z-index: 1000;
+        overflow-y: auto;
+    }
+
+    main {
+        padding-top: 30px;
+    }
+}
+

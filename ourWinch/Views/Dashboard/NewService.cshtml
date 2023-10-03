@@ -1,0 +1,119 @@
+﻿<<div class="container mt-5 container-max-height" style="background-color: #C0D0D7; max-width: 800px; border-radius: 5px;">
+    <form action="/ServiceOrder/Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="row justify-content-center">
+            <div class="col-12 text-center my-3">
+                <img class="logo-image rounded" src="/img/nøsted2.jpeg" alt="nøsted Logo" width="230" style="border-radius: 5px;">
+                <h2 class="font-weight-bold mt-4" style="font-size: 2em; font-weight: 600;">Ny Service</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Sol Bölüm -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="text-dark">Fornavn</label>
+                    <input type="text" name="Fornavn" class="form-control form-control-sm rounded-input" placeholder="Fornavn">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Etternavn</label>
+                    <input type="text" name="Etternavn" class="form-control form-control-sm" placeholder="Etternavn">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Mobil No</label>
+                    <input type="tel" name="MobilNo" class="form-control form-control-sm" placeholder="Mobil No">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Email</label>
+                    <input type="email" name="Email" class="form-control form-control-sm" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Adresse</label>
+                    <input type="text" name="Adresse" class="form-control form-control-sm" placeholder="Adresse">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark mt-2">Feilbeskrivelse</label>
+                    <textarea name="Feilbeskrivelse" class="form-control form-control-sm flex-textarea-feil mt-1" rows="5" placeholder="Feilbeskrivelse"></textarea>
+                </div>
+            </div>
+
+            <!-- Sağ Bölüm -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="text-dark">Ordrenummer</label>
+                    <input type="text" name="Ordrenummer" value="@Model?.Ordrenummer" readonly class="form-control form-control-sm" />
+                </div>
+
+
+                <div class="form-group">
+                    <label class="text-dark">Produkttype</label>
+                    <input type="text" name="Produkttype" class="form-control form-control-sm" placeholder="Produkttype">
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark">Serienummer</label>
+                    <input type="text" name="Serienummer" class="form-control form-control-sm" placeholder="Serienummer">
+                </div>
+
+                <div class="form-group d-flex align-items-start justify-content-between">
+                    <div class="mottatt-dato">
+                        <label class="text-dark">Mottatt Dato</label>
+                        <div class="input-group">
+                            <input type="date" name="MottattDato" class="form-control form-control-sm">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-dark">Årsmodell</label>
+                        <div class="input-group">
+                            <input type="text" name="Årsmodell" class="form-control form-control-sm" placeholder="2021">
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fa fa-caret-down"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group d-flex align-items-center justify-content-between mt-5">
+                    <div class="d-flex align-items-center">
+                        <input type="checkbox" name="Garanti" value="true" class="mr-2">
+                        <label>Garanti</label>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <input type="checkbox" name="Servis" value="true" class="mr-2">
+                        <label>Servis</label>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <input type="checkbox" name="Reperasjon" value="true" class="mr-2">
+                        <label>Reperasjon</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="text-dark mt-2">Kommentar Fra Kunde</label>
+                    <textarea name="KommentarFraKunde" class="form-control form-control-sm flex-textarea-kommentar" rows="5" placeholder="Kommentar Fra Kunde"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 text-center my-4">
+                <button type="submit" class="btn" style="background-color: #4945F9; color: #fff;">Opprett Ny Ordre</button>
+            </div>
+        </div>
+    </form>
+</div>
