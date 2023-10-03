@@ -11,10 +11,11 @@ public class ServiceOrderController : Controller
         _context = context;
     }
 
-    // GET: ServiceOrder/Create
-    public IActionResult Create()
+    public IActionResult NewService()
     {
-        return View();
+        ServiceOrder model = new ServiceOrder();
+        // Modelinizde özel başlangıç değerleri atamak isterseniz bu kısmı kullanabilirsiniz
+        return View(model);
     }
 
     // POST: ServiceOrder/Create
@@ -22,14 +23,18 @@ public class ServiceOrderController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(ServiceOrder serviceOrder)
     {
-        if (ModelState.IsValid)
-        {
-            _context.ServiceOrders.Add(serviceOrder);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index)); // Index metodu oluşturulmalıdır.
-        }
-        return View(serviceOrder);
+        var lastOrder = _context.ServiceOrders.OrderByDescending(o => o.Ordrenummer).FirstOrDefault();
+        var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 1;
+
+        serviceOrder.Ordrenummer = newOrderNumber;
+
+        _context.ServiceOrders.Add(serviceOrder);
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
     }
+
+
 
     // GET: ServiceOrder/Index
     public IActionResult Index()
