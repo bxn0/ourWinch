@@ -1,20 +1,18 @@
 html {
-    font-size: 14px;
-    position: relative;
-    min-height: 100%;
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    margin-bottom: 60px;
-}
-
-.container {
-    overflow-x: auto;
-    max-width: 100%;
+  margin-bottom: 60px;
 }
