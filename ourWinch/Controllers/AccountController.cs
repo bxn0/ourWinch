@@ -1,65 +1,43 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-public class AccountController : Controller
+using ourWinch.Models;
+using ourWinch.Services;
+using System.Data.SqlClient;
+
+namespace ourWinch.Controllers
 {
-    private static string VerificationCode = "123456"; // Bu kısmı JavaScript'te belirttiğiniz değere göre güncelledim.
-
-    [HttpPost]
-    public IActionResult SendCode(ForgotPasswordViewModel model)
+    public class AccountController : Controller
     {
-        if (ModelState.IsValid)
+        private readonly UserService _userService;
+
+        public AccountController(UserService userService)
         {
-            ViewBag.CodeSent = true;
+            _userService = userService;
         }
-        return View("ForgotPassword", model);
-    }
 
-    [HttpPost]
-    public IActionResult VerifyCode(string code)
-    {
-        if (code == VerificationCode)
+        [HttpGet]
+        public IActionResult Login()
         {
-            return RedirectToAction("ResetPassword");
+            return View();
         }
-        ViewBag.ErrorMessage = "VerifyCode Wrong!";
-        return View("ResetPassword");
-    }
 
-
-    [HttpPost]
-    public IActionResult ResetPassword(ResetPasswordViewModel model)
-    {
-        if (ModelState.IsValid)
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
         {
-            return RedirectToAction("Login");
-        }
-        return View(model);
-    }
+            if (!ModelState.IsValid)
+                return View(model);
 
-    public IActionResult Login()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public IActionResult Login(LoginViewModel model)
-    {
-        if (ModelState.IsValid)
-        {
-            if (model.Mobil == "123456" && model.Password == "password") // Burası JavaScript kodu ile uyumlu.
+            var user = _userService.Authenticate(model.Username, model.Password);
+            if (user == null)
             {
-                return RedirectToAction("Index", "Dashboard");
+                ModelState.AddModelError("", "Username or password is incorrect");
+                return View(model);
             }
-            else
-            {
-                ViewBag.ErrorMessage = "Feil mobil nummer eller password! Password må være på minst 8 tegn! Prøv igjen!";
-            }
+
+            // Set the user in the session/claims and redirect to the desired page
+
+            return RedirectToAction("Index", "Home");
         }
-        return View(model);
     }
 
-    public IActionResult ForgotPassword()
-    {
-        return View();
-    }
 }

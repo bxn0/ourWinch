@@ -1,11 +1,15 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class LoginViewModel
+namespace ourWinch.Models
 {
-    [Required]
-    public string? Mobil { get; set; }
+    public class LoginViewModel
+    {
+        [Required]
+        public string Username { get; set; }
 
-    [Required]
-    [DataType(DataType.Password)]
-    public string? Password { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
+
 }
