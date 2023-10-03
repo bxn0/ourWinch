@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/Dashboard/dashboard.css" />
-    <link rel="stylesheet" href="~/css/Dashboard/fulførte.css" />
-    <link rel="stylesheet" href="~/css/Dashboard/nyservice.css" />
+    <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
+    <link rel="stylesheet" href="~/css/Dashboard/newservice.css" />
+    <link rel="stylesheet" href="~/css/Dashboard/index.css" />
 </head>
 <body>
     <!-- Navbar Kısmı -->
@@ -66,7 +67,10 @@
                     </ul>
                 </div>
             </nav>
-            @RenderBody()
+
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
         </div>
     </div>
 
