@@ -41,4 +41,10 @@ public class ServiceOrderController : Controller
     {
         return View(_context.ServiceOrders.ToList());
     }
-}
+
+    // GET: ServiceOrder/Checklist
+    public IActionResult Checklist()
+    {
+        ServiceOrder model = new ServiceOrder(); // Şimdilik boş bir model oluşturduk. İlerleyen zamanlarda bu model üzerinde veriyle çalışabilirsiniz.
+        return View(model);
+    }
