@@ -26,7 +26,12 @@
                                       @foreach (var item in Model)
                 {
                                       <tr>
-                                          <td>@item.Ordrenummer</td>
+                                          <td>
+                                              <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="@item.Id">
+                                                  @item.Ordrenummer
+                                              </a>
+                                          </td>
+
                                           <td>@item.Produkttype</td>
                                           <td>@item.Fornavn @item.Etternavn</td>
                                           <td>@item.MottattDato.ToShortDateString()</td>
