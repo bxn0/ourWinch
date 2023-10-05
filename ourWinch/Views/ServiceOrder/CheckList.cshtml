@@ -79,6 +79,7 @@
 
             <!-- Form 1 -->
             <form class="row" id="form1" style="display:none;">
+                <h3 class="mx-auto">Mekaniske Sjekkliste</h3>
                 <!-- Option 1 -->
                 <div class="col-md-12 d-flex align-items-center">
 
@@ -193,7 +194,7 @@
 
                 </div>
                 <div class="col-md-12 d-flex align-items-center" id="inputRow1">
-                    <div class="col-md-6" id="inputDiv1"  style="display:none;">
+                    <div class="col-md-6" id="inputDiv1" style="display:none;">
                         <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                     </div>
                     <button type="button" onclick="addItem('form1')" class="btn btn-primary">
@@ -213,9 +214,10 @@
             </form>
 
 
-                                <!-- ************************* Form for Hydrolisk *******************************-->
+            <!-- ************************* Form for Hydrolisk *******************************-->
 
             <form class="row" id="form2" style="display:none;">
+                <h3 class="mx-auto">Hydrauliske Sjekkliste</h3>
                 <!-- Option 1 -->
                 <div class="col-md-12 d-flex align-items-center">
 
@@ -236,7 +238,7 @@
 
                     <div class="col-md-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="hydraulicOption1"  value="Bør skiftes">
+                            <input class="form-check-input" type="radio" name="hydraulicOption1" value="Bør skiftes">
                             <label class="form-check-label" for="hydraulicOption12">
                                 Bør skiftes
                             </label>
@@ -245,7 +247,7 @@
 
                     <div class="col-md-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="hydraulicOption1"  value="Defekt">
+                            <input class="form-check-input" type="radio" name="hydraulicOption1" value="Defekt">
                             <label class="form-check-label" for="hydraulicOption13">
                                 Defekt
                             </label>
@@ -265,7 +267,7 @@
                     <!-- Radyo Butonları -->
                     <div class="col-md-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="hydraulicOption2"  value="OK">
+                            <input class="form-check-input" type="radio" name="hydraulicOption2" value="OK">
                             <label class="form-check-label" for="hydraulicOption21">
                                 OK
                             </label>
@@ -352,33 +354,342 @@
 
 
 
-                 <!--************************************ Form 3 *************************************-->
+            <!--************************************ Form 3 *************************************-->
 
-            <div class="row" id="form3" style="display:none;">
-                <!-- Form içeriği... -->
-                <div class="col-md-12">
-                    <!-- Örnek form elemanı -->
-                    <input type="text" class="form-control" placeholder="Form 3 için bir input" />
-                </div>
-            </div>
+            <form class="row" id="form3" style="display:none;">
+                <!-- Option 1 -->
+                <h3 class="mx-auto">Elektro Sjekkliste</h3>
+                <div class="col-md-12 d-flex align-items-center">
 
-            <!-- Form 4 -->
-            <div class="row" id="form4" style="display:none;">
-                <!-- Form içeriği... -->
-                <div class="col-md-12">
-                    <!-- Örnek form elemanı -->
-                    <input type="text" class="form-control" placeholder="Form 4 için bir input" />
-                </div>
-            </div>
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="elektroOption1">Sjekk ledningsnett på vinsj</label>
+                    </div>
 
-            <!-- Form 5 -->
-            <div class="row" id="form5" style="display:none;">
-                <!-- Form içeriği... -->
-                <div class="col-md-12">
-                    <!-- Örnek form elemanı -->
-                    <input type="text" class="form-control" placeholder="Form 5 için bir input" />
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption1" value="OK">
+                            <label class="form-check-label" for="elektroOption1">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption1" value="Bør skiftes">
+                            <label class="form-check-label" for="elektroOption1">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption1" value="Defekt">
+                            <label class="form-check-label" for="elektroOption1">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+
+                <!-- Option 2 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="elektroOption2">Sjekk og test radio</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption2" value="OK">
+                            <label class="form-check-label" for="elektroOption2">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption2" value="Bør skiftes">
+                            <label class="form-check-label" for="elektroOption1">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption2" value="Defekt">
+                            <label class="form-check-label" for="elektroOption2">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Option 3 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="elektroOption3">Sjekk og test knappekasse</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption3" value="OK">
+                            <label class="form-check-label" for="elektroOption3">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption3" value="Bør skiftes">
+                            <label class="form-check-label" for="elektroOption3">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="elektroOption3" value="Defekt">
+                            <label class="form-check-label" for="elektroOption3">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12 d-flex align-items-center" id="inputRow3">
+                    <div class="col-md-6" id="inputDiv3" style="display:none;">
+                        <input type="text" id="userInput3" placeholder="Label girin..." class="form-control">
+                    </div>
+                    <button type="button" onclick="addItem('form3')" class="btn btn-primary">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                </div>
+                <!--***************************Comment****************************-->
+                <div class="form-floating col-12 mt-3">
+                    <textarea class="form-control w-100" placeholder="Skriv en kommentar" id="MechanicTextArea" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2"></label>
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <!-- Added text-center and mt-3 for spacing -->
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+
+            </form>
+
+
+            <!--************************************ Form 4 *************************************-->
+
+            <form class="row" id="form4" style="display:none;">
+                <!-- Option 1 -->
+                <h3 class="mx-auto">Funksjons Test</h3>
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="funksjonsOption1">Test vinsj og kjør alle funksjoner</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption1" value="OK">
+                            <label class="form-check-label" for="funksjonsOption1">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption1" value="Bør skiftes">
+                            <label class="form-check-label" for="funksjonsOption1">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption1" value="Defekt">
+                            <label class="form-check-label" for="funksjonsOption1">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Option 2 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="funksjonsOption2">Trekkraft KN</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption2" value="OK">
+                            <label class="form-check-label" for="funksjonsOption2">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption2" value="Bør skiftes">
+                            <label class="form-check-label" for="funksjonsOption2">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption2" value="Defekt">
+                            <label class="form-check-label" for="funksjonsOption2">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Option 3 -->
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="funksjonsOption3">Bremse kraft KN</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption3" value="OK">
+                            <label class="form-check-label" for="funksjonsOption3">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption3" value="Bør skiftes">
+                            <label class="form-check-label" for="funksjonsOption3">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="funksjonsOption3" value="Defekt">
+                            <label class="form-check-label" for="funksjonsOption3">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-12 d-flex align-items-center" id="inputRow4">
+                    <div class="col-md-6" id="inputDiv4" style="display:none;">
+                        <input type="text" id="userInput4" placeholder="Label girin..." class="form-control">
+                    </div>
+                    <button type="button" onclick="addItem('form4')" class="btn btn-primary">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                </div>
+                <!--***************************Comment****************************-->
+                <div class="form-floating col-12 mt-3">
+                    <textarea class="form-control w-100" placeholder="Skriv en kommentar" id="MechanicTextArea" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2"></label>
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <!-- Added text-center and mt-3 for spacing -->
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+
+            </form>
+
+            <!--************************************ Form 5 *************************************-->
+
+            <form class="row" id="form5" style="display:none;">
+                <!-- Option 1 -->
+                <h3 class="mx-auto">Trykk Setninger</h3>
+                <div class="col-md-12 d-flex align-items-center">
+
+                    <!-- Label -->
+                    <div class="col-md-6">
+                        <label for="trykkOption1">Xx - Bar</label>
+                    </div>
+
+                    <!-- Radyo Butonları -->
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="trykkOption1" value="OK">
+                            <label class="form-check-label" for="trykkOption1">
+                                OK
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="trykkOption1" value="Bør skiftes">
+                            <label class="form-check-label" for="trykkOption1">
+                                Bør skiftes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="trykkOption1" value="Defekt">
+                            <label class="form-check-label" for="trykkOption1">
+                                Defekt
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 d-flex align-items-center" id="inputRow5">
+                    <div class="col-md-6" id="inputDiv5" style="display:none;">
+                        <input type="text" id="userInput5" placeholder="Label girin..." class="form-control">
+                    </div>
+                    <button type="button" onclick="addItem('form5')" class="btn btn-primary">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </button>
+                </div>
+                <!--***************************Comment****************************-->
+                <div class="form-floating col-12 mt-3">
+                    <textarea class="form-control w-100" placeholder="Skriv en kommentar" id="MechanicTextArea" style="height: 100px"></textarea>
+                    <label for="floatingTextarea2"></label>
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <!-- Added text-center and mt-3 for spacing -->
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                </div>
+
+            </form>
 
 </section>
 
@@ -409,6 +720,21 @@
                     inputDiv = document.getElementById("inputDiv2");
                     userInputField = document.getElementById('userInput2');
                     inputRow = document.getElementById("inputRow2");
+                    break;
+                case 'form3':
+                    inputDiv = document.getElementById("inputDiv3");
+                    userInputField = document.getElementById('userInput3');
+                    inputRow = document.getElementById("inputRow3");
+                    break;
+                case 'form4':
+                    inputDiv = document.getElementById("inputDiv4");
+                    userInputField = document.getElementById('userInput4');
+                    inputRow = document.getElementById("inputRow4");
+                    break;
+                case 'form5':
+                    inputDiv = document.getElementById("inputDiv5");
+                    userInputField = document.getElementById('userInput5');
+                    inputRow = document.getElementById("inputRow5");
                     break;
                 // ... diğer formlar için benzer yapılar eklenebilir.
             }
