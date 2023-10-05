@@ -1,5 +1,37 @@
 ﻿
+<style>
+    .form-button {
+        background-color: #d17242;
+        border-color: #d17242;
+        color: white;
+    }
 
+    .form-button:hover,
+    .form-button:focus,
+    .form-button:active {
+        background-color: #217520;
+        border-color: #217520;
+    }
+
+    form {
+        background-color: #bfd0d7;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    i {
+        border-radius: 50%;
+    }
+
+    .button-add-item {
+        width: 30px; /* Set your desired width */
+        height: 30px; /* Set the same value as width to make it a perfect circle */
+        border-radius: 50%; /* Makes it rounded */
+        display: flex; /* Flexbox for centering content */
+        align-items: center; /* Vertically center the content */
+        justify-content: center; /* Horizontally center the content */
+    }
+</style>
 <mainv class="dflex mx-auto mt-3">
 
     <!--************************* TABLE *****************************-->
@@ -52,22 +84,22 @@
     </div>
     <section class="mt-3">
         <!--************************* BUTONLAR ******************************** -->
-        <div class="container">
+        <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form1')">Mekanisk</button>
+                    <button class="btn form-button w-100 p-3"  onclick="showForm('form1')">Mekanisk</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form2')">Hydrolisk</button>
+                    <button class="btn form-button w-100 p-3"  onclick="showForm('form2')">Hydrolisk</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form3')">Elektro</button>
+                    <button class="btn form-button w-100 p-3"  onclick="showForm('form3')">Elektro</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form4')">Funksjons Test</button>
+                    <button class="btn form-button w-100 p-3"  onclick="showForm('form4')">Funksjons Test</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn btn-primary w-100 p-3" onclick="showForm('form5')">Trykk Settinger</button>
+                    <button class="btn form-button w-100 p-3" onclick="showForm('form5')">Trykk Settinger</button>
                 </div>
             </div>
         </div>
@@ -197,7 +229,7 @@
                     <div class="col-md-6" id="inputDiv1" style="display:none;">
                         <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                     </div>
-                    <button type="button" onclick="addItem('form1')" class="btn btn-primary">
+                    <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
                         <i class="fa-solid fa-circle-plus"></i>
                     </button>
                 </div>
@@ -335,7 +367,7 @@
                     <div class="col-md-6" id="inputDiv2" style="display:none;">
                         <input type="text" id="userInput2" placeholder="Label girin..." class="form-control">
                     </div>
-                    <button type="button" onclick="addItem('form2')" class="btn btn-primary">
+                    <button type="button" onclick="addItem('form2')" class="btn btn-primary button-add-item">
                         <i class="fa-solid fa-circle-plus"></i>
                     </button>
                 </div>
@@ -475,7 +507,7 @@
                     <div class="col-md-6" id="inputDiv3" style="display:none;">
                         <input type="text" id="userInput3" placeholder="Label girin..." class="form-control">
                     </div>
-                    <button type="button" onclick="addItem('form3')" class="btn btn-primary">
+                    <button type="button" onclick="addItem('form3')" class="btn btn-primary button-add-item">
                         <i class="fa-solid fa-circle-plus"></i>
                     </button>
                 </div>
@@ -613,7 +645,7 @@
                     <div class="col-md-6" id="inputDiv4" style="display:none;">
                         <input type="text" id="userInput4" placeholder="Label girin..." class="form-control">
                     </div>
-                    <button type="button" onclick="addItem('form4')" class="btn btn-primary">
+                    <button type="button" onclick="addItem('form4')" class="btn btn-primary button-add-item">
                         <i class="fa-solid fa-circle-plus"></i>
                     </button>
                 </div>
@@ -675,7 +707,7 @@
                     <div class="col-md-6" id="inputDiv5" style="display:none;">
                         <input type="text" id="userInput5" placeholder="Label girin..." class="form-control">
                     </div>
-                    <button type="button" onclick="addItem('form5')" class="btn btn-primary">
+                    <button type="button" onclick="addItem('form5')" class="btn btn-primary button-add-item">
                         <i class="fa-solid fa-circle-plus"></i>
                     </button>
                 </div>
@@ -691,16 +723,17 @@
 
             </form>
 
-</section>
+    </section>
 
 
 
-                                                 <!-- JavaScript -->
+    <!-- JavaScript -->
 
     <script>
         function showForm(formId) {
             ['form1', 'form2', 'form3', 'form4', 'form5'].forEach(function (id) {
                 document.getElementById(id).style.display = (id === formId) ? 'flex' : 'none';
+               
             });
         }
 
@@ -742,7 +775,7 @@
             inputDiv.style.display = "flex";
 
             // Kullanıcıdan alınan girdiyi oku
-            
+
             let labelText = userInputField.value;
 
             if (labelText === '') return; // Eğer boşsa işlem yapma
@@ -752,34 +785,34 @@
             newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
 
             newItem.innerHTML = `
-        <div class="col-md-6">
-            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
-        </div>
-        <div class="col-md-2">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="${labelText}" value="OK">
-                <label class="form-check-label">OK</label>
+            <div class="col-md-6">
+                <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="${labelText}" value="Bør skiftes">
-                <label class="form-check-label">Bør skiftes</label>
+            <div class="col-md-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="${labelText}" value="OK">
+                    <label class="form-check-label">OK</label>
+                </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="${labelText}" value="Defekt">
-                <label class="form-check-label">Defekt</label>
+            <div class="col-md-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="${labelText}" value="Bør skiftes">
+                    <label class="form-check-label">Bør skiftes</label>
+                </div>
             </div>
-        </div>
-    `;
+            <div class="col-md-2">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="${labelText}" value="Defekt">
+                    <label class="form-check-label">Defekt</label>
+                </div>
+            </div>
+        `;
 
             // Oluşturulan elementi formda inputRow'un hemen üstüne ekle
             inputRow.parentNode.insertBefore(newItem, inputRow);
             userInputField.value = '';
         }
-        
+
 
 
 
@@ -794,21 +827,31 @@
 
 
 
-                                 /* Writes forms to console */
+        /* Writes forms to console */
         document.getElementById("form1").addEventListener("submit", function (event) {
-            
-            
 
-            
+
+
+
             var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
 
-            
+
             inputs.forEach(function (input) {
                 console.log(input.name + ": " + input.value);
             });
 
-           
+
         });
+
+
+        function setActive(button) {
+            // Remove 'active' class from all buttons
+            var buttons = document.querySelectorAll('.form-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Set clicked button as active
+            button.classList.add('active');
+        }
 
     </script>
 </mainv>

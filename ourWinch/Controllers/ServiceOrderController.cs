@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 public class ServiceOrderController : Controller
 {
+
     public IActionResult Checklist()
     {
         return View();
