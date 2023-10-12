@@ -41,7 +41,7 @@
         <!--************************* TABLE *****************************-->
         <div>
             <div class="container mt-2">
-                @foreach (var item in Model)
+                @*foreach (var item in Model)*@
             {
                 <div class="row">
                     <div class="col-md-4 border border-black p-1">
@@ -101,6 +101,7 @@
             <div class="container mt-3" onclick="eventHandler(event)">
 
                 <!-- Form 1 -->
+                <form class="row" id="form1" style="display:none;">
                     <h3 class="mx-auto">Mekaniske Sjekkliste</h3>
                     <!-- Option 1 -->
                     <div class="col-md-12 d-flex align-items-center">
@@ -713,7 +714,7 @@
 
                 </form>
 
-        </section>
+</section>
 
 
 
