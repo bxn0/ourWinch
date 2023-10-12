@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/Dashboard/dashboard.css" />
-    <link rel="stylesheet" href="~/css/Dashboard/fulførte.css" />
-    <link rel="stylesheet" href="~/css/Dashboard/nyservice.css" />
+    <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
+    <link rel="stylesheet" href="~/css/Dashboard/index.css" />
+    <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
 </head>
 <body>
     <!-- Navbar Kısmı -->
@@ -52,21 +53,24 @@
                             </a>
                         </li>
                         <li class="nav-item mt-3">
-                            <a asp-controller="Fulførte" asp-action="Dashboard" class="nav-link">
+                            <a asp-controller="Completed" asp-action="Dashboard" class="nav-link">
                                 <i class="fas fa-check-circle"></i> Fulførte Servicer
                             </a>
 
                         </li>
 
                         <li class="nav-item mt-3">
-                            <a asp-controller="NyService" asp-action="Dashboard" class="nav-link">
+                            <a asp-controller="NewService" asp-action="Dashboard" class="nav-link">
                                 <i class="fas fa-pen"></i> Ny service
                             </a>
                         </li>
                     </ul>
                 </div>
             </nav>
-            @RenderBody()
+
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
         </div>
     </div>
 
