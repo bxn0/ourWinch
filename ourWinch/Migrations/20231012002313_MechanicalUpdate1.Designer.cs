@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231005233731_AddNewColumnToTable")]
-    partial class AddNewColumnToTable
+    [Migration("20231012002313_MechanicalUpdate1")]
+    partial class MechanicalUpdate1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,46 @@ namespace ourWinch.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CheckItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MechanicalChecklistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MechanicalChecklistId");
+
+                    b.ToTable("CheckItems");
+                });
+
+            modelBuilder.Entity("MechanicalChecklist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MechanicalChecklists");
+                });
+
             modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -33,9 +73,6 @@ namespace ourWinch.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Adresse")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChecklistData")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -83,6 +120,22 @@ namespace ourWinch.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ServiceOrders");
+                });
+
+            modelBuilder.Entity("CheckItem", b =>
+                {
+                    b.HasOne("MechanicalChecklist", "MechanicalChecklist")
+                        .WithMany("CheckItems")
+                        .HasForeignKey("MechanicalChecklistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MechanicalChecklist");
+                });
+
+            modelBuilder.Entity("MechanicalChecklist", b =>
+                {
+                    b.Navigation("CheckItems");
                 });
 #pragma warning restore 612, 618
         }

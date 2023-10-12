@@ -21,7 +21,6 @@
         public bool Reperasjon { get; set; }
         public string? KommentarFraKunde { get; set; }
 
-        public string? ChecklistData { get; set; }
 
 
     }

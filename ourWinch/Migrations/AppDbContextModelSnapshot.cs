@@ -21,6 +21,31 @@ namespace ourWinch.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Mechanical", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BorSkiftes")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Defekt")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("OK")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SjekkPunkter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mechanicals");
+                });
+
             modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -30,9 +55,6 @@ namespace ourWinch.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Adresse")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChecklistData")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
