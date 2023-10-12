@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class IlkMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,7 +23,7 @@ namespace ourWinch.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Adresse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Feilbeskrivelse = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ordrenummer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Ordrenummer = table.Column<int>(type: "int", nullable: false),
                     Produkttype = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Serienummer = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MottattDato = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -31,7 +31,8 @@ namespace ourWinch.Migrations
                     Garanti = table.Column<bool>(type: "bit", nullable: false),
                     Servis = table.Column<bool>(type: "bit", nullable: false),
                     Reperasjon = table.Column<bool>(type: "bit", nullable: false),
-                    KommentarFraKunde = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    KommentarFraKunde = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ChecklistData = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

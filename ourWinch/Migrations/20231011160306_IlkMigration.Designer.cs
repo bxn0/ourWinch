@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231003115040_UpdateOrdrenummerType")]
-    partial class UpdateOrdrenummerType
+    [Migration("20231011160306_IlkMigration")]
+    partial class IlkMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace ourWinch.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Adresse")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChecklistData")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
