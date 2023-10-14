@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231014021059_Mechanical")]
+    [Migration("20231014022409_Mechanical")]
     partial class Mechanical
     {
         /// <inheritdoc />
@@ -47,15 +47,10 @@ namespace ourWinch.Migrations
                     b.Property<bool>("OK")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Ordrenummer")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ServiceOrderId")
+                    b.Property<int>("OrderID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ServiceOrderId");
 
                     b.ToTable("Mechanicals");
                 });
@@ -115,19 +110,7 @@ namespace ourWinch.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Ordrenummer")
-                        .IsUnique();
-
                     b.ToTable("ServiceOrders");
-                });
-
-            modelBuilder.Entity("Mechanical", b =>
-                {
-                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
-                        .WithMany()
-                        .HasForeignKey("ServiceOrderId");
-
-                    b.Navigation("ServiceOrder");
                 });
 #pragma warning restore 612, 618
         }

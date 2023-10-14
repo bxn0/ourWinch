@@ -71,8 +71,14 @@ namespace ourWinch.Controllers.Checklist
         {
             if (ModelState.IsValid)
             {
+                bool isFirst = true;
                 foreach (var mechanical in viewModel.Mechanicals)
                 {
+                    if (isFirst)
+                    {
+                        mechanical.Kommentar = viewModel.Kommentar;
+                        isFirst = false;
+                    }
                     _context.Add(mechanical);
                 }
                 await _context.SaveChangesAsync();

@@ -12,6 +12,8 @@
 public class MechanicalListViewModel
 {
     public List<Mechanical> Mechanicals { get; set; } = new List<Mechanical>();
+
+    public string? Kommentar { get; set; }
 }
 
 
