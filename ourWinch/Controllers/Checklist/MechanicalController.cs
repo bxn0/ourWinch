@@ -21,6 +21,7 @@ namespace ourWinch.Controllers.Checklist
             return View(await _context.Mechanicals.ToListAsync());
         }
 
+
         // GET: Mechanical/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,15 +49,24 @@ namespace ourWinch.Controllers.Checklist
         // POST: Mechanical/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SjekkPunkter,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(mechanical);
+                bool isFirst = true;
+                foreach (var mechanical in viewModel.Mechanicals)
+                {
+                    if (isFirst)
+                    {
+                        mechanical.Kommentar = viewModel.Kommentar;
+                        isFirst = false;
+                    }
+                    _context.Add(mechanical);
+                }
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("/ServiceOrder/Details/2");
             }
-            return View(mechanical);
+            return View(viewModel);
         }
 
         // GET: Mechanical/Edit/5
@@ -78,7 +88,7 @@ namespace ourWinch.Controllers.Checklist
         // POST: Mechanical/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SjekkPunkter,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Mechanical mechanical)
         {
             if (id != mechanical.Id)
             {

@@ -11,18 +11,49 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231011160306_IlkMigration")]
-    partial class IlkMigration
+    [Migration("20231014023149_Kommentar")]
+    partial class Kommentar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Mechanical", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BorSkiftes")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ChecklistItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Defekt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Kommentar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OK")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mechanicals");
+                });
 
             modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
                 {
@@ -33,9 +64,6 @@ namespace ourWinch.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Adresse")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChecklistData")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")

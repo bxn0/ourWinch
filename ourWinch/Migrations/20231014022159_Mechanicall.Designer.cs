@@ -11,20 +11,20 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231012002313_MechanicalUpdate1")]
-    partial class MechanicalUpdate1
+    [Migration("20231014022159_Mechanicall")]
+    partial class Mechanicall
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CheckItem", b =>
+            modelBuilder.Entity("Mechanical", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,36 +32,27 @@ namespace ourWinch.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("MechanicalChecklistId")
+                    b.Property<bool>("BorSkiftes")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ChecklistItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Defekt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Kommentar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OK")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OrderID")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MechanicalChecklistId");
-
-                    b.ToTable("CheckItems");
-                });
-
-            modelBuilder.Entity("MechanicalChecklist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MechanicalChecklists");
+                    b.ToTable("Mechanicals");
                 });
 
             modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
@@ -120,22 +111,6 @@ namespace ourWinch.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ServiceOrders");
-                });
-
-            modelBuilder.Entity("CheckItem", b =>
-                {
-                    b.HasOne("MechanicalChecklist", "MechanicalChecklist")
-                        .WithMany("CheckItems")
-                        .HasForeignKey("MechanicalChecklistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MechanicalChecklist");
-                });
-
-            modelBuilder.Entity("MechanicalChecklist", b =>
-                {
-                    b.Navigation("CheckItems");
                 });
 #pragma warning restore 612, 618
         }

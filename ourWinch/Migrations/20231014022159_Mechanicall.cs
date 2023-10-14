@@ -6,11 +6,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class IlkMigration : Migration
+    public partial class Mechanicall : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Mechanicals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderID = table.Column<int>(type: "int", nullable: false),
+                    ChecklistItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OK = table.Column<bool>(type: "bit", nullable: false),
+                    BorSkiftes = table.Column<bool>(type: "bit", nullable: false),
+                    Defekt = table.Column<bool>(type: "bit", nullable: false),
+                    Kommentar = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mechanicals", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "ServiceOrders",
                 columns: table => new
@@ -31,8 +49,7 @@ namespace ourWinch.Migrations
                     Garanti = table.Column<bool>(type: "bit", nullable: false),
                     Servis = table.Column<bool>(type: "bit", nullable: false),
                     Reperasjon = table.Column<bool>(type: "bit", nullable: false),
-                    KommentarFraKunde = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ChecklistData = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    KommentarFraKunde = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,6 +60,9 @@ namespace ourWinch.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Mechanicals");
+
             migrationBuilder.DropTable(
                 name: "ServiceOrders");
         }
