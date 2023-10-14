@@ -21,24 +21,6 @@ namespace ourWinch.Controllers.Checklist
             return View(await _context.Mechanicals.ToListAsync());
         }
 
-        public IActionResult AddTestMechanical()
-        {
-            var mechanical = new Mechanical
-            {
-                OrderID = 123,
-                ChecklistItem = "Örnek Madde",
-                OK = true,
-                BorSkiftes = false,
-                Defekt = true,
-                Kommentar = "Bu bir yorumdur"
-            };
-
-            _context.Mechanicals.Add(mechanical);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(Index));
-        }
-
 
         // GET: Mechanical/Details/5
         public async Task<IActionResult> Details(int? id)
