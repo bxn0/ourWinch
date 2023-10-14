@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class Checklist : Migration
+    public partial class MechanicalModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +17,12 @@ namespace ourWinch.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SjekkPunkter = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrderID = table.Column<int>(type: "int", nullable: false),
+                    ChecklistItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OK = table.Column<bool>(type: "bit", nullable: false),
                     BorSkiftes = table.Column<bool>(type: "bit", nullable: false),
-                    Defekt = table.Column<bool>(type: "bit", nullable: false)
+                    Defekt = table.Column<bool>(type: "bit", nullable: false),
+                    Kommentar = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

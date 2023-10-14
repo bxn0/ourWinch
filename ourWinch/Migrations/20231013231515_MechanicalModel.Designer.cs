@@ -11,15 +11,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231012004802_Checklist")]
-    partial class Checklist
+    [Migration("20231013231515_MechanicalModel")]
+    partial class MechanicalModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -35,14 +35,20 @@ namespace ourWinch.Migrations
                     b.Property<bool>("BorSkiftes")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ChecklistItem")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Defekt")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Kommentar")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("OK")
                         .HasColumnType("bit");
 
-                    b.Property<string>("SjekkPunkter")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -21,6 +21,25 @@ namespace ourWinch.Controllers.Checklist
             return View(await _context.Mechanicals.ToListAsync());
         }
 
+        public IActionResult AddTestMechanical()
+        {
+            var mechanical = new Mechanical
+            {
+                OrderID = 123,
+                ChecklistItem = "Örnek Madde",
+                OK = true,
+                BorSkiftes = false,
+                Defekt = true,
+                Kommentar = "Bu bir yorumdur"
+            };
+
+            _context.Mechanicals.Add(mechanical);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
         // GET: Mechanical/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -48,15 +67,18 @@ namespace ourWinch.Controllers.Checklist
         // POST: Mechanical/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SjekkPunkter,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(mechanical);
+                foreach (var mechanical in viewModel.Mechanicals)
+                {
+                    _context.Add(mechanical);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(mechanical);
+            return View(viewModel);
         }
 
         // GET: Mechanical/Edit/5
@@ -78,7 +100,7 @@ namespace ourWinch.Controllers.Checklist
         // POST: Mechanical/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SjekkPunkter,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Mechanical mechanical)
         {
             if (id != mechanical.Id)
             {
