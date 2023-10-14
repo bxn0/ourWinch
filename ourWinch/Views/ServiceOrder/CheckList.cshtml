@@ -199,6 +199,8 @@
                         <button class="btn btn-primary" type="submit">Submit form</button>
                     </div>
 
+          
+
                 </form>
      </div>
 
@@ -688,89 +690,76 @@
         <!-- JavaScript -->
 
     <script>
-        function showForm(formId) {
-            ['form1', 'form2', 'form3', 'form4', 'form5'].forEach(function (id) {
-                document.getElementById(id).style.display = (id === formId) ? 'flex' : 'none';
-            });
-        }
+        let counter = 3;
 
-            //************************************************* */
-            function addItem(formId) {
-                let inputDiv;
-                let userInputField;
-                let inputRow;
-
-                switch (formId) {
-                    case 'form1':
-                        inputDiv = document.getElementById("inputDiv1");
-                        userInputField = document.getElementById('userInput1');
-                        inputRow = document.getElementById("inputRow1");
-                        break;
-                    case 'form2':
-                        inputDiv = document.getElementById("inputDiv2");
-                        userInputField = document.getElementById('userInput2');
-                        inputRow = document.getElementById("inputRow2");
-                        break;
-                    case 'form3':
-                        inputDiv = document.getElementById("inputDiv3");
-                        userInputField = document.getElementById('userInput3');
-                        inputRow = document.getElementById("inputRow3");
-                        break;
-                    case 'form4':
-                        inputDiv = document.getElementById("inputDiv4");
-                        userInputField = document.getElementById('userInput4');
-                        inputRow = document.getElementById("inputRow4");
-                        break;
-                    case 'form5':
-                        inputDiv = document.getElementById("inputDiv5");
-                        userInputField = document.getElementById('userInput5');
-                        inputRow = document.getElementById("inputRow5");
-                        break;
-                    // ... diğer formlar için benzer yapılar eklenebilir.
-                }
-
-                inputDiv.style.display = "flex";
-
-                // Kullanıcıdan alınan girdiyi oku
-
-                let labelText = userInputField.value;
-
-                if (labelText === '') return; // Eğer boşsa işlem yapma
-
-                // Yeni bir element oluştur
-                let newItem = document.createElement('div');
-                newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
-
-                newItem.innerHTML = `
-                                        <div class="col-md-6">
-                                            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="${labelText}" value="OK">
-                                                <label class="form-check-label">OK</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="${labelText}" value="Bør skiftes">
-                                                <label class="form-check-label">Bør skiftes</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="${labelText}" value="Defekt">
-                                                <label class="form-check-label">Defekt</label>
-                                            </div>
-                                        </div>
-                                    `;
-
-                // Oluşturulan elementi formda inputRow'un hemen üstüne ekle
-                inputRow.parentNode.insertBefore(newItem, inputRow);
-                userInputField.value = '';
+        function addItem(formId) {
+            let inputDiv;
+            let userInputField;
+            let inputRow;
+            switch (formId) {
+                case 'form1':
+                    inputDiv = document.getElementById("inputDiv1");
+                    userInputField = document.getElementById('userInput1');
+                    inputRow = document.getElementById("inputRow1");
+                    break;
+                case 'form2':
+                    inputDiv = document.getElementById("inputDiv2");
+                    userInputField = document.getElementById('userInput2');
+                    inputRow = document.getElementById("inputRow2");
+                    break;
+                case 'form3':
+                    inputDiv = document.getElementById("inputDiv3");
+                    userInputField = document.getElementById('userInput3');
+                    inputRow = document.getElementById("inputRow3");
+                    break;
+                case 'form4':
+                    inputDiv = document.getElementById("inputDiv4");
+                    userInputField = document.getElementById('userInput4');
+                    inputRow = document.getElementById("inputRow4");
+                    break;
+                case 'form5':
+                    inputDiv = document.getElementById("inputDiv5");
+                    userInputField = document.getElementById('userInput5');
+                    inputRow = document.getElementById("inputRow5");
+                    break;
             }
 
-            /************************ EVENTS **************************************/
+            inputDiv.style.display = "flex";
+            let labelText = userInputField.value;
+            if (labelText === '') return;
+
+            let newItem = document.createElement('div');
+            newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
+
+            newItem.innerHTML = `
+                <div class="col-md-6">
+                    <input type="hidden" name="Mechanicals[${counter}].ChecklistItem" value="${labelText}">
+                    <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Mechanicals[${counter}].OK" value="true">
+                        <label class="form-check-label">OK</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Mechanicals[${counter}].BorSkiftes" value="true">
+                        <label class="form-check-label">BorSkiftes</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Mechanicals[${counter}].Defekt" value="true">
+                        <label class="form-check-label">Defekt</label>
+                    </div>
+                </div>
+            `;
+
+            inputRow.parentNode.insertBefore(newItem, inputRow);
+            userInputField.value = '';
+            counter++;
+        }
 
         const eventHandler = (event) => {
             if (event.target.type === 'radio') {
@@ -778,28 +767,19 @@
             }
         }
 
-                   
-            function setActive(button) {
-                // Remove 'active' class from all buttons
-                var buttons = document.querySelectorAll('.form-button');
-                buttons.forEach(btn => btn.classList.remove('active'));
+        function setActive(button) {
+            var buttons = document.querySelectorAll('.form-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
 
-                // Set clicked button as active
-                button.classList.add('active');
-            }
-
-        // Formun submit olayını yakala
         document.getElementById('form1').addEventListener('submit', function (event) {
-            event.preventDefault(); // Formun otomatik gönderilmesini engelle
-
-            // Form bilgilerini konsola yazdır
+            event.preventDefault();
             var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
             inputs.forEach(function (input) {
                 console.log(input.name + ": " + input.value);
             });
-
-            // Formu programatik olarak gönder
-            const actionUrl = '/Mechanical/Create'; // Burada doğru URL'yi belirtmelisiniz
+            const actionUrl = '/Mechanical/Create';
             this.setAttribute('action', actionUrl);
             this.submit();
         });
