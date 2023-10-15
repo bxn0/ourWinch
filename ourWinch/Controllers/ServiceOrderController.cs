@@ -24,7 +24,7 @@ public class ServiceOrderController : Controller
     public IActionResult Create(ServiceOrder serviceOrder)
     {
         var lastOrder = _context.ServiceOrders.OrderByDescending(o => o.Ordrenummer).FirstOrDefault();
-        var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 1;
+        var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230001;
 
         serviceOrder.Ordrenummer = newOrderNumber;
 
@@ -52,7 +52,7 @@ public class ServiceOrderController : Controller
 
     public IActionResult Details(int id)
     {
-        var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.Id == id);
+        var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
         if (serviceOrder == null)
         {
             return NotFound();

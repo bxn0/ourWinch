@@ -44,21 +44,26 @@ namespace ourWinch.Migrations
                     b.Property<bool>("OK")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OrderID")
+                    b.Property<int>("Ordrenummer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceOrderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServiceOrderId");
 
                     b.ToTable("Mechanicals");
                 });
 
             modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ServiceOrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceOrderId"));
 
                     b.Property<string>("Adresse")
                         .HasColumnType("nvarchar(max)");
@@ -105,9 +110,20 @@ namespace ourWinch.Migrations
                     b.Property<string>("Årsmodell")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ServiceOrderId");
 
                     b.ToTable("ServiceOrders");
+                });
+
+            modelBuilder.Entity("Mechanical", b =>
+                {
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
+                        .WithMany()
+                        .HasForeignKey("ServiceOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceOrder");
                 });
 #pragma warning restore 612, 618
         }
