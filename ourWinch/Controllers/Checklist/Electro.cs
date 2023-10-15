@@ -42,10 +42,13 @@ namespace ourWinch.Controllers.Checklist
         // GET: Electro/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new ElectroListViewModel
+            {
+                Electros = new List<Electro>() // İsterseniz bu listeyi doldurabilirsiniz.
+            };
+            return View(viewModel);
         }
 
-        // POST: Electro/Create
         // POST: Electro/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -75,7 +78,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/2");
+                    return Redirect("/ServiceOrder/Details/1");
                 }
                 else
                 {

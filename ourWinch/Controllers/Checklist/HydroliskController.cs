@@ -75,7 +75,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/2");
+                    return Redirect("/ServiceOrder/Details/1");
                 }
                 else
                 {

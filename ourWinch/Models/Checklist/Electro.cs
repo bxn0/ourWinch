@@ -19,7 +19,7 @@ public class Electro
 public class ElectroListViewModel
 {
     public List<Electro> Electros { get; set; } = new List<Electro>();
-
+    public ServiceOrder? ServiceOrderInfo { get; set; }
     public string? Kommentar { get; set; }
 }
 
