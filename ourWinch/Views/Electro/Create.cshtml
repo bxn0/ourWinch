@@ -37,9 +37,10 @@
 <main class="dflex mx-auto mt-3">
 
     <!--************************* TABLE *****************************-->
-    <div>
-        <div class="container mt-2">
-            @foreach (var item in Model.Electros)
+    <div class="container mt-2">
+        @if (Model.ServiceOrderInfo != null)
+        {
+            foreach (var item in Model.Electros)
             {
                 <div class="row">
                     <div class="col-md-4 border border-black p-1">
@@ -75,26 +76,41 @@
                     </div>
                 </div>
             }
-        </div>
+        }
+        else
+        {
+           
+        }
     </div>
+
     <section class="mt-3">
         <!--************************* BUTONLAR ******************************** -->
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form1')">Mekanisk</button>
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1">
+                        <button class="btn form-button w-100 p-3">Mekanisk</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form2')">Hydrolisk</button>
+                    <a asp-controller="Hydrolisk" asp-action="Create">
+                        <button class="btn form-button w-100 p-3">Hydrolisk</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form3')">Elektro</button>
+                    <a asp-controller="Electro" asp-action="Create">
+                        <button class="btn form-button w-100 p-3">Elektro</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form4')">Funksjons Test</button>
+                    <a asp-controller="FunksjonsTest" asp-action="Create">
+                        <button class="btn form-button w-100 p-3">Funksjons Test</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form5')">Trykk Settinger</button>
+                    <a asp-controller="TrykkSettinger" asp-action="Create">
+                        <button class="btn form-button w-100 p-3">Trykk Settinger</button>
+                    </a>
                 </div>
             </div>
         </div>
