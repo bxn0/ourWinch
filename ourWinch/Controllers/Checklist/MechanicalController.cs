@@ -1,5 +1,4 @@
-﻿using ourWinchSist.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,6 +46,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // POST: Mechanical/Create
+        // POST: Mechanical/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
@@ -54,20 +54,38 @@ namespace ourWinch.Controllers.Checklist
             if (ModelState.IsValid)
             {
                 bool isFirst = true;
-                foreach (var mechanical in viewModel.Mechanicals)
+
+                // En son eklenen ServiceOrder'ı alıyoruz.
+                var lastServiceOrder = _context.ServiceOrders.OrderByDescending(o => o.ServiceOrderId).FirstOrDefault();
+
+                if (lastServiceOrder != null)
                 {
-                    if (isFirst)
+                    foreach (var mechanical in viewModel.Mechanicals)
                     {
-                        mechanical.Kommentar = viewModel.Kommentar;
-                        isFirst = false;
+                        if (isFirst)
+                        {
+                            mechanical.Kommentar = viewModel.Kommentar;
+                            isFirst = false;
+                        }
+
+                        // Her bir Mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        mechanical.Ordrenummer = lastServiceOrder.Ordrenummer;
+                        mechanical.ServiceOrderId = lastServiceOrder.ServiceOrderId;
+
+                        _context.Add(mechanical);
                     }
-                    _context.Add(mechanical);
+                    await _context.SaveChangesAsync();
+                    return Redirect("/ServiceOrder/Details/2");
                 }
-                await _context.SaveChangesAsync();
-                return Redirect("/ServiceOrder/Details/2");
+                else
+                {
+                    // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
+                    ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
+                }
             }
             return View(viewModel);
         }
+
 
         // GET: Mechanical/Edit/5
         public async Task<IActionResult> Edit(int? id)

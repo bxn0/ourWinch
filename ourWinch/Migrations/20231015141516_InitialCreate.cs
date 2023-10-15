@@ -6,34 +6,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class Mechanicall : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Mechanicals",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderID = table.Column<int>(type: "int", nullable: false),
-                    ChecklistItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OK = table.Column<bool>(type: "bit", nullable: false),
-                    BorSkiftes = table.Column<bool>(type: "bit", nullable: false),
-                    Defekt = table.Column<bool>(type: "bit", nullable: false),
-                    Kommentar = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Mechanicals", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ServiceOrders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    ServiceOrderId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Fornavn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Etternavn = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -53,8 +35,38 @@ namespace ourWinch.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceOrders", x => x.Id);
+                    table.PrimaryKey("PK_ServiceOrders", x => x.ServiceOrderId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Mechanicals",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ordrenummer = table.Column<int>(type: "int", nullable: false),
+                    ChecklistItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OK = table.Column<bool>(type: "bit", nullable: false),
+                    BorSkiftes = table.Column<bool>(type: "bit", nullable: false),
+                    Defekt = table.Column<bool>(type: "bit", nullable: false),
+                    Kommentar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceOrderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Mechanicals", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Mechanicals_ServiceOrders_ServiceOrderId",
+                        column: x => x.ServiceOrderId,
+                        principalTable: "ServiceOrders",
+                        principalColumn: "ServiceOrderId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Mechanicals_ServiceOrderId",
+                table: "Mechanicals",
+                column: "ServiceOrderId");
         }
 
         /// <inheritdoc />
