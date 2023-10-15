@@ -10,4 +10,5 @@ public class AppDbContext : DbContext
     public DbSet<ServiceOrder> ServiceOrders { get; set; }
     public DbSet<Mechanical> Mechanicals { get; set; }
 
+    public DbSet<Electro> Electros { get; set; }
 }
