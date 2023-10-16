@@ -1,0 +1,347 @@
+﻿@model TrykkListViewModel
+    ﻿
+<style>
+    .form-button {
+        background-color: #d17242;
+        border-color: #d17242;
+        color: white;
+    }
+
+        .form-button:hover,
+        .form-button:focus,
+        .form-button:active {
+            background-color: #217520;
+            border-color: #217520;
+        }
+
+    form {
+        background-color: #bfd0d7;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    i {
+        border-radius: 50%;
+    }
+
+    .button-add-item {
+        width: 30px; /* Set your desired width */
+        height: 30px; /* Set the same value as width to make it a perfect circle */
+        border-radius: 50%; /* Makes it rounded */
+        display: flex; /* Flexbox for centering content */
+        align-items: center; /* Vertically center the content */
+        justify-content: center; /* Horizontally center the content */
+    }
+
+    .active-button {
+        background-color: #217520; /* Örnek renk */
+        color: white;
+    }
+
+</style>
+
+<main class="dflex mx-auto mt-3">
+
+    <!--************************* TABLE *****************************-->
+    <div class="container mt-2">
+        @if (Model.ServiceOrderInfo != null)
+        {
+            foreach (var item in Model.Trykks)
+            {
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>OrderID:</strong> @Model.ServiceOrderInfo.Ordrenummer
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>ProduktType:</strong> @Model.ServiceOrderInfo.Produkttype
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Arsmodell:</strong> @Model.ServiceOrderInfo.Årsmodell
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Kunde Navn:</strong> @Model.ServiceOrderInfo.Fornavn @Model.ServiceOrderInfo.Etternavn
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Serie No:</strong> @Model.ServiceOrderInfo.Serienummer
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Status:</strong> @Model.ServiceOrderInfo.Reperasjon
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Mobil No:</strong> @Model.ServiceOrderInfo.MobilNo
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Feilbeskrivelse:</strong> @Model.ServiceOrderInfo.Feilbeskrivelse
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Kommentar fra kunde:</strong> @Model.ServiceOrderInfo.KommentarFraKunde
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+           
+        }
+    </div>
+
+    <section class="mt-3">
+        <!--************************* BUTONLAR ******************************** -->
+        <div class="container text-light">
+            <div class="row">
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
+                    </a>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <a asp-controller="Hydrolisk" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Hydrolisk" ? "active-button" : "") w-100 p-3">Hydrolisk</button>
+
+                    </a>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <a asp-controller="Electro" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Electro" ? "active-button" : "") w-100 p-3">Electro</button>
+                    </a>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <a asp-controller="FunksjonsTest" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "FunksjonsTest" ? "active-button" : "") w-100 p-3">FunksjonsTest</button>
+                    </a>
+                </div>
+                <div class="col-2 col-md-2 col-lg-2.4">
+                    <a asp-controller="Trykk" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Trykk" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ************************** Form for Trykk ******************************* -->
+
+    <div class="container mt-3" onclick="eventHandler(event)">
+
+        <!-- Form 1 -->
+        <form class="row" id="formElectro" asp-controller="Trykk" asp-action="Create" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <h3 class="mx-auto">Trykk Sjekkliste</h3>
+            <!-- Option 1 -->
+            <div class="col-md-12 d-flex align-items-center">
+                <div class="col-md-6">
+                    <input type="hidden" name="Trykks[0].ChecklistItem" value="xx- Bar">
+                    <label for="option0">xx- Bar</label>
+                </div>
+
+                <!-- Radyo Butonları -->
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[0].OK" id="option0OK" value="true">
+                        <label class="form-check-label" for="option0OK">OK</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[0].BorSkiftes" id="option01BorSkiftes" value="true">
+                        <label class="form-check-label" for="option01BorSkiftes">BorSkiftes</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[0].Defekt" id="option02Defekt" value="true">
+                        <label class="form-check-label" for="option02Defekt">Defekt</label>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Option 2 -->
+            <div class="col-md-12 d-flex align-items-center">
+                <input type="hidden" name="Trykks[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
+                <div class="col-md-6">
+                    <label for="option1">Sjekk bremser. Bånd/Pål</label>
+                </div>
+
+                <!-- Radyo Butonları -->
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[1].OK" id="option1OK" value="true">
+                        <label class="form-check-label" for="option1OK">OK</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[1].BorSkiftes" id="option11BorSkiftes" value="true">
+                        <label class="form-check-label" for="option11BorSkiftes">BorSkiftes</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[1].Defekt" id="option12Defekt" value="true">
+                        <label class="form-check-label" for="option12Defekt">Defekt</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Option 3 -->
+            <div class="col-md-12 d-flex align-items-center">
+                <input type="hidden" name="Trykks[2].ChecklistItem" value="Sjekk lager for trommel">
+                <div class="col-md-6">
+                    <label for="option2">Sjekk lager for trommel</label>
+                </div>
+
+                <!-- Radyo Butonları -->
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[2].OK" id="option2OK" value="true">
+                        <label class="form-check-label" for="option2OK">OK</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[2].BorSkiftes" id="option21BorSkiftes" value="true">
+                        <label class="form-check-label" for="option21BorSkiftes">BorSkiftes</label>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="Trykks[2].Defekt" id="option22Defekt" value="true">
+                        <label class="form-check-label" for="option22Defekt">Defekt</label>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12 d-flex align-items-center" id="inputRow1">
+                <div class="col-md-6" id="inputDiv1" style="display:none;">
+                    <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
+                </div>
+                <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </button>
+            </div>
+            <!--***************************Comment****************************-->
+            <div class="form-floating col-12 mt-3">
+                <textarea class="form-control w-100" placeholder="Skriv en kommentar" id="MechanicTextArea" name="Kommentar" style="height: 100px"></textarea>
+                <label for="MechanicTextArea"></label>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <!-- Added text-center and mt-3 for spacing -->
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </div>
+
+
+
+        </form>
+    </div>
+    <!-- JavaScript -->
+
+    <script>
+        let counter = 3;
+
+        function addItem(formId) {
+            let inputDiv;
+            let userInputField;
+            let inputRow;
+            switch (formId) {
+                case 'form1':
+                    inputDiv = document.getElementById("inputDiv1");
+                    userInputField = document.getElementById('userInput1');
+                    inputRow = document.getElementById("inputRow1");
+                    break;
+                case 'form2':
+                    inputDiv = document.getElementById("inputDiv2");
+                    userInputField = document.getElementById('userInput2');
+                    inputRow = document.getElementById("inputRow2");
+                    break;
+                case 'form3':
+                    inputDiv = document.getElementById("inputDiv3");
+                    userInputField = document.getElementById('userInput3');
+                    inputRow = document.getElementById("inputRow3");
+                    break;
+                case 'form4':
+                    inputDiv = document.getElementById("inputDiv4");
+                    userInputField = document.getElementById('userInput4');
+                    inputRow = document.getElementById("inputRow4");
+                    break;
+                case 'form5':
+                    inputDiv = document.getElementById("inputDiv5");
+                    userInputField = document.getElementById('userInput5');
+                    inputRow = document.getElementById("inputRow5");
+                    break;
+            }
+
+            inputDiv.style.display = "flex";
+            let labelText = userInputField.value;
+            if (labelText === '') return;
+
+            let newItem = document.createElement('div');
+            newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
+
+            newItem.innerHTML = `
+                        <div class="col-md-6">
+                            <input type="hidden" name="Trykks[${counter}].ChecklistItem" value="${labelText}">
+                            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Trykks[${counter}].OK" value="true">
+                                <label class="form-check-label">OK</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Trykks[${counter}].BorSkiftes" value="true">
+                                <label class="form-check-label">BorSkiftes</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Trykks[${counter}].Defekt" value="true">
+                                <label class="form-check-label">Defekt</label>
+                            </div>
+                        </div>
+                    `;
+
+            inputRow.parentNode.insertBefore(newItem, inputRow);
+            userInputField.value = '';
+            counter++;
+        }
+
+        const eventHandler = (event) => {
+            if (event.target.type === 'radio') {
+                console.log(event.target.value);
+            }
+        }
+
+        function setActive(button) {
+            var buttons = document.querySelectorAll('.form-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+
+        document.getElementById('form1').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
+            inputs.forEach(function (input) {
+                console.log(input.name + ": " + input.value);
+            });
+            const actionUrl = '/Trykk/Create';
+            this.setAttribute('action', actionUrl);
+            this.submit();
+        });
+    </script>
+</main>

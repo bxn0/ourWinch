@@ -1,1 +1,55 @@
-<h1>ServiceOrder</h1>
+﻿@model IEnumerable<ourWinchSist.Models.ServiceOrder>
+
+    <div class="container mt-5">
+        <!-- Bootstrap container sınıfı eklenmiştir. -->
+        <h2 class="text-center">Service Orders List</h2> <!-- Başlık ortalandı. -->
+
+        <div class="table-responsive">
+            <!-- Responsive tablo için sarmalayıcı. -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fornavn</th>
+                        <th>Etternavn</th>
+                        <th>Mobil No</th>
+                        <th>Email</th>
+                        <th>Adresse</th>
+                        <th>Feilbeskrivelse</th>
+                        <th>Ordrenummer</th>
+                        <th>Produkttype</th>
+                        <th>Serienummer</th>
+                        <th>Mottatt Dato</th>
+                        <th>Årsmodell</th>
+                        <th>Garanti</th>
+                        <th>Servis</th>
+                        <th>Reperasjon</th>
+                        <th>Kommentar Fra Kunde</th>
+                        <!-- Eğer diğer işlemler için düğmeler eklemek isterseniz, örneğin düzenleme ya da silme gibi, o sütunları da buraya ekleyebilirsiniz. -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+        {
+                    <tr>
+                        <td>@item.ServiceOrderId</td>
+                        <td>@item.Fornavn</td>
+                        <td>@item.Etternavn</td>
+                        <td>@item.MobilNo</td>
+                        <td>@item.Email</td>
+                        <td>@item.Adresse</td>
+                        <td>@item.Feilbeskrivelse</td>
+                        <td>@item.Ordrenummer</td>
+                        <td>@item.Produkttype</td>
+                        <td>@item.Serienummer</td>
+                        <td>@item.MottattDato.ToShortDateString()</td> <!-- Sadece tarihi göstermek için ToShortDateString() kullanıldı. -->
+                        <td>@item.Årsmodell</td>
+                        <td>@(item.Garanti ? "Ja" : "Nei")</td>
+                        <td>@(item.Servis ? "Ja" : "Nei")</td>
+                        <td>@(item.Reperasjon ? "Ja" : "Nei")</td>
+                        <td>@item.KommentarFraKunde</td>
+                        <!-- Eğer diğer işlemler için düğmeler eklemek isterseniz, örneğin düzenleme ya da silme gibi, o sütunları da buraya ekleyebilirsiniz. -->
+                    </tr>
+        }
+                </tbody>
+            </table>
