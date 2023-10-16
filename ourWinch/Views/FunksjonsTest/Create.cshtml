@@ -1,4 +1,4 @@
-﻿@model ElectroListViewModel
+﻿@model FunksjonsTestListViewModel
     ﻿
 <style>
     .form-button {
@@ -46,7 +46,7 @@
     <div class="container mt-2">
         @if (Model.ServiceOrderInfo != null)
         {
-            foreach (var item in Model.Electros)
+            foreach (var item in Model.FunksjonsTests)
             {
                 <div class="row">
                     <div class="col-md-4 border border-black p-1">
@@ -85,7 +85,7 @@
         }
         else
         {
-           
+
         }
     </div>
 
@@ -122,41 +122,41 @@
             </div>
         </div>
     </section>
-    <!-- ************************** Form for Electro ******************************* -->
+    <!-- ************************** Form for FunksjonsTest ******************************* -->
 
     <div class="container mt-3" onclick="eventHandler(event)">
 
         <!-- Form 1 -->
-        <form class="row" id="formElectro" asp-controller="Electro" asp-action="Create" method="post">
+        <form class="row" id="formFunksjonsTest" asp-controller="FunksjonsTest" asp-action="Create" method="post">
 
             @Html.AntiForgeryToken()
 
-            <h3 class="mx-auto">Electro Sjekkliste</h3>
+            <h3 class="mx-auto">FunksjonsTest Sjekkliste</h3>
             <!-- Option 1 -->
             <div class="col-md-12 d-flex align-items-center">
                 <div class="col-md-6">
-                    <input type="hidden" name="Electros[0].ChecklistItem" value="Sjekk clutch lameller for slitasje">
+                    <input type="hidden" name="FunksjonsTests[0].ChecklistItem" value="Sjekk clutch lameller for slitasje">
                     <label for="option0">Sjekk clutch lameller for slitasje</label>
                 </div>
 
                 <!-- Radyo Butonları -->
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[0].OK" id="option0OK" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[0].OK" id="option0OK" value="true">
                         <label class="form-check-label" for="option0OK">OK</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[0].BorSkiftes" id="option01BorSkiftes" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[0].BorSkiftes" id="option01BorSkiftes" value="true">
                         <label class="form-check-label" for="option01BorSkiftes">BorSkiftes</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[0].Defekt" id="option02Defekt" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[0].Defekt" id="option02Defekt" value="true">
                         <label class="form-check-label" for="option02Defekt">Defekt</label>
 
                     </div>
@@ -166,7 +166,7 @@
 
             <!-- Option 2 -->
             <div class="col-md-12 d-flex align-items-center">
-                <input type="hidden" name="Electros[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
+                <input type="hidden" name="FunksjonsTests[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
                 <div class="col-md-6">
                     <label for="option1">Sjekk bremser. Bånd/Pål</label>
                 </div>
@@ -174,21 +174,21 @@
                 <!-- Radyo Butonları -->
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[1].OK" id="option1OK" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[1].OK" id="option1OK" value="true">
                         <label class="form-check-label" for="option1OK">OK</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[1].BorSkiftes" id="option11BorSkiftes" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[1].BorSkiftes" id="option11BorSkiftes" value="true">
                         <label class="form-check-label" for="option11BorSkiftes">BorSkiftes</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[1].Defekt" id="option12Defekt" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[1].Defekt" id="option12Defekt" value="true">
                         <label class="form-check-label" for="option12Defekt">Defekt</label>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
 
             <!-- Option 3 -->
             <div class="col-md-12 d-flex align-items-center">
-                <input type="hidden" name="Electros[2].ChecklistItem" value="Sjekk lager for trommel">
+                <input type="hidden" name="FunksjonsTests[2].ChecklistItem" value="Sjekk lager for trommel">
                 <div class="col-md-6">
                     <label for="option2">Sjekk lager for trommel</label>
                 </div>
@@ -204,21 +204,21 @@
                 <!-- Radyo Butonları -->
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[2].OK" id="option2OK" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[2].OK" id="option2OK" value="true">
                         <label class="form-check-label" for="option2OK">OK</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[2].BorSkiftes" id="option21BorSkiftes" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[2].BorSkiftes" id="option21BorSkiftes" value="true">
                         <label class="form-check-label" for="option21BorSkiftes">BorSkiftes</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[2].Defekt" id="option22Defekt" value="true">
+                        <input class="form-check-input" type="radio" name="FunksjonsTests[2].Defekt" id="option22Defekt" value="true">
                         <label class="form-check-label" for="option22Defekt">Defekt</label>
 
                     </div>
@@ -292,29 +292,29 @@
             newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
 
             newItem.innerHTML = `
-                        <div class="col-md-6">
-                            <input type="hidden" name="Electros[${counter}].ChecklistItem" value="${labelText}">
-                            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Electros[${counter}].OK" value="true">
-                                <label class="form-check-label">OK</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Electros[${counter}].BorSkiftes" value="true">
-                                <label class="form-check-label">BorSkiftes</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Electros[${counter}].Defekt" value="true">
-                                <label class="form-check-label">Defekt</label>
-                            </div>
-                        </div>
-                    `;
+                                <div class="col-md-6">
+                                    <input type="hidden" name="FunksjonsTests[${counter}].ChecklistItem" value="${labelText}">
+                                    <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="FunksjonsTests[${counter}].OK" value="true">
+                                        <label class="form-check-label">OK</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="FunksjonsTests[${counter}].BorSkiftes" value="true">
+                                        <label class="form-check-label">BorSkiftes</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="FunksjonsTests[${counter}].Defekt" value="true">
+                                        <label class="form-check-label">Defekt</label>
+                                    </div>
+                                </div>
+                            `;
 
             inputRow.parentNode.insertBefore(newItem, inputRow);
             userInputField.value = '';
@@ -339,7 +339,7 @@
             inputs.forEach(function (input) {
                 console.log(input.name + ": " + input.value);
             });
-            const actionUrl = '/Electro/Create';
+            const actionUrl = '/FunksjonsTest/Create';
             this.setAttribute('action', actionUrl);
             this.submit();
         });

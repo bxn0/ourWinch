@@ -1,8 +1,5 @@
-﻿@using ourWinchSist.Models
-
-@model List<ourWinchSist.Models.ServiceOrder>
-
-    ﻿
+﻿@model List<ourWinchSist.Models.ServiceOrder>
+@using ourWinchSist.Models
     ﻿
 <style>
     .form-button {
@@ -86,19 +83,19 @@
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3">Mekanisk</button>
+                    <button class="btn form-button w-100 p-3" onclick="showForm('form1')">Mekanisk</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3">Hydrolisk</button>
+                    <button class="btn form-button w-100 p-3" onclick="showForm('form2')">Hydrolisk</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" </button>
+                    <button class="btn form-button w-100 p-3" onclick="showForm('form3')">Elektro</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3"</button>
+                    <button class="btn form-button w-100 p-3" onclick="showForm('form4')">Funksjons Test</button>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3">Trykk Settinger</button>
+                    <button class="btn form-button w-100 p-3" onclick="showForm('form5')">Trykk Settinger</button>
                 </div>
             </div>
         </div>
@@ -108,11 +105,11 @@
     <div class="container mt-3" onclick="eventHandler(event)">
 
         <!-- Form 1 -->
-        <form class="row" id="form1" asp-controller="Electro" asp-action="Create" method="post">
+        <form class="row" id="formElectro" asp-controller="Electro" asp-action="Create" method="post">
 
             @Html.AntiForgeryToken()
 
-            <h3 class="mx-auto">Hydrolisk Sjekkliste</h3>
+            <h3 class="mx-auto">Electro Sjekkliste</h3>
             <!-- Option 1 -->
             <div class="col-md-12 d-flex align-items-center">
                 <div class="col-md-6">

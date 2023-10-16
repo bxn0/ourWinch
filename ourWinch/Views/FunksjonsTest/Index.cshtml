@@ -1,46 +1,46 @@
 ﻿@model List<ourWinchSist.Models.ServiceOrder>
-
+@using ourWinchSist.Models
     ﻿
-    <style>
-        .form-button {
-            background-color: #d17242;
-            border-color: #d17242;
-            color: white;
+<style>
+    .form-button {
+        background-color: #d17242;
+        border-color: #d17242;
+        color: white;
+    }
+
+        .form-button:hover,
+        .form-button:focus,
+        .form-button:active {
+            background-color: #217520;
+            border-color: #217520;
         }
 
-            .form-button:hover,
-            .form-button:focus,
-            .form-button:active {
-                background-color: #217520;
-                border-color: #217520;
-            }
+    form {
+        background-color: #bfd0d7;
+        border-radius: 20px;
+        padding: 10px;
+    }
 
-        form {
-            background-color: #bfd0d7;
-            border-radius: 20px;
-            padding: 10px;
-        }
+    i {
+        border-radius: 50%;
+    }
 
-        i {
-            border-radius: 50%;
-        }
+    .button-add-item {
+        width: 30px; /* Set your desired width */
+        height: 30px; /* Set the same value as width to make it a perfect circle */
+        border-radius: 50%; /* Makes it rounded */
+        display: flex; /* Flexbox for centering content */
+        align-items: center; /* Vertically center the content */
+        justify-content: center; /* Horizontally center the content */
+    }
+</style>
 
-        .button-add-item {
-            width: 30px; /* Set your desired width */
-            height: 30px; /* Set the same value as width to make it a perfect circle */
-            border-radius: 50%; /* Makes it rounded */
-            display: flex; /* Flexbox for centering content */
-            align-items: center; /* Vertically center the content */
-            justify-content: center; /* Horizontally center the content */
-        }
-    </style>
+<main class="dflex mx-auto mt-3">
 
-    <main class="dflex mx-auto mt-3">
-
-        <!--************************* TABLE *****************************-->
-        <div>
-            <div class="container mt-2">
-                @foreach (var item in Model)
+    <!--************************* TABLE *****************************-->
+    <div>
+        <div class="container mt-2">
+            @foreach (var item in Model)
             {
                 <div class="row">
                     <div class="col-md-4 border border-black p-1">
@@ -76,8 +76,8 @@
                     </div>
                 </div>
             }
-            </div>
         </div>
+    </div>
     <section class="mt-3">
         <!--************************* BUTONLAR ******************************** -->
         <div class="container text-light">
@@ -99,133 +99,133 @@
                 </div>
             </div>
         </div>
-        </section>
-       <!-- ************************** Form for Electro ******************************* -->
+    </section>
+    <!-- ************************** Form for Electro ******************************* -->
 
-            <div class="container mt-3" onclick="eventHandler(event)">
+    <div class="container mt-3" onclick="eventHandler(event)">
 
-                <!-- Form 1 -->
+        <!-- Form 1 -->
         <form class="row" id="formElectro" asp-controller="Electro" asp-action="Create" method="post">
 
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                    <h3 class="mx-auto">Electro Sjekkliste</h3>
-                    <!-- Option 1 -->
-                    <div class="col-md-12 d-flex align-items-center">
-                        <div class="col-md-6">
-                            <input type="hidden" name="Electros[0].ChecklistItem" value="Sjekk clutch lameller for slitasje">
-                            <label for="option0">Sjekk clutch lameller for slitasje</label>
-                        </div>
+            <h3 class="mx-auto">Electro Sjekkliste</h3>
+            <!-- Option 1 -->
+            <div class="col-md-12 d-flex align-items-center">
+                <div class="col-md-6">
+                    <input type="hidden" name="Electros[0].ChecklistItem" value="Sjekk clutch lameller for slitasje">
+                    <label for="option0">Sjekk clutch lameller for slitasje</label>
+                </div>
 
-                        <!-- Radyo Butonları -->
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <!-- Radyo Butonları -->
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[0].OK" id="option0OK" value="true">
                         <label class="form-check-label" for="option0OK">OK</label>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[0].BorSkiftes" id="option01BorSkiftes" value="true">
                         <label class="form-check-label" for="option01BorSkiftes">BorSkiftes</label>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[0].Defekt" id="option02Defekt" value="true">
                         <label class="form-check-label" for="option02Defekt">Defekt</label>
 
-                            </div>
-                        </div>
-
                     </div>
+                </div>
 
-                    <!-- Option 2 -->
-                    <div class="col-md-12 d-flex align-items-center">
-                        <input type="hidden" name="Electros[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
-                        <div class="col-md-6">
+            </div>
+
+            <!-- Option 2 -->
+            <div class="col-md-12 d-flex align-items-center">
+                <input type="hidden" name="Electros[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
+                <div class="col-md-6">
                     <label for="option1">Sjekk bremser. Bånd/Pål</label>
-                        </div>
+                </div>
 
-                        <!-- Radyo Butonları -->
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <!-- Radyo Butonları -->
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[1].OK" id="option1OK" value="true">
                         <label class="form-check-label" for="option1OK">OK</label>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[1].BorSkiftes" id="option11BorSkiftes" value="true">
                         <label class="form-check-label" for="option11BorSkiftes">BorSkiftes</label>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[1].Defekt" id="option12Defekt" value="true">
                         <label class="form-check-label" for="option12Defekt">Defekt</label>
-                            </div>
-                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Option 3 -->
-                    <div class="col-md-12 d-flex align-items-center">
-                        <input type="hidden" name="Electros[2].ChecklistItem" value="Sjekk lager for trommel">
-                        <div class="col-md-6">
-                            <label for="option2">Sjekk lager for trommel</label>
-                        </div>
+            <!-- Option 3 -->
+            <div class="col-md-12 d-flex align-items-center">
+                <input type="hidden" name="Electros[2].ChecklistItem" value="Sjekk lager for trommel">
+                <div class="col-md-6">
+                    <label for="option2">Sjekk lager for trommel</label>
+                </div>
 
-                        <!-- Radyo Butonları -->
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <!-- Radyo Butonları -->
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[2].OK" id="option2OK" value="true">
                         <label class="form-check-label" for="option2OK">OK</label>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[2].BorSkiftes" id="option21BorSkiftes" value="true">
                         <label class="form-check-label" for="option21BorSkiftes">BorSkiftes</label>
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="col-md-2">
-                            <div class="form-check">
+                <div class="col-md-2">
+                    <div class="form-check">
                         <input class="form-check-input" type="radio" name="Electros[2].Defekt" id="option22Defekt" value="true">
                         <label class="form-check-label" for="option22Defekt">Defekt</label>
 
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                    </div>
-                    <div class="col-md-12 d-flex align-items-center" id="inputRow1">
-                        <div class="col-md-6" id="inputDiv1" style="display:none;">
-                            <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
-                        </div>
-                        <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
-                            <i class="fa-solid fa-circle-plus"></i>
-                        </button>
-                    </div>
-                    <!--***************************Comment****************************-->
-                    <div class="form-floating col-12 mt-3">
+            </div>
+            <div class="col-md-12 d-flex align-items-center" id="inputRow1">
+                <div class="col-md-6" id="inputDiv1" style="display:none;">
+                    <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
+                </div>
+                <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </button>
+            </div>
+            <!--***************************Comment****************************-->
+            <div class="form-floating col-12 mt-3">
                 <textarea class="form-control w-100" placeholder="Skriv en kommentar" id="MechanicTextArea" name="Kommentar" style="height: 100px"></textarea>
                 <label for="MechanicTextArea"></label>
-                    </div>
-                    <div class="col-12 text-center mt-3">
-                        <!-- Added text-center and mt-3 for spacing -->
-                        <button class="btn btn-primary" type="submit">Submit form</button>
-                    </div>
+            </div>
+            <div class="col-12 text-center mt-3">
+                <!-- Added text-center and mt-3 for spacing -->
+                <button class="btn btn-primary" type="submit">Submit form</button>
+            </div>
 
-          
 
-                </form>
-     </div>
-             <!-- JavaScript -->
+
+        </form>
+    </div>
+    <!-- JavaScript -->
 
     <script>
         let counter = 3;
@@ -270,29 +270,29 @@
             newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
 
             newItem.innerHTML = `
-                <div class="col-md-6">
-                    <input type="hidden" name="Electros[${counter}].ChecklistItem" value="${labelText}">
-                    <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[${counter}].OK" value="true">
-                        <label class="form-check-label">OK</label>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[${counter}].BorSkiftes" value="true">
-                        <label class="form-check-label">BorSkiftes</label>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[${counter}].Defekt" value="true">
-                        <label class="form-check-label">Defekt</label>
-                    </div>
-                </div>
-            `;
+                        <div class="col-md-6">
+                            <input type="hidden" name="Electros[${counter}].ChecklistItem" value="${labelText}">
+                            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Electros[${counter}].OK" value="true">
+                                <label class="form-check-label">OK</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Electros[${counter}].BorSkiftes" value="true">
+                                <label class="form-check-label">BorSkiftes</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Electros[${counter}].Defekt" value="true">
+                                <label class="form-check-label">Defekt</label>
+                            </div>
+                        </div>
+                    `;
 
             inputRow.parentNode.insertBefore(newItem, inputRow);
             userInputField.value = '';
@@ -322,4 +322,4 @@
             this.submit();
         });
     </script>
-    </main>
+</main>

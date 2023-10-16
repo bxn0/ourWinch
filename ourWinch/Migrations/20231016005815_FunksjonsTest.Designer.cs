@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231015170947_UpdatedServiceOrderRelation")]
-    partial class UpdatedServiceOrderRelation
+    [Migration("20231016005815_FunksjonsTest")]
+    partial class FunksjonsTest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,78 @@ namespace ourWinch.Migrations
                     b.ToTable("Electros");
                 });
 
+            modelBuilder.Entity("FunksjonsTest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BorSkiftes")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ChecklistItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Defekt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Kommentar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OK")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Ordrenummer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceOrderId");
+
+                    b.ToTable("FunksjonsTests");
+                });
+
+            modelBuilder.Entity("Hydrolisk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BorSkiftes")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ChecklistItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Defekt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Kommentar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OK")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Ordrenummer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceOrderId");
+
+                    b.ToTable("Hydrolisks");
+                });
+
             modelBuilder.Entity("Mechanical", b =>
                 {
                     b.Property<int>("Id")
@@ -94,6 +166,42 @@ namespace ourWinch.Migrations
                     b.HasIndex("ServiceOrderId");
 
                     b.ToTable("Mechanicals");
+                });
+
+            modelBuilder.Entity("Trykk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("BorSkiftes")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ChecklistItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Defekt")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Kommentar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("OK")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Ordrenummer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceOrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceOrderId");
+
+                    b.ToTable("Trykks");
                 });
 
             modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
@@ -165,7 +273,40 @@ namespace ourWinch.Migrations
                     b.Navigation("ServiceOrder");
                 });
 
+            modelBuilder.Entity("FunksjonsTest", b =>
+                {
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
+                        .WithMany()
+                        .HasForeignKey("ServiceOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceOrder");
+                });
+
+            modelBuilder.Entity("Hydrolisk", b =>
+                {
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
+                        .WithMany()
+                        .HasForeignKey("ServiceOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceOrder");
+                });
+
             modelBuilder.Entity("Mechanical", b =>
+                {
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
+                        .WithMany()
+                        .HasForeignKey("ServiceOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceOrder");
+                });
+
+            modelBuilder.Entity("Trykk", b =>
                 {
                     b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
                         .WithMany()
