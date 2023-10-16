@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace ourWinch.Controllers.Checklist
 {
-    public class MechanicalController : Controller
+    public class FunksjonsTestController : Controller
     {
         private readonly AppDbContext _context;
 
-        public MechanicalController(AppDbContext context)
+        public FunksjonsTestController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Mechanical
+        // GET: FunksjonsTest
         public async Task<IActionResult> Index()
         {
             return View(await _context.Mechanicals.ToListAsync());
@@ -29,27 +29,30 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
+            var FunksjonsTest = await _context.Electros
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            if (FunksjonsTest == null)
             {
                 return NotFound();
             }
 
-            return View(mechanical);
+            return View(FunksjonsTest);
         }
 
-        // GET: Mechanical/Create
+        // GET: FunksjonsTest/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new FunksjonsTestListViewModel
+            {
+                FunksjonsTests = new List<FunksjonsTest>() // İsterseniz bu listeyi doldurabilirsiniz.
+            };
+            return View(viewModel);
         }
 
-        // POST: Mechanical/Create
-        // POST: Mechanical/Create
+        // POST: FunksjonsTest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
+        public async Task<IActionResult> Create(ElectroListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -60,19 +63,19 @@ namespace ourWinch.Controllers.Checklist
 
                 if (lastServiceOrder != null)
                 {
-                    foreach (var mechanical in viewModel.Mechanicals)
+                    foreach (var FunksjonsTest in viewModel.Electros)
                     {
                         if (isFirst)
                         {
-                            mechanical.Kommentar = viewModel.Kommentar;
+                            FunksjonsTest.Kommentar = viewModel.Kommentar;
                             isFirst = false;
                         }
 
-                        // Her bir Mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
-                        mechanical.Ordrenummer = lastServiceOrder.Ordrenummer;
-                        mechanical.ServiceOrderId = lastServiceOrder.ServiceOrderId;
+                        // Her bir FunksjonsTest için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        FunksjonsTest.Ordrenummer = lastServiceOrder.Ordrenummer;
+                        FunksjonsTest.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
-                        _context.Add(mechanical);
+                        _context.Add(FunksjonsTest);
                     }
                     await _context.SaveChangesAsync();
                     return Redirect("/ServiceOrder/Details/1");
@@ -87,7 +90,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
 
-        // GET: Mechanical/Edit/5
+        // GET: FunksjonsTest/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,20 +98,20 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals.FindAsync(id);
-            if (mechanical == null)
+            var FunksjonsTest = await _context.Electros.FindAsync(id);
+            if (FunksjonsTest == null)
             {
                 return NotFound();
             }
-            return View(mechanical);
+            return View(FunksjonsTest);
         }
 
-        // POST: Mechanical/Edit/5
+        // POST: FunksjonsTest/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] FunksjonsTest FunksjonsTest)
         {
-            if (id != mechanical.Id)
+            if (id != FunksjonsTest.Id)
             {
                 return NotFound();
             }
@@ -117,12 +120,12 @@ namespace ourWinch.Controllers.Checklist
             {
                 try
                 {
-                    _context.Update(mechanical);
+                    _context.Update(FunksjonsTest);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MechanicalExists(mechanical.Id))
+                    if (!ElectroExists(FunksjonsTest.Id))
                     {
                         return NotFound();
                     }
@@ -133,10 +136,10 @@ namespace ourWinch.Controllers.Checklist
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(mechanical);
+            return View(FunksjonsTest);
         }
 
-        // GET: Mechanical/Delete/5
+        // GET: FunksjonsTest/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,30 +147,30 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
+            var FunksjonsTest = await _context.Electros
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            if (FunksjonsTest == null)
             {
                 return NotFound();
             }
 
-            return View(mechanical);
+            return View(FunksjonsTest);
         }
 
-        // POST: Mechanical/Delete/5
+        // POST: FunksjonsTest/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mechanical = await _context.Mechanicals.FindAsync(id);
-            _context.Mechanicals.Remove(mechanical);
+            var FunksjonsTest = await _context.Electros.FindAsync(id);
+            _context.Electros.Remove(FunksjonsTest);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MechanicalExists(int id)
+        private bool ElectroExists(int id)
         {
-            return _context.Mechanicals.Any(e => e.Id == id);
+            return _context.Electros.Any(e => e.Id == id);
         }
     }
 }

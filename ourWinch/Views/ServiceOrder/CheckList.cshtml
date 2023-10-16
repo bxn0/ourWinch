@@ -83,19 +83,30 @@
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form1')">Mekanisk</button>
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form2')">Hydrolisk</button>
+                    <a asp-controller="Hydrolisk" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Hydrolisk" ? "active-button" : "") w-100 p-3">Hydrolisk</button>
+
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form3')">Elektro</button>
+                    <a asp-controller="Electro" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Electro" ? "active-button" : "") w-100 p-3">Electro</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form4')">Funksjons Test</button>
+                    <a asp-controller="FunksjonsTest" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "FunksjonsTest" ? "active-button" : "") w-100 p-3">FunksjonsTest</button>
+                    </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <button class="btn form-button w-100 p-3" onclick="showForm('form5')">Trykk Settinger</button>
+                    <a asp-controller="Trykk" asp-action="Create">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Trykk" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -371,19 +382,19 @@
 
                 <form class="row" id="form3" style="display:none;">
                     <!-- Option 1 -->
-                    <h3 class="mx-auto">Elektro Sjekkliste</h3>
+                    <h3 class="mx-auto">Hydrolisk Sjekkliste</h3>
                     <div class="col-md-12 d-flex align-items-center">
 
                         <!-- Label -->
                         <div class="col-md-6">
-                            <label for="elektroOption1">Sjekk ledningsnett på vinsj</label>
+                            <label for="HydroliskOption1">Sjekk ledningsnett på vinsj</label>
                         </div>
 
                         <!-- Radyo Butonları -->
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption1" value="OK">
-                                <label class="form-check-label" for="elektroOption1">
+                                <input class="form-check-input" type="radio" name="HydroliskOption1" value="OK">
+                                <label class="form-check-label" for="HydroliskOption1">
                                     OK
                                 </label>
                             </div>
@@ -391,8 +402,8 @@
 
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption1" value="Bør skiftes">
-                                <label class="form-check-label" for="elektroOption1">
+                                <input class="form-check-input" type="radio" name="HydroliskOption1" value="Bør skiftes">
+                                <label class="form-check-label" for="HydroliskOption1">
                                     Bør skiftes
                                 </label>
                             </div>
@@ -400,8 +411,8 @@
 
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption1" value="Defekt">
-                                <label class="form-check-label" for="elektroOption1">
+                                <input class="form-check-input" type="radio" name="HydroliskOption1" value="Defekt">
+                                <label class="form-check-label" for="HydroliskOption1">
                                     Defekt
                                 </label>
                             </div>
@@ -414,14 +425,14 @@
 
                         <!-- Label -->
                         <div class="col-md-6">
-                            <label for="elektroOption2">Sjekk og test radio</label>
+                            <label for="HydroliskOption2">Sjekk og test radio</label>
                         </div>
 
                         <!-- Radyo Butonları -->
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption2" value="OK">
-                                <label class="form-check-label" for="elektroOption2">
+                                <input class="form-check-input" type="radio" name="HydroliskOption2" value="OK">
+                                <label class="form-check-label" for="HydroliskOption2">
                                     OK
                                 </label>
                             </div>
@@ -429,8 +440,8 @@
 
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption2" value="Bør skiftes">
-                                <label class="form-check-label" for="elektroOption1">
+                                <input class="form-check-input" type="radio" name="HydroliskOption2" value="Bør skiftes">
+                                <label class="form-check-label" for="HydroliskOption1">
                                     Bør skiftes
                                 </label>
                             </div>
@@ -438,8 +449,8 @@
 
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption2" value="Defekt">
-                                <label class="form-check-label" for="elektroOption2">
+                                <input class="form-check-input" type="radio" name="HydroliskOption2" value="Defekt">
+                                <label class="form-check-label" for="HydroliskOption2">
                                     Defekt
                                 </label>
                             </div>
@@ -452,14 +463,14 @@
 
                         <!-- Label -->
                         <div class="col-md-6">
-                            <label for="elektroOption3">Sjekk og test knappekasse</label>
+                            <label for="HydroliskOption3">Sjekk og test knappekasse</label>
                         </div>
 
                         <!-- Radyo Butonları -->
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption3" value="OK">
-                                <label class="form-check-label" for="elektroOption3">
+                                <input class="form-check-input" type="radio" name="HydroliskOption3" value="OK">
+                                <label class="form-check-label" for="HydroliskOption3">
                                     OK
                                 </label>
                             </div>
@@ -467,8 +478,8 @@
 
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption3" value="Bør skiftes">
-                                <label class="form-check-label" for="elektroOption3">
+                                <input class="form-check-input" type="radio" name="HydroliskOption3" value="Bør skiftes">
+                                <label class="form-check-label" for="HydroliskOption3">
                                     Bør skiftes
                                 </label>
                             </div>
@@ -476,8 +487,8 @@
 
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="elektroOption3" value="Defekt">
-                                <label class="form-check-label" for="elektroOption3">
+                                <input class="form-check-input" type="radio" name="HydroliskOption3" value="Defekt">
+                                <label class="form-check-label" for="HydroliskOption3">
                                     Defekt
                                 </label>
                             </div>
