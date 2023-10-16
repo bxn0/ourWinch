@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ourWinch.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,14 +30,14 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var FunksjonsTest = await _context.Electros
+            var funksjonsTest = await _context.FunksjonsTests
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (FunksjonsTest == null)
+            if (funksjonsTest == null)
             {
                 return NotFound();
             }
 
-            return View(FunksjonsTest);
+            return View(funksjonsTest);
         }
 
         // GET: FunksjonsTest/Create
@@ -52,7 +53,7 @@ namespace ourWinch.Controllers.Checklist
         // POST: FunksjonsTest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ElectroListViewModel viewModel)
+        public async Task<IActionResult> Create(FunksjonsTestListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -63,19 +64,19 @@ namespace ourWinch.Controllers.Checklist
 
                 if (lastServiceOrder != null)
                 {
-                    foreach (var FunksjonsTest in viewModel.Electros)
+                    foreach (var funksjonsTest in viewModel.FunksjonsTests)
                     {
                         if (isFirst)
                         {
-                            FunksjonsTest.Kommentar = viewModel.Kommentar;
+                            funksjonsTest.Kommentar = viewModel.Kommentar;
                             isFirst = false;
                         }
 
-                        // Her bir FunksjonsTest için ServiceOrder'dan Ordrenummer'ı alıyoruz.
-                        FunksjonsTest.Ordrenummer = lastServiceOrder.Ordrenummer;
-                        FunksjonsTest.ServiceOrderId = lastServiceOrder.ServiceOrderId;
+                       
+                        funksjonsTest.Ordrenummer = lastServiceOrder.Ordrenummer;
+                        funksjonsTest.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
-                        _context.Add(FunksjonsTest);
+                        _context.Add(funksjonsTest);
                     }
                     await _context.SaveChangesAsync();
                     return Redirect("/ServiceOrder/Details/1");
@@ -98,20 +99,20 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var FunksjonsTest = await _context.Electros.FindAsync(id);
-            if (FunksjonsTest == null)
+            var funksjonsTest = await _context.FunksjonsTests.FindAsync(id);
+            if (funksjonsTest == null)
             {
                 return NotFound();
             }
-            return View(FunksjonsTest);
+            return View(funksjonsTest);
         }
 
         // POST: FunksjonsTest/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] FunksjonsTest FunksjonsTest)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] FunksjonsTest funksjonsTest)
         {
-            if (id != FunksjonsTest.Id)
+            if (id != funksjonsTest.Id)
             {
                 return NotFound();
             }
@@ -120,12 +121,12 @@ namespace ourWinch.Controllers.Checklist
             {
                 try
                 {
-                    _context.Update(FunksjonsTest);
+                    _context.Update(funksjonsTest);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ElectroExists(FunksjonsTest.Id))
+                    if (!FunksjonsTestExists(funksjonsTest.Id))
                     {
                         return NotFound();
                     }
@@ -136,7 +137,7 @@ namespace ourWinch.Controllers.Checklist
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(FunksjonsTest);
+            return View(funksjonsTest);
         }
 
         // GET: FunksjonsTest/Delete/5
@@ -147,14 +148,14 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var FunksjonsTest = await _context.Electros
+            var funksjonsTest = await _context.FunksjonsTests
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (FunksjonsTest == null)
+            if (funksjonsTest == null)
             {
                 return NotFound();
             }
 
-            return View(FunksjonsTest);
+            return View(funksjonsTest);
         }
 
         // POST: FunksjonsTest/Delete/5
@@ -162,15 +163,15 @@ namespace ourWinch.Controllers.Checklist
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var FunksjonsTest = await _context.Electros.FindAsync(id);
-            _context.Electros.Remove(FunksjonsTest);
+            var funksjonsTest = await _context.FunksjonsTests.FindAsync(id);
+            _context.FunksjonsTests.Remove(funksjonsTest);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ElectroExists(int id)
+        private bool FunksjonsTestExists(int id)
         {
-            return _context.Electros.Any(e => e.Id == id);
+            return _context.FunksjonsTests.Any(e => e.Id == id);
         }
     }
 }
