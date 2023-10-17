@@ -31,7 +31,7 @@ namespace ourWinch
             // Set the server to listen on localhost:5002
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
-                serverOptions.ListenAnyIP(5002);
+                serverOptions.ListenLocalhost(5002);
             });
 
             var app = builder.Build();
