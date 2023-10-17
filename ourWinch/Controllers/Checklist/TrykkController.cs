@@ -78,7 +78,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/1");
+                    return Redirect("/ServiceSkjema/index");
                 }
                 else
                 {
