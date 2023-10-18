@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-using Microsoft.EntityFrameworkCore;
-using ourWinch.Utility;
-
-var builder = WebApplication.CreateBuilder(args);
-=======
 ﻿using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
->>>>>>> c9cc9ad12e5097cfc701b60f0ac460602b54ab2c
 
 
 namespace ourWinch
@@ -31,17 +24,9 @@ namespace ourWinch
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-<<<<<<< HEAD
-builder.Services.AddDbContext<ApplicationDBContext>(options=>
-
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-var app = builder.Build();
-=======
             // Add the DbContext to the DI container.
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
->>>>>>> c9cc9ad12e5097cfc701b60f0ac460602b54ab2c
 
             // Set the server to listen on localhost:5002
             builder.WebHost.ConfigureKestrel(serverOptions =>

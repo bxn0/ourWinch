@@ -16,39 +16,12 @@
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="ServiceAp\" />
 	</ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Views\NewFolder1\**" />
-    <Compile Remove="Views\NewFolder2\**" />
-    <Compile Remove="Views\NewFolder\**" />
-    <Content Remove="Views\NewFolder1\**" />
-    <Content Remove="Views\NewFolder2\**" />
-    <Content Remove="Views\NewFolder\**" />
-    <EmbeddedResource Remove="Views\NewFolder1\**" />
-    <EmbeddedResource Remove="Views\NewFolder2\**" />
-    <EmbeddedResource Remove="Views\NewFolder\**" />
-    <None Remove="Views\NewFolder1\**" />
-    <None Remove="Views\NewFolder2\**" />
-    <None Remove="Views\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
 
 </Project>
