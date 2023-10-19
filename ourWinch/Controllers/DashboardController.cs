@@ -19,9 +19,5 @@ public class DashboardController : Controller
         return View(serviceOrders);
     }
 
-    public IActionResult Page(int page = 1)
-    {
-        return View("~/Views/Dashboard/Index.cshtml");
-    }
-
+   
 }
