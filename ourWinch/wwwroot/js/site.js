@@ -1,4 +1,21 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿document.addEventListener("DOMContentLoaded", function () {
 
-// Write your JavaScript code.
+    // Şu anki sayfanın yolunu al
+    var currentPath = window.location.pathname;
+
+    // Tüm menü öğelerini döngüye al
+    var navLinks = document.querySelectorAll(".nav-link");
+    for (let i = 0; i < navLinks.length; i++) {
+        if (navLinks[i].getAttribute('href') === currentPath) {
+            navLinks[i].classList.add("active-link");
+        }
+        navLinks[i].addEventListener("click", function () {
+            // Tüm menülerden aktifliği kaldır
+            for (let j = 0; j < navLinks.length; j++) {
+                navLinks[j].classList.remove("active-link");
+            }
+            // Tıklanan menüye aktifliği ekle
+            this.classList.add("active-link");
+        });
+    }
+});
