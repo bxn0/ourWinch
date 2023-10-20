@@ -14,9 +14,9 @@ public class CompletedController : Controller
     public IActionResult Dashboard(int? page)
     {
         int pageNumber = page ?? 1; // Sayfa numarasını veya varsayılan olarak 1'i alın
-        int pageSize = 5; // Sayfa başına öğe sayısı
+        int pageSize = 3; // Sayfa başına öğe sayısı
 
         var serviceOrders = _context.ServiceOrders.ToPagedList(pageNumber, pageSize); // Verileri sayfalayın
-        return View(serviceOrders);
+        return View("Completed", serviceOrders);
     }
 }

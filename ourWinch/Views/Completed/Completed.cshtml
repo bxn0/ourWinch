@@ -1,5 +1,6 @@
 ﻿@model X.PagedList.IPagedList<ourWinchSist.Models.ServiceOrder>
     @using X.PagedList.Mvc.Core
+    @using X.PagedList
 
     OurWinch.Views.Completed
 
@@ -76,9 +77,8 @@
                                      </div>
 
                                      </div>
-                                     @Html.PagedListPager(Model, page => Url.Action("Dashboard", new { page }), new PagedListRenderOptions() { LiElementClasses = new string[] { "page-item" }, PageClasses = new string[] { "page-link" } })
 
-
+                                     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { LiElementClasses = new string[] { "page-item" }, PageClasses = new string[] { "page-link" } })
 
                                      </div>
 
