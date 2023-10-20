@@ -25,7 +25,7 @@
 
                 <tbody>
                     @foreach (var item in Model)
-                    {
+    {
                     <tr>
                         <td>@item.Ordrenummer</td>
                         <td>@item.Produkttype</td>
@@ -33,12 +33,13 @@
                         <td>@item.MottattDato.ToShortDateString()</td>
                         <td>@item.Feilbeskrivelse</td>
                         <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
-                        <td>Process</td>
-                        <td>@item.Servis ? "Ja" : "Nei"</td>
-                        <td></td> <!-- Timer kısmı boş bırakıldı. -->
+                        <td>Status</td> <!-- "Status" sütunu "Status" olarak görüntülemek için -->
+                        <td>@(item.Servis ? "Yes" : "No")</td> <!-- "Yes" veya "No" metinlerini "Servis" değerine göre görüntülemek için -->
+                        <td></td> <!-- Zaman kısmı boş bırakıldı. -->
                     </tr>
-                    }
+    }
                 </tbody>
+
             </table>
         }
         else
@@ -46,6 +47,10 @@
             <p>No service orders available.</p>
         }
         </div>
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Dashboard", new { page })), 
-
-   
+        <div class="pagination-container">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Dashboard", new { page }), new PagedListRenderOptions
+            {
+                LiElementClasses = new string[] { "pagination-item" },
+                PageClasses = new string[] { "pagination-item" }
+            })
+        </div>

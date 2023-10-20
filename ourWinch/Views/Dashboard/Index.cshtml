@@ -1,6 +1,6 @@
 ﻿@model X.PagedList.IPagedList<ourWinchSist.Models.ServiceOrder>
     @using X.PagedList.Mvc.Core
-    
+
 
     <div class="container mt-5">
         <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Aktive Servicer</div>
@@ -48,8 +48,12 @@
         {
             <p>No service orders available.</p>
         }
-        </div>
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page })), 
+      
 
-
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+        {
+            LiElementClasses = new string[] { "pagination-item" },
+            PageClasses = new string[] { "pagination-item" }
+        })
     </div>
