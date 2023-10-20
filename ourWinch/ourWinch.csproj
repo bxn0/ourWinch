@@ -21,12 +21,10 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	
+
 		<PackageReference Include="PagedList" Version="1.17.0" />
-
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-
-		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.7" />
-
+		<PackageReference Include="X.PagedList.Mvc.Core" Version="9.0.0-prerelease" />
 
 
 

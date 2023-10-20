@@ -1,12 +1,22 @@
-// Controllers/Fulf�rteController.cs
-using OurWinch.Models;
-using System.Collections.Generic;
+﻿using OurWinch.Models;
 using Microsoft.AspNetCore.Mvc;
+using X.PagedList;
 
 public class CompletedController : Controller
 {
-    public IActionResult Dashboard()
+    private readonly AppDbContext _context;
+
+    public CompletedController(AppDbContext context)
     {
-        return View("~/Views/Dashboard/Completed.cshtml");
+        _context = context;
+    }
+
+    public IActionResult Dashboard(int? page)
+    {
+        int pageNumber = page ?? 1; // Sayfa numarasını veya varsayılan olarak 1'i alın
+        int pageSize = 5; // Sayfa başına öğe sayısı
+
+        var serviceOrders = _context.ServiceOrders.ToPagedList(pageNumber, pageSize); // Verileri sayfalayın
+        return View(serviceOrders);
     }
 }
