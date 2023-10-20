@@ -58,7 +58,7 @@ public class ServiceOrderController : Controller
             return NotFound();
         }
         List<ServiceOrder> serviceOrderList = new List<ServiceOrder> { serviceOrder };
-        return View("Checklist", serviceOrderList);  // Burada "Checklist" view'ına List<ServiceOrder> modelini gönderiyoruz.
+        return View("~/Views/Mechanical/create.cshtml", serviceOrderList);
     }
 
 }
