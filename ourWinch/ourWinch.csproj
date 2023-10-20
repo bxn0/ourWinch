@@ -22,6 +22,10 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
+		<PackageReference Include="PagedList" Version="1.17.0" />
+		<PackageReference Include="PagedList.Core.Mvc" Version="3.0.0" />
+		<PackageReference Include="PagedList.EntityFramework" Version="1.0.1" />
+		<PackageReference Include="PagedList.Mvc" Version="4.5.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		<PackageReference Include="X.PagedList" Version="8.4.7" />
 		<PackageReference Include="X.PagedList.Mvc" Version="8.0.7" />
