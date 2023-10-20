@@ -42,14 +42,6 @@ public class ServiceOrderController : Controller
         return View(_context.ServiceOrders.ToList());
     }
 
-    // GET: ServiceOrder/Checklist
-    public IActionResult Checklist()
-    {
-        var serviceOrders = _context.ServiceOrders.ToList();
-        return View(serviceOrders);
-    }
-
-
     public IActionResult Details(int id, string category = "Mechanical")
     {
         var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
