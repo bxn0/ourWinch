@@ -50,7 +50,7 @@ public class ServiceOrderController : Controller
     }
 
 
-    public IActionResult Details(int id)
+    public IActionResult Details(int id, string category = "Mechanical")
     {
         var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
         if (serviceOrder == null)
@@ -58,7 +58,22 @@ public class ServiceOrderController : Controller
             return NotFound();
         }
         List<ServiceOrder> serviceOrderList = new List<ServiceOrder> { serviceOrder };
-        return View("Checklist", serviceOrderList);  // Burada "Checklist" view'ına List<ServiceOrder> modelini gönderiyoruz.
-    }
 
+        switch (category)
+        {
+            case "Mechanical":
+                return View("~/Views/Mechanical/create.cshtml", serviceOrderList);
+            case "Hydrolisk":
+                return View("~/Views/Hydrolisk/create.cshtml", serviceOrderList);
+            case "Electro":
+                return View("~/Views/Electro/create.cshtml", serviceOrderList);
+            case "FunksjonsTest":
+                return View("~/Views/FunksjonsTest/create.cshtml", serviceOrderList);
+            case "Trykk":
+                return View("~/Views/Trykk/create.cshtml", serviceOrderList);
+            // Diğer kategoriler için de benzer case blokları ekleyebilirsiniz.
+            default:
+                return NotFound();
+        }
+    }
 }

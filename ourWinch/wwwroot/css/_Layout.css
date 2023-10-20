@@ -14,10 +14,6 @@
     /* ... diğer CSS kodları ... */
 
 
-    .sidebar .active-link {
-        color: #A8C29C;
-    }
-
     .sidebar .nav-link {
         color: #9CB7C2;
         background-color: black;
@@ -26,6 +22,10 @@
         .sidebar .nav-link:hover {
             color: #A8C29C;
         }
+
+        .sidebar .nav-link.active-link {
+            color: #A8C29C; /* ya da istediğiniz başka bir renk */
+                    }
 
 .navbar {
     background-color: black;
@@ -116,5 +116,11 @@
     main {
         padding-top: 30px;
     }
+
+    .active-link {
+        color: #FF5733; /* Veya istediğiniz herhangi bir renk */
+    }
+
+
 }
 
