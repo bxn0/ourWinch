@@ -50,6 +50,12 @@
     transition: background-color 0.3s; /* Geçiş efekti ekleme */
 }
 
+    .pagination-item.active span {
+        color: white;
+        background-color: #20c997;
+    }
+
+
     .pagination-item.active {
         background-color: #20c997; /* Aktif sayfanın arka plan rengi turkuaz */
         color: #20c997; /* Aktif sayfanın metin rengi beyaz */

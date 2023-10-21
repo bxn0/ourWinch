@@ -50,10 +50,13 @@
         }
       
 
-    <div class="pagination-container">
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
-        {
-            LiElementClasses = new string[] { "pagination-item" },
-            PageClasses = new string[] { "pagination-item" }
-        })
-    </div>
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+      {
+          LiElementClasses = new string[] { "pagination-item" },
+          PageClasses = new string[] { "pagination-item" },
+          LinkToPreviousPageFormat = "Previ",
+          LinkToNextPageFormat = "Next"
+      })
+
+        </div>

@@ -49,8 +49,11 @@
         </div>
         <div class="pagination-container">
             @Html.PagedListPager((IPagedList)Model, page => Url.Action("Dashboard", new { page }), new PagedListRenderOptions
-            {
-                LiElementClasses = new string[] { "pagination-item" },
-                PageClasses = new string[] { "pagination-item" }
-            })
+   {
+       LiElementClasses = new string[] { "pagination-item" },
+       PageClasses = new string[] { "pagination-item" },
+       LinkToPreviousPageFormat = "Previ", // Önceki sayfa bağlantısı
+       LinkToNextPageFormat = "Next" // Sonraki sayfa bağlantısı
+   })
+
         </div>

@@ -94,6 +94,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+   
 }
 
 .pagination-item {
@@ -101,21 +102,31 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-   
+    padding: 20px 20px;
     justify-content: center;
     align-items: center;
     margin: 0 10px;
     color: #fff; /* Pasif sayfanın metin rengi beyaz */
     transition: background-color 0.3s; /* Geçiş efekti ekleme */
-   
 }
 
     .pagination-item.active {
         background-color: #20c997; /* Aktif sayfanın arka plan rengi turkuaz */
-        color: #20c997; /* Aktif sayfanın metin rengi beyaz */
+        color: #fff; /* Aktif sayfanın metin rengi beyaz */
+     
     }
+
+        .pagination-item.active span {
+            color: white;
+            background-color: #20c997;
+           
+        }
+
+      
+   
 
     .pagination-item:hover {
         background-color: #20c997; /* Sayfa numarasına gelince yeşil hover efekti */
         color: #fff; /* Hover durumunda metin rengi beyaz */
+      
     }
