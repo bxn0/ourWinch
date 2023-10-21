@@ -17,7 +17,6 @@ public class ServiceOrderController : Controller
         // Modelinizde özel başlangıç değerleri atamak isterseniz bu kısmı kullanabilirsiniz
         return View(model);
     }
-
     // POST: ServiceOrder/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -27,13 +26,15 @@ public class ServiceOrderController : Controller
         var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230001;
 
         serviceOrder.Ordrenummer = newOrderNumber;
-
         _context.ServiceOrders.Add(serviceOrder);
         _context.SaveChanges();
 
+        // Save to ActiveService
+        var serviceManager = new ServiceManager(_context);
+        serviceManager.SaveToActiveService(serviceOrder.ServiceOrderId);
+
         return RedirectToAction(nameof(Index));
     }
-
 
 
     // GET: ServiceOrder/Index
