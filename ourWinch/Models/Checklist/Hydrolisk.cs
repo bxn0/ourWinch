@@ -1,4 +1,4 @@
-﻿using ourWinchSist.Models;
+﻿using ourWinch.Models.Dashboard;
 
 public class Hydrolisk
 {

@@ -1,5 +1,5 @@
 // Controllers/FulførteController.cs
-using OurWinch.Models;
+using ourWinch.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 

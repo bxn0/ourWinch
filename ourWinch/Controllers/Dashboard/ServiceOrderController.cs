@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ourWinchSist.Models;
+using ourWinch.Models.Dashboard;
 using System.Linq;
 
 public class ServiceOrderController : Controller

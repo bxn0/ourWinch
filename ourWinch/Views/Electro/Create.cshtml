@@ -1,5 +1,6 @@
-﻿@model List<ourWinchSist.Models.ServiceOrder>
-    ﻿
+﻿@using ourWinch.Models.Dashboard;
+@model IEnumerable<ServiceOrder>
+
 <style>
     .form-button {
         background-color: #d17242;
@@ -89,7 +90,7 @@
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Mechanical">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-category="Mechanical">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
                     </a>
                 </div>

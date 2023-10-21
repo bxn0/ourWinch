@@ -1,5 +1,5 @@
 ﻿// Controllers/DashboardController.cs
-using OurWinch.Models;
+using ourWinch.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -16,12 +16,12 @@ public class DashboardController : Controller
     public IActionResult Index()
     {
         var serviceOrders = _context.ServiceOrders.ToList();
-        return View(serviceOrders);
+        return View("~/Views/Dashboard/ActiveService.cshtml", serviceOrders);
     }
 
     public IActionResult Page(int page = 1)
     {
-        return View("~/Views/Dashboard/Index.cshtml");
+        return View("~/Views/Dashboard/ActiveService.cshtml");
     }
 
 }
