@@ -27,6 +27,16 @@
             color: #A8C29C;
         }
 
+        .navbar {
+    background-color: black; /* Navbar'ın arka plan rengi */
+    height: 60px; /* Navbar'ın yüksekliği */
+    position: fixed; /* Navbar'ı sabit hale getirir */
+    top: 0; /* Navbar'ı sayfanın üstüne sabitler */
+    left: 0; /* Navbar'ı sayfanın sol üst köşesine sabitler */
+    width: 100%; /* Navbar'ı sayfanın tam genişliğine yayar */
+    z-index: 1000; /* Diğer öğelerin üzerinde görüntülenmesi için z-index */
+}
+
 .navbar {
     background-color: black;
     height: 60px;
