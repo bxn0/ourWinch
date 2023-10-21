@@ -36,9 +36,14 @@
         <div class="user-info d-flex align-items-center ml-3">
             <i class="fas fa-bell text-white mr-3"></i>
             <span class="text-white mr-2">Lars Olsen</span>
-            <i class="fas fa-user text-white ml-2 mr-4"></i>
+
         </div>
+
+
+
     </nav>
+
+
     <!-- Sidebar Kısmı -->
     <div class="container-fluid">
         <div class="row">
@@ -78,13 +83,23 @@
                         </li>
                     </ul>
                 </div>
+
             </nav>
 
             <div class="col-md-10">
+                <!-- Kullanıcı adını Navbar dışında gösterme -->
+                <div class="container mt-7 d-flex justify-content-end" style="position: absolute; top: 70px; right: 1px;">
+                    <h1 class="display-6"></h1>
+                    <a href="/Account/Logout/" class="btn btn-info" >Logout</a>
+                </div>
+
+
+
                 @RenderBody()
             </div>
         </div>
     </div>
+    
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
