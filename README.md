@@ -1,15 +1,17 @@
-OurWinch-Nøsted-App (GitHub Repository Root)
+. OurWinch-Nøsted-App (GitHub Repository Root)
 │
-├── Controller
-│   ├── ElektroController
-│   ├── FunksjonsTestController
-│   ├── HydroliskController
-│   ├── MechanicalController
-│   ├── ServiceSkjemaController
-│   └── TrykkController
+├── Dependencies
+│   ├── Controllers
+│   │   ├── ElektroController.cs
+│   │   ├── FunksjonsTestController.cs
+│   │   ├── HydroliskController.cs
+│   │   ├── MechanicalController.cs
+│   │   ├── ServiceSkjemaController.cs
+│   │   └── TrykkController.cs
 │
 ├── Data
-│   ├── AppDbContext
+│   ├── AppDbContext.cs
+│   ├── Migrations
 │
 ├── Models
 │   ├── Checklist
@@ -17,74 +19,72 @@ OurWinch-Nøsted-App (GitHub Repository Root)
 │   │   ├── FunksjonsTest.cs
 │   │   ├── Hydrolisk.cs
 │   │   ├── Trykk.cs
-│   │
-│   ├── DashboardModel
-│   ├── ErrorViewModel
-│   ├── ForgotPasswordViewModel
-│   ├── LoginViewModel
-│   ├── ResetPasswordViewModel
-│   ├── ServiceOrder
-│   └── UsageOperationsModel
+│   ├── DashboardModel.cs
+│   ├── ErrorViewModel.cs
+│   ├── ForgotPasswordViewModel.cs
+│   ├── LoginViewModel.cs
+│   ├── ResetPasswordViewModel.cs
+│   ├── ServiceOrder.cs
+│   └── UsageOperationsModel.cs
 │
 ├── Views
 │   ├── Account
-│   │   ├── ForgotPassword
-│   │   ├── Login
-│   │   ├── ResetPassword
-│   │
+│   │   ├── ForgotPassword.cshtml
+│   │   ├── Login.cshtml
+│   │   ├── ResetPassword.cshtml
 │   ├── Completed
 │   │   ├── Completed.cshtml
-│   │
-│   ├── Dashboard
-│   │   ├── Index.cshtml
-│   │   ├── NewService.cshtml
-│   │
-│   ├── Electro
-│   │   ├── Create
-│   │   ├── Delete
-│   │   ├── Details
-│   │   ├── Edit
-│   │   ├── Index
-│   │
-│   ├── FunksjonsTest
-│   │   ├── Create
-│   │   ├── Delete
-│   │   ├── Details
-│   │   ├── Edit
-│   │   ├── Index
-│   │
-│   ├── Home
-│   │   ├── Index.cshtml
-│   │   ├── Privacy.cshtml
-│   │
-│   ├── Hydrolisk
-│   │   ├── Create
-│   │   ├── Delete
-│   │   ├── Details
-│   │   ├── Edit
-│   │   ├── Index
-│   │
-│   ├── Mechanical
-│   │   ├── Create
-│   │   ├── Delete
-│   │   ├── Details
-│   │   ├── Edit
-│   │   ├── Index
-│   │
-│   ├── ServiceOrder
-│   │   ├── CheckList.cshtml
-│   │   ├── Index.cshtml
-│   │   ├── Mechanical.cshtml
-│   │
-│   ├── ServiceSkjema
-│   │   ├── Index.cshtml
-│   │
-│   ├── Trykk
-│   │   ├── Create
-│   │   ├── Delete
-│   │   ├── Details
-│   │   ├── Edit
-│   │   ├── Index
+│
+├── Dashboard
+│   ├── Index.cshtml
+│   ├── NewService.cshtml
+│
+├── Electro
+│   ├── Create.cshtml
+│   ├── Delete.cshtml
+│   ├── Details.cshtml
+│   ├── Edit.cshtml
+│   ├── Index.cshtml
+│
+├── FunksjonsTest
+│   ├── Create.cshtml
+│   ├── Delete.cshtml
+│   ├── Details.cshtml
+│   ├── Edit.cshtml
+│   ├── Index.cshtml
+│
+├── Home
+│   ├── Index.cshtml
+│   ├── Privacy.cshtml
+│
+├── Hydrolisk
+│   ├── Create.cshtml
+│   ├── Delete.cshtml
+│   ├── Details.cshtml
+│   ├── Edit.cshtml
+│   ├── Index.cshtml
+│
+├── Mechanical
+│   ├── Create.cshtml
+│   ├── Delete.cshtml
+│   ├── Details.cshtml
+│   ├── Edit.cshtml
+│   ├── Index.cshtml
+│
+├── ServiceOrder
+│   ├── CheckList.cshtml
+│   ├── Index.cshtml
+│   ├── Mechanical.cshtml
+│
+├── ServiceSkjema
+│   ├── Index.cshtml
+│
+├── Trykk
+│   ├── Create.cshtml
+│   ├── Delete.cshtml
+│   ├── Details.cshtml
+│   ├── Edit.cshtml
+│   ├── Index.cshtml
 │
 ├── Root
 │   ├── Css
