@@ -1,11 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ourWinch.Models.Dashboard;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class ActiveService
 {
     public int Id { get; set; }
 
     [Required]
+    [ForeignKey("ServiceOrder")]
     public int Ordrenummer { get; set; }
+
+    public virtual ServiceOrder? ServiceOrder { get; set; }
 
     [Required]
     public string? Produkttype { get; set; }

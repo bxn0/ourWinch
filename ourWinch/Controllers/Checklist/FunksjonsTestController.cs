@@ -41,12 +41,30 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: FunksjonsTest/Create
-        public IActionResult Create()
+        [Route("FunksjonsTest/Create/{serviceOrderId}")]
+        public IActionResult Create(int serviceOrderId)
         {
+            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
+            if (serviceOrder == null)
+            {
+                return NotFound();
+            }
+
             var viewModel = new FunksjonsTestListViewModel
             {
-                FunksjonsTests = new List<FunksjonsTest>() // İsterseniz bu listeyi doldurabilirsiniz.
+                ServiceOrderId = serviceOrder.ServiceOrderId,
+                Ordrenummer = serviceOrder.Ordrenummer,
+                Produkttype = serviceOrder.Produkttype,
+                Årsmodell = serviceOrder.Årsmodell,
+                Fornavn = serviceOrder.Fornavn,
+                Etternavn = serviceOrder.Etternavn,
+                Serienummer = serviceOrder.Serienummer,
+                Status = serviceOrder.Status,
+                MobilNo = serviceOrder.MobilNo,
+                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
+                KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
+
             return View(viewModel);
         }
 

@@ -40,14 +40,34 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Hydrolisk/Create
-        public IActionResult Create()
+        [Route("Hydrolisk/Create/{serviceOrderId}")]
+        public IActionResult Create(int serviceOrderId)
         {
+            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
+            if (serviceOrder == null)
+            {
+                return NotFound();
+            }
+
             var viewModel = new HydroliskListViewModel
             {
-                Hydrolisks = new List<Hydrolisk>() // İsterseniz bu listeyi doldurabilirsiniz.
+                ServiceOrderId = serviceOrder.ServiceOrderId,
+                Ordrenummer = serviceOrder.Ordrenummer,
+                Produkttype = serviceOrder.Produkttype,
+                Årsmodell = serviceOrder.Årsmodell,
+                Fornavn = serviceOrder.Fornavn,
+                Etternavn = serviceOrder.Etternavn,
+                Serienummer = serviceOrder.Serienummer,
+                Status = serviceOrder.Status,
+                MobilNo = serviceOrder.MobilNo,
+                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
+                KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
+
             return View(viewModel);
         }
+
+
 
         // POST: Hydrolisk/Create
         [HttpPost]
