@@ -25,14 +25,23 @@
                                   </thead>
                                   <tbody>
                                       @foreach (var item in Model)
-                {
+                            {
                                       <tr>
-                                          <td>
-                                              <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="@item.ServiceOrderId">
-                                                  @item.Ordrenummer
-                                              </a>
-                                          </td>
-
+                            <td>
+                                <a asp-controller="Mechanical" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
+                            </td>
+                            <td>
+                                <a asp-controller="Hydrolisk" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
+                            </td>
+                            <td>
+                                <a asp-controller="Electro" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
+                            </td>
+                            <td>
+                                <a asp-controller="FunksjonsTest" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
+                            </td>
+                            <td>
+                                <a asp-controller="Trykk" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
+                            </td>
                                           <td>@item.Produkttype</td>
                                           <td>@item.Fornavn @item.Etternavn</td>
                                           <td>@item.MottattDato.ToShortDateString()</td>

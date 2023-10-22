@@ -1,5 +1,4 @@
-﻿@using ourWinch.Models.Dashboard;
-@model IEnumerable<ServiceOrder>
+﻿@model MechanicalListViewModel
 
 <style>
     .form-button {
@@ -40,75 +39,75 @@
     <!--************************* TABLE *****************************-->
     <div>
         <div class="container mt-2">
-            @foreach (var item in Model)
-            {
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>OrderID:</strong> @item.Ordrenummer
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>ProduktType:</strong> @item.Produkttype
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Arsmodell:</strong> @item.Årsmodell
-                    </div>
+
+            <div class="row">
+                <div class="col-md-4 border border-black p-1">
+                    <strong>OrderID:</strong> @Model.Ordrenummer
                 </div>
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Kunde Navn:</strong> @item.Fornavn @item.Etternavn
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Serie No:</strong> @item.Serienummer
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Status:</strong> @item.Reperasjon
-                    </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>ProduktType:</strong> @Model.Produkttype
                 </div>
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Mobil No:</strong> @item.MobilNo
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Feilbeskrivelse:</strong> @item.Feilbeskrivelse
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Kommentar fra kunde:</strong> @item.KommentarFraKunde
-                    </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Arsmodell:</strong> @Model.Årsmodell
                 </div>
-            }
+            </div>
+            <div class="row">
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Kunde Navn:</strong> @Model.Fornavn @Model.Etternavn
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Serie No:</strong> @Model.Serienummer
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Status: Prosess</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Mobil No:</strong> @Model.MobilNo
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Feilbeskrivelse:</strong> @Model.Feilbeskrivelse
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Kommentar fra kunde:</strong> @Model.KommentarFraKunde
+                </div>
+            </div>
         </div>
+
     </div>
     <section class="mt-3">
         <!--************************* BUTONLAR ******************************** -->
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Mechanical">
+                    <a asp-controller="Mechanical" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Mechanical">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Hydrolisk">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Hydrolisk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Hydrolisk" ? "active-button" : "") w-100 p-3">Hydrolisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Electro">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Electro">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Electro" ? "active-button" : "") w-100 p-3">Electro</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="FunksjonsTest">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="FunksjonsTest">
                         <button class="btn form-button @(ViewBag.ActiveButton == "FunksjonsTest" ? "active-button" : "") w-100 p-3">FunksjonsTest</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Trykk">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Trykk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Trykk" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
                     </a>
                 </div>
             </div>
         </div>
+
 
     </section>
     <!-- ************************** Form for Mekasanisk ******************************* -->

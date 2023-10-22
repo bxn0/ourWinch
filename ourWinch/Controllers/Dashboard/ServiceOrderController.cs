@@ -37,12 +37,13 @@ public class ServiceOrderController : Controller
     }
 
 
-    // GET: ServiceOrder/Index
+    // GET: ServiceOrder/index
     public IActionResult Index()
     {
         return View(_context.ServiceOrders.ToList());
     }
 
+    // GET: ServiceOrder/Details
     public IActionResult Details(int id, string category = "Mechanical")
     {
         var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ourWinch.Models.Dashboard;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,32 +21,71 @@ namespace ourWinch.Controllers.Checklist
             return View(await _context.Mechanicals.ToListAsync());
         }
 
-
-        // GET: Mechanical/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // GET: Details
+        public IActionResult Details(int id, string category = "Mechanical")
         {
-            if (id == null)
+            var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
+            if (serviceOrder == null)
             {
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            switch (category)
             {
-                return NotFound();
-            }
+                case "Mechanical":
+                    var mechanicalModel = new MechanicalListViewModel
+                    {
+                        ServiceOrderId = serviceOrder.ServiceOrderId,
+                        Ordrenummer = serviceOrder.Ordrenummer,
+                        Produkttype = serviceOrder.Produkttype,
+                        Årsmodell = serviceOrder.Årsmodell,
+                        Fornavn = serviceOrder.Fornavn,
+                        Etternavn = serviceOrder.Etternavn,
+                        Serienummer = serviceOrder.Serienummer,
+                        Status = serviceOrder.Status,
+                        MobilNo = serviceOrder.MobilNo,
+                        Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
+                        KommentarFraKunde = serviceOrder.KommentarFraKunde
+                    };
+                    return View("~/Views/Mechanical/create.cshtml", mechanicalModel);
 
-            return View(mechanical);
+                default:
+                    return NotFound();
+            }
         }
 
         // GET: Mechanical/Create
-        public IActionResult Create()
+
+        [Route("Mechanical/Create/{serviceOrderId}")]
+        public IActionResult Create(int serviceOrderId)
         {
-            return View();
+            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
+            if (serviceOrder == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new MechanicalListViewModel
+            {
+                ServiceOrderId = serviceOrder.ServiceOrderId,
+                Ordrenummer = serviceOrder.Ordrenummer,
+                Produkttype = serviceOrder.Produkttype,
+                Årsmodell = serviceOrder.Årsmodell,
+                Fornavn = serviceOrder.Fornavn,
+                Etternavn = serviceOrder.Etternavn,
+                Serienummer = serviceOrder.Serienummer,
+                Status = serviceOrder.Status,
+                MobilNo = serviceOrder.MobilNo,
+                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
+                KommentarFraKunde = serviceOrder.KommentarFraKunde
+            };
+
+            return View(viewModel);
         }
 
-        // POST: Mechanical/Create
+
+
+
         // POST: Mechanical/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -75,7 +115,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/1");
+                    return RedirectToAction("Create", "Mechanical");
                 }
                 else
                 {
@@ -150,6 +190,8 @@ namespace ourWinch.Controllers.Checklist
             {
                 return NotFound();
             }
+
+         
 
             return View(mechanical);
         }
