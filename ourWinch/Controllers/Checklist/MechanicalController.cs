@@ -56,8 +56,8 @@ namespace ourWinch.Controllers.Checklist
 
         // GET: Mechanical/Create
 
-        [Route("Mechanical/Create/{serviceOrderId}")]
-        public IActionResult Create(int serviceOrderId)
+        [Route("Mechanical/Create/{serviceOrderId}/{category?}")]
+        public IActionResult Create(int serviceOrderId, string category = "Mechanical")
         {
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -80,6 +80,7 @@ namespace ourWinch.Controllers.Checklist
                 KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
 
+            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 
@@ -115,7 +116,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Create", "Mechanical");
+                    return RedirectToAction("Create", "Hydrolisk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Hydrolisk" });
                 }
                 else
                 {

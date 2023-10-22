@@ -8,6 +8,8 @@ public class ActiveService
 
     [Required]
     [ForeignKey("ServiceOrder")]
+    public int ServiceOrderId { get; set; }
+
     public int Ordrenummer { get; set; }
 
     public virtual ServiceOrder? ServiceOrder { get; set; }

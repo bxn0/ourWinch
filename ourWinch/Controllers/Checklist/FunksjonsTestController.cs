@@ -41,8 +41,8 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: FunksjonsTest/Create
-        [Route("FunksjonsTest/Create/{serviceOrderId}")]
-        public IActionResult Create(int serviceOrderId)
+        [Route("FunksjonsTest/Create/{serviceOrderId}/{category?}")]
+        public IActionResult Create(int serviceOrderId, string category = "FunksjonsTest")
         {
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -65,6 +65,7 @@ namespace ourWinch.Controllers.Checklist
                 KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
 
+            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 

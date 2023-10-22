@@ -1,6 +1,11 @@
 ﻿@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
 
+@{
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+    var currentAction = ViewContext.RouteData.Values["action"].ToString();
+}
+
                       <div class="container mt-5">
                           <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Aktive Servicer</div>
 
@@ -28,20 +33,24 @@
                             {
                                       <tr>
                             <td>
-                                <a asp-controller="Mechanical" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
+                                <div class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Ordrenummer</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item @(currentController == "Mechanical" && currentAction == "Create" ? "active-link" : "")"
+                                           asp-controller="Mechanical" asp-action="Create" asp-route-id="@item.ServiceOrderId">Mechanical</a>
+                                        <a class="dropdown-item @(currentController == "Hydrolisk" && currentAction == "Create" ? "active-link" : "")"
+                                           asp-controller="Hydrolisk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Hydrolisk</a>
+                                        <a class="dropdown-item @(currentController == "Electro" && currentAction == "Create" ? "active-link" : "")"
+                                           asp-controller="Electro" asp-action="Create" asp-route-id="@item.ServiceOrderId">Electro</a>
+                                        <a class="dropdown-item @(currentController == "FunksjonsTest" && currentAction == "Create" ? "active-link" : "")"
+                                           asp-controller="FunksjonsTest" asp-action="Create" asp-route-id="@item.ServiceOrderId">FunksjonsTest</a>
+                                        <a class="dropdown-item @(currentController == "Trykk" && currentAction == "Create" ? "active-link" : "")"
+                                           asp-controller="Trykk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Trykk</a>
+                                    </div>
+                                </div>
                             </td>
-                            <td>
-                                <a asp-controller="Hydrolisk" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
-                            </td>
-                            <td>
-                                <a asp-controller="Electro" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
-                            </td>
-                            <td>
-                                <a asp-controller="FunksjonsTest" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
-                            </td>
-                            <td>
-                                <a asp-controller="Trykk" asp-action="Create" asp-route-id="@item.ServiceOrderId">@item.Ordrenummer</a>
-                            </td>
+
+
                                           <td>@item.Produkttype</td>
                                           <td>@item.Fornavn @item.Etternavn</td>
                                           <td>@item.MottattDato.ToShortDateString()</td>

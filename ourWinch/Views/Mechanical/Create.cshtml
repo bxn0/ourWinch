@@ -14,6 +14,11 @@
             border-color: #217520;
         }
 
+    .active-button {
+        background-color: #217520 !important;
+        color: #FFFFFF !important;
+    }
+
     form {
         background-color: #bfd0d7;
         border-radius: 20px;
@@ -25,12 +30,12 @@
     }
 
     .button-add-item {
-        width: 30px; /* Set your desired width */
-        height: 30px; /* Set the same value as width to make it a perfect circle */
-        border-radius: 50%; /* Makes it rounded */
-        display: flex; /* Flexbox for centering content */
-        align-items: center; /* Vertically center the content */
-        justify-content: center; /* Horizontally center the content */
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>
 
@@ -82,26 +87,26 @@
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
                     <a asp-controller="Mechanical" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Mechanical">
-                        <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Mechanical" ? "active-button" : "") w-100 p-3">Mekanisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Hydrolisk">
+                    <a asp-controller="Hydrolisk" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Hydrolisk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Hydrolisk" ? "active-button" : "") w-100 p-3">Hydrolisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Electro">
+                    <a asp-controller="Electro" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Electro">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Electro" ? "active-button" : "") w-100 p-3">Electro</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="FunksjonsTest">
+                    <a asp-controller="FunksjonsTest" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="FunksjonsTest">
                         <button class="btn form-button @(ViewBag.ActiveButton == "FunksjonsTest" ? "active-button" : "") w-100 p-3">FunksjonsTest</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Trykk">
+                    <a asp-controller="Trykk" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Trykk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Trykk" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
                     </a>
                 </div>

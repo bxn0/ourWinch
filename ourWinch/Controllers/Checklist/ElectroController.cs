@@ -40,8 +40,8 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Electro/Create
-        [Route("Electro/Create/{serviceOrderId}")]
-        public IActionResult Create(int serviceOrderId)
+        [Route("Electro/Create/{serviceOrderId}/{category?}")]
+        public IActionResult Create(int serviceOrderId, string category = "Electro")
         {
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -64,6 +64,7 @@ namespace ourWinch.Controllers.Checklist
                 KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
 
+            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 

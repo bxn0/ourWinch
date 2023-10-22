@@ -40,8 +40,8 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Trykk/Create
-        [Route("Trykk/Create/{serviceOrderId}")]
-        public IActionResult Create(int serviceOrderId)
+        [Route("Trykk/Create/{serviceOrderId}/{category?}")]
+        public IActionResult Create(int serviceOrderId, string category = "Trykk")
         {
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -64,6 +64,7 @@ namespace ourWinch.Controllers.Checklist
                 KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
 
+            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 

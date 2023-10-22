@@ -63,7 +63,7 @@ namespace ourWinch.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActiveServices");
+                    b.ToTable("ActiveServices", (string)null);
                 });
 
             modelBuilder.Entity("Electro", b =>
@@ -99,7 +99,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Electros");
+                    b.ToTable("Electros", (string)null);
                 });
 
             modelBuilder.Entity("FunksjonsTest", b =>
@@ -135,7 +135,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("FunksjonsTests");
+                    b.ToTable("FunksjonsTests", (string)null);
                 });
 
             modelBuilder.Entity("Hydrolisk", b =>
@@ -171,7 +171,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Hydrolisks");
+                    b.ToTable("Hydrolisks", (string)null);
                 });
 
             modelBuilder.Entity("Mechanical", b =>
@@ -207,7 +207,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Mechanicals");
+                    b.ToTable("Mechanicals", (string)null);
                 });
 
             modelBuilder.Entity("Trykk", b =>
@@ -243,7 +243,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Trykks");
+                    b.ToTable("Trykks", (string)null);
                 });
 
             modelBuilder.Entity("ourWinch.Models.Dashboard.ServiceOrder", b =>
@@ -305,7 +305,7 @@ namespace ourWinch.Migrations
 
                     b.HasKey("ServiceOrderId");
 
-                    b.ToTable("ServiceOrders");
+                    b.ToTable("ServiceOrders", (string)null);
                 });
 
             modelBuilder.Entity("Electro", b =>
