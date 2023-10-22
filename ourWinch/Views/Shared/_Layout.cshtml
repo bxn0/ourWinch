@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="~/css/Dashboard/index.css" />
     <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
     <link rel="stylesheet" href="~/css/pagination-styles.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        a.text-white.text-decoration-none:hover {
+            color: yellow; /* Logout rengini değiştirmek istediğiniz renk */
+        }
+    </style>
     <!-- pagination styl added CSS -->
 </head>
 <body>
@@ -33,11 +40,20 @@
                 </div>
             </div>
         </div>
-        <div class="user-info d-flex align-items-center ml-3">
-            <i class="fas fa-bell text-white mr-3"></i>
-            <span class="text-white mr-2">Lars Olsen</span>
+        <div class="d-flex align-items-baseline">
+            <button class="btn text-white">
+                <i class="fas fa-bell"></i>
+            </button>
 
+            <div class="flex flex-column align-items-start p-2">
+                <div class='text-white'>Lars Olsen</div>
+                <a href="/Account/Logout/" class="text-white text-decoration-none"  >Logout</a>
+                
+}
+
+            </div>
         </div>
+
 
 
 
@@ -86,23 +102,23 @@
 
             </nav>
 
-            <div class="col-md-10">
-                <!-- Kullanıcı adını Navbar dışında gösterme -->
-                <div class="container mt-7 d-flex justify-content-end" style="position: absolute; top: 70px; right: 1px;">
-                    <h1 class="display-6"></h1>
-                    <a href="/Account/Logout/" class="btn btn-info" >Logout</a>
-                </div>
 
 
 
-                @RenderBody()
-            </div>
+
+            @RenderBody()
         </div>
     </div>
-    
+    </div>
+
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
+
+
+
+
 </body>
 </html>
