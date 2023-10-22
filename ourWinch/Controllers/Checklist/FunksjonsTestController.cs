@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ourWinch.Migrations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ourWinch.Controllers.Checklist
 {

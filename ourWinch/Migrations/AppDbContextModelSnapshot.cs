@@ -54,16 +54,18 @@ namespace ourWinch.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ServiceOrderId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ServiceSkjema")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ActiveServices", (string)null);
+                    b.ToTable("ActiveServices");
                 });
 
             modelBuilder.Entity("Electro", b =>
@@ -99,7 +101,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Electros", (string)null);
+                    b.ToTable("Electros");
                 });
 
             modelBuilder.Entity("FunksjonsTest", b =>
@@ -135,7 +137,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("FunksjonsTests", (string)null);
+                    b.ToTable("FunksjonsTests");
                 });
 
             modelBuilder.Entity("Hydrolisk", b =>
@@ -171,7 +173,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Hydrolisks", (string)null);
+                    b.ToTable("Hydrolisks");
                 });
 
             modelBuilder.Entity("Mechanical", b =>
@@ -207,7 +209,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Mechanicals", (string)null);
+                    b.ToTable("Mechanicals");
                 });
 
             modelBuilder.Entity("Trykk", b =>
@@ -243,7 +245,7 @@ namespace ourWinch.Migrations
 
                     b.HasIndex("ServiceOrderId");
 
-                    b.ToTable("Trykks", (string)null);
+                    b.ToTable("Trykks");
                 });
 
             modelBuilder.Entity("ourWinch.Models.Dashboard.ServiceOrder", b =>
@@ -297,7 +299,6 @@ namespace ourWinch.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Årsmodell")
@@ -305,7 +306,7 @@ namespace ourWinch.Migrations
 
                     b.HasKey("ServiceOrderId");
 
-                    b.ToTable("ServiceOrders", (string)null);
+                    b.ToTable("ServiceOrders");
                 });
 
             modelBuilder.Entity("Electro", b =>

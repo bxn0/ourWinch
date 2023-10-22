@@ -105,6 +105,17 @@ namespace ourWinch.Controllers.Checklist
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
             }
+            // ModelState.IsValid değilse hataları yazdırıyoruz.
+            else
+            {
+                foreach (var modelStateValue in ModelState.Values)
+                {
+                    foreach (var error in modelStateValue.Errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
+            }
             return View(viewModel);
         }
 

@@ -26,6 +26,8 @@ public class ServiceOrderController : Controller
         var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230001;
 
         serviceOrder.Ordrenummer = newOrderNumber;
+        serviceOrder.Status = "Process";
+
         _context.ServiceOrders.Add(serviceOrder);
         _context.SaveChanges();
 

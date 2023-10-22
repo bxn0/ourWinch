@@ -12,8 +12,6 @@ public class ActiveService
 
     public int Ordrenummer { get; set; }
 
-    public virtual ServiceOrder? ServiceOrder { get; set; }
-
     [Required]
     public string? Produkttype { get; set; }
 
@@ -32,7 +30,6 @@ public class ActiveService
   
     public DateTime AvtaltLevering { get; set; }
 
-    [Required]
     public string? Status { get; set; }
 
 
