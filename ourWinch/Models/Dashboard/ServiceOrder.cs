@@ -13,7 +13,6 @@ namespace ourWinch.Models.Dashboard
         [Required]
         public string? Etternavn { get; set; }
 
-        [Required]
         public string? MobilNo { get; set; }
 
         [Required]
@@ -33,7 +32,7 @@ namespace ourWinch.Models.Dashboard
         [Required]
         public DateTime MottattDato { get; set; }
 
-        [Required]
+    
         public string? Årsmodell { get; set; }
 
         [Required]        

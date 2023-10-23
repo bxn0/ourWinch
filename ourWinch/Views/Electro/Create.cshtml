@@ -1,5 +1,17 @@
 ﻿@model ElectroListViewModel
 
+@if (ViewBag.Errors != null && ViewBag.Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewBag.Errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
 <style>
     .form-button {
         background-color: #d17242;
@@ -38,6 +50,11 @@
         justify-content: center;
     }
 </style>
+
+<script>
+    var someServiceOrderId = @Model.ServiceOrderId;
+    var someCategory = "@ViewBag.ActiveButton";
+</script>
 
 <main class="dflex mx-auto mt-3">
 
@@ -221,7 +238,7 @@
                 <div class="col-md-6" id="inputDiv1" style="display:none;">
                     <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                 </div>
-                <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
+                <button type="button" onclick="addItem('formElectro')" class="btn btn-primary button-add-item">
                     <i class="fa-solid fa-circle-plus"></i>
                 </button>
             </div>
@@ -242,16 +259,15 @@
     <!-- JavaScript -->
 
     <script>
-
         document.addEventListener("DOMContentLoaded", function () {
-        let counter = 3;
+            let counter = 3;
 
-        function addItem(formId) {
-            let inputDiv;
-            let userInputField;
-            let inputRow;
+            function addItem(formId) {
+                let inputDiv;
+                let userInputField;
+                let inputRow;
             switch (formId) {
-                case 'form1':
+                case 'formElectro':
                     inputDiv = document.getElementById("inputDiv1");
                     userInputField = document.getElementById('userInput1');
                     inputRow = document.getElementById("inputRow1");
@@ -278,14 +294,14 @@
                     break;
             }
 
-            inputDiv.style.display = "flex";
-            let labelText = userInputField.value;
-            if (labelText === '') return;
+                inputDiv.style.display = "flex";
+                let labelText = userInputField.value;
+                if (labelText === '') return;
 
-            let newItem = document.createElement('div');
-            newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
+                let newItem = document.createElement('div');
+                newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
 
-            newItem.innerHTML = `
+                newItem.innerHTML = `
                         <div class="col-md-6">
                             <input type="hidden" name="Electros[${counter}].ChecklistItem" value="${labelText}">
                             <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
@@ -310,33 +326,39 @@
                         </div>
                     `;
 
-            inputRow.parentNode.insertBefore(newItem, inputRow);
-            userInputField.value = '';
-            counter++;
-        }
-
-        const eventHandler = (event) => {
-            if (event.target.type === 'radio') {
-                console.log(event.target.value);
+                inputRow.parentNode.insertBefore(newItem, inputRow);
+                userInputField.value = '';
+                counter++;
             }
-        }
 
-        function setActive(button) {
-            var buttons = document.querySelectorAll('.form-button');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-        }
+            const eventHandler = (event) => {
+                if (event.target.type === 'radio') {
+                    console.log(event.target.value);
+                }
+            }
 
-        document.getElementById('form1').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
-            inputs.forEach(function (input) {
-                console.log(input.name + ": " + input.value);
+            function setActive(button) {
+                var buttons = document.querySelectorAll('.form-button');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            }
+
+            let isFormSubmitted = false;  // Bu değişkenin tanımlanmadığını gördüm, bu nedenle ekledim.
+
+            document.getElementById('formElectro').addEventListener('submit', function (event) {
+                if (!isFormSubmitted) {
+                    event.preventDefault();
+                    var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
+                    inputs.forEach(function (input) {
+                        console.log(input.name + ": " + input.value);
+                    });
+                    const actionUrl = `/Electro/Create/${someServiceOrderId}/${someCategory}`;
+
+                    this.setAttribute('action', actionUrl);
+                    isFormSubmitted = true;
+                    this.submit();
+                }
             });
-            const actionUrl = '/Electro/Create';
-            this.setAttribute('action', actionUrl);
-            this.submit();
-        });
-        });
+        }); // Bu satırı ekledim. DOMContentLoaded olay dinleyicisinin kapanış süslü parantezi eksikti.
     </script>
 </main>

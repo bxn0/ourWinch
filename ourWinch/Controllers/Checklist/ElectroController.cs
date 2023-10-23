@@ -70,8 +70,9 @@ namespace ourWinch.Controllers.Checklist
 
         // POST: Electro/Create
         [HttpPost]
+        [Route("Electro/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ElectroListViewModel viewModel)
+        public async Task<IActionResult> Create(ElectroListViewModel viewModel, int serviceOrderId, string category)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +98,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/1");
+                    return RedirectToAction("Create", "FunksjonsTest", new { serviceOrderId = viewModel.ServiceOrderId, category = "FunksjonsTest" });
                 }
                 else
                 {
@@ -108,13 +109,15 @@ namespace ourWinch.Controllers.Checklist
             // ModelState.IsValid değilse hataları yazdırıyoruz.
             else
             {
-                foreach (var modelStateValue in ModelState.Values)
+                foreach (var modelState in ModelState)
                 {
-                    foreach (var error in modelStateValue.Errors)
+                    var fieldName = modelState.Key;
+                    foreach (var error in modelState.Value.Errors)
                     {
-                        Console.WriteLine(error.ErrorMessage);
+                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
                     }
                 }
+                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             }
             return View(viewModel);
         }

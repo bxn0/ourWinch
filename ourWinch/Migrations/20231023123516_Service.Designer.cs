@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231022204836_Active")]
-    partial class Active
+    [Migration("20231023123516_Service")]
+    partial class Service
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,8 +67,6 @@ namespace ourWinch.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ServiceOrderId");
 
                     b.ToTable("ActiveServices");
                 });
@@ -304,7 +302,6 @@ namespace ourWinch.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Årsmodell")
@@ -313,17 +310,6 @@ namespace ourWinch.Migrations
                     b.HasKey("ServiceOrderId");
 
                     b.ToTable("ServiceOrders");
-                });
-
-            modelBuilder.Entity("ActiveService", b =>
-                {
-                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
-                        .WithMany()
-                        .HasForeignKey("ServiceOrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ServiceOrder");
                 });
 
             modelBuilder.Entity("Electro", b =>

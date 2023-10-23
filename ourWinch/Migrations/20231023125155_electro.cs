@@ -5,7 +5,7 @@
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class Electros : Migration
+    public partial class electro : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

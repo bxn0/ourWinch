@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231022232228_Electros")]
-    partial class Electros
+    [Migration("20231023123647_mechanical")]
+    partial class mechanical
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
