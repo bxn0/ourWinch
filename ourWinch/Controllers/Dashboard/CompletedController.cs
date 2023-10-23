@@ -1,4 +1,6 @@
-﻿using OurWinch.Models;
+// Controllers/Fulf�rteController.cs
+using ourWinch.Models;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 using Microsoft.EntityFrameworkCore;

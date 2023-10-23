@@ -1,9 +1,11 @@
-﻿using ourWinchSist.Models;
+﻿using ourWinch.Models.Dashboard;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Hydrolisk
 {
         public int Id { get; set; }
 
+    [ForeignKey("ServiceOrder")]
     public int ServiceOrderId { get; set; } // Foreign key for ServiceOrder
     public int Ordrenummer { get; set; }
         public string? ChecklistItem { get; set; }
@@ -14,13 +16,26 @@ public class Hydrolisk
 
    
     public ServiceOrder? ServiceOrder { get; set; } // Navigation property
+    
 }
 
 public class HydroliskListViewModel
 {
     public List<Hydrolisk> Hydrolisks { get; set; } = new List<Hydrolisk>();
     public ServiceOrder? ServiceOrderInfo { get; set; }
+    public int ServiceOrderId { get; set; }
+    public int Ordrenummer { get; set; }
+    public string? Produkttype { get; set; }
+    public string? Årsmodell { get; set; }
+    public string? Fornavn { get; set; }
+    public string? Etternavn { get; set; }
+    public string? Serienummer { get; set; }
+    public string? Status { get; set; }
+    public string? MobilNo { get; set; }
+    public string? Feilbeskrivelse { get; set; }
+    public string? KommentarFraKunde { get; set; }
     public string? Kommentar { get; set; }
+   
 }
 
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ourWinchSist.Models;
+using ourWinch.Models.Dashboard;
 using System.Linq;
 
 public class ServiceOrderController : Controller
@@ -17,7 +17,6 @@ public class ServiceOrderController : Controller
         // Modelinizde özel başlangıç değerleri atamak isterseniz bu kısmı kullanabilirsiniz
         return View(model);
     }
-
     // POST: ServiceOrder/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -27,21 +26,26 @@ public class ServiceOrderController : Controller
         var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230001;
 
         serviceOrder.Ordrenummer = newOrderNumber;
+        serviceOrder.Status = "Process";
 
         _context.ServiceOrders.Add(serviceOrder);
         _context.SaveChanges();
+
+        // Save to ActiveService
+        var serviceManager = new ServiceManager(_context);
+        serviceManager.SaveToActiveService(serviceOrder.ServiceOrderId);
 
         return RedirectToAction(nameof(Index));
     }
 
 
-
-    // GET: ServiceOrder/Index
+    // GET: ServiceOrder/index
     public IActionResult Index()
     {
         return View(_context.ServiceOrders.ToList());
     }
 
+    // GET: ServiceOrder/Details
     public IActionResult Details(int id, string category = "Mechanical")
     {
         var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);

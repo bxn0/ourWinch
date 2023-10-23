@@ -1,5 +1,17 @@
-﻿@model List<ourWinchSist.Models.ServiceOrder>
-    ﻿
+﻿@model TrykkListViewModel
+
+@if (ViewBag.Errors != null && ViewBag.Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewBag.Errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
 <style>
     .form-button {
         background-color: #d17242;
@@ -14,6 +26,11 @@
             border-color: #217520;
         }
 
+    .active-button {
+        background-color: #217520 !important;
+        color: #FFFFFF !important;
+    }
+
     form {
         background-color: #bfd0d7;
         border-radius: 20px;
@@ -25,91 +42,88 @@
     }
 
     .button-add-item {
-        width: 30px; /* Set your desired width */
-        height: 30px; /* Set the same value as width to make it a perfect circle */
-        border-radius: 50%; /* Makes it rounded */
-        display: flex; /* Flexbox for centering content */
-        align-items: center; /* Vertically center the content */
-        justify-content: center; /* Horizontally center the content */
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
-    .active-button {
-        background-color: #217520; /* Örnek renk */
-        color: white;
-    }
-
 </style>
+
+<script>
+    var someServiceOrderId = @Model.ServiceOrderId;
+    var someCategory = "@ViewBag.ActiveButton";
+</script>
 
 <main class="dflex mx-auto mt-3">
 
     <!--************************* TABLE *****************************-->
     <div>
         <div class="container mt-2">
-            @foreach (var item in Model)
-            {
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>OrderID:</strong> @item.Ordrenummer
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>ProduktType:</strong> @item.Produkttype
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Arsmodell:</strong> @item.Årsmodell
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Kunde Navn:</strong> @item.Fornavn @item.Etternavn
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Serie No:</strong> @item.Serienummer
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Status:</strong> @item.Reperasjon
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Mobil No:</strong> @item.MobilNo
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Feilbeskrivelse:</strong> @item.Feilbeskrivelse
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Kommentar fra kunde:</strong> @item.KommentarFraKunde
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
 
+            <div class="row">
+                <div class="col-md-4 border border-black p-1">
+                    <strong>OrderID:</strong> @Model.Ordrenummer
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>ProduktType:</strong> @Model.Produkttype
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Arsmodell:</strong> @Model.Årsmodell
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Kunde Navn:</strong> @Model.Fornavn @Model.Etternavn
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Serie No:</strong> @Model.Serienummer
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Status: Prosess</strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Mobil No:</strong> @Model.MobilNo
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Feilbeskrivelse:</strong> @Model.Feilbeskrivelse
+                </div>
+                <div class="col-md-4 border border-black p-1">
+                    <strong>Kommentar fra kunde:</strong> @Model.KommentarFraKunde
+                </div>
+            </div>
+        </div>
+
+    </div>
     <section class="mt-3">
         <!--************************* BUTONLAR ******************************** -->
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Mechanical">
-                        <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
+                    <a asp-controller="Mechanical" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Mechanical">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Mechanical" ? "active-button" : "") w-100 p-3">Mekanisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Hydrolisk">
+                    <a asp-controller="Hydrolisk" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Hydrolisk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Hydrolisk" ? "active-button" : "") w-100 p-3">Hydrolisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Electro">
+                    <a asp-controller="Electro" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Electro">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Electro" ? "active-button" : "") w-100 p-3">Electro</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="FunksjonsTest">
+                    <a asp-controller="FunksjonsTest" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="FunksjonsTest">
                         <button class="btn form-button @(ViewBag.ActiveButton == "FunksjonsTest" ? "active-button" : "") w-100 p-3">FunksjonsTest</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Trykk">
+                    <a asp-controller="Trykk" asp-action="Create" asp-route-serviceOrderId="@Model.ServiceOrderId" asp-route-category="Trykk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Trykk" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
                     </a>
                 </div>
@@ -224,7 +238,7 @@
                 <div class="col-md-6" id="inputDiv1" style="display:none;">
                     <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                 </div>
-                <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
+                <button type="button" onclick="addItem('Trykks')" class="btn btn-primary button-add-item">
                     <i class="fa-solid fa-circle-plus"></i>
                 </button>
             </div>
@@ -252,7 +266,7 @@
             let userInputField;
             let inputRow;
             switch (formId) {
-                case 'form1':
+                case 'Trykks':
                     inputDiv = document.getElementById("inputDiv1");
                     userInputField = document.getElementById('userInput1');
                     inputRow = document.getElementById("inputRow1");
@@ -328,15 +342,19 @@
             button.classList.add('active');
         }
 
-        document.getElementById('form1').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
-            inputs.forEach(function (input) {
-                console.log(input.name + ": " + input.value);
-            });
-            const actionUrl = '/Trykk/Create';
-            this.setAttribute('action', actionUrl);
-            this.submit();
+        document.getElementById('trykks').addEventListener('submit', function (event) {
+            if (!isFormSubmitted) {
+                event.preventDefault();
+                var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
+                inputs.forEach(function (input) {
+                    console.log(input.name + ": " + input.value);
+                });
+                const actionUrl = `/Trykks/Create/${someServiceOrderId}/${someCategory}`;
+
+                this.setAttribute('action', actionUrl);
+                isFormSubmitted = true;
+                this.submit();
+            }
         });
     </script>
 </main>

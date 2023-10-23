@@ -1,0 +1,10 @@
+﻿public IActionResult Details(int id, string category = "Mechanical")
+{
+    var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
+    if (serviceOrder == null)
+    {
+        return NotFound();
+    }
+    ViewBag.Category = category; // Kategoriyi view'e taşıyoruz.
+    return View(serviceOrder);
+}
