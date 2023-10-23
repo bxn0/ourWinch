@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
 
 public class AccountController : Controller
 {
@@ -58,8 +60,20 @@ public class AccountController : Controller
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Login", "Account");
+    }
+
+
     public IActionResult ForgotPassword()
     {
         return View();
     }
+
+
+
+
 }
