@@ -27,7 +27,7 @@
                 {
                                       <tr>
                                           <td>
-                                              <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="@item.Id">
+                                              <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="@item.ServiceOrderId">
                                                   @item.Ordrenummer
                                               </a>
                                           </td>
@@ -50,12 +50,43 @@
                               <p>No service orders available.</p>
                               }
                           </div>
-                          <!-- Sayfa Numaralandırma -->
+                          <!-- Sayfa Gecisleri -->
                           <div class="pagination-container">
-                              <div class="pagination-text">Previous</div>
-                              <div class="pagination-item active">1</div>
-                              <div class="pagination-item">2</div>
-                              <div class="pagination-item">3</div>
-                              <div class="pagination-text">Next</div>
+
+                              <a asp-controller="Dashboard" asp-action="Index" asp-route-page="1"
+                                 style="display: inline-block;
+                                      width: 30px;
+                                      height: 30px;
+                                      line-height: 30px;
+                                      text-align: center;
+                                      border: 1px solid #000;
+                                      border-radius: 50%;
+                                      margin: 5px;
+                                      text-decoration: none;
+                                      color: #000;
+                                      background-color: #3498db;
+                                      transition: background-color 0.4s;"
+                                 onmouseover="this.style.backgroundColor='white'"
+                                 onmouseout="this.style.backgroundColor='#3498db'">1</a>
+
+                              <a asp-controller="Completed" asp-action="Dashboard" asp-route-page="2"
+                                 style="display: inline-block;
+                                      width: 30px;
+                                      height: 30px;
+                                      line-height: 30px;
+                                      text-align: center;
+                                      border: 1px solid #000;
+                                      border-radius: 50%;
+                                      margin: 5px;
+                                      text-decoration: none;
+                                      color: #000;
+                                      background-color: #B9B9B9;
+                                      transition: background-color 0.4s;"
+                                 onmouseover="this.style.backgroundColor='#27ae60'"
+                                 onmouseout="this.style.backgroundColor='white'">2</a>
+
+
+
                           </div>
+
                       </div>

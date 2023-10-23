@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace ourWinch.Controllers.Checklist
 {
-    public class MechanicalController : Controller
+    public class ElectroController : Controller
     {
         private readonly AppDbContext _context;
 
-        public MechanicalController(AppDbContext context)
+        public ElectroController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Mechanical
+        // GET: Electro
         public async Task<IActionResult> Index()
         {
             return View(await _context.Mechanicals.ToListAsync());
@@ -29,27 +29,30 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
+            var electro = await _context.Electros
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            if (electro == null)
             {
                 return NotFound();
             }
 
-            return View(mechanical);
+            return View(electro);
         }
 
-        // GET: Mechanical/Create
+        // GET: Electro/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new ElectroListViewModel
+            {
+                Electros = new List<Electro>() // İsterseniz bu listeyi doldurabilirsiniz.
+            };
+            return View(viewModel);
         }
 
-        // POST: Mechanical/Create
-        // POST: Mechanical/Create
+        // POST: Electro/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
+        public async Task<IActionResult> Create(ElectroListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -60,19 +63,19 @@ namespace ourWinch.Controllers.Checklist
 
                 if (lastServiceOrder != null)
                 {
-                    foreach (var mechanical in viewModel.Mechanicals)
+                    foreach (var electro in viewModel.Electros)
                     {
                         if (isFirst)
                         {
-                            mechanical.Kommentar = viewModel.Kommentar;
+                            electro.Kommentar = viewModel.Kommentar;
                             isFirst = false;
                         }
 
-                        // Her bir Mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
-                        mechanical.Ordrenummer = lastServiceOrder.Ordrenummer;
-                        mechanical.ServiceOrderId = lastServiceOrder.ServiceOrderId;
+                        // Her bir Electro için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        electro.Ordrenummer = lastServiceOrder.Ordrenummer;
+                        electro.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
-                        _context.Add(mechanical);
+                        _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
                     return Redirect("/ServiceOrder/Details/1");
@@ -87,7 +90,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
 
-        // GET: Mechanical/Edit/5
+        // GET: Electro/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,20 +98,20 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals.FindAsync(id);
-            if (mechanical == null)
+            var electro = await _context.Electros.FindAsync(id);
+            if (electro == null)
             {
                 return NotFound();
             }
-            return View(mechanical);
+            return View(electro);
         }
 
-        // POST: Mechanical/Edit/5
+        // POST: Electro/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Electro electro)
         {
-            if (id != mechanical.Id)
+            if (id != electro.Id)
             {
                 return NotFound();
             }
@@ -117,12 +120,12 @@ namespace ourWinch.Controllers.Checklist
             {
                 try
                 {
-                    _context.Update(mechanical);
+                    _context.Update(electro);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MechanicalExists(mechanical.Id))
+                    if (!ElectroExists(electro.Id))
                     {
                         return NotFound();
                     }
@@ -133,10 +136,10 @@ namespace ourWinch.Controllers.Checklist
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(mechanical);
+            return View(electro);
         }
 
-        // GET: Mechanical/Delete/5
+        // GET: Electro/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,30 +147,30 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
+            var electro = await _context.Electros
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            if (electro == null)
             {
                 return NotFound();
             }
 
-            return View(mechanical);
+            return View(electro);
         }
 
-        // POST: Mechanical/Delete/5
+        // POST: Electro/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mechanical = await _context.Mechanicals.FindAsync(id);
-            _context.Mechanicals.Remove(mechanical);
+            var electro = await _context.Electros.FindAsync(id);
+            _context.Electros.Remove(electro);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MechanicalExists(int id)
+        private bool ElectroExists(int id)
         {
-            return _context.Mechanicals.Any(e => e.Id == id);
+            return _context.Electros.Any(e => e.Id == id);
         }
     }
 }

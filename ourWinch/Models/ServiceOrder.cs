@@ -3,7 +3,7 @@
 
     public class ServiceOrder
     {
-        public int Id { get; set; }
+        public int ServiceOrderId { get; set; }
         public string? Fornavn { get; set; }
         public string? Etternavn { get; set; }
         public string? MobilNo { get; set; }

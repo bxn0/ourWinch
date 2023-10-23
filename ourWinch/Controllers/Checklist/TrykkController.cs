@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace ourWinch.Controllers.Checklist
 {
-    public class MechanicalController : Controller
+    public class TrykkController : Controller
     {
         private readonly AppDbContext _context;
 
-        public MechanicalController(AppDbContext context)
+        public TrykkController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Mechanical
+        // GET: Trykk
         public async Task<IActionResult> Index()
         {
             return View(await _context.Mechanicals.ToListAsync());
@@ -29,27 +29,30 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
+            var trykk = await _context.Trykks
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            if (trykk == null)
             {
                 return NotFound();
             }
 
-            return View(mechanical);
+            return View(trykk);
         }
 
-        // GET: Mechanical/Create
+        // GET: Trykk/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new TrykkListViewModel
+            {
+                Trykks = new List<Trykk>() // İsterseniz bu listeyi doldurabilirsiniz.
+            };
+            return View(viewModel);
         }
 
-        // POST: Mechanical/Create
-        // POST: Mechanical/Create
+        // POST: Trykk/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
+        public async Task<IActionResult> Create(TrykkListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -60,22 +63,22 @@ namespace ourWinch.Controllers.Checklist
 
                 if (lastServiceOrder != null)
                 {
-                    foreach (var mechanical in viewModel.Mechanicals)
+                    foreach (var trykk in viewModel.Trykks)
                     {
                         if (isFirst)
                         {
-                            mechanical.Kommentar = viewModel.Kommentar;
+                            trykk.Kommentar = viewModel.Kommentar;
                             isFirst = false;
                         }
 
-                        // Her bir Mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
-                        mechanical.Ordrenummer = lastServiceOrder.Ordrenummer;
-                        mechanical.ServiceOrderId = lastServiceOrder.ServiceOrderId;
+                        // Her bir Trykk için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        trykk.Ordrenummer = lastServiceOrder.Ordrenummer;
+                        trykk.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
-                        _context.Add(mechanical);
+                        _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/1");
+                    return Redirect("/ServiceSkjema/index");
                 }
                 else
                 {
@@ -87,7 +90,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
 
-        // GET: Mechanical/Edit/5
+        // GET: Trykk/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,20 +98,20 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals.FindAsync(id);
-            if (mechanical == null)
+            var trykk = await _context.Trykks.FindAsync(id);
+            if (trykk == null)
             {
                 return NotFound();
             }
-            return View(mechanical);
+            return View(trykk);
         }
 
-        // POST: Mechanical/Edit/5
+        // POST: Trykk/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Mechanical mechanical)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Trykk trykk)
         {
-            if (id != mechanical.Id)
+            if (id != trykk.Id)
             {
                 return NotFound();
             }
@@ -117,12 +120,12 @@ namespace ourWinch.Controllers.Checklist
             {
                 try
                 {
-                    _context.Update(mechanical);
+                    _context.Update(trykk);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MechanicalExists(mechanical.Id))
+                    if (!ElectroExists(trykk.Id))
                     {
                         return NotFound();
                     }
@@ -133,10 +136,10 @@ namespace ourWinch.Controllers.Checklist
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(mechanical);
+            return View(trykk);
         }
 
-        // GET: Mechanical/Delete/5
+        // GET: Trykk/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,30 +147,30 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var mechanical = await _context.Mechanicals
+            var trykk = await _context.Trykks
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (mechanical == null)
+            if (trykk == null)
             {
                 return NotFound();
             }
 
-            return View(mechanical);
+            return View(trykk);
         }
 
-        // POST: Mechanical/Delete/5
+        // POST: Trykk/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var mechanical = await _context.Mechanicals.FindAsync(id);
-            _context.Mechanicals.Remove(mechanical);
+            var trykk = await _context.Trykks.FindAsync(id);
+            _context.Trykks.Remove(trykk);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MechanicalExists(int id)
+        private bool ElectroExists(int id)
         {
-            return _context.Mechanicals.Any(e => e.Id == id);
+            return _context.Trykks.Any(e => e.Id == id);
         }
     }
 }

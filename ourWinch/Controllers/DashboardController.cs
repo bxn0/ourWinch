@@ -18,4 +18,10 @@ public class DashboardController : Controller
         var serviceOrders = _context.ServiceOrders.ToList();
         return View(serviceOrders);
     }
+
+    public IActionResult Page(int page = 1)
+    {
+        return View("~/Views/Dashboard/Index.cshtml");
+    }
+
 }

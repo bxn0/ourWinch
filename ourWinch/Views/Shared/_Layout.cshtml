@@ -9,7 +9,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- FontAwesome (ikonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/Dashboard/dashboard.css" />
     <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
@@ -45,7 +44,7 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column mb-3" style="list-style-type: none; padding-left: 0;">
                         <li class="nav-item my-3" style="border-top: 1px solid #728791; border-bottom: 1px solid #728791;">
-                            <a class="nav-link active-link" href="#">
+                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
                                 <i class="fas fa-home"></i> Hjem
                             </a>
                         <li class="nav-item mt-3">
@@ -63,6 +62,16 @@
                         <li class="nav-item mt-3">
                             <a asp-controller="NewService" asp-action="Dashboard" class="nav-link">
                                 <i class="fas fa-pen"></i> Ny service
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav flex-column mt-9">
+                        <li class="nav-item">
+                            <a asp-controller="UsageOperations" asp-action="Index" class="nav-link">
+
+
+                                <i class="fas fa-users"></i> Brukeoperasjoner
                             </a>
                         </li>
                     </ul>
