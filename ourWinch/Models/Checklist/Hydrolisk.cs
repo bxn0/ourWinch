@@ -1,9 +1,11 @@
 ﻿using ourWinch.Models.Dashboard;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Hydrolisk
 {
         public int Id { get; set; }
 
+    [ForeignKey("ServiceOrder")]
     public int ServiceOrderId { get; set; } // Foreign key for ServiceOrder
     public int Ordrenummer { get; set; }
         public string? ChecklistItem { get; set; }
