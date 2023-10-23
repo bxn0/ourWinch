@@ -68,8 +68,9 @@ namespace ourWinch.Controllers.Checklist
 
         // POST: FunksjonsTest/Create
         [HttpPost]
+        [Route("FunksjonsTest/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(FunksjonsTestListViewModel viewModel)
+        public async Task<IActionResult> Create(FunksjonsTestListViewModel viewModel, int serviceOrderId, string category)
         {
             if (ModelState.IsValid)
             {
@@ -88,20 +89,33 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                       
+                        // Her bir funksjonsTest için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         funksjonsTest.Ordrenummer = lastServiceOrder.Ordrenummer;
                         funksjonsTest.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(funksjonsTest);
                     }
                     await _context.SaveChangesAsync();
-                    return Redirect("/ServiceOrder/Details/1");
+                    return RedirectToAction("Create", "Trykk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Trykk" });
                 }
                 else
                 {
                     // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
+            }
+            // ModelState.IsValid değilse hataları yazdırıyoruz.
+            else
+            {
+                foreach (var modelState in ModelState)
+                {
+                    var fieldName = modelState.Key;
+                    foreach (var error in modelState.Value.Errors)
+                    {
+                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
+                    }
+                }
+                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             }
             return View(viewModel);
         }

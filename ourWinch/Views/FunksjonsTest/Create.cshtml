@@ -1,5 +1,17 @@
 ﻿@model FunksjonsTestListViewModel
 
+@if (ViewBag.Errors != null && ViewBag.Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in ViewBag.Errors)
+            {
+                <li>@error</li>
+            }
+        </ul>
+    </div>
+}
+
 <style>
     .form-button {
         background-color: #d17242;
@@ -38,6 +50,11 @@
         justify-content: center;
     }
 </style>
+
+<script>
+    var someServiceOrderId = @Model.ServiceOrderId;
+    var someCategory = "@ViewBag.ActiveButton";
+</script>
 
 <main class="dflex mx-auto mt-3">
 
@@ -221,7 +238,7 @@
                 <div class="col-md-6" id="inputDiv1" style="display:none;">
                     <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                 </div>
-                <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
+                <button type="button" onclick="addItem('FunksjonsTests')" class="btn btn-primary button-add-item">
                     <i class="fa-solid fa-circle-plus"></i>
                 </button>
             </div>
@@ -249,7 +266,7 @@
             let userInputField;
             let inputRow;
             switch (formId) {
-                case 'form1':
+                case 'FunksjonsTests':
                     inputDiv = document.getElementById("inputDiv1");
                     userInputField = document.getElementById('userInput1');
                     inputRow = document.getElementById("inputRow1");
@@ -325,15 +342,21 @@
             button.classList.add('active');
         }
 
-        document.getElementById('form1').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
-            inputs.forEach(function (input) {
-                console.log(input.name + ": " + input.value);
-            });
-            const actionUrl = '/FunksjonsTest/Create';
-            this.setAttribute('action', actionUrl);
-            this.submit();
+        let isFormSubmitted = false;  // Bu değişkenin tanımlanmadığını gördüm, bu nedenle ekledim.
+
+        document.getElementById('formFunksjonsTests').addEventListener('submit', function (event) {
+            if (!isFormSubmitted) {
+                event.preventDefault();
+                var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
+                inputs.forEach(function (input) {
+                    console.log(input.name + ": " + input.value);
+                });
+                const actionUrl = `/FunksjonsTests/Create/${someServiceOrderId}/${someCategory}`;
+
+                this.setAttribute('action', actionUrl);
+                isFormSubmitted = true;
+                this.submit();
+            }
         });
     </script>
 </main>
