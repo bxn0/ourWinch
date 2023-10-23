@@ -238,7 +238,7 @@
                 <div class="col-md-6" id="inputDiv1" style="display:none;">
                     <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                 </div>
-                <button type="button" onclick="addItem('formElectro')" class="btn btn-primary button-add-item">
+                <button type="button" onclick="addItem('Electros')" class="btn btn-primary button-add-item">
                     <i class="fa-solid fa-circle-plus"></i>
                 </button>
             </div>
@@ -256,6 +256,7 @@
 
         </form>
     </div>
+   
     <!-- JavaScript -->
 
     <script>
@@ -266,7 +267,7 @@
             let userInputField;
             let inputRow;
             switch (formId) {
-                case 'Electro':
+                case 'Electros':
                     inputDiv = document.getElementById("inputDiv1");
                     userInputField = document.getElementById('userInput1');
                     inputRow = document.getElementById("inputRow1");
@@ -301,29 +302,29 @@
             newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
 
             newItem.innerHTML = `
-                                        <div class="col-md-6">
-                                            <input type="hidden" name="Electro[${counter}].ChecklistItem" value="${labelText}">
-                                            <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Electro[${counter}].OK" value="true">
-                                                <label class="form-check-label">OK</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Electro[${counter}].BorSkiftes" value="true">
-                                                <label class="form-check-label">BorSkiftes</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Electro[${counter}].Defekt" value="true">
-                                                <label class="form-check-label">Defekt</label>
-                                            </div>
-                                        </div>
-                                    `;
+                                <div class="col-md-6">
+                                            <input type="hidden" name="Electros[${counter}].ChecklistItem" value="${labelText}">
+                                    <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Electros[${counter}].OK" value="true">
+                                        <label class="form-check-label">OK</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Electros[${counter}].BorSkiftes" value="true">
+                                        <label class="form-check-label">BorSkiftes</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="Electros[${counter}].Defekt" value="true">
+                                        <label class="form-check-label">Defekt</label>
+                                    </div>
+                                </div>
+                            `;
 
             inputRow.parentNode.insertBefore(newItem, inputRow);
             userInputField.value = '';
@@ -342,16 +343,14 @@
             button.classList.add('active');
         }
 
-        let isFormSubmitted = false;  // Bu değişkenin tanımlanmadığını gördüm, bu nedenle ekledim.
-
-        document.getElementById('formElectro').addEventListener('submit', function (event) {
+        document.getElementById('electros').addEventListener('submit', function (event) {
             if (!isFormSubmitted) {
                 event.preventDefault();
                 var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
                 inputs.forEach(function (input) {
                     console.log(input.name + ": " + input.value);
                 });
-                const actionUrl = `/Electro/Create/${someServiceOrderId}/${someCategory}`;
+                const actionUrl = `/Electros/Create/${someServiceOrderId}/${someCategory}`;
 
                 this.setAttribute('action', actionUrl);
                 isFormSubmitted = true;
