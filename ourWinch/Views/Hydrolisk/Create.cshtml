@@ -1,21 +1,16 @@
 ﻿@model HydroliskListViewModel
-@{
-    ViewBag.Title = "Hydrolisk Oluştur";
-}
-
-<h2>Create</h2>
-
-@if (!ViewData.ModelState.IsValid)
+@if (ViewBag.Errors != null && ViewBag.Errors.Count > 0)
 {
     <div class="alert alert-danger">
         <ul>
-            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            @foreach (var error in ViewBag.Errors)
             {
-                <li>@error.ErrorMessage</li>
+                <li>@error</li>
             }
         </ul>
     </div>
 }
+
 <style>
     .form-button {
         background-color: #d17242;
@@ -55,6 +50,10 @@
     }
 </style>
 
+<script>
+    var someServiceOrderId = @Model.ServiceOrderId;
+    var someCategory = "@ViewBag.ActiveButton";
+</script>
 <main class="dflex mx-auto mt-3">
 
     <!--************************* TABLE *****************************-->
@@ -237,7 +236,7 @@
                 <div class="col-md-6" id="inputDiv1" style="display:none;">
                     <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                 </div>
-                <button type="button" onclick="addItem('form1')" class="btn btn-primary button-add-item">
+                <button type="button" onclick="addItem('Hydrolisks')" class="btn btn-primary button-add-item">
                     <i class="fa-solid fa-circle-plus"></i>
                 </button>
             </div>
@@ -265,7 +264,7 @@
             let userInputField;
             let inputRow;
             switch (formId) {
-                case 'form1':
+                case 'Hydrolisks':
                     inputDiv = document.getElementById("inputDiv1");
                     userInputField = document.getElementById('userInput1');
                     inputRow = document.getElementById("inputRow1");
@@ -341,15 +340,19 @@
             button.classList.add('active');
         }
 
-        document.getElementById('form1').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
-            inputs.forEach(function (input) {
-                console.log(input.name + ": " + input.value);
-            });
-            const actionUrl = '/Hydrolisks/Create';
-            this.setAttribute('action', actionUrl);
-            this.submit();
+        document.getElementById('hydrolisks').addEventListener('submit', function (event) {
+            if (!isFormSubmitted) {
+                event.preventDefault();
+                var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
+                inputs.forEach(function (input) {
+                    console.log(input.name + ": " + input.value);
+                });
+                const actionUrl = `/Hydrolisks/Create/${someServiceOrderId}/${someCategory}`;
+
+                this.setAttribute('action', actionUrl);
+                isFormSubmitted = true;
+                this.submit();
+            }
         });
     </script>
 </main>
