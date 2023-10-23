@@ -25,5 +25,48 @@
 
         table.table-bordered th:last-child, table.table-bordered td:last-child {
             border-right-width: 1px; /* Sadece kalınlığı değiştirdik */
+
+
+
         }
-</style>
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-item {
+    background-color: #17a2b8; /* Pasif sayfanın arka plan rengi gri */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    color: #fff; /* Pasif sayfanın metin rengi beyaz */
+    transition: background-color 0.3s; /* Geçiş efekti ekleme */
+}
+
+    .pagination-item.active span {
+        color: white;
+        background-color: #20c997;
+    }
+
+
+    .pagination-item.active {
+        background-color: #20c997; /* Aktif sayfanın arka plan rengi turkuaz */
+        color: #20c997; /* Aktif sayfanın metin rengi beyaz */
+    }
+
+    .pagination-item:hover {
+        background-color: #20c997; /* Sayfa numarasına gelince yeşil hover efekti */
+        color: #fff; /* Hover durumunda metin rengi beyaz */
+    }
+
+
+
+</style >
+
