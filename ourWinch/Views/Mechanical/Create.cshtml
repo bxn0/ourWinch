@@ -1,4 +1,5 @@
-﻿@model ElectroListViewModel
+﻿@model List<ourWinchSist.Models.ServiceOrder>
+
     ﻿
 <style>
     .form-button {
@@ -32,131 +33,119 @@
         align-items: center; /* Vertically center the content */
         justify-content: center; /* Horizontally center the content */
     }
-
-    .active-button {
-        background-color: #217520; /* Örnek renk */
-        color: white;
-    }
-
 </style>
 
 <main class="dflex mx-auto mt-3">
 
     <!--************************* TABLE *****************************-->
-    <div class="container mt-2">
-        @if (Model.ServiceOrderInfo != null)
-        {
-            foreach (var item in Model.Electros)
+    <div>
+        <div class="container mt-2">
+            @foreach (var item in Model)
             {
                 <div class="row">
                     <div class="col-md-4 border border-black p-1">
-                        <strong>OrderID:</strong> @Model.ServiceOrderInfo.Ordrenummer
+                        <strong>OrderID:</strong> @item.Ordrenummer
                     </div>
                     <div class="col-md-4 border border-black p-1">
-                        <strong>ProduktType:</strong> @Model.ServiceOrderInfo.Produkttype
+                        <strong>ProduktType:</strong> @item.Produkttype
                     </div>
                     <div class="col-md-4 border border-black p-1">
-                        <strong>Arsmodell:</strong> @Model.ServiceOrderInfo.Årsmodell
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Kunde Navn:</strong> @Model.ServiceOrderInfo.Fornavn @Model.ServiceOrderInfo.Etternavn
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Serie No:</strong> @Model.ServiceOrderInfo.Serienummer
-                    </div>
-                    <div class="col-md-4 border border-black p-1">
-                        <strong>Status:</strong> @Model.ServiceOrderInfo.Reperasjon
+                        <strong>Arsmodell:</strong> @item.Årsmodell
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 border border-black p-1">
-                        <strong>Mobil No:</strong> @Model.ServiceOrderInfo.MobilNo
+                        <strong>Kunde Navn:</strong> @item.Fornavn @item.Etternavn
                     </div>
                     <div class="col-md-4 border border-black p-1">
-                        <strong>Feilbeskrivelse:</strong> @Model.ServiceOrderInfo.Feilbeskrivelse
+                        <strong>Serie No:</strong> @item.Serienummer
                     </div>
                     <div class="col-md-4 border border-black p-1">
-                        <strong>Kommentar fra kunde:</strong> @Model.ServiceOrderInfo.KommentarFraKunde
+                        <strong>Status:</strong> @item.Reperasjon
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Mobil No:</strong> @item.MobilNo
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Feilbeskrivelse:</strong> @item.Feilbeskrivelse
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Kommentar fra kunde:</strong> @item.KommentarFraKunde
                     </div>
                 </div>
             }
-        }
-        else
-        {
-           
-        }
+        </div>
     </div>
-
     <section class="mt-3">
         <!--************************* BUTONLAR ******************************** -->
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Mechanical">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Mekanisk" ? "active-button" : "") w-100 p-3">Mekanisk</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="Hydrolisk" asp-action="Create">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Hydrolisk">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Hydrolisk" ? "active-button" : "") w-100 p-3">Hydrolisk</button>
-
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="Electro" asp-action="Create">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Electro">
                         <button class="btn form-button @(ViewBag.ActiveButton == "Electro" ? "active-button" : "") w-100 p-3">Electro</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="FunksjonsTest" asp-action="Create">
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="FunksjonsTest">
                         <button class="btn form-button @(ViewBag.ActiveButton == "FunksjonsTest" ? "active-button" : "") w-100 p-3">FunksjonsTest</button>
                     </a>
                 </div>
                 <div class="col-2 col-md-2 col-lg-2.4">
-                    <a asp-controller="TrykkSettinger" asp-action="Create">
-                        <button class="btn form-button @(ViewBag.ActiveButton == "TrykkSettinger" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
+                    <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="1" asp-route-category="Trykk">
+                        <button class="btn form-button @(ViewBag.ActiveButton == "Trykk" ? "active-button" : "") w-100 p-3">TrykkSettinger</button>
                     </a>
                 </div>
             </div>
         </div>
+
     </section>
-    <!-- ************************** Form for Electro ******************************* -->
+    <!-- ************************** Form for Mekasanisk ******************************* -->
 
     <div class="container mt-3" onclick="eventHandler(event)">
 
         <!-- Form 1 -->
-        <form class="row" id="formElectro" asp-controller="Electro" asp-action="Create" method="post">
+        <form class="row" id="form1" asp-controller="Mechanical" asp-action="Create" method="post">
 
             @Html.AntiForgeryToken()
 
-            <h3 class="mx-auto">Electro Sjekkliste</h3>
+            <h3 class="mx-auto">Mekaniske Sjekkliste</h3>
             <!-- Option 1 -->
             <div class="col-md-12 d-flex align-items-center">
                 <div class="col-md-6">
-                    <input type="hidden" name="Electros[0].ChecklistItem" value="Sjekk clutch lameller for slitasje">
+                    <input type="hidden" name="Mechanicals[0].ChecklistItem" value="Sjekk clutch lameller for slitasje">
                     <label for="option0">Sjekk clutch lameller for slitasje</label>
                 </div>
 
                 <!-- Radyo Butonları -->
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[0].OK" id="option0OK" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[0].OK" id="option0OK" value="true">
                         <label class="form-check-label" for="option0OK">OK</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[0].BorSkiftes" id="option01BorSkiftes" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[0].BorSkiftes" id="option01BorSkiftes" value="true">
                         <label class="form-check-label" for="option01BorSkiftes">BorSkiftes</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[0].Defekt" id="option02Defekt" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[0].Defekt" id="option02Defekt" value="true">
                         <label class="form-check-label" for="option02Defekt">Defekt</label>
 
                     </div>
@@ -166,7 +155,7 @@
 
             <!-- Option 2 -->
             <div class="col-md-12 d-flex align-items-center">
-                <input type="hidden" name="Electros[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
+                <input type="hidden" name="Mechanicals[1].ChecklistItem" value="Sjekk bremser. Bånd/Pål">
                 <div class="col-md-6">
                     <label for="option1">Sjekk bremser. Bånd/Pål</label>
                 </div>
@@ -174,21 +163,21 @@
                 <!-- Radyo Butonları -->
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[1].OK" id="option1OK" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[1].OK" id="option1OK" value="true">
                         <label class="form-check-label" for="option1OK">OK</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[1].BorSkiftes" id="option11BorSkiftes" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[1].BorSkiftes" id="option11BorSkiftes" value="true">
                         <label class="form-check-label" for="option11BorSkiftes">BorSkiftes</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[1].Defekt" id="option12Defekt" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[1].Defekt" id="option12Defekt" value="true">
                         <label class="form-check-label" for="option12Defekt">Defekt</label>
                     </div>
                 </div>
@@ -196,7 +185,7 @@
 
             <!-- Option 3 -->
             <div class="col-md-12 d-flex align-items-center">
-                <input type="hidden" name="Electros[2].ChecklistItem" value="Sjekk lager for trommel">
+                <input type="hidden" name="Mechanicals[2].ChecklistItem" value="Sjekk lager for trommel">
                 <div class="col-md-6">
                     <label for="option2">Sjekk lager for trommel</label>
                 </div>
@@ -204,21 +193,21 @@
                 <!-- Radyo Butonları -->
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[2].OK" id="option2OK" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[2].OK" id="option2OK" value="true">
                         <label class="form-check-label" for="option2OK">OK</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[2].BorSkiftes" id="option21BorSkiftes" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[2].BorSkiftes" id="option21BorSkiftes" value="true">
                         <label class="form-check-label" for="option21BorSkiftes">BorSkiftes</label>
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="Electros[2].Defekt" id="option22Defekt" value="true">
+                        <input class="form-check-input" type="radio" name="Mechanicals[2].Defekt" id="option22Defekt" value="true">
                         <label class="form-check-label" for="option22Defekt">Defekt</label>
 
                     </div>
@@ -247,6 +236,7 @@
 
         </form>
     </div>
+
     <!-- JavaScript -->
 
     <script>
@@ -293,24 +283,24 @@
 
             newItem.innerHTML = `
                         <div class="col-md-6">
-                            <input type="hidden" name="Electros[${counter}].ChecklistItem" value="${labelText}">
+                            <input type="hidden" name="Mechanicals[${counter}].ChecklistItem" value="${labelText}">
                             <label style="word-wrap: break-word;max-width: 100%;" for=${labelText}>${labelText}</label>
                         </div>
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Electros[${counter}].OK" value="true">
+                                <input class="form-check-input" type="radio" name="Mechanicals[${counter}].OK" value="true">
                                 <label class="form-check-label">OK</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Electros[${counter}].BorSkiftes" value="true">
+                                <input class="form-check-input" type="radio" name="Mechanicals[${counter}].BorSkiftes" value="true">
                                 <label class="form-check-label">BorSkiftes</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="Electros[${counter}].Defekt" value="true">
+                                <input class="form-check-input" type="radio" name="Mechanicals[${counter}].Defekt" value="true">
                                 <label class="form-check-label">Defekt</label>
                             </div>
                         </div>
@@ -339,7 +329,7 @@
             inputs.forEach(function (input) {
                 console.log(input.name + ": " + input.value);
             });
-            const actionUrl = '/Electro/Create';
+            const actionUrl = '/Mechanical/Create';
             this.setAttribute('action', actionUrl);
             this.submit();
         });
