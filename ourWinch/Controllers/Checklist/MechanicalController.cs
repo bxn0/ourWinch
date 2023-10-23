@@ -84,13 +84,11 @@ namespace ourWinch.Controllers.Checklist
             return View(viewModel);
         }
 
-
-
-
         // POST: Mechanical/Create
         [HttpPost]
+        [Route("Mechanical/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
+        public async Task<IActionResult> Create(MechanicalListViewModel viewModel, int serviceOrderId, string category)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +107,7 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir Mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        // Her bir mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         mechanical.Ordrenummer = lastServiceOrder.Ordrenummer;
                         mechanical.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
@@ -124,8 +122,22 @@ namespace ourWinch.Controllers.Checklist
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
             }
+            // ModelState.IsValid değilse hataları yazdırıyoruz.
+            else
+            {
+                foreach (var modelState in ModelState)
+                {
+                    var fieldName = modelState.Key;
+                    foreach (var error in modelState.Value.Errors)
+                    {
+                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
+                    }
+                }
+                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
+            }
             return View(viewModel);
         }
+
 
 
         // GET: Mechanical/Edit/5
