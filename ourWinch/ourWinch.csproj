@@ -6,6 +6,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<StartupObject></StartupObject>
+		<UserSecretsId>67bb3da8-1bec-4939-bab0-65c86786c740</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
@@ -22,7 +24,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
+
 		
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 		
