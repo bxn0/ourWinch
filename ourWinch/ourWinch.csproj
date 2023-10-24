@@ -5,23 +5,37 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<StartupObject></StartupObject>
+		<UserSecretsId>67bb3da8-1bec-4939-bab0-65c86786c740</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.12" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
+
+		
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		
+		<PackageReference Include="X.PagedList" Version="9.0.0-prerelease" />
+		<PackageReference Include="X.PagedList.Mvc.Core" Version="9.0.0-prerelease" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ServiceAp\" />
+		<Folder Include="ServiceApi\" />
 	</ItemGroup>
 
 </Project>

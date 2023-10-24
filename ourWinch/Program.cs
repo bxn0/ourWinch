@@ -1,8 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Microsoft.AspNetCore.Authentication.Cookies; // Gerekli using direktifi
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
-
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace ourWinch
 {
@@ -10,55 +15,65 @@ namespace ourWinch
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            CreateHostBuilder(args).Build().Run();
+        }
 
-            // App Configuration
-            string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            if (string.IsNullOrEmpty(connectionString))
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                        config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    });
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+}
+
+public class Startup
+{
+    private IConfiguration Configuration { get; }
+
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Kimlik doğrulama ve diğer servis eklemeleri
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
             {
-                throw new InvalidOperationException("Connection string is missing.");
-            }
-            // Add services to the container.
-            builder.Services.AddControllers();
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            // Add the DbContext to the DI container.
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
-
-            // Set the server to listen on localhost:5002
-            builder.WebHost.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ListenLocalhost(5002);
+                options.LoginPath = "/Account/Login"; // Giriş yapılacak sayfanın yolu
+                options.LogoutPath = "/Account/Logout"; // Çıkış yapılacak sayfanın yolu
             });
 
-            var app = builder.Build();
+        // Diğer servislerin eklenmesi
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
-            }
+        services.AddControllers();
+        services.AddControllersWithViews();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
+    }
 
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
+    public void Configure(IApplicationBuilder app)
+    {
+        // Middleware ve diğer konfigürasyonlar burada tanımlanır
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+        app.UseAuthorization();
+        app.UseAuthentication();
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}");
-
-            app.Run();
-        }
+        });
     }
 }

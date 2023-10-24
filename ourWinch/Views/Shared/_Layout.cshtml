@@ -4,7 +4,12 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap JS ve bağımlılıkları -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- FontAwesome (ikonlar için) -->
@@ -14,6 +19,15 @@
     <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
     <link rel="stylesheet" href="~/css/Dashboard/index.css" />
     <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
+    <link rel="stylesheet" href="~/css/pagination-styles.css" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        a.text-white.text-decoration-none:hover {
+            color: yellow; /* Logout rengini değiştirmek istediğiniz renk */
+        }
+    </style>
+    <!-- pagination styl added CSS -->
 </head>
 <body>
     <!-- Navbar Kısmı -->
@@ -31,12 +45,26 @@
                 </div>
             </div>
         </div>
-        <div class="user-info d-flex align-items-center ml-3">
-            <i class="fas fa-bell text-white mr-3"></i>
-            <span class="text-white mr-2">Lars Olsen</span>
-            <i class="fas fa-user text-white ml-2 mr-4"></i>
+        <div class="d-flex align-items-baseline">
+            <button class="btn text-white">
+                <i class="fas fa-bell"></i>
+            </button>
+
+            <div class="flex flex-column align-items-start p-2">
+                <div class='text-white'>Lars Olsen</div>
+                <a href="/Account/Logout/" class="text-white text-decoration-none"  >Logout</a>
+                
+}
+
+            </div>
         </div>
+
+
+
+
     </nav>
+
+
     <!-- Sidebar Kısmı -->
     <div class="container-fluid">
         <div class="row">
@@ -60,7 +88,7 @@
                         </li>
 
                         <li class="nav-item mt-3">
-                            <a asp-controller="NewService" asp-action="Dashboard" class="nav-link">
+                            <a asp-controller="NewService" asp-action="Index" class="nav-link">
                                 <i class="fas fa-pen"></i> Ny service
                             </a>
                         </li>
@@ -76,16 +104,16 @@
                         </li>
                     </ul>
                 </div>
+
             </nav>
 
-            <div class="col-md-10">
-                @RenderBody()
-            </div>
+
+
+
+
+            @RenderBody()
         </div>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js"></script>
 </body>
 </html>
