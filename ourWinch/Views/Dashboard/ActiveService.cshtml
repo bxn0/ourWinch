@@ -1,8 +1,9 @@
-@using PagedList;
-@using PagedList.Mvc;
+@using X.PagedList.Mvc.Core
+@using X.PagedList
 
 @using ourWinch.Models.Dashboard;
-@model IEnumerable<ServiceOrder>
+@model IPagedList<ourWinch.Models.Dashboard.ServiceOrder>
+
 
 @{
     var currentController = ViewContext.RouteData.Values["controller"].ToString();

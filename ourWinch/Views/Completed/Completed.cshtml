@@ -1,59 +1,69 @@
-﻿@model X.PagedList.IPagedList<ourWinchSist.Models.ServiceOrder>
-    @using X.PagedList.Mvc.Core
-    @using X.PagedList
+﻿@using ourWinch.Models.Dashboard;
+@using ourWinch.Models;
+@model X.PagedList.IPagedList<ServiceOrder>
+@using X.PagedList.Mvc.Core
+@using X.PagedList
 
-    <div class="container mt-5">
-        <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 90px auto 20px; width: fit-content;">Fulførte Servicer</div>
+<div class="container mt-5">
+    <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 90px auto 20px; width: fit-content;">Fulførte Servicer</div>
 
-        <div class="table-responsive">
-            @if (Model != null && Model.Any())
+    <div class="table-responsive">
+        @if (Model != null && Model.Any())
         {
-            <table class="custom-table table table-bordered max-width: 100%" style="font-size: 14px;">
+            <table class="custom-table table table-bordered" style="font-size: 14px; max-width: 100%;">
                 <thead style="background-color: #B9B9B9;">
                     <tr>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">OrderID</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Product Type</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Kunde</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Mottatt Dato</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Feilbeskriving</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Avtalt Levering</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Status</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Service Skjema</th>
-                        <th style="border-bottom: 2px solid #000; border-top: 2px solid #000;">Timer</th>
+                        <!-- Daha okunaklı olması için sütun başlıkları için stil bilgilerini düzelttim. -->
+                        <th class="bordered-th">OrderID</th>
+                        <th class="bordered-th">Product Type</th>
+                        <th class="bordered-th">Kunde</th>
+                        <th class="bordered-th">Mottatt Dato</th>
+                        <th class="bordered-th">Feilbeskriving</th>
+                        <th class="bordered-th">Avtalt Levering</th>
+                        <th class="bordered-th">Status</th>
+                        <th class="bordered-th">Service Skjema</th>
+                        <th class="bordered-th" style="border-right: none;">Timer</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     @foreach (var item in Model)
-    {
-                    <tr>
-                        <td>@item.Ordrenummer</td>
-                        <td>@item.Produkttype</td>
-                        <td>@item.Fornavn @item.Etternavn</td>
-                        <td>@item.MottattDato.ToShortDateString()</td>
-                        <td>@item.Feilbeskrivelse</td>
-                        <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
-                        <td>Status</td> <!-- "Status" sütunu "Status" olarak görüntülemek için -->
-                        <td>@(item.Servis ? "Yes" : "No")</td> <!-- "Yes" veya "No" metinlerini "Servis" değerine göre görüntülemek için -->
-                        <td></td> <!-- Zaman kısmı boş bırakıldı. -->
-                    </tr>
-    }
+                    {
+                        <tr>
+                            <td>@item.Ordrenummer</td>
+                            <td>@item.Produkttype</td>
+                            <td>@item.Fornavn @item.Etternavn</td>
+                            <td>@item.MottattDato.ToShortDateString()</td>
+                            <td>@item.Feilbeskrivelse</td>
+                            <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
+                            <td>Status</td>
+                            <td>@(item.Servis ? "Yes" : "No")</td>
+                            <td></td>
+                        </tr>
+                    }
                 </tbody>
-
             </table>
         }
         else
         {
             <p>No service orders available.</p>
         }
-        </div>
-        <div class="pagination-container">
-            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Dashboard", new { page }), new PagedListRenderOptions
-   {
-       LiElementClasses = new string[] { "pagination-item" },
-       PageClasses = new string[] { "pagination-item" },
-       LinkToPreviousPageFormat = "Previ", // Önceki sayfa bağlantısı
-       LinkToNextPageFormat = "Next" // Sonraki sayfa bağlantısı
-   })
+    </div>
+    <div class="pagination-container">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Dashboard", new { page }), new PagedListRenderOptions
+        {
+        LiElementClasses = new string[] { "pagination-item" },
+        PageClasses = new string[] { "pagination-item" },
+        LinkToPreviousPageFormat = "Previ",
+        LinkToNextPageFormat = "Next"
+        })
+    </div>
+</div>
 
-        </div>
+<style>
+    /* Sütun başlıkları için ortak stil bilgisi */
+    .bordered-th {
+        border-bottom: 2px solid #000;
+        border-top: 2px solid #000;
+        border-right: 2px solid #000;
+    }
+</style>
