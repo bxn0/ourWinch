@@ -23,4 +23,6 @@ public class DashboardController : Controller
         var serviceOrders = _context.ServiceOrders.ToPagedList(pageNumber, pageSize); // Verileri sayfalayın
         return View(serviceOrders);
     }
+
+
 }
