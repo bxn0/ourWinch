@@ -1,22 +1,19 @@
-<<<<<<< HEAD:ourWinch/Views/Dashboard/Index.cshtml
-﻿@model X.PagedList.IPagedList<ourWinchSist.Models.ServiceOrder>
-    @using X.PagedList.Mvc.Core
-@using X.PagedList
-=======
-﻿@using ourWinch.Models.Dashboard;
+@using PagedList;
+@using PagedList.Mvc;
+
+@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
 
 @{
     var currentController = ViewContext.RouteData.Values["controller"].ToString();
     var currentAction = ViewContext.RouteData.Values["action"].ToString();
 }
->>>>>>> umit:ourWinch/Views/Dashboard/ActiveService.cshtml
 
-    <div class="container mt-5">
-        <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 90px auto 20px; width: fit-content; ">Aktive Servicer</div>
+<div class="container mt-5">
+    <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 90px auto 20px; width: fit-content;">Aktive Servicer</div>
 
-        <div class="table-responsive">
-            @if (Model != null && Model.Any())
+    <div class="table-responsive">
+        @if (Model != null && Model.Any())
         {
             <table class="table table-bordered">
                 <thead style="background-color: #B9B9B9;">
@@ -35,62 +32,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            <a asp-controller="ServiceOrder" asp-action="Details" asp-route-id="@item.ServiceOrderId">
-                                @item.Ordrenummer
-                            </a>
-                        </td>
-                        <td>@item.Produkttype</td>
-                        <td>@item.Fornavn @item.Etternavn</td>
-                        <td>@item.MottattDato.ToShortDateString()</td>
-                        <td>@item.Feilbeskrivelse</td>
-                        <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
-                        <td>Process</td>
-                        <td>@item.Servis</td>
-                        <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <p>No service orders available.</p>
-        }
-      
-
-        <div class="pagination-container">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
-      {
-          LiElementClasses = new string[] { "pagination-item" },
-          PageClasses = new string[] { "pagination-item" },
-          LinkToPreviousPageFormat = "Previ",
-          LinkToNextPageFormat = "Next"
-      })
-
-<<<<<<< HEAD:ourWinch/Views/Dashboard/Index.cshtml
-        </div>
-=======
-             {
-                              <table class="table table-bordered">
-                                  <thead style="background-color: #B9B9B9;">
-                                      <tr>
-                                          <th style="border: 2px solid #000;">OrderID</th>
-                                          <th style="border: 2px solid #000;">Product Type</th>
-                                          <th style="border: 2px solid #000;">Kunde</th>
-                                          <th style="border: 2px solid #000;">Mottatt Dato</th>
-                                          <th style="border: 2px solid #000;">Feilbeskriving</th>
-                                          <th style="border: 2px solid #000;">Avtalt Levering</th>
-                                          <th style="border: 2px solid #000;">Status</th>
-                                          <th style="border: 2px solid #000;">Service Skjema</th>
-                                          <th style="border: 2px solid #000;">Timer</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      @foreach (var item in Model)
-                            {
-                                      <tr>
+                        <tr>
                             <td>
                                 <div class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Ordrenummer</a>
@@ -108,64 +50,32 @@
                                     </div>
                                 </div>
                             </td>
+                            <td>@item.Produkttype</td>
+                            <td>@item.Fornavn @item.Etternavn</td>
+                            <td>@item.MottattDato.ToShortDateString()</td>
+                            <td>@item.Feilbeskrivelse</td>
+                            <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
+                            <td>Process</td>
+                            <td>@item.Servis</td>
+                            <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No service orders available.</p>
+        }
 
-
-                                          <td>@item.Produkttype</td>
-                                          <td>@item.Fornavn @item.Etternavn</td>
-                                          <td>@item.MottattDato.ToShortDateString()</td>
-                                          <td>@item.Feilbeskrivelse</td>
-                                          <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
-                                          <td>Process</td>
-                                          <td>@item.Servis</td>
-                                          <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
-                                      </tr>
-                                           }
-                                  </tbody>
-                              </table>
-                              }
-                              else
-                              {
-                              <p>No service orders available.</p>
-                              }
-                          </div>
-                          <!-- Sayfa Gecisleri -->
-                          <div class="pagination-container">
-
-                              <a asp-controller="Dashboard" asp-action="Index" asp-route-page="1"
-                                 style="display: inline-block;
-                                      width: 30px;
-                                      height: 30px;
-                                      line-height: 30px;
-                                      text-align: center;
-                                      border: 1px solid #000;
-                                      border-radius: 50%;
-                                      margin: 5px;
-                                      text-decoration: none;
-                                      color: #000;
-                                      background-color: #3498db;
-                                      transition: background-color 0.4s;"
-                                 onmouseover="this.style.backgroundColor='white'"
-                                 onmouseout="this.style.backgroundColor='#3498db'">1</a>
-
-                              <a asp-controller="Completed" asp-action="Dashboard" asp-route-page="2"
-                                 style="display: inline-block;
-                                      width: 30px;
-                                      height: 30px;
-                                      line-height: 30px;
-                                      text-align: center;
-                                      border: 1px solid #000;
-                                      border-radius: 50%;
-                                      margin: 5px;
-                                      text-decoration: none;
-                                      color: #000;
-                                      background-color: #B9B9B9;
-                                      transition: background-color 0.4s;"
-                                 onmouseover="this.style.backgroundColor='#27ae60'"
-                                 onmouseout="this.style.backgroundColor='white'">2</a>
-
-
-
-                          </div>
-
-                      </div>
->>>>>>> umit:ourWinch/Views/Dashboard/ActiveService.cshtml
+        <div class="pagination-container">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+            {
+            LiElementClasses = new string[] { "pagination-item" },
+            PageClasses = new string[] { "pagination-item" },
+            LinkToPreviousPageFormat = "Previ",
+            LinkToNextPageFormat = "Next"
+            })
+        </div>
+    </div>
+</div>
