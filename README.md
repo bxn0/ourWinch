@@ -1,93 +1,89 @@
-. OurWinch-Nøsted-App (GitHub Repository Root)
-│
-├── Dependencies
-│   ├── Controllers
-│   │   ├── ElektroController.cs
-│   │   ├── FunksjonsTestController.cs
-│   │   ├── HydroliskController.cs
-│   │   ├── MechanicalController.cs
-│   │   ├── ServiceSkjemaController.cs
-│   │   └── TrykkController.cs
-│
-├── Data
-│   ├── AppDbContext.cs
-│   ├── Migrations
-│
-├── Models
-│   ├── Checklist
-│   │   ├── Elektro.cs
-│   │   ├── FunksjonsTest.cs
-│   │   ├── Hydrolisk.cs
-│   │   ├── Trykk.cs
-│   ├── DashboardModel.cs
-│   ├── ErrorViewModel.cs
-│   ├── ForgotPasswordViewModel.cs
-│   ├── LoginViewModel.cs
-│   ├── ResetPasswordViewModel.cs
-│   ├── ServiceOrder.cs
-│   └── UsageOperationsModel.cs
-│
-├── Views
-│   ├── Account
-│   │   ├── ForgotPassword.cshtml
-│   │   ├── Login.cshtml
-│   │   ├── ResetPassword.cshtml
-│   ├── Completed
-│   │   ├── Completed.cshtml
-│
-├── Dashboard
-│   ├── Index.cshtml
-│   ├── NewService.cshtml
-│
-├── Electro
-│   ├── Create.cshtml
-│   ├── Delete.cshtml
-│   ├── Details.cshtml
-│   ├── Edit.cshtml
-│   ├── Index.cshtml
-│
-├── FunksjonsTest
-│   ├── Create.cshtml
-│   ├── Delete.cshtml
-│   ├── Details.cshtml
-│   ├── Edit.cshtml
-│   ├── Index.cshtml
-│
-├── Home
-│   ├── Index.cshtml
-│   ├── Privacy.cshtml
-│
-├── Hydrolisk
-│   ├── Create.cshtml
-│   ├── Delete.cshtml
-│   ├── Details.cshtml
-│   ├── Edit.cshtml
-│   ├── Index.cshtml
-│
-├── Mechanical
-│   ├── Create.cshtml
-│   ├── Delete.cshtml
-│   ├── Details.cshtml
-│   ├── Edit.cshtml
-│   ├── Index.cshtml
-│
-├── ServiceOrder
-│   ├── CheckList.cshtml
-│   ├── Index.cshtml
-│   ├── Mechanical.cshtml
-│
-├── ServiceSkjema
-│   ├── Index.cshtml
-│
-├── Trykk
-│   ├── Create.cshtml
-│   ├── Delete.cshtml
-│   ├── Details.cshtml
-│   ├── Edit.cshtml
-│   ├── Index.cshtml
-│
-├── Root
-│   ├── Css
-│   │   ├── Account
-│   │   ├── Dashboard
-│   │   ├── ServiceOrder
+### OurWinch-Nøsted-App (GitHub Repository Root)
+
+### Dashboard
+   ├─ ActiveServiceController
+   ├─ CompletedController
+   ├─ DashboardController
+   ├─ NewServiceController
+   ├─ ServiceManagerController
+   ├─ ServiceOrderController
+
+### Data
+   ├─ AppDbContext
+   ├─ Migrations
+
+### Models
+   ├─ Account
+      ├─ ForgotPasswordViewModel
+      ├─ LoginViewModel
+      ├─ ResetPasswordViewModel
+      ├─ UsageOperationsModel
+   ├─ ChecklistModel
+      ├─ Electro
+      ├─ FunctionalTest
+      ├─ Hydraulic
+      ├─ Mechanical
+      ├─ Pressure
+   ├─ DashboardModel
+      ├─ ActiveService
+      ├─ DashboardModel
+      ├─ ServiceOrder
+      ├─ ErrorViewModel
+
+### Views
+   ├─ Account
+      ├─ ForgotPassword
+      ├─ Login
+      ├─ ResetPassword
+   ├─ Completed
+      ├─ Completed.cshtml
+   ├─ Dashboard
+      ├─ Index.cshtml
+      ├─ NewService.cshtml
+   ├─ Electro
+      ├─ Create
+      ├─ Delete
+      ├─ Details
+      ├─ Edit
+      ├─ Index
+   ├─ FunctionalTest
+      ├─ Create
+      ├─ Delete
+      ├─ Details
+      ├─ Edit
+      ├─ Index
+   ├─ Hydraulic
+      ├─ Create
+      ├─ Delete
+      ├─ Details
+      ├─ Edit
+      ├─ Index
+   ├─ Mechanical
+      ├─ Create
+      ├─ Delete
+      ├─ Details
+      ├─ Edit
+      ├─ Index
+   ├─ ServiceOrder
+      ├─ Checklist.cshtml
+      ├─ Index.cshtml
+      ├─ Mechanical.cshtml
+   ├─ ServiceSchema
+      ├─ Index.cshtml
+   ├─ Shared
+      ├─ Layout.cshtml
+   ├─ Pressure
+      ├─ Create
+      ├─ Delete
+      ├─ Details
+      ├─ Edit
+      ├─ Index
+
+### Root
+   ├─ Css
+      ├─ Account-css
+      ├─ Dashboard-css
+      ├─ ServiceOrder-css
+   ├─ Program.cs
+      ├─ Program
+      ├─ Startup
