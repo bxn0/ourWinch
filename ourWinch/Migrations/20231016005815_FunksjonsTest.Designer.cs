@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231023161818_Trykk")]
-    partial class Trykk
+    [Migration("20231016005815_FunksjonsTest")]
+    partial class FunksjonsTest
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,53 +23,6 @@ namespace ourWinch.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ActiveService", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("AvtaltLevering")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Etternavn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Feilbeskrivelse")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fornavn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("MottattDato")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Ordrenummer")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Produkttype")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceOrderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServiceSkjema")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ActiveServices");
-                });
 
             modelBuilder.Entity("Electro", b =>
                 {
@@ -251,7 +204,7 @@ namespace ourWinch.Migrations
                     b.ToTable("Trykks");
                 });
 
-            modelBuilder.Entity("ourWinch.Models.Dashboard.ServiceOrder", b =>
+            modelBuilder.Entity("ourWinchSist.Models.ServiceOrder", b =>
                 {
                     b.Property<int>("ServiceOrderId")
                         .ValueGeneratedOnAdd()
@@ -301,9 +254,6 @@ namespace ourWinch.Migrations
                     b.Property<bool>("Servis")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Årsmodell")
                         .HasColumnType("nvarchar(max)");
 
@@ -314,7 +264,7 @@ namespace ourWinch.Migrations
 
             modelBuilder.Entity("Electro", b =>
                 {
-                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
                         .WithMany()
                         .HasForeignKey("ServiceOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -325,7 +275,7 @@ namespace ourWinch.Migrations
 
             modelBuilder.Entity("FunksjonsTest", b =>
                 {
-                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
                         .WithMany()
                         .HasForeignKey("ServiceOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -336,7 +286,7 @@ namespace ourWinch.Migrations
 
             modelBuilder.Entity("Hydrolisk", b =>
                 {
-                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
                         .WithMany()
                         .HasForeignKey("ServiceOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -347,7 +297,7 @@ namespace ourWinch.Migrations
 
             modelBuilder.Entity("Mechanical", b =>
                 {
-                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
                         .WithMany()
                         .HasForeignKey("ServiceOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,7 +308,7 @@ namespace ourWinch.Migrations
 
             modelBuilder.Entity("Trykk", b =>
                 {
-                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
+                    b.HasOne("ourWinchSist.Models.ServiceOrder", "ServiceOrder")
                         .WithMany()
                         .HasForeignKey("ServiceOrderId")
                         .OnDelete(DeleteBehavior.Cascade)

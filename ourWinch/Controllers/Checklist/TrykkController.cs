@@ -21,7 +21,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
 
-        // GET: Trykk/Details/5
+        // GET: Mechanical/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,39 +40,19 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Trykk/Create
-        [Route("Trykk/Create/{serviceOrderId}/{category?}")]
-        public IActionResult Create(int serviceOrderId, string category = "Trykk")
+        public IActionResult Create()
         {
-            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
-            if (serviceOrder == null)
-            {
-                return NotFound();
-            }
-
             var viewModel = new TrykkListViewModel
             {
-                ServiceOrderId = serviceOrder.ServiceOrderId,
-                Ordrenummer = serviceOrder.Ordrenummer,
-                Produkttype = serviceOrder.Produkttype,
-                Årsmodell = serviceOrder.Årsmodell,
-                Fornavn = serviceOrder.Fornavn,
-                Etternavn = serviceOrder.Etternavn,
-                Serienummer = serviceOrder.Serienummer,
-                Status = serviceOrder.Status,
-                MobilNo = serviceOrder.MobilNo,
-                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
-                KommentarFraKunde = serviceOrder.KommentarFraKunde
+                Trykks = new List<Trykk>() // İsterseniz bu listeyi doldurabilirsiniz.
             };
-
-            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 
         // POST: Trykk/Create
         [HttpPost]
-        [Route("Trykk/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TrykkListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(TrykkListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -91,33 +71,20 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir trykk için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        // Her bir Trykk için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         trykk.Ordrenummer = lastServiceOrder.Ordrenummer;
                         trykk.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Create", "Mechanical", new { serviceOrderId = viewModel.ServiceOrderId, category = "Mechanical" });
+                    return Redirect("/ServiceSkjema/index");
                 }
                 else
                 {
                     // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
-            }
-            // ModelState.IsValid değilse hataları yazdırıyoruz.
-            else
-            {
-                foreach (var modelState in ModelState)
-                {
-                    var fieldName = modelState.Key;
-                    foreach (var error in modelState.Value.Errors)
-                    {
-                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
-                    }
-                }
-                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             }
             return View(viewModel);
         }

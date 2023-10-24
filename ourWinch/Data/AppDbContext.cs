@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ourWinch.Models.Dashboard;
+using ourWinchSist.Models; // Bu satırı ekleyerek ServiceOrder sınıfını dahil ediyoruz.
 
 public class AppDbContext : DbContext
 {
@@ -8,16 +8,9 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<ServiceOrder> ServiceOrders { get; set; }
-<<<<<<< HEAD
  
 
   public DbSet<Mechanical> Mechanicals { get; set; }
-=======
-
-    public DbSet<ActiveService> ActiveServices { get; set; }
-
-    public DbSet<Mechanical> Mechanicals { get; set; }
->>>>>>> umit
 
     public DbSet<Electro> Electros { get; set; }
 
