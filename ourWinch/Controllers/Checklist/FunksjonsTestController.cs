@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ourWinch.Migrations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ourWinch.Controllers.Checklist
 {
@@ -38,39 +41,19 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: FunksjonsTest/Create
-        [Route("FunksjonsTest/Create/{serviceOrderId}/{category?}")]
-        public IActionResult Create(int serviceOrderId, string category = "FunksjonsTest")
+        public IActionResult Create()
         {
-            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
-            if (serviceOrder == null)
-            {
-                return NotFound();
-            }
-
             var viewModel = new FunksjonsTestListViewModel
             {
-                ServiceOrderId = serviceOrder.ServiceOrderId,
-                Ordrenummer = serviceOrder.Ordrenummer,
-                Produkttype = serviceOrder.Produkttype,
-                Årsmodell = serviceOrder.Årsmodell,
-                Fornavn = serviceOrder.Fornavn,
-                Etternavn = serviceOrder.Etternavn,
-                Serienummer = serviceOrder.Serienummer,
-                Status = serviceOrder.Status,
-                MobilNo = serviceOrder.MobilNo,
-                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
-                KommentarFraKunde = serviceOrder.KommentarFraKunde
+                FunksjonsTests = new List<FunksjonsTest>() // İsterseniz bu listeyi doldurabilirsiniz.
             };
-
-            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 
         // POST: FunksjonsTest/Create
         [HttpPost]
-        [Route("FunksjonsTest/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(FunksjonsTestListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(FunksjonsTestListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -89,33 +72,20 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir funksjonsTest için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                       
                         funksjonsTest.Ordrenummer = lastServiceOrder.Ordrenummer;
                         funksjonsTest.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(funksjonsTest);
                     }
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Create", "Trykk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Trykk" });
+                    return Redirect("/ServiceOrder/Details/1");
                 }
                 else
                 {
                     // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
-            }
-            // ModelState.IsValid değilse hataları yazdırıyoruz.
-            else
-            {
-                foreach (var modelState in ModelState)
-                {
-                    var fieldName = modelState.Key;
-                    foreach (var error in modelState.Value.Errors)
-                    {
-                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
-                    }
-                }
-                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             }
             return View(viewModel);
         }

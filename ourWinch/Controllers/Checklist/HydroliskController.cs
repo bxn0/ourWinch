@@ -40,39 +40,19 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Hydrolisk/Create
-        [Route("Hydrolisk/Create/{serviceOrderId}/{category?}")]
-        public IActionResult Create(int serviceOrderId, string category = "Hydrolisk")
+        public IActionResult Create()
         {
-            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
-            if (serviceOrder == null)
-            {
-                return NotFound();
-            }
-
             var viewModel = new HydroliskListViewModel
             {
-                ServiceOrderId = serviceOrder.ServiceOrderId,
-                Ordrenummer = serviceOrder.Ordrenummer,
-                Produkttype = serviceOrder.Produkttype,
-                Årsmodell = serviceOrder.Årsmodell,
-                Fornavn = serviceOrder.Fornavn,
-                Etternavn = serviceOrder.Etternavn,
-                Serienummer = serviceOrder.Serienummer,
-                Status = serviceOrder.Status,
-                MobilNo = serviceOrder.MobilNo,
-                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
-                KommentarFraKunde = serviceOrder.KommentarFraKunde
+                Hydrolisks = new List<Hydrolisk>() // İsterseniz bu listeyi doldurabilirsiniz.
             };
-
-            ViewBag.ActiveButton = category;
             return View(viewModel);
         }
 
         // POST: Hydrolisk/Create
         [HttpPost]
-        [Route("Hydrolisk/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(HydroliskListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(HydroliskListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -91,33 +71,20 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir hydrolisk için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        // Her bir Hydrolisk için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         hydrolisk.Ordrenummer = lastServiceOrder.Ordrenummer;
                         hydrolisk.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(hydrolisk);
                     }
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Create", "Electro", new { serviceOrderId = viewModel.ServiceOrderId, category = "Electro" });
+                    return Redirect("/ServiceOrder/Details/1");
                 }
                 else
                 {
                     // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
-            }
-            // ModelState.IsValid değilse hataları yazdırıyoruz.
-            else
-            {
-                foreach (var modelState in ModelState)
-                {
-                    var fieldName = modelState.Key;
-                    foreach (var error in modelState.Value.Errors)
-                    {
-                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
-                    }
-                }
-                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             }
             return View(viewModel);
         }

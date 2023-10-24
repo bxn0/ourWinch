@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;  
+﻿using System.Collections.Generic;  // Bu satırı ekleyin
 
-namespace ourWinch.Models.Dashboard
+namespace OurWinch.Models
 {
     public class DashboardModel
     {

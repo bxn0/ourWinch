@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ourWinch.Models.Account;
-namespace ourWinch.Controllers.Account
+using ourWinch.Models; // Models namespace'ini ekleyin
+namespace ourWinch.Controllers
 {
     public class UsageOperationsController : Controller
     {

@@ -6,33 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ourWinch.Migrations
 {
     /// <inheritdoc />
-    public partial class Trykk : Migration
+    public partial class clear : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "ActiveServices",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ServiceOrderId = table.Column<int>(type: "int", nullable: false),
-                    Ordrenummer = table.Column<int>(type: "int", nullable: false),
-                    Produkttype = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Fornavn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Etternavn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MottattDato = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Feilbeskrivelse = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AvtaltLevering = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ServiceSkjema = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActiveServices", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "ServiceOrders",
                 columns: table => new
@@ -53,8 +31,7 @@ namespace ourWinch.Migrations
                     Garanti = table.Column<bool>(type: "bit", nullable: false),
                     Servis = table.Column<bool>(type: "bit", nullable: false),
                     Reperasjon = table.Column<bool>(type: "bit", nullable: false),
-                    KommentarFraKunde = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    KommentarFraKunde = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,13 +119,13 @@ namespace ourWinch.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ServiceOrderId = table.Column<int>(type: "int", nullable: false),
                     Ordrenummer = table.Column<int>(type: "int", nullable: false),
                     ChecklistItem = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OK = table.Column<bool>(type: "bit", nullable: false),
                     BorSkiftes = table.Column<bool>(type: "bit", nullable: false),
                     Defekt = table.Column<bool>(type: "bit", nullable: false),
-                    Kommentar = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Kommentar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceOrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,9 +192,6 @@ namespace ourWinch.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ActiveServices");
-
             migrationBuilder.DropTable(
                 name: "Electros");
 

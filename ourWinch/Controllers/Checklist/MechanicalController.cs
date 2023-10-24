@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ourWinch.Models.Dashboard;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,74 +20,36 @@ namespace ourWinch.Controllers.Checklist
             return View(await _context.Mechanicals.ToListAsync());
         }
 
-        // GET: Details
-        public IActionResult Details(int id, string category = "Mechanical")
+
+        // GET: Mechanical/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
-            if (serviceOrder == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            switch (category)
+            var mechanical = await _context.Mechanicals
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (mechanical == null)
             {
-                case "Mechanical":
-                    var mechanicalModel = new MechanicalListViewModel
-                    {
-                        ServiceOrderId = serviceOrder.ServiceOrderId,
-                        Ordrenummer = serviceOrder.Ordrenummer,
-                        Produkttype = serviceOrder.Produkttype,
-                        Årsmodell = serviceOrder.Årsmodell,
-                        Fornavn = serviceOrder.Fornavn,
-                        Etternavn = serviceOrder.Etternavn,
-                        Serienummer = serviceOrder.Serienummer,
-                        Status = serviceOrder.Status,
-                        MobilNo = serviceOrder.MobilNo,
-                        Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
-                        KommentarFraKunde = serviceOrder.KommentarFraKunde
-                    };
-                    return View("~/Views/Mechanical/create.cshtml", mechanicalModel);
-
-                default:
-                    return NotFound();
+                return NotFound();
             }
+
+            return View(mechanical);
         }
 
         // GET: Mechanical/Create
-
-        [Route("Mechanical/Create/{serviceOrderId}/{category?}")]
-        public IActionResult Create(int serviceOrderId, string category = "Mechanical")
+        public IActionResult Create()
         {
-            var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
-            if (serviceOrder == null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = new MechanicalListViewModel
-            {
-                ServiceOrderId = serviceOrder.ServiceOrderId,
-                Ordrenummer = serviceOrder.Ordrenummer,
-                Produkttype = serviceOrder.Produkttype,
-                Årsmodell = serviceOrder.Årsmodell,
-                Fornavn = serviceOrder.Fornavn,
-                Etternavn = serviceOrder.Etternavn,
-                Serienummer = serviceOrder.Serienummer,
-                Status = serviceOrder.Status,
-                MobilNo = serviceOrder.MobilNo,
-                Feilbeskrivelse = serviceOrder.Feilbeskrivelse,
-                KommentarFraKunde = serviceOrder.KommentarFraKunde
-            };
-
-            ViewBag.ActiveButton = category;
-            return View(viewModel);
+            return View();
         }
 
         // POST: Mechanical/Create
+        // POST: Mechanical/Create
         [HttpPost]
-        [Route("Mechanical/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicalListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(MechanicalListViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
@@ -107,14 +68,14 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
+                        // Her bir Mechanical için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         mechanical.Ordrenummer = lastServiceOrder.Ordrenummer;
                         mechanical.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("Create", "Hydrolisk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Hydrolisk" });
+                    return Redirect("/ServiceOrder/Details/1");
                 }
                 else
                 {
@@ -122,22 +83,8 @@ namespace ourWinch.Controllers.Checklist
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
             }
-            // ModelState.IsValid değilse hataları yazdırıyoruz.
-            else
-            {
-                foreach (var modelState in ModelState)
-                {
-                    var fieldName = modelState.Key;
-                    foreach (var error in modelState.Value.Errors)
-                    {
-                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
-                    }
-                }
-                ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-            }
             return View(viewModel);
         }
-
 
 
         // GET: Mechanical/Edit/5
@@ -203,8 +150,6 @@ namespace ourWinch.Controllers.Checklist
             {
                 return NotFound();
             }
-
-         
 
             return View(mechanical);
         }

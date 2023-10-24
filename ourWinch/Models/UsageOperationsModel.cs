@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ourWinch.Models.Account
+namespace ourWinch.Models
 {
     public class RegistrationModel
     {

@@ -1,45 +1,27 @@
-﻿using Microsoft.Build.Framework;
-
-namespace ourWinch.Models.Dashboard
+﻿namespace ourWinchSist.Models
 {
 
     public class ServiceOrder
     {
-
         public int ServiceOrderId { get; set; }
-        [Required]
         public string? Fornavn { get; set; }
-
-        [Required]
         public string? Etternavn { get; set; }
-
         public string? MobilNo { get; set; }
-
-        [Required]
         public string? Email { get; set; }
-
-        [Required]
         public string? Adresse { get; set; }
-
-        [Required]
         public string? Feilbeskrivelse { get; set; }
         public int Ordrenummer { get; set; }
         public string? Produkttype { get; set; }
-
-        [Required]
         public string? Serienummer { get; set; }
-
-        [Required]
-        public DateTime MottattDato { get; set; }
-
-    
+        public DateTime MottattDato { get; set; } // Tarih bilgisi DateTime türünde tutulmalıdır.
         public string? Årsmodell { get; set; }
-
-        [Required]        
+        // Garanti, Servis ve Reperasjon için belki bool türünde bir alan kullanabilirsiniz, eğer bu alanlar evet/hayır şeklinde ise.
         public bool Garanti { get; set; }
         public bool Servis { get; set; }
         public bool Reperasjon { get; set; }
         public string? KommentarFraKunde { get; set; }
-        public string? Status { get; internal set; }
+
+
+
     }
 }
