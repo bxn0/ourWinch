@@ -28,11 +28,13 @@ namespace ourWinch
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+           
             // Set the server to listen on localhost:5002
-            builder.WebHost.ConfigureKestrel(serverOptions =>
-            {
-                serverOptions.ListenLocalhost(5002);
-            });
+           
+            //builder.WebHost.ConfigureKestrel(serverOptions =>
+            //{
+            //    serverOptions.ListenAnyIP(5002);
+            //});
 
             var app = builder.Build();
 
