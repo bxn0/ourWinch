@@ -27,9 +27,4 @@
 	  <Folder Include="ServiceAp\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Include="ourWinch_new.csproj" />
-	  <None Include="ourWinch_new.csproj.user" />
-	</ItemGroup>
-
 </Project>
