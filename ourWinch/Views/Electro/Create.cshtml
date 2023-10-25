@@ -26,28 +26,41 @@
             border-color: #217520;
         }
 
-    .active-button {
-        background-color: #217520 !important;
-        color: #FFFFFF !important;
-    }
-
     form {
         background-color: #bfd0d7;
         border-radius: 20px;
         padding: 10px;
     }
 
-    i {
-        border-radius: 50%;
+    .button-add-item:hover,
+    .button-add-item:focus,
+    .button-add-item:active {
+        background-color: #217520;
+        border-color: #217520;
     }
 
+    .submit-button:hover,
+    .submit-button:focus,
+    .submit-button:active {
+        background-color: #217520;
+        border-color: #217520;
+    }
+
+
     .button-add-item {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
+        width: 30px; 
+        height: 30px; 
+        border-radius: 50%; 
+        display: flex; 
+        align-items: center; 
         justify-content: center;
+        background-color: #d17242;
+        border-color: #d17242;
+    }
+
+    .submit-button {
+        background-color: #d17242;
+        border-color: #d17242;
     }
 </style>
 
@@ -238,8 +251,8 @@
                 <div class="col-md-6" id="inputDiv1" style="display:none;">
                     <input type="text" id="userInput1" placeholder="Label girin..." class="form-control">
                 </div>
-                <button type="button" onclick="addItem('Electros')" class="btn btn-primary button-add-item">
-                    <i class="fa-solid fa-circle-plus"></i>
+                <button type="button" onclick="addItem('Electros')" class="button-add-item">
+                    <i class="fa-solid fa-plus text-white"></i>
                 </button>
             </div>
             <!--***************************Comment****************************-->
@@ -249,7 +262,7 @@
             </div>
             <div class="col-12 text-center mt-3">
                 <!-- Added text-center and mt-3 for spacing -->
-                <button class="btn btn-primary" type="submit">Submit form</button>
+                <button class="btn submit-button" type="submit">Submit form</button>
             </div>
 
 
