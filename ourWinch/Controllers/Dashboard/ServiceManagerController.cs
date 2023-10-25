@@ -18,6 +18,7 @@ public class ServiceManager
         {
             var activeService = new ActiveService
             {
+                ServiceOrderId = serviceOrder.ServiceOrderId,  
                 Ordrenummer = serviceOrder.Ordrenummer,
                 Produkttype = serviceOrder.Produkttype,
                 Fornavn = serviceOrder.Fornavn,
@@ -30,4 +31,5 @@ public class ServiceManager
             _context.SaveChanges();
         }
     }
+
 }
