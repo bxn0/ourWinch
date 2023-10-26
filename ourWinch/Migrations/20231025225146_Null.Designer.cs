@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ourWinch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231023161818_Trykk")]
-    partial class Trykk
+    [Migration("20231025225146_Null")]
+    partial class Null
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,8 @@ namespace ourWinch.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ServiceOrderId");
 
                     b.ToTable("ActiveServices");
                 });
@@ -260,18 +262,23 @@ namespace ourWinch.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceOrderId"));
 
                     b.Property<string>("Adresse")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Etternavn")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Feilbeskrivelse")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fornavn")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Garanti")
@@ -296,6 +303,7 @@ namespace ourWinch.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Serienummer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Servis")
@@ -310,6 +318,17 @@ namespace ourWinch.Migrations
                     b.HasKey("ServiceOrderId");
 
                     b.ToTable("ServiceOrders");
+                });
+
+            modelBuilder.Entity("ActiveService", b =>
+                {
+                    b.HasOne("ourWinch.Models.Dashboard.ServiceOrder", "ServiceOrder")
+                        .WithMany()
+                        .HasForeignKey("ServiceOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ServiceOrder");
                 });
 
             modelBuilder.Entity("Electro", b =>
