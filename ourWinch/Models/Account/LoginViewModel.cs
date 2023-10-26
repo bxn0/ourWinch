@@ -2,10 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 public class LoginViewModel
 {
-    [Required]
-    public string? Mobil { get; set; }
+    [Phone]
+    public string Mobilno { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
-    public string? Password { get; set; }
+    public string Password { get; set; }
+
 }
