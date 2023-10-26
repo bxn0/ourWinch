@@ -3,7 +3,6 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
 
-
 namespace ourWinch
 {
     public class Program
@@ -41,6 +40,7 @@ namespace ourWinch
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
+                app.UseDeveloperExceptionPage();  // Bu satırı ekledik.
             }
 
             else
