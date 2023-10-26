@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5" style="background-color: #C0D0D7; max-width: 800px; border-radius: 10px;">
+    <div class="container mt-5" style="background-color: #C0D0D7; max-width: 800px; border-radius: 10px; padding: 20px">
         <div class="row justify-content-center">
             <div class="col-12 text-center my-3">
                 <img class="logo-image rounded" src="/img/nøsted2.jpeg" alt="nøsted Logo" width="200" style="border-radius: 5px;">
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <!-- Sol Bölüm -->
+            <!-- Left Section -->
             <div class="col-md-6">
                 <div class="form-group">
                     <input type="text" class="form-control form-control-sm rounded-input" placeholder="Fornavn" id="fornavnInput">
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <!-- Sağ Bölüm -->
+            <!-- Right Section -->
             <div class="col-md-6">
                 <div class="form-group">
                     <input type="text" class="form-control form-control-sm" placeholder="Mellom navn" id="mellomNavnInput">
@@ -60,7 +60,7 @@
         const mellomNavn = document.getElementById("mellomNavnInput").value;
         const email = document.getElementById("emailInput").value;
 
-        // Bu bilgileri kullanarak kayıt işlemini yapabilirsiniz
+// You can register using this information
         console.log("Fornavn: " + fornavn);
         console.log("Etternavn: " + etternavn);
         console.log("Mobil No: " + mobilNo);

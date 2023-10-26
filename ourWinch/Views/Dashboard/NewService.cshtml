@@ -1,4 +1,4 @@
-﻿<<div class="container mt-5 container-max-height" style="background-color: #C0D0D7; max-width: 800px; border-radius: 5px;">
+﻿<div class="container mt-5 container-max-height" style="background-color: #C0D0D7; max-width: 800px; border-radius: 5px;">
     <form action="/ServiceOrder/Create" method="post">
         @Html.AntiForgeryToken()
         <div class="row justify-content-center">
@@ -64,7 +64,7 @@
                     <div class="mottatt-dato">
                         <label class="text-dark">Mottatt Dato</label>
                         <div class="input-group">
-                            <input type="date" name="MottattDato" class="form-control form-control-sm">
+                            <input type="date" id="datepicker" name="MottattDato" class="form-control form-control-sm">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i class="fa fa-calendar"></i>
@@ -117,3 +117,32 @@
         </div>
     </form>
 </div>
+ <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+
+        let bookedDates = @Html.Raw(ViewBag.BookedDates);
+
+
+        function formatToShortDate(dateString) {
+            return dateString.split('T')[0];
+        }
+
+
+        let shortBookedDates = bookedDates.map(formatToShortDate);
+
+
+        let dateInput = document.getElementById("datepicker");
+
+
+        dateInput.addEventListener("change", function() {
+            if(shortBookedDates.includes(this.value)) {
+                alert("Denne datoen er booket! Vennligst velg en annen dato.");
+                this.value = "";
+            }
+        });
+    });
+
+
+
+ </script>
