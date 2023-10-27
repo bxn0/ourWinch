@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ourWinch.Models.Account
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+
+
+<ul class="navbar-nav">
+    
+    @if (SignInManager.IsSignedIn(User))
+    {
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">@UserManager.GetUserName(User)</a>
+        </li>
+    }
+
+
+
+</ul>

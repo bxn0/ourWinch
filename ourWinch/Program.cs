@@ -3,6 +3,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
 
+using Microsoft.AspNetCore.Identity;
+
+
 namespace ourWinch
 {
     public class Program
@@ -17,6 +20,9 @@ namespace ourWinch
             {
                 throw new InvalidOperationException("Connection string is missing.");
             }
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
@@ -41,6 +47,7 @@ namespace ourWinch
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
+                app.UseDeveloperExceptionPage();  // Bu satırı ekledik.
             }
             else
             {
@@ -51,6 +58,7 @@ namespace ourWinch
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

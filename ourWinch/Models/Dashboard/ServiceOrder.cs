@@ -1,12 +1,12 @@
-﻿using Microsoft.Build.Framework;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ourWinch.Models.Dashboard
 {
-
     public class ServiceOrder
     {
-
         public int ServiceOrderId { get; set; }
+
         [Required]
         public string? Fornavn { get; set; }
 
@@ -23,7 +23,9 @@ namespace ourWinch.Models.Dashboard
 
         [Required]
         public string? Feilbeskrivelse { get; set; }
+
         public int Ordrenummer { get; set; }
+
         public string? Produkttype { get; set; }
 
         [Required]
@@ -32,14 +34,20 @@ namespace ourWinch.Models.Dashboard
         [Required]
         public DateTime MottattDato { get; set; }
 
-    
         public string? Årsmodell { get; set; }
 
-        [Required]        
+        [Required]
         public bool Garanti { get; set; }
+
         public bool Servis { get; set; }
+
         public bool Reperasjon { get; set; }
+
         public string? KommentarFraKunde { get; set; }
+
         public string? Status { get; internal set; }
+
+        public string ServiceSkjema { get; set; } = "Nei";
+
     }
 }

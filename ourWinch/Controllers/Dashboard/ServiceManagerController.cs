@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
+
+
+[Authorize]
 public class ServiceManager
 {
     private readonly AppDbContext _context;
@@ -18,6 +22,7 @@ public class ServiceManager
         {
             var activeService = new ActiveService
             {
+                ServiceOrderId = serviceOrder.ServiceOrderId,  
                 Ordrenummer = serviceOrder.Ordrenummer,
                 Produkttype = serviceOrder.Produkttype,
                 Fornavn = serviceOrder.Fornavn,
@@ -30,4 +35,5 @@ public class ServiceManager
             _context.SaveChanges();
         }
     }
+
 }
