@@ -2,9 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ourWinch.Controllers.Checklist
 {
+
+    [Authorize]
     public class ElectroController : Controller
     {
         private readonly AppDbContext _context;

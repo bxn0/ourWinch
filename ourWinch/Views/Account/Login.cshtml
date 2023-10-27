@@ -28,6 +28,7 @@ Layout = null;
                 <p class="text-center mb-5">Logg på kontoen din</p>
 
                 <form asp-action="Login" asp-controller="Account" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
                     <!-- Username input -->
                     <div class="form-group position-relative m-4">
                         <i class="fas fa-user position-absolute"></i>
@@ -38,6 +39,16 @@ Layout = null;
                     <div class="form-group position-relative m-4">
                         <i class="fas fa-key position-absolute"></i>
                         <input type="password" class="form-control pl-5 rounded-lg" id="Password" asp-for="Password" required placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <div class=" col-md-10">
+                            <div class="custom-checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m=>m.RememberMe)
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <!-- Submit button -->
                     <div class="form-group mt-4 mb-1 m-4 text-center">
@@ -53,34 +64,5 @@ Layout = null;
         </div>
     </main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.querySelector("form");
-            const errorMsg = document.createElement("div");
-            errorMsg.className = "error-message";
-            errorMsg.style.color = "red";
-            errorMsg.style.marginTop = "10px";
-
-            form.addEventListener("submit", function (e) {
-                const usernameInput = document.querySelector("#mobil").value;
-                const passwordInput = document.querySelector("#Password").value;
-
-                const mockUsername = "123456";
-                const mockPassword = "password";
-
-                if (usernameInput === mockUsername && passwordInput === mockPassword) {
-                    form.submit(); // Formu sunucuya gönder
-                } else {
-                    e.preventDefault();
-                    errorMsg.innerHTML = `
-                                <strong>X</strong> Feil mobil nummer eller password! Password må være på minst 8 tegn! Prøv igjen!
-                            `;
-                    form.appendChild(errorMsg);
-                }
-            });
-        });
-    </script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js"></script>
+    
 </body>
