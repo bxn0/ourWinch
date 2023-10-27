@@ -1,6 +1,7 @@
-﻿using ourWinch.Models.Dashboard;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ourWinch.Models.Dashboard;
 
 public class ActiveService
 {
@@ -9,6 +10,8 @@ public class ActiveService
     [Required]
     [ForeignKey("ServiceOrder")]
     public int ServiceOrderId { get; set; }
+
+    public ServiceOrder ServiceOrder { get; set; }
 
     public int Ordrenummer { get; set; }
 
@@ -27,13 +30,9 @@ public class ActiveService
     [Required]
     public string? Feilbeskrivelse { get; set; }
 
-  
     public DateTime AvtaltLevering { get; set; }
 
     public string? Status { get; set; }
 
-
-    public string? ServiceSkjema { get; set; }
-
-    // Diğer gereken özellikleri de buraya ekleyebilirsiniz...
+    public string? ServiceSkjema { get; set; } = "Nei";
 }

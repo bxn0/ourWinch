@@ -7,13 +7,15 @@ namespace ourWinch.Models.Account
         [Required]
         public string? Fornavn { get; set; }
 
+        public string? MellomNavn { get; set; }
+
         [Required]
         public string? Etternavn { get; set; }
 
         [Required]
         public string? MobilNo { get; set; }
 
-        public string? MellomNavn { get; set; }
+        
 
         [Required]
         [EmailAddress]

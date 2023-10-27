@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ourWinch.Models.Dashboard;
 using System.Linq;
 
+
+
+
+[Authorize]
 public class ServiceOrderController : Controller
 {
     private readonly AppDbContext _context;
