@@ -1,10 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
+
+
+
+
+[Authorize]
 
 public class ActiveServiceController : Controller
 {
     private readonly AppDbContext _context;
     private const int PageSize = 10; // Her sayfada gösterilecek öğe sayısı.
+
+
+
+
 
     public ActiveServiceController(AppDbContext context)
     {

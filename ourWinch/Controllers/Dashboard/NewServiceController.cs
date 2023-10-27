@@ -3,9 +3,13 @@ using ourWinch.Models.Dashboard;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
 
+
+
+[Authorize]
 public class NewServiceController : Controller
 {
     private readonly AppDbContext _context;

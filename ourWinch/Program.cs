@@ -2,6 +2,7 @@
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 
 namespace ourWinch
 {
@@ -17,6 +18,9 @@ namespace ourWinch
             {
                 throw new InvalidOperationException("Connection string is missing.");
             }
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
@@ -52,6 +56,7 @@ namespace ourWinch
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

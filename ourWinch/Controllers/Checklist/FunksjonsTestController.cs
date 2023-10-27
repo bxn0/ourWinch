@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ourWinch.Controllers.Checklist
 {
+
+    [Authorize]
     public class FunksjonsTestController : Controller
     {
         private readonly AppDbContext _context;
