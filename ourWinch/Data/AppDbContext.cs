@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ourWinch.Models.Account;
 using ourWinch.Models.Dashboard;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -20,4 +22,7 @@ public class AppDbContext : DbContext
     public DbSet<FunksjonsTest> FunksjonsTests { get; set; }
 
     public DbSet<Trykk> Trykks { get; set; }
+
+    public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
 }

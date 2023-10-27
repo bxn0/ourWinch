@@ -1,10 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
+
+
+[Authorize]
 public class ActiveServiceController : Controller
 {
     private readonly AppDbContext _context;
+
+
+
+
 
     public ActiveServiceController(AppDbContext context)
     {
