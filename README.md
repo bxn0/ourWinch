@@ -1,3 +1,7 @@
+Dummy Credentials for login:
+94717176
+chekoKral1990!
+
 # Demonstration of the app:
 ![IGLAND WINCH](https://github.com/bxn0/ourWinch/assets/82652466/ee33a86f-190b-4c80-8056-2b5fe61da9a5)
 
