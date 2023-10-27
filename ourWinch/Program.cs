@@ -2,7 +2,9 @@
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
+
 using Microsoft.AspNetCore.Identity;
+
 
 namespace ourWinch
 {
@@ -31,10 +33,11 @@ namespace ourWinch
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            // Set the server to listen on localhost:5002
+            // Set the server to listen on 0.0.0.0:5002
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
-                serverOptions.ListenLocalhost(5002);
+                serverOptions.ListenAnyIP(5002);
+                Console.WriteLine("Kestrel is now configured to listen on port 5002 for any IP address.");
             });
 
             var app = builder.Build();
@@ -46,7 +49,6 @@ namespace ourWinch
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
                 app.UseDeveloperExceptionPage();  // Bu satırı ekledik.
             }
-
             else
             {
                 app.UseExceptionHandler("/Home/Error");
