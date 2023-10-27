@@ -46,5 +46,8 @@ namespace ourWinch.Models.Dashboard
         public string? KommentarFraKunde { get; set; }
 
         public string? Status { get; internal set; }
+
+        public string ServiceSkjema { get; set; } = "Nei";
+
     }
 }
