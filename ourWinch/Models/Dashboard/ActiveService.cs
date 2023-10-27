@@ -34,5 +34,5 @@ public class ActiveService
 
     public string? Status { get; set; }
 
-    public string? ServiceSkjema { get; set; }
+    public string? ServiceSkjema { get; set; } = "Nei";
 }
