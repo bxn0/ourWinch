@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    var isAdmin = User.IsInRole("Admin");
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,9 +56,9 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column mb-3" style="list-style-type: none; padding-left: 0;">
                         <li class="nav-item my-3" style="border-top: 1px solid #728791; border-bottom: 1px solid #728791;">
-                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
-                                <i class="fas fa-home"></i> Hjem
-                            </a>
+                        <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                            <i class="fas fa-home"></i> Hjem
+                        </a>
                         <li class="nav-item mt-3">
                             <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
                                 <i class="fas fa-cog"></i> Aktive Servicer
@@ -74,16 +77,19 @@
                             </a>
                         </li>
                     </ul>
+                    
+                    @if(isAdmin){
 
-                    <ul class="nav flex-column mt-9">
-                        <li class="nav-item">
-                            <a asp-controller="Account" asp-action="Register" class="nav-link">
+                        <ul class="nav flex-column mt-9">
+                            <li class="nav-item">
+                                <a asp-controller="Account" asp-action="Register" class="nav-link">
 
 
-                                <i class="fas fa-users"></i> Registrering
-                            </a>
-                        </li>
-                    </ul>
+                                    <i class="fas fa-users"></i> Registrering
+                                </a>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </nav>
 

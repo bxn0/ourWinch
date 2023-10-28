@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ourWinch.Models.Account
 {
@@ -8,7 +9,7 @@ namespace ourWinch.Models.Account
         [Required]
         public string Fornavn { get; set; }
 
-        public string MellomNavn { get; set; }
+        public string? MellomNavn { get; set; }
 
         [Required]
         public string Etternavn { get; set; }
@@ -26,6 +27,8 @@ namespace ourWinch.Models.Account
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+       // public IEnumerable<SelectListItem> RoleList { get; set; }
 
         public string Role { get; set; }
 
