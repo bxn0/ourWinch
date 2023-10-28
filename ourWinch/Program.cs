@@ -4,15 +4,26 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Configuration;
+using ourWinch.Services;
 
 
 namespace ourWinch
 {
     public class Program
     {
+
+        
         public static void Main(string[] args)
         {
+
+            
+
+
             var builder = WebApplication.CreateBuilder(args);
+
+            
 
             // App Configuration
             string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -21,7 +32,19 @@ namespace ourWinch
                 throw new InvalidOperationException("Connection string is missing.");
             }
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
+            builder.Services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequiredLength = 5;
+                opt.Password.RequireLowercase = true;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(15);
+                opt.Lockout.MaxFailedAccessAttempts = 6;
+
+            });
+
+
+
 
             // Add services to the container.
             builder.Services.AddControllers();

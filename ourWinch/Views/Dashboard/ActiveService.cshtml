@@ -24,7 +24,7 @@
             background-color: white;
         }
 </style>
-                      <div class="container mt-5">
+                      <div class="container mt-4">
                           <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Aktive Servicer</div>
 
                           <div class="table-responsive">
@@ -89,8 +89,8 @@
     </div>
 
     <div>
-        Current Page: @((ViewBag.CurrentPage as int?) ?? 0)
-        Total Pages: @((ViewBag.TotalPages as int?) ?? 0)
+        Current Page: @((ViewBag.CurrentPage as int?) ?? 1)
+        Total Pages: @((ViewBag.TotalPages as int?) ?? 1)
     </div>
 
 
