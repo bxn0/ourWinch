@@ -56,6 +56,9 @@ namespace ourWinch
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            // Register ServiceSkjemaService for DI.
+            builder.Services.AddScoped<ServiceSkjemaService>();
+
             // Set the server to listen on 0.0.0.0:5002
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {

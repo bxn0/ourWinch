@@ -3,28 +3,28 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using ourWinch.Services;
 
 namespace ourWinch.Controllers.Checklist
 {
-
     [Authorize]
     public class ElectroController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ServiceSkjemaService _serviceSkjemaService;
 
-        public ElectroController(AppDbContext context)
+        // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
+        public ElectroController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
         {
             _context = context;
+            _serviceSkjemaService = serviceSkjemaService;
         }
 
-        // GET: Electro
         public async Task<IActionResult> Index()
         {
             return View(await _context.Mechanicals.ToListAsync());
         }
 
-
-        // GET: Mechanical/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,8 +32,7 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var electro = await _context.Electros
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var electro = await _context.Electros.FirstOrDefaultAsync(m => m.Id == id);
             if (electro == null)
             {
                 return NotFound();
@@ -42,7 +41,6 @@ namespace ourWinch.Controllers.Checklist
             return View(electro);
         }
 
-        // GET: Electro/Create
         [Route("Electro/Create/{serviceOrderId}/{category?}")]
         public IActionResult Create(int serviceOrderId, string category = "Electro")
         {
@@ -71,7 +69,6 @@ namespace ourWinch.Controllers.Checklist
             return View(viewModel);
         }
 
-        // POST: Electro/Create
         [HttpPost]
         [Route("Electro/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
@@ -80,8 +77,6 @@ namespace ourWinch.Controllers.Checklist
             if (ModelState.IsValid)
             {
                 bool isFirst = true;
-
-                // En son eklenen ServiceOrder'ı alıyoruz.
                 var lastServiceOrder = _context.ServiceOrders.OrderByDescending(o => o.ServiceOrderId).FirstOrDefault();
 
                 if (lastServiceOrder != null)
@@ -94,39 +89,29 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir Electro için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         electro.Ordrenummer = lastServiceOrder.Ordrenummer;
                         electro.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
+
+                    await UpdateServicejemaIfAllCompleted(serviceOrderId);
+
                     return RedirectToAction("Create", "FunksjonsTest", new { serviceOrderId = viewModel.ServiceOrderId, category = "FunksjonsTest" });
                 }
                 else
                 {
-                   
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
             }
-            // ModelState.IsValid değilse hataları yazdırıyoruz.
             else
             {
-                foreach (var modelState in ModelState)
-                {
-                    var fieldName = modelState.Key;
-                    foreach (var error in modelState.Value.Errors)
-                    {
-                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
-                    }
-                }
                 ViewBag.Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
             }
             return View(viewModel);
         }
 
-
-        // GET: Electro/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -142,7 +127,6 @@ namespace ourWinch.Controllers.Checklist
             return View(electro);
         }
 
-        // POST: Electro/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ChecklistItem,OK,BorSkiftes,Defekt")] Electro electro)
@@ -175,7 +159,6 @@ namespace ourWinch.Controllers.Checklist
             return View(electro);
         }
 
-        // GET: Electro/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -183,8 +166,7 @@ namespace ourWinch.Controllers.Checklist
                 return NotFound();
             }
 
-            var electro = await _context.Electros
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var electro = await _context.Electros.FirstOrDefaultAsync(m => m.Id == id);
             if (electro == null)
             {
                 return NotFound();
@@ -193,7 +175,6 @@ namespace ourWinch.Controllers.Checklist
             return View(electro);
         }
 
-        // POST: Electro/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -207,6 +188,12 @@ namespace ourWinch.Controllers.Checklist
         private bool ElectroExists(int id)
         {
             return _context.Electros.Any(e => e.Id == id);
+        }
+
+        private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
+        {
+            await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId);
+
         }
     }
 }

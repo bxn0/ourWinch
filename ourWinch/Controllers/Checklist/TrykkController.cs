@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ourWinch.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,10 +14,13 @@ namespace ourWinch.Controllers.Checklist
     public class TrykkController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ServiceSkjemaService _serviceSkjemaService;
 
-        public TrykkController(AppDbContext context)
+        // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
+        public TrykkController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
         {
             _context = context;
+            _serviceSkjemaService = serviceSkjemaService;
         }
 
         // GET: Trykk
@@ -103,6 +107,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
+                    await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Mechanical", new { serviceOrderId = viewModel.ServiceOrderId, category = "Mechanical" });
                 }
                 else
@@ -209,6 +214,11 @@ namespace ourWinch.Controllers.Checklist
         private bool ElectroExists(int id)
         {
             return _context.Trykks.Any(e => e.Id == id);
+        }
+        private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
+        {
+            await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId);
+
         }
     }
 }
