@@ -75,7 +75,16 @@
                                           <td>@item.Feilbeskrivelse</td>
                                           <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
                                           <td>Process</td>
-                                          <td>@item.ServiceSkjema</td>
+                            <td>
+                                @if (@item.ServiceSkjema == "Ja")
+                                {
+                                    <a href="@Url.Action("Index", "ServiceSkjema")">@item.ServiceSkjema</a>
+                                }
+                                else
+                                {
+                                    @item.ServiceSkjema
+                                }
+                            </td>
                                           <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
                                       </tr>
                                            }
