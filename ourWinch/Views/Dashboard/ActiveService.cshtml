@@ -78,7 +78,7 @@
                             <td>
                                 @if (@item.ServiceSkjema == "Ja")
                                 {
-                                    <a href="@Url.Action("Index", "ServiceSkjema")">@item.ServiceSkjema</a>
+                                    <a href="@Url.Action("Index", "ServiceSkjema", new { id = @item.ServiceOrderId })">@item.ServiceSkjema</a>
                                 }
                                 else
                                 {

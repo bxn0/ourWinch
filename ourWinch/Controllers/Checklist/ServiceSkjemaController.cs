@@ -20,6 +20,20 @@ namespace ourWinch.Controllers.Checklist
         {
             return View();
         }
+
+        // GET: api/ServiceSkjema/5
+        [HttpGet("api/ServiceSkjema/{id}")]
+        public async Task<ActionResult<IEnumerable<ServiceOrder>>> GetServiceSkjema(int id)
+        {
+            var serviceOrders = await _context.ServiceOrders.Where(so => so.ServiceOrderId == id).ToListAsync();
+
+            if (serviceOrders == null || !serviceOrders.Any())
+            {
+                return NotFound();
+            }
+
+            return serviceOrders;
+        }
+
     }
-        
 }
