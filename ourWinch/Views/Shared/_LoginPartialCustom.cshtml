@@ -1,24 +1,21 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using ourWinch.Models.Account
+@using System.Security.Claims
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
-
-
-
-
-
-<ul class="navbar-nav">
-    
-    @if (SignInManager.IsSignedIn(User))
-    {
-
-
-        <li class="nav-item">
-            <a class="nav-link" href="#">@UserManager.GetUserName(User)</a>
-        </li>
-    }
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 
 
-</ul>
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+
+    var user = await UserManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+    <li class="nav-item">
+        <a class="nav-link" href="#">@($"{user.Fornavn} {user.Etternavn}")</a>
+    </li>
+}
