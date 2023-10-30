@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ourWinch.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +13,13 @@ namespace ourWinch.Controllers.Checklist
     public class HydroliskController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ServiceSkjemaService _serviceSkjemaService; // Eklediğimiz yeni servis
 
-        public HydroliskController(AppDbContext context)
+        // Düzenlediğimiz constructor
+        public HydroliskController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
         {
             _context = context;
+            _serviceSkjemaService = serviceSkjemaService;
         }
 
         // GET: Hydrolisk
@@ -81,8 +85,6 @@ namespace ourWinch.Controllers.Checklist
             if (ModelState.IsValid)
             {
                 bool isFirst = true;
-
-                // En son eklenen ServiceOrder'ı alıyoruz.
                 var lastServiceOrder = _context.ServiceOrders.OrderByDescending(o => o.ServiceOrderId).FirstOrDefault();
 
                 if (lastServiceOrder != null)
@@ -95,22 +97,20 @@ namespace ourWinch.Controllers.Checklist
                             isFirst = false;
                         }
 
-                        // Her bir hydrolisk için ServiceOrder'dan Ordrenummer'ı alıyoruz.
                         hydrolisk.Ordrenummer = lastServiceOrder.Ordrenummer;
                         hydrolisk.ServiceOrderId = lastServiceOrder.ServiceOrderId;
 
                         _context.Add(hydrolisk);
                     }
                     await _context.SaveChangesAsync();
+                    await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId); // Eklediğimiz yeni servis metodunu çağırıyoruz
                     return RedirectToAction("Create", "Electro", new { serviceOrderId = viewModel.ServiceOrderId, category = "Electro" });
                 }
                 else
                 {
-                    // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
                     ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
                 }
             }
-            // ModelState.IsValid değilse hataları yazdırıyoruz.
             else
             {
                 foreach (var modelState in ModelState)
@@ -208,6 +208,11 @@ namespace ourWinch.Controllers.Checklist
         private bool ElectroExists(int id)
         {
             return _context.Hydrolisks.Any(e => e.Id == id);
+        }
+        private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
+        {
+            await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId);
+
         }
     }
 }

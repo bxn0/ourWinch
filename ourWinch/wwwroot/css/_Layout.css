@@ -121,6 +121,33 @@
         color: #FF5733; /* Veya istediğiniz herhangi bir renk */
     }
 
+    .user-info .user-icon-name {
+        display: flex; /* içerikleri yatayda hizalayın */
+        align-items: center; /* içerikleri dikeyde ortala */
+    }
 
+    .user-name {
+        margin-left: 5px; /* İkonla arasındaki boşluğu ayarla */
+    }
+
+    /* Logout butonu için düzenlemeler */
+    /* CSS */
+    .user-info {
+        align-items: center;
+    }
+
+    .btn-logout {
+        vertical-align: middle;
+    }
+
+
+    nav li {
+        list-style-type: none;
+    }
+
+    .navbar {
+        /* ... existing styles ... */
+        justify-content: space-between; /* Adjusting layout to space out the content */
+    }
 }
 

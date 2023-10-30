@@ -21,6 +21,19 @@
             </div>
         </div>
 
+        <!-- Eklenen Form Başlangıç -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Servis Ordre ID" id="serviceOrdreIdInput">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="lastInnData">Yükle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Eklenen Form Bitiş -->
+
         <div class="row mt-3">
             <div class="col-md-6">
                 <label>Godkjent av:</label>
@@ -51,116 +64,9 @@
                             <th>Defekt</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Mekanisk satırları -->
-                        <tr>
-                            <td rowspan="3">Mekanisk</td>
-                            <td>Sjekk clutch lameller for slitasje</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Mekanisk için 2. satır bilgileri -->
-                            <td>Sjekk punkter 2</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Mekanisk için 3. satır bilgileri -->
-                            <td>Sjekk punkter 3</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-
-                        <!-- Hydrolisk satırları -->
-                        <tr>
-                            <td rowspan="3">Hydrolisk</td>
-                            <td>Sjekk punkter 1</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 2. satır bilgileri -->
-                            <td>Sjekk punkter 2</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 3. satır bilgileri -->
-                            <td>Sjekk punkter 3</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-
-                        <!-- Elektro satırları -->
-                        <tr>
-                            <td rowspan="3">Elektro</td>
-                            <td>Sjekk punkter 1</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 2. satır bilgileri -->
-                            <td>Sjekk punkter 2</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 3. satır bilgileri -->
-                            <td>Sjekk punkter 3</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <!-- Funksjons Test -->
-                        <tr>
-                            <td rowspan="3">Funksjons Test</td>
-                            <td>Sjekk punkter 1</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 2. satır bilgileri -->
-                            <td>Sjekk punkter 2</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 3. satır bilgileri -->
-                            <td>Sjekk punkter 3</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <!-- Trykk Settinger -->
-                        <tr>
-                            <td rowspan="3">Trykk Settinger</td>
-                            <td>Sjekk punkter 1</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <!-- Hydrolisk için 2. satır bilgileri -->
-                            <td>Sjekk punkter 2</td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                       
-
+                    <tbody id="dataBody">
+                        <!-- Dinamik olarak buraya satırlar eklenecek -->
                     </tbody>
-
                 </table>
             </div>
         </div>
@@ -179,6 +85,55 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <script>
+        $(document).ready(function () {
 
+            $("#lastInnData").click(function () {
+                var serviceOrdreId = $("#serviceOrdreIdInput").val();
+
+                if (serviceOrdreId) {
+                    fetchServiceData(serviceOrdreId);
+                } else {
+                    alert("Vennligst skriv inn en service ordre ID.");
+                }
+            });
+
+            // Eğer serviceSkjemaLink sınıfını kullandıysanız bu kısmı kullanın
+            $(".serviceSkjemaLink").click(function (e) {
+                e.preventDefault();
+                var orderId = $(this).data("id");
+                fetchServiceData(orderId);
+            });
+
+        });
+
+        function fetchServiceData(orderId) {
+            var apiUrl = "/api/ServiceSkjema/" + orderId;
+
+            $.ajax({
+                url: apiUrl,
+                method: "GET",
+                success: function (data) {
+                    var tableBody = $("#dataBody");
+                    tableBody.empty();
+
+                    data.forEach(item => { // "data" kullanıldı, "data.items" değil.
+                        var row = `<tr>
+                                           <td>${item.Avdeling}</td>
+                                           <td>${item.SjekkPunkter}</td>
+                                           <td><input type="checkbox" ${item.OK ? 'checked' : ''}></td>
+                                           <td><input type="checkbox" ${item.BørSkiftes ? 'checked' : ''}></td>
+                                           <td><input type="checkbox" ${item.Defekt ? 'checked' : ''}></td>
+                                       </tr>`;
+                        tableBody.append(row);
+                    });
+                },
+                error: function (error) {
+                    console.log("Det oppsto en feil: ", error);
+                    alert("Bir hata oluştu! Lütfen tekrar deneyiniz.");
+                }
+            });
+        }
+    </script>
+</body>
 </html>

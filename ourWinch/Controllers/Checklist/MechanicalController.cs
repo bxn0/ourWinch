@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ourWinch.Models.Dashboard;
+using ourWinch.Services;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,10 +10,13 @@ namespace ourWinch.Controllers.Checklist
     public class MechanicalController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ServiceSkjemaService _serviceSkjemaService;
 
-        public MechanicalController(AppDbContext context)
+        // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
+        public MechanicalController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
         {
             _context = context;
+            _serviceSkjemaService = serviceSkjemaService;
         }
 
         // GET: Mechanical
@@ -114,6 +118,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
+                    await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Hydrolisk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Hydrolisk" });
                 }
                 else
@@ -223,6 +228,11 @@ namespace ourWinch.Controllers.Checklist
         private bool MechanicalExists(int id)
         {
             return _context.Mechanicals.Any(e => e.Id == id);
+        }
+        private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
+        {
+            await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId);
+
         }
     }
 }

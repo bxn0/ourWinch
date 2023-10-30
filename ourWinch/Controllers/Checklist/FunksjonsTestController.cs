@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ourWinch.Services;
 
 namespace ourWinch.Controllers.Checklist
 {
@@ -9,10 +10,13 @@ namespace ourWinch.Controllers.Checklist
     public class FunksjonsTestController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ServiceSkjemaService _serviceSkjemaService;
 
-        public FunksjonsTestController(AppDbContext context)
+        // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
+        public FunksjonsTestController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
         {
             _context = context;
+            _serviceSkjemaService = serviceSkjemaService;
         }
 
         // GET: FunksjonsTest
@@ -99,6 +103,8 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(funksjonsTest);
                     }
                     await _context.SaveChangesAsync();
+
+                    await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Trykk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Trykk" });
                 }
                 else
@@ -205,6 +211,11 @@ namespace ourWinch.Controllers.Checklist
         private bool FunksjonsTestExists(int id)
         {
             return _context.FunksjonsTests.Any(e => e.Id == id);
+        }
+        private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
+        {
+            await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId);
+
         }
     }
 }
