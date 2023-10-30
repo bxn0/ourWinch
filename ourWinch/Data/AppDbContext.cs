@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ourWinch.Models.Account;
 using ourWinch.Models.Dashboard;
 
-public class AppDbContext : IdentityDbContext
+public class AppDbContext : IdentityDbContext<ApplicationUser>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
+using ourWinch.Models.Account;
 using ourWinch.Services;
 
 
@@ -32,7 +33,15 @@ namespace ourWinch
                 throw new InvalidOperationException("Connection string is missing.");
             }
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+
+
             builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
             builder.Services.Configure<IdentityOptions>(opt =>
             {
