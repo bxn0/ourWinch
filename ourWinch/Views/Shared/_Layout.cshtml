@@ -36,18 +36,17 @@
             </div>
         </div>
         <div class="user-info d-flex align-items-center ml-3">
-           
             <i class="fas fa-bell text-white mr-3"></i>
-            
-            <!--Partial Login-->
-            <partial name="_LoginPartialCustom" class="text-white mr-2" />
-            <li class="nav-item">
-                <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="Logout">
-                    <button type="submit" class="text-danger ml-auto" style="font-weight: bold; text-decoration: none; display: block; text-align: center; width: 100%;">Logout</button>
-                </form>
-            </li>
-            <i class="fas fa-user text-white ml-2 mr-4"></i>
+            <div class="user-icon-name d-flex align-items-center mr-3">
+                <i class="fas fa-user text-white mr-2"></i>
+                <span class="text-white user-name">Bunyamin</span>
+            </div>
+            <form id="logoutForm" method="post" class="form-inline d-flex align-items-center" asp-controller="Account" asp-action="Logout">
+                <button type="submit" class="btn-logout text-danger ml-auto border-0 bg-transparent">Logout</button>
+            </form>
         </div>
+
+
     </nav>
     <!-- Sidebar Kısmı -->
     <div class="container-fluid">
@@ -56,9 +55,9 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column mb-3" style="list-style-type: none; padding-left: 0;">
                         <li class="nav-item my-3" style="border-top: 1px solid #728791; border-bottom: 1px solid #728791;">
-                        <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
-                            <i class="fas fa-home"></i> Hjem
-                        </a>
+                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                                <i class="fas fa-home"></i> Hjem
+                            </a>
                         <li class="nav-item mt-3">
                             <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
                                 <i class="fas fa-cog"></i> Aktive Servicer
