@@ -2,17 +2,31 @@
     var isAdmin = User.IsInRole("Admin");
 }
 
+@using Microsoft.AspNetCore.Identity
+@using ourWinch.Models.Account
+@using System.Security.Claims
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Bootstrap JS ve bağımlılıkları -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/2368a3baef.js" crossorigin="anonymous"></script>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+
     <!-- FontAwesome (ikonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
@@ -23,7 +37,8 @@
     <!-- Navbar Kısmı -->
     <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-1 shadow">
         <div class="navbar-brand col-sm-3 col-md-2 mr-0">
-            <img class="logo-image" src="/img/nøsted1.png" alt="nøsted Logo">
+            <img class="logo-image" src="/img/nøsted1.png" alt="nøsted Logo" style="border-radius: 10px;">
+
         </div>
         <div class="search-wrapper position-relative ml-auto">
             <div class="input-group">
@@ -39,7 +54,15 @@
             <i class="fas fa-bell text-white mr-3"></i>
             <div class="user-icon-name d-flex align-items-center mr-3">
                 <i class="fas fa-user text-white mr-2"></i>
-                <span class="text-white user-name">Bunyamin</span>
+            @if (SignInManager.IsSignedIn(User))
+            {
+
+
+                var user = await UserManager.FindByIdAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                    <span class="text-white user-name">@($"{user.Fornavn} {user.Etternavn}")</span>
+
+            }
             </div>
             <form id="logoutForm" method="post" class="form-inline d-flex align-items-center" asp-controller="Account" asp-action="Logout">
                 <button type="submit" class="btn-logout text-danger ml-auto border-0 bg-transparent">Logout</button>
@@ -75,19 +98,58 @@
                                 <i class="fas fa-pen"></i> Ny service
                             </a>
                         </li>
+
+                       
                     </ul>
                     
                     @if(isAdmin){
 
                         <ul class="nav flex-column mt-9">
+
+                            <li class="nav-item mt-3">
+                                <!-- "Rapporter" bağlantısı -->
+                                <a href="#" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
+                                    <i class="fas fa-rapports"></i> Rapporter
+                                </a>
+                                <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
+                                <ul id="kunderSubmenu" class="collapse">
+                                    <li class="nav-item mt-3">
+                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
+                                            <i class="fas fa-kunde"></i> Kunder
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mt-3">
+                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
+                                            <i class="fas fa-reserv"></i> Reservedeler
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mt-3">
+                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
+                                            <i class="fas fa-tjeneste"></i> Tjenestetype
+                                        </a>
+                                    </li>
+                                </ul>
+                                
+                            </li>
+
                             <li class="nav-item">
                                 <a asp-controller="Account" asp-action="Register" class="nav-link">
-
 
                                     <i class="fas fa-users"></i> Registrering
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav flex-column mt-9">
+                            <li class="nav-item">
+                                <a asp-controller="User" asp-action="Index" class="nav-link">
+
+
+                                    <i class="fas fa-users"></i> Brukere
+                                </a>
+                            </li>
+                        </ul>
+
+
                     }
                 </div>
             </nav>

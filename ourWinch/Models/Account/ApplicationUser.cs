@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 #nullable enable
 
@@ -18,9 +19,11 @@ namespace ourWinch.Models.Account
         public string? MellomNavn { get; set; }
 
 
+        [NotMapped]
+        public string Role { get; set; }
 
-        [Required]
-        public string Password { get; set; }
+
+
 
 
 
