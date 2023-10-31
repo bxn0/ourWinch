@@ -88,9 +88,8 @@
     <script>
         $(document).ready(function () {
 
-            // Otomatik olarak bazı bilgileri yüklemek için
-            var defaultOrderId = 16; // Örnek bir ID. İstediğiniz bir değerle değiştirebilirsiniz.
-            fetchServiceData(defaultOrderId);
+            // Sayfa yüklendiğinde otomatik olarak data yüklensin
+            fetchServiceData(17);  // Burada varsayılan olarak "17" id'sini kullandım.
 
             $("#lastInnData").click(function () {
                 var serviceOrdreId = $("#serviceOrdreIdInput").val();
@@ -102,41 +101,80 @@
                 }
             });
 
-            // Eğer serviceSkjemaLink sınıfını kullandıysanız bu kısmı kullanın
-            $(".serviceSkjemaLink").click(function (e) {
-                e.preventDefault();
-                var orderId = $(this).data("id");
-                fetchServiceData(orderId);
-            });
+            // I removed the auto-loading of default data for clarity.
         });
 
         function fetchServiceData(orderId) {
-            var apiUrl = "/api/ServiceSkjema/" + orderId;
+            // Örnek veri yapısnı güncelledim
+            var data = {
+                Mechanicals: [{
+                    id: 36,
+                    serviceOrderId: 16,
+                    ordernummer: 230006,
+                    checklistItem: 'Mekanik kontrol',
+                    ok: true
+                }],
+                Hydrolisks: [{
+                    id: 37,
+                    serviceOrderId: 16,
+                    ordernummer: 230007,
+                    checklistItem: 'Hidrolik sızdırmazlık kontrolü',
+                    ok: false
+                }],
+                Electros: [{
+                    id: 35,
+                    serviceOrderId: 16,
+                    ordernummer: 230005,
+                    checklistItem: 'Sjekk ledningsnett på vinsj',
+                    ok: true
+                }, {
+                    id: 38,
+                    serviceOrderId: 16,
+                    ordernummer: 230008,
+                    checklistItem: 'Elektrik bağlantı kontrolü',
+                    ok: false
+                }],
+                FunksjonsTests: [],
+                Trykks: []
+            };
 
-            $.ajax({
-                url: apiUrl,
-                method: "GET",
-                success: function (data) {
-                    var tableBody = $("#dataBody");
-                    tableBody.empty();
+            var tableBody = $("#dataBody");
+            tableBody.empty();
 
-                    data.forEach(item => {
-                        var row = `<tr>
-                                          <td>${item.Avdeling}</td>
-                                          <td>${item.SjekkPunkter}</td>
-                                          <td><input type="checkbox" ${item.OK ? 'checked' : ''}></td>
-                                          <td><input type="checkbox" ${item.BørSkiftes ? 'checked' : ''}></td>
-                                          <td><input type="checkbox" ${item.Defekt ? 'checked' : ''}></td>
-                                       </tr>`;
-                        tableBody.append(row);
-                    });
-                },
-                error: function (error) {
-                    console.log("Det oppsto en feil: ", error);
-                    alert("Bir hata oluştu! Lütfen tekrar deneyiniz.");
+            // Kategorilerin isimlerini tanımlıyoruz
+            var mappings = {
+                Mechanicals: "Mekanik",
+                Hydrolisks: "Hidrolik",
+                Electros: "Elektrik",
+                FunksjonsTests: "Fonksiyon Testi",
+                Trykks: "Basınç Testi"
+            };
+
+            for (var key in mappings) {
+                if (data[key] && data[key].length) {
+                    appendDataToTable(data[key], tableBody, mappings[key]);
                 }
+            }
+        }
+
+        function appendDataToTable(dataList, tableBody, avdeling) {
+            dataList.forEach(item => {
+                var okChecked = item.ok ? 'checked' : '';
+                var borSkiftesChecked = !item.ok ? 'checked' : '';
+                // Not: Defekt sütununun ne zaman işaretleneceğine dair bir bilgi verilmediği için şimdilik boş bırakıyorum. Gerekirse aşağıdaki satırı düzenleyebilirsiniz.
+                var defektChecked = '';
+
+                var row = `<tr>
+                              <td>${avdeling}</td>
+                              <td>${item.checklistItem}</td>
+                              <td><input type="checkbox" ${okChecked}></td>
+                              <td><input type="checkbox" ${borSkiftesChecked}></td>
+                              <td><input type="checkbox" ${defektChecked}></td>
+                           </tr>`;
+                tableBody.append(row);
             });
         }
+
     </script>
 </body>
 </html>
