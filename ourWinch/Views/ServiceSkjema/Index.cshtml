@@ -88,6 +88,10 @@
     <script>
         $(document).ready(function () {
 
+            // Otomatik olarak bazı bilgileri yüklemek için
+            var defaultOrderId = 16; // Örnek bir ID. İstediğiniz bir değerle değiştirebilirsiniz.
+            fetchServiceData(defaultOrderId);
+
             $("#lastInnData").click(function () {
                 var serviceOrdreId = $("#serviceOrdreIdInput").val();
 
@@ -104,7 +108,6 @@
                 var orderId = $(this).data("id");
                 fetchServiceData(orderId);
             });
-
         });
 
         function fetchServiceData(orderId) {
@@ -117,13 +120,13 @@
                     var tableBody = $("#dataBody");
                     tableBody.empty();
 
-                    data.forEach(item => { // "data" kullanıldı, "data.items" değil.
+                    data.forEach(item => {
                         var row = `<tr>
-                                           <td>${item.Avdeling}</td>
-                                           <td>${item.SjekkPunkter}</td>
-                                           <td><input type="checkbox" ${item.OK ? 'checked' : ''}></td>
-                                           <td><input type="checkbox" ${item.BørSkiftes ? 'checked' : ''}></td>
-                                           <td><input type="checkbox" ${item.Defekt ? 'checked' : ''}></td>
+                                          <td>${item.Avdeling}</td>
+                                          <td>${item.SjekkPunkter}</td>
+                                          <td><input type="checkbox" ${item.OK ? 'checked' : ''}></td>
+                                          <td><input type="checkbox" ${item.BørSkiftes ? 'checked' : ''}></td>
+                                          <td><input type="checkbox" ${item.Defekt ? 'checked' : ''}></td>
                                        </tr>`;
                         tableBody.append(row);
                     });
