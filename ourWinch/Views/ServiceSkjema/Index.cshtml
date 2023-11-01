@@ -89,7 +89,7 @@
         $(document).ready(function () {
 
             // Sayfa yüklendiğinde otomatik olarak data yüklensin
-            fetchServiceData(17);  // Burada varsayılan olarak "17" id'sini kullandım.
+            fetchServiceData(26);  // Burada varsayılan olarak "17" id'sini kullandım.
 
             $("#lastInnData").click(function () {
                 var serviceOrdreId = $("#serviceOrdreIdInput").val();
@@ -134,20 +134,26 @@
     });
 }
         function appendDataToTable(dataList, tableBody, avdeling) {
-            dataList.forEach(item => {
+            dataList.forEach((item, index) => {
                 var okChecked = item.ok ? 'checked' : '';
-                var borSkiftesChecked = !item.ok ? 'checked' : '';
-                // Not: Defekt sütununun ne zaman işaretleneceğine dair bir bilgi verilmediği için şimdilik boş bırakıyorum. Gerekirse aşağıdaki satırı düzenleyebilirsiniz.
-                var defektChecked = '';
+                var borSkiftesChecked = (item.borSkiftes && !item.ok) ? 'checked' : '';
+                var defektChecked = (!item.ok && !item.borSkiftes) ? 'checked' : '';
 
                 var row = `<tr>
                               <td>${avdeling}</td>
                               <td>${item.checklistItem}</td>
-                              <td><input type="checkbox" ${okChecked}></td>
-                              <td><input type="checkbox" ${borSkiftesChecked}></td>
-                              <td><input type="checkbox" ${defektChecked}></td>
+                              <td><input type="checkbox" name="checkbox-group-${index}" ${okChecked} onclick="uncheckOthers(this)"></td>
+                              <td><input type="checkbox" name="checkbox-group-${index}" ${borSkiftesChecked} onclick="uncheckOthers(this)"></td>
+                              <td><input type="checkbox" name="checkbox-group-${index}" ${defektChecked} onclick="uncheckOthers(this)"></td>
                            </tr>`;
                 tableBody.append(row);
+            });
+        }
+
+        function uncheckOthers(checkbox) {
+            let checkboxes = document.querySelectorAll(`input[name="${checkbox.name}"]`);
+            checkboxes.forEach(cb => {
+                if (cb !== checkbox) cb.checked = false;
             });
         }
 
