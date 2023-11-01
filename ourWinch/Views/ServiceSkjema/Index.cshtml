@@ -88,6 +88,9 @@
     <script>
         $(document).ready(function () {
 
+            // Sayfa yüklendiğinde otomatik olarak data yüklensin
+            fetchServiceData(17);  // Burada varsayılan olarak "17" id'sini kullandım.
+
             $("#lastInnData").click(function () {
                 var serviceOrdreId = $("#serviceOrdreIdInput").val();
 
@@ -98,42 +101,56 @@
                 }
             });
 
-            // Eğer serviceSkjemaLink sınıfını kullandıysanız bu kısmı kullanın
-            $(".serviceSkjemaLink").click(function (e) {
-                e.preventDefault();
-                var orderId = $(this).data("id");
-                fetchServiceData(orderId);
-            });
-
+            // I removed the auto-loading of default data for clarity.
         });
 
-        function fetchServiceData(orderId) {
-            var apiUrl = "/api/ServiceSkjema/" + orderId;
+      function fetchServiceData(orderId) {
+    $.ajax({
+      url: "http://localhost:5002/api/ServiceSkjema/" + orderId,
+        type: "GET",
+        success: function(data) {
+            var tableBody = $("#dataBody");
+            tableBody.empty();
+            console.log(data)
 
-            $.ajax({
-                url: apiUrl,
-                method: "GET",
-                success: function (data) {
-                    var tableBody = $("#dataBody");
-                    tableBody.empty();
+            // Kategorilerin isimlerini tanımlıyoruz
+            var mappings = {
+                mechanicals: "Mechanical",
+                hydrolisks: "Hydrolisk",
+                electros: "Electro",
+                funksjonsTests: "FunksjonsTest",
+                trykks: "Trykk"
+            };
 
-                    data.forEach(item => { // "data" kullanıldı, "data.items" değil.
-                        var row = `<tr>
-                                           <td>${item.Avdeling}</td>
-                                           <td>${item.SjekkPunkter}</td>
-                                           <td><input type="checkbox" ${item.OK ? 'checked' : ''}></td>
-                                           <td><input type="checkbox" ${item.BørSkiftes ? 'checked' : ''}></td>
-                                           <td><input type="checkbox" ${item.Defekt ? 'checked' : ''}></td>
-                                       </tr>`;
-                        tableBody.append(row);
-                    });
-                },
-                error: function (error) {
-                    console.log("Det oppsto en feil: ", error);
-                    alert("Bir hata oluştu! Lütfen tekrar deneyiniz.");
+            for (var key in mappings) {
+                if (data[key] && data[key].length) {
+                    appendDataToTable(data[key], tableBody, mappings[key]);
                 }
+            }
+        },
+        error: function(error) {
+            alert("Bir hata oluştu! Lütfen tekrar deneyin.");
+        }
+    });
+}
+        function appendDataToTable(dataList, tableBody, avdeling) {
+            dataList.forEach(item => {
+                var okChecked = item.ok ? 'checked' : '';
+                var borSkiftesChecked = !item.ok ? 'checked' : '';
+                // Not: Defekt sütununun ne zaman işaretleneceğine dair bir bilgi verilmediği için şimdilik boş bırakıyorum. Gerekirse aşağıdaki satırı düzenleyebilirsiniz.
+                var defektChecked = '';
+
+                var row = `<tr>
+                              <td>${avdeling}</td>
+                              <td>${item.checklistItem}</td>
+                              <td><input type="checkbox" ${okChecked}></td>
+                              <td><input type="checkbox" ${borSkiftesChecked}></td>
+                              <td><input type="checkbox" ${defektChecked}></td>
+                           </tr>`;
+                tableBody.append(row);
             });
         }
+
     </script>
 </body>
 </html>

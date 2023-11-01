@@ -83,7 +83,7 @@
 }
 
 .sidebar-sticky ul.nav {
-    padding-top: 10px; /* Hjem'in daha yukarıda olması için ayarlandı */
+    padding-top: 2px; /* Hjem'in daha yukarıda olması için ayarlandı */
 }
 @media (max-width: 768px) {
     .navbar {

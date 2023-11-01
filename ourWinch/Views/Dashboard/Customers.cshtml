@@ -1,0 +1,118 @@
+﻿
+<div class="container">
+    <!-- Kunde Statistics -->
+    <div class="statistics-wrapper">
+        <div class="stat-item">
+            <div class="stat-icon">
+                <!-- SVG or Image for Icon -->
+            </div>
+            <div class="stat-info">
+                <span class="stat-number">5,423</span>
+                <span class="stat-text">Total Kunde</span>
+                <span class="stat-change">+16% denne måned</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-icon">
+                <!-- SVG or Image for Icon -->
+            </div>
+            <div class="stat-info">
+                <span class="stat-number">5,423</span>
+                <span class="stat-text">Total Kunde</span>
+                <span class="stat-change">+16% dette år</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kunde Table -->
+    <div class="kunde-wrapper">
+        <h2>Kunder</h2>
+        <div class="search-wrapper">
+            <input type="search" placeholder="Search" />
+            <select>
+                <option>kort av: Navn</option>
+                <!-- Other options -->
+            </select>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Kunde Navn</th>
+                    <th>Etter Navn</th>
+                    <th>Tlf Nummer</th>
+                    <th>Email</th>
+                    <th>Adress</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Per</td>
+                    <td>Pol</td>
+                    <td>12345678</td>
+                    <td>perpol@mail.com</td>
+                    <td>Mandalvei 6.</td>
+                    <td><span class="status-active">Active</span></td>
+                </tr>
+                <tr>
+                    <td>Jakob</td>
+                    <td>Tesla</td>
+                    <td>87654321</td>
+                    <td>jakoptesla@mail.com</td>
+                    <td>Mandalvei 41</td>
+                    <td><span class="status-inactive">Inactive</span></td>
+                </tr>
+                <!-- More rows as needed -->
+            </tbody>
+        </table>
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+            <span>&lt;</span>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <!-- ... More pages -->
+            <span>&gt;</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Sample styling (customize as needed) */
+    .statistics-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .stat-item {
+        display: flex;
+    }
+
+    .kunde-wrapper {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .status-active {
+        color: green;
+    }
+
+    .status-inactive {
+        color: red;
+    }
+
+    .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+</style>
