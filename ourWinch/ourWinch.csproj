@@ -32,6 +32,7 @@
 
 	<ItemGroup>
 	  <Folder Include="ServiceAp\" />
+	  <Folder Include="Views\Rapporter\" />
 	</ItemGroup>
 
 </Project>

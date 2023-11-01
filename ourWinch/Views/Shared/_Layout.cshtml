@@ -103,9 +103,10 @@
                         @if(isAdmin){
                             <li class="nav-item mt-3">
                                 <!-- "Rapporter" bağlantısı -->
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
+                                <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
                                     <i class="fa fa-bar-chart"></i> Rapporter
                                 </a>
+
                                 <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
                                 <ul id="kunderSubmenu" class="collapse">
                                     <li style="max-height: 10px" class="nav-item mt-3">
