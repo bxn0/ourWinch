@@ -104,50 +104,22 @@
             // I removed the auto-loading of default data for clarity.
         });
 
-        function fetchServiceData(orderId) {
-            // Örnek veri yapısnı güncelledim
-            var data = {
-                Mechanicals: [{
-                    id: 36,
-                    serviceOrderId: 16,
-                    ordernummer: 230006,
-                    checklistItem: 'Mekanik kontrol',
-                    ok: true
-                }],
-                Hydrolisks: [{
-                    id: 37,
-                    serviceOrderId: 16,
-                    ordernummer: 230007,
-                    checklistItem: 'Hidrolik sızdırmazlık kontrolü',
-                    ok: false
-                }],
-                Electros: [{
-                    id: 35,
-                    serviceOrderId: 16,
-                    ordernummer: 230005,
-                    checklistItem: 'Sjekk ledningsnett på vinsj',
-                    ok: true
-                }, {
-                    id: 38,
-                    serviceOrderId: 16,
-                    ordernummer: 230008,
-                    checklistItem: 'Elektrik bağlantı kontrolü',
-                    ok: false
-                }],
-                FunksjonsTests: [],
-                Trykks: []
-            };
-
+      function fetchServiceData(orderId) {
+    $.ajax({
+      url: "http://localhost:5002/api/ServiceSkjema/" + orderId,
+        type: "GET",
+        success: function(data) {
             var tableBody = $("#dataBody");
             tableBody.empty();
+            console.log(data)
 
             // Kategorilerin isimlerini tanımlıyoruz
             var mappings = {
-                Mechanicals: "Mekanik",
-                Hydrolisks: "Hidrolik",
-                Electros: "Elektrik",
-                FunksjonsTests: "Fonksiyon Testi",
-                Trykks: "Basınç Testi"
+                mechanicals: "Mechanical",
+                hydrolisks: "Hydrolisk",
+                electros: "Electro",
+                funksjonsTests: "FunksjonsTest",
+                trykks: "Trykk"
             };
 
             for (var key in mappings) {
@@ -155,8 +127,12 @@
                     appendDataToTable(data[key], tableBody, mappings[key]);
                 }
             }
+        },
+        error: function(error) {
+            alert("Bir hata oluştu! Lütfen tekrar deneyin.");
         }
-
+    });
+}
         function appendDataToTable(dataList, tableBody, avdeling) {
             dataList.forEach(item => {
                 var okChecked = item.ok ? 'checked' : '';
