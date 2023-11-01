@@ -29,6 +29,7 @@
 
     <!-- FontAwesome (ikonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
     <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
@@ -99,6 +100,32 @@
                             </a>
                         </li>
 
+                        @if(isAdmin){
+                            <li class="nav-item mt-3">
+                                <!-- "Rapporter" bağlantısı -->
+                                <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
+                                    <i class="fa fa-bar-chart"></i> Rapporter
+                                </a>
+
+                                <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
+                                <ul id="kunderSubmenu" class="collapse">
+                                    <li style="max-height: 10px" class="nav-item mt-3">
+                                        <a asp-controller="Customers" asp-action="Dashboard" class="nav-link">
+                                            <i class="fa fa-address-card"></i> Kunder
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mt-3">
+                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
+                                            <i class="fa fa-filter"></i> Tjenestetype
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            }
+
+
+
                        
                     </ul>
                     
@@ -106,31 +133,7 @@
 
                         <ul class="nav flex-column mt-9">
 
-                            <li class="nav-item mt-3">
-                                <!-- "Rapporter" bağlantısı -->
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
-                                    <i class="fas fa-rapports"></i> Rapporter
-                                </a>
-                                <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
-                                <ul id="kunderSubmenu" class="collapse">
-                                    <li class="nav-item mt-3">
-                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
-                                            <i class="fas fa-kunde"></i> Kunder
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mt-3">
-                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
-                                            <i class="fas fa-reserv"></i> Reservedeler
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mt-3">
-                                        <a asp-controller="rapports" asp-action="Dashboard" class="nav-link">
-                                            <i class="fas fa-tjeneste"></i> Tjenestetype
-                                        </a>
-                                    </li>
-                                </ul>
-                                
-                            </li>
+                           
 
                             <li class="nav-item">
                                 <a asp-controller="Account" asp-action="Register" class="nav-link">
