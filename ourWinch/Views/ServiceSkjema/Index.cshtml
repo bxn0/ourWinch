@@ -18,23 +18,38 @@
             </div>
             <div class="col-md-6 text-right">
                 <button class="btn btn-primary">Skriv ut</button>
+                <button class="btn btn-primary">Fulført</button>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>Navn:</label>
-                <span id="personName"></span>
-            </div>
-            <div class="col-md-4">
-                <label>Etternavn:</label>
-                <span id="personSurname"></span>
-            </div>
-            <div class="col-md-4">
-                <label>OrdereNummer:</label>
-                <span id="orderNumber"></span>
+        <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Service Skjema</div>
+        <div>
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Navn:</strong> <span id="personName"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Etternavn:</strong> <span id="personSurname"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>OrdereNummer:</strong> <span id="orderNumber"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Produkttype:</strong> <span id="productType"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Serienummer:</strong> <span id="serialNumber"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Mottatt Dato: </strong> <span id="receivedDate"></span>
+                    </div>
+                </div>
             </div>
         </div>
-             
+
+
         <div class="row mt-3">
             <div class="col-md-12">
                 <table class="table table-bordered">
@@ -111,9 +126,13 @@
                     tableBody.empty();
 
                     if (data.serviceOrders && data.serviceOrders.length > 0) {
-                        $("#personName").text(data.serviceOrders[0].fornavn);
-                        $("#personSurname").text(data.serviceOrders[0].etternavn);
-                        $("#orderNumber").text(data.serviceOrders[0].ordrenummer);
+                        var order = data.serviceOrders[0];
+                        $("#personName").text(order.fornavn);
+                        $("#personSurname").text(order.etternavn);
+                        $("#orderNumber").text(order.ordrenummer);
+                        $("#productType").text(order.produkttype);     // Ekstra bilgileri ekledik
+                        $("#serialNumber").text(order.serienummer);
+                        $("#receivedDate").text(order.mottattDato);
                     }
                     console.log(data);
 
