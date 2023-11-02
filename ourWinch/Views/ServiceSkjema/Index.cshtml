@@ -110,9 +110,9 @@
                     var tableBody = $("#dataBody");
                     tableBody.empty();
 
-                    $("#personName").text(data.Fornavn);
-                    $("#personSurname").text(data.Etternavn);
-                    $("#orderNumber").text(data.Ordrenummer);
+                    $("#personName").text(data.fornavn);
+                    $("#personSurname").text(data.etternavn);
+                    $("#orderNumber").text(data.serviceOrderId);
                     console.log(data);
 
                     var mappings = {
@@ -121,7 +121,7 @@
                         electros: "Electro",
                         funksjonsTests: "FunksjonsTest",
                         trykks: "Trykk",
-                        serviceoOrder: "ServiceOrder"
+                        serviceoOrders: "ServiceOrder"
                     };
 
                     for (var key in mappings) {
