@@ -30,7 +30,7 @@
                 <span id="personSurname"></span>
             </div>
             <div class="col-md-4">
-                <label>OrderNummer:</label>
+                <label>OrdereNummer:</label>
                 <span id="orderNumber"></span>
             </div>
         </div>
@@ -110,9 +110,11 @@
                     var tableBody = $("#dataBody");
                     tableBody.empty();
 
-                    $("#personName").text(data.fornavn);
-                    $("#personSurname").text(data.etternavn);
-                    $("#orderNumber").text(data.serviceOrderId);
+                    if (data.serviceOrders && data.serviceOrders.length > 0) {
+                        $("#personName").text(data.serviceOrders[0].fornavn);
+                        $("#personSurname").text(data.serviceOrders[0].etternavn);
+                        $("#orderNumber").text(data.serviceOrders[0].ordrenummer);
+                    }
                     console.log(data);
 
                     var mappings = {
@@ -121,7 +123,7 @@
                         electros: "Electro",
                         funksjonsTests: "FunksjonsTest",
                         trykks: "Trykk",
-                        serviceoOrders: "ServiceOrder"
+                       
                     };
 
                     for (var key in mappings) {
@@ -131,7 +133,7 @@
                     }
                 },
                 error: function (error) {
-                    alert("Bir hata oluştu! Lütfen tekrar deneyin.");
+                    alert("Something went wrong! Please try again.");
                 }
             });
         }
