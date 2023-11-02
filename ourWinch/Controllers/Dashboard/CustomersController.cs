@@ -16,17 +16,23 @@ public class CustomersController : Controller
         _context = context;
     }
 
-    public IActionResult Dashboard()
+    public IActionResult Dashboard(int page = 1)
     {
+        int pageSize = 10;
         List<DateTime> bookedDates = _context.ServiceOrders.Select(s => s.MottattDato).ToList();
         ViewBag.BookedDates = JsonConvert.SerializeObject(bookedDates);
 
-        // Benzersiz "navn", "Etter Navn" ve "Tlf Nummer" değerlerine sahip satırları al
         var uniqueServiceOrders = _context.ServiceOrders
             .GroupBy(s => new { s.Fornavn, s.Etternavn, s.MobilNo })
             .Select(g => g.First())
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToList();
+
+        ViewBag.TotalPages = Math.Ceiling((double)_context.ServiceOrders.Count() / pageSize);
+        ViewBag.CurrentPage = page;
 
         return View("~/Views/Dashboard/Customers.cshtml", uniqueServiceOrders);
     }
+
 }
