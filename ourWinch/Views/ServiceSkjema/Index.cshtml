@@ -20,7 +20,20 @@
                 <button class="btn btn-primary">Skriv ut</button>
             </div>
         </div>
-
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label>Navn:</label>
+                <span id="personName"></span>
+            </div>
+            <div class="col-md-4">
+                <label>Etternavn:</label>
+                <span id="personSurname"></span>
+            </div>
+            <div class="col-md-4">
+                <label>OrderNummer:</label>
+                <span id="orderNumber"></span>
+            </div>
+        </div>
              
         <div class="row mt-3">
             <div class="col-md-12">
@@ -96,6 +109,10 @@
                 success: function (data) {
                     var tableBody = $("#dataBody");
                     tableBody.empty();
+
+                    $("#personName").text(data.Fornavn);
+                    $("#personSurname").text(data.Etternavn);
+                    $("#orderNumber").text(data.Ordrenummer);
                     console.log(data);
 
                     var mappings = {
@@ -103,7 +120,8 @@
                         hydrolisks: "Hydrolisk",
                         electros: "Electro",
                         funksjonsTests: "FunksjonsTest",
-                        trykks: "Trykk"
+                        trykks: "Trykk",
+                        serviceoOrder: "ServiceOrder"
                     };
 
                     for (var key in mappings) {
