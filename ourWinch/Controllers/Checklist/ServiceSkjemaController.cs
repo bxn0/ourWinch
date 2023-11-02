@@ -33,6 +33,7 @@ namespace ourWinch.Controllers.Checklist
             var electros = await _context.Electros.Where(e => e.ServiceOrderId == id).ToListAsync();
             var funksjonsTests = await _context.FunksjonsTests.Where(f => f.ServiceOrderId == id).ToListAsync();
             var trykks = await _context.Trykks.Where(t => t.ServiceOrderId == id).ToListAsync();
+            var serviceOrders = await _context.ServiceOrders.Where(t => t.ServiceOrderId == id).ToListAsync();
 
             if (!mechanicals.Any() && !hydrolisks.Any() && !electros.Any() && !funksjonsTests.Any() && !trykks.Any())
             {
@@ -45,7 +46,8 @@ namespace ourWinch.Controllers.Checklist
                 Hydrolisks = hydrolisks,
                 Electros = electros,
                 FunksjonsTests = funksjonsTests,
-                Trykks = trykks
+                Trykks = trykks,
+                ServiceOrders = serviceOrders
             };
 
             return serviceSkjema;

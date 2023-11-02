@@ -9,7 +9,10 @@ public class ServiceSkjema
     public List<Electro> Electros { get; set; }
     public List<FunksjonsTest> FunksjonsTests { get; set; }
     public List<Trykk> Trykks { get; set; }
- 
+
+    public List<ServiceOrder> ServiceOrders { get; set; }
+
+
 }
 
 
