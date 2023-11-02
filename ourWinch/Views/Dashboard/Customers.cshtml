@@ -2,26 +2,7 @@
 <div class="container">
     <!-- Kunde Statistics -->
     <div class="statistics-wrapper">
-        <div class="stat-item">
-            <div class="stat-icon">
-                <!-- SVG or Image for Icon -->
-            </div>
-            <div class="stat-info">
-                <span class="stat-number">5,423</span>
-                <span class="stat-text">Total Kunde</span>
-                <span class="stat-change">+16% denne måned</span>
-            </div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-icon">
-                <!-- SVG or Image for Icon -->
-            </div>
-            <div class="stat-info">
-                <span class="stat-number">5,423</span>
-                <span class="stat-text">Total Kunde</span>
-                <span class="stat-change">+16% dette år</span>
-            </div>
-        </div>
+        <!-- ... Your statistics components ... -->
     </div>
 
     <!-- Kunde Table -->
@@ -34,6 +15,9 @@
                 <!-- Other options -->
             </select>
         </div>
+
+        @model List<ourWinch.Models.Dashboard.ServiceOrder>
+
         <table>
             <thead>
                 <tr>
@@ -42,40 +26,30 @@
                     <th>Tlf Nummer</th>
                     <th>Email</th>
                     <th>Adress</th>
-                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Per</td>
-                    <td>Pol</td>
-                    <td>12345678</td>
-                    <td>perpol@mail.com</td>
-                    <td>Mandalvei 6.</td>
-                    <td><span class="status-active">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Jakob</td>
-                    <td>Tesla</td>
-                    <td>87654321</td>
-                    <td>jakoptesla@mail.com</td>
-                    <td>Mandalvei 41</td>
-                    <td><span class="status-inactive">Inactive</span></td>
-                </tr>
-                <!-- More rows as needed -->
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Fornavn</td>
+                        <td>@order.Etternavn</td>
+                        <td>@order.MobilNo</td>
+                        <td>@order.Email</td>
+                        <td>@order.Adresse</td>
+                    </tr>
+                }
             </tbody>
         </table>
         <!-- Pagination -->
         <div class="pagination-wrapper">
-            <span>&lt;</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <!-- ... More pages -->
-            <span>&gt;</span>
+            <!-- ... Your pagination components ... -->
         </div>
     </div>
 </div>
+
+<!-- The rest of your style definitions -->
+
 
 <style>
     /* Sample styling (customize as needed) */
