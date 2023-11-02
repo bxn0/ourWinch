@@ -20,7 +20,20 @@
                 <button class="btn btn-primary">Skriv ut</button>
             </div>
         </div>
-
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label>Navn:</label>
+                <span id="personName"></span>
+            </div>
+            <div class="col-md-4">
+                <label>Etternavn:</label>
+                <span id="personSurname"></span>
+            </div>
+            <div class="col-md-4">
+                <label>OrdereNummer:</label>
+                <span id="orderNumber"></span>
+            </div>
+        </div>
              
         <div class="row mt-3">
             <div class="col-md-12">
@@ -96,6 +109,12 @@
                 success: function (data) {
                     var tableBody = $("#dataBody");
                     tableBody.empty();
+
+                    if (data.serviceOrders && data.serviceOrders.length > 0) {
+                        $("#personName").text(data.serviceOrders[0].fornavn);
+                        $("#personSurname").text(data.serviceOrders[0].etternavn);
+                        $("#orderNumber").text(data.serviceOrders[0].ordrenummer);
+                    }
                     console.log(data);
 
                     var mappings = {
@@ -103,7 +122,8 @@
                         hydrolisks: "Hydrolisk",
                         electros: "Electro",
                         funksjonsTests: "FunksjonsTest",
-                        trykks: "Trykk"
+                        trykks: "Trykk",
+                       
                     };
 
                     for (var key in mappings) {
@@ -113,7 +133,7 @@
                     }
                 },
                 error: function (error) {
-                    alert("Bir hata oluştu! Lütfen tekrar deneyin.");
+                    alert("Something went wrong! Please try again.");
                 }
             });
         }
