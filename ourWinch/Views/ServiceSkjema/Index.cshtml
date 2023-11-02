@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="container mt-5">
+    <div class="container mt-2">
         <div class="row">
             <div class="col-md-6">
                 <h4>Nøsted & avd. Jåbæk</h4>
@@ -21,37 +21,7 @@
             </div>
         </div>
 
-        <!-- Eklenen Form Başlangıç -->
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Servis Ordre ID" id="serviceOrdreIdInput">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="lastInnData">Yükle</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Eklenen Form Bitiş -->
-
-        <div class="row mt-3">
-            <div class="col-md-6">
-                <label>Godkjent av:</label>
-                <input type="text" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <label>Dato:</label>
-                <input type="date" class="form-control">
-            </div>
-            <div class="col-md-3">
-                <label>Type:</label>
-                <select class="form-control">
-                    <option value="Ny">Ny</option>
-                    <!-- Diğer seçenekler buraya eklenebilir -->
-                </select>
-            </div>
-        </div>
-
+             
         <div class="row mt-3">
             <div class="col-md-12">
                 <table class="table table-bordered">
@@ -88,8 +58,8 @@
     <script>
         $(document).ready(function () {
 
-            // Sayfa yüklendiğinde otomatik olarak data yüklensin
-            fetchServiceData(17);  // Burada varsayılan olarak "17" id'sini kullandım.
+            var serviceOrdreId = getIdFromUrl();  // URL'den ID'yi al
+            fetchServiceData(serviceOrdreId);     // Alınan ID ile veriyi yükle
 
             $("#lastInnData").click(function () {
                 var serviceOrdreId = $("#serviceOrdreIdInput").val();
@@ -101,56 +71,77 @@
                 }
             });
 
-            // I removed the auto-loading of default data for clarity.
+            $("a:contains('Ja')").click(function (event) {
+                event.preventDefault(); // Linkin varsayılan davranışını engelle
+                let serviceOrderId = $(this).closest('tr').data('orderid'); // Tıklanılan linkin bulunduğu satırdan data-orderid değerini al
+                fetchServiceData(serviceOrderId);
+            });
         });
 
-      function fetchServiceData(orderId) {
-    $.ajax({
-      url: "http://localhost:5002/api/ServiceSkjema/" + orderId,
-        type: "GET",
-        success: function(data) {
-            var tableBody = $("#dataBody");
-            tableBody.empty();
-            console.log(data)
-
-            // Kategorilerin isimlerini tanımlıyoruz
-            var mappings = {
-                mechanicals: "Mechanical",
-                hydrolisks: "Hydrolisk",
-                electros: "Electro",
-                funksjonsTests: "FunksjonsTest",
-                trykks: "Trykk"
-            };
-
-            for (var key in mappings) {
-                if (data[key] && data[key].length) {
-                    appendDataToTable(data[key], tableBody, mappings[key]);
-                }
-            }
-        },
-        error: function(error) {
-            alert("Bir hata oluştu! Lütfen tekrar deneyin.");
+        function getIdFromUrl() {
+            var url = window.location.pathname;
+            var id = url.substring(url.lastIndexOf('/') + 1);
+            return id;
         }
-    });
-}
+
+        function fetchServiceData(orderId) {
+            var url = "http://localhost:5002/api/ServiceSkjema/" + orderId;
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                beforeSend: function () {
+                    console.log("Fetching data from URL:", url);
+                },
+                success: function (data) {
+                    var tableBody = $("#dataBody");
+                    tableBody.empty();
+                    console.log(data);
+
+                    var mappings = {
+                        mechanicals: "Mechanical",
+                        hydrolisks: "Hydrolisk",
+                        electros: "Electro",
+                        funksjonsTests: "FunksjonsTest",
+                        trykks: "Trykk"
+                    };
+
+                    for (var key in mappings) {
+                        if (data[key] && data[key].length) {
+                            appendDataToTable(data[key], tableBody, mappings[key]);
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert("Bir hata oluştu! Lütfen tekrar deneyin.");
+                }
+            });
+        }
+
         function appendDataToTable(dataList, tableBody, avdeling) {
-            dataList.forEach(item => {
+            dataList.forEach((item, index) => {
                 var okChecked = item.ok ? 'checked' : '';
-                var borSkiftesChecked = !item.ok ? 'checked' : '';
-                // Not: Defekt sütununun ne zaman işaretleneceğine dair bir bilgi verilmediği için şimdilik boş bırakıyorum. Gerekirse aşağıdaki satırı düzenleyebilirsiniz.
-                var defektChecked = '';
+                var borSkiftesChecked = (item.borSkiftes && !item.ok) ? 'checked' : '';
+                var defektChecked = (!item.ok && !item.borSkiftes) ? 'checked' : '';
 
                 var row = `<tr>
-                              <td>${avdeling}</td>
-                              <td>${item.checklistItem}</td>
-                              <td><input type="checkbox" ${okChecked}></td>
-                              <td><input type="checkbox" ${borSkiftesChecked}></td>
-                              <td><input type="checkbox" ${defektChecked}></td>
-                           </tr>`;
+                                  <td>${avdeling}</td>
+                                  <td>${item.checklistItem}</td>
+                                  <td><input type="checkbox" name="checkbox-group-${index}" ${okChecked} onclick="uncheckOthers(this)"></td>
+                                  <td><input type="checkbox" name="checkbox-group-${index}" ${borSkiftesChecked} onclick="uncheckOthers(this)"></td>
+                                  <td><input type="checkbox" name="checkbox-group-${index}" ${defektChecked} onclick="uncheckOthers(this)"></td>
+                               </tr>`;
                 tableBody.append(row);
             });
         }
 
+        function uncheckOthers(checkbox) {
+            let checkboxes = document.querySelectorAll(`input[name="${checkbox.name}"]`);
+            checkboxes.forEach(cb => {
+                if (cb !== checkbox) cb.checked = false;
+            });
+        }
     </script>
+
 </body>
 </html>
