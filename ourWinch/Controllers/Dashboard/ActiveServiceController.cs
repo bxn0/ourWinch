@@ -62,4 +62,23 @@ public class ActiveServiceController : Controller
         return View(serviceOrders);
     }
 
+    [HttpDelete]
+    public async Task<IActionResult> DeleteService(int id)
+    {
+        // ActiveService tablosundan kayıt arama
+        var activeService = await _context.ActiveServices.FindAsync(id);
+        if (activeService == null)
+        {
+            return NotFound();
+        }
+
+        // ActiveService tablosundan ilgili kaydı silme
+        _context.ActiveServices.Remove(activeService);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+
+
 }
