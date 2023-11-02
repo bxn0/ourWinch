@@ -16,20 +16,33 @@ public class CustomersController : Controller
         _context = context;
     }
 
-    public IActionResult Dashboard(int page = 1)
+    public IActionResult Dashboard(string query = "", string filter = "name", int page = 1)
     {
         int pageSize = 10;
         List<DateTime> bookedDates = _context.ServiceOrders.Select(s => s.MottattDato).ToList();
         ViewBag.BookedDates = JsonConvert.SerializeObject(bookedDates);
 
-        var uniqueServiceOrders = _context.ServiceOrders
+        var serviceOrdersQuery = _context.ServiceOrders.AsQueryable();
+
+        if (!string.IsNullOrEmpty(query))
+        {
+            switch (filter)
+            {
+                case "name":
+                    serviceOrdersQuery = serviceOrdersQuery.Where(s => s.Fornavn.Contains(query) || s.Etternavn.Contains(query));
+                    break;
+                    // You can add more cases for other filters here
+            }
+        }
+
+        var uniqueServiceOrders = serviceOrdersQuery
             .GroupBy(s => new { s.Fornavn, s.Etternavn, s.MobilNo })
             .Select(g => g.First())
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToList();
 
-        ViewBag.TotalPages = Math.Ceiling((double)_context.ServiceOrders.Count() / pageSize);
+        ViewBag.TotalPages = Math.Ceiling((double)serviceOrdersQuery.Count() / pageSize);
         ViewBag.CurrentPage = page;
 
         return View("~/Views/Dashboard/Customers.cshtml", uniqueServiceOrders);
