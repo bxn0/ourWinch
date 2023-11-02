@@ -27,7 +27,7 @@
             </div>
             <div class="col-md-6 text-right">
                 <button class="btn btn-primary">Skriv ut</button>
-                <button class="btn btn-primary">Fulført</button>
+                <button id="fulfortButton" class="btn btn-primary">Fulført</button>
             </div>
         </div>
         <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Service Skjema</div>
@@ -180,6 +180,28 @@
                                   <td><input type="checkbox" name="checkbox-group-${index}" ${defektChecked} onclick="uncheckOthers(this)"></td>
                                </tr>`;
                 tableBody.append(row);
+            });
+        }
+        function fulforService(serviceOrdreId) {
+            $("#fulfortButton").click(function () {
+
+            $.ajax({
+                url: "http://localhost:5002/api/ActiveService/" + serviceOrdreId,
+                type: "DELETE",
+                success: function () {
+                    // Şimdi veriyi Fulførte sayfasına ekleyin.
+                    // Örnek olarak, POST metoduyla yeni bir kayıt ekleyeceğiz.
+                    $.ajax({
+                        url: "http://localhost:5002/api/Fulforte/",
+                        type: "POST",
+                        data: { "serviceOrdreId": serviceOrdreId },
+                        success: function () {
+                            alert("Service başarıyla tamamlandı!");
+                            // Kullanıcıyı Fulførte sayfasına yönlendirin veya sayfayı yenileyin.
+                            window.location.reload();
+                        }
+                    });
+                }
             });
         }
 
