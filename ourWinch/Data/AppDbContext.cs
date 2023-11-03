@@ -13,6 +13,9 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<ActiveService> ActiveServices { get; set; }
 
+    public DbSet<CompletedService> CompletedServices { get; set; }
+
+
     public DbSet<Mechanical> Mechanicals { get; set; }
 
     public DbSet<Electro> Electros { get; set; }

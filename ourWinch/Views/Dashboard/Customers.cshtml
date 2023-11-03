@@ -8,13 +8,16 @@
     <!-- Kunde Table -->
     <div class="kunde-wrapper">
         <h2>Kunder</h2>
-        <div class="search-wrapper">
-            <input type="search" placeholder="Search" />
-            <select>
-                <option>kort av: Navn</option>
-                <!-- Other options -->
-            </select>
-        </div>
+        <form method="get" action="@Url.Action("Dashboard", "Customers")">
+            <div class="search-wrapper">
+                <input type="search" name="query" placeholder="Search" />
+                <select name="filter">
+                    <option value="name">kort av: Navn</option>
+                    <!-- Other options -->
+                </select>
+                <button type="submit">Search</button>
+            </div>
+        </form>
 
         @model List<ourWinch.Models.Dashboard.ServiceOrder>
 
