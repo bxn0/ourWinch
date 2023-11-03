@@ -6,11 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Kontrol Sayfası</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+  .main-container {
+    max-height: 80vh;  /* Ekranın %80 yüksekliğinde maksimum yükseklik */
+    overflow-y: auto;  /* Dikey kaydırma çubuğu aktif hale getirildi */
+  }
+</style>
+
 </head>
 
 <body>
 
-    <div class="container mt-2">
+    <div class="container mt-2 main-container">
         <div class="row">
             <div class="col-md-6">
                 <h4>Nøsted & avd. Jåbæk</h4>
@@ -18,23 +26,38 @@
             </div>
             <div class="col-md-6 text-right">
                 <button class="btn btn-primary">Skriv ut</button>
+                <button class="btn btn-primary">Fulført</button>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>Navn:</label>
-                <span id="personName"></span>
-            </div>
-            <div class="col-md-4">
-                <label>Etternavn:</label>
-                <span id="personSurname"></span>
-            </div>
-            <div class="col-md-4">
-                <label>OrderNummer:</label>
-                <span id="orderNumber"></span>
+
+        <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Service Skjema</div>
+        <div>
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Navn:</strong> <span id="personName"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Etternavn:</strong> <span id="personSurname"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>OrdereNummer:</strong> <span id="orderNumber"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Produkttype:</strong> <span id="productType"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Serienummer:</strong> <span id="serialNumber"></span>
+                    </div>
+                    <div class="col-md-4 border border-black p-1">
+                        <strong>Mottatt Dato: </strong> <span id="receivedDate"></span>
+                    </div>
+                </div>
             </div>
         </div>
-             
+
         <div class="row mt-3">
             <div class="col-md-12">
                 <table class="table table-bordered">
@@ -110,10 +133,15 @@
                     var tableBody = $("#dataBody");
                     tableBody.empty();
 
-                    $("#personName").text(data.fornavn);
-                    $("#personSurname").text(data.etternavn);
-                    $("#orderNumber").text(data.serviceOrderId);
-                    console.log(data);
+                    if (data.serviceOrders && data.serviceOrders.length > 0) {
+                        var order = data.serviceOrders[0];
+                        $("#personName").text(order.fornavn);
+                        $("#personSurname").text(order.etternavn);
+                        $("#orderNumber").text(order.ordrenummer);
+                        $("#productType").text(order.produkttype);    
+                        $("#serialNumber").text(order.serienummer);
+                        $("#receivedDate").text(order.mottattDato);
+                    }
 
                     var mappings = {
                         mechanicals: "Mechanical",
@@ -121,7 +149,7 @@
                         electros: "Electro",
                         funksjonsTests: "FunksjonsTest",
                         trykks: "Trykk",
-                        serviceoOrders: "ServiceOrder"
+                       
                     };
 
                     for (var key in mappings) {
