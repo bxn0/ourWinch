@@ -7,7 +7,7 @@
 .sidebar {
     background-color: black;
     color: #9CB7C2;
-    height: 140vh;
+    height: 120vh;
     padding-top: 0px; /* Bu değeri ayarlayarak "Hjem" öğesinin konumunu kontrol edebilirsiniz. */
 }
 
