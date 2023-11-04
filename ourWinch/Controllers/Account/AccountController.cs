@@ -14,12 +14,12 @@ public class AccountController : Controller
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly IEmailSender _emailSender;
-    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, RoleManager<IdentityRole> roleManager)
+    //private readonly IEmailSender _emailSender;
+    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,  RoleManager<IdentityRole> roleManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
-        _emailSender = emailSender;
+       // _emailSender = emailSender;
         _roleManager = roleManager;
     }
 
@@ -166,8 +166,8 @@ public class AccountController : Controller
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callbackurl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-            await _emailSender.SendEmailAsync(model.Email, "Reset Password - Identity Manager",
-                "Please reset your password by clicking here: <a href=\"" + callbackurl + "\">link</a>");
+          //  await _emailSender.SendEmailAsync(model.Email, "Reset Password - Identity Manager",
+            //    "Please reset your password by clicking here: <a href=\"" + callbackurl + "\">link</a>");
 
             return RedirectToAction("ForgotPasswordConfirmation");
         }
