@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ourWinch.Models.Dashboard;
 using ourWinch.Services;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace ourWinch.Controllers.Checklist
 {
+
+    [Authorize]
     public class MechanicalController : Controller
     {
         private readonly AppDbContext _context;

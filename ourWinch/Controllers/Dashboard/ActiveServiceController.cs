@@ -21,6 +21,13 @@ public class ActiveServiceController : Controller
     {
         _context = context;
     }
+    public static int PageSizeValue
+    {
+        get
+        {
+            return PageSize;
+        }
+    }
 
     public async Task<IActionResult> ActiveService(int page = 1)
     {
@@ -61,6 +68,7 @@ public class ActiveServiceController : Controller
 
         return View(serviceOrders);
     }
+
 
     [HttpDelete]
     public async Task<IActionResult> DeleteService(int id)
