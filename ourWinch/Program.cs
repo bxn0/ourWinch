@@ -41,7 +41,11 @@ namespace ourWinch
             //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
-
+            builder.Services.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.AddConsole();
+                loggingBuilder.AddDebug();
+            });
             builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
             builder.Services.Configure<IdentityOptions>(opt =>
             {
