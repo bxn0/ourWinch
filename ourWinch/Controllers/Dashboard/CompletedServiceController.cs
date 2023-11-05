@@ -20,10 +20,11 @@ public class CompletedServiceController : Controller
     }
 
     // GET: Gösterilen dashboard
-    public IActionResult Dashboard()
+    // GET: Dashboard/CompletedService
+    public IActionResult Index()
     {
-        // Returnerer fullført tjeneste dashboard-visning
-        return View("~/Views/Dashboard/Completed.cshtml");
+        var completedServices = _context.CompletedServices.ToList();
+        return View("~/Views/Dashboard/CompletedService.cshtml", completedServices);
     }
 
     // POST: Fullført tjeneste kaydı için
@@ -35,7 +36,7 @@ public class CompletedServiceController : Controller
             // Model doğruysa, veritabanına ekle
             _context.CompletedServices.Add(completedService);
             _context.SaveChanges(); // Değişiklikleri kaydet
-            return RedirectToAction("Dashboard"); // Dashboard'a yönlendir
+            return RedirectToAction("Index", "CompletedService");
         }
 
         // ModelState geçerli değilse, hataları logla
