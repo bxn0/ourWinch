@@ -1,1 +1,42 @@
+@{
+    ViewData["Title"] = "Tjenestetype";
+}
+
+<h2>Tjeneste Status</h2>
+
+<!-- Grafik Konteyneri -->
+<div class="chart-container" style="position: relative; height:40vh; width:80vw">
+    <canvas id="tjenesteChart"></canvas>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('tjenesteChart').getContext('2d');
+        var tjenesteChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Garanti', 'Service', 'Reperasjon'],
+                datasets: [{
+                    label: 'Tjenestetype Status',
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    borderColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    data: [@ViewBag.GarantiCount, @ViewBag.ServiceCount, @ViewBag.ReperasjonCount]
+                }]
+            },
+            options: {
+                scales: {
+                    y: { 
+                        beginAtZero: true
+                    }
+                },
+                legend: {
+                    display: true
+                },
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+}
 
