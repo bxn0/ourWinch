@@ -8,13 +8,20 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-
   .main-container {
     max-height: 80vh;  /* Ekranın %80 yüksekliğinde maksimum yükseklik */
     overflow-y: auto;  /* Dikey kaydırma çubuğu aktif hale getirildi */
   }
-</style>
 
+        .main-container {
+            max-height: 80vh; /* Ekranın %80 yüksekliğinde maksimum yükseklik */
+            overflow-y: auto; /* Dikey kaydırma çubuğu aktif hale getirildi */
+        }
+
+        .hidden-form {
+            display: none; /* Formun görünmez olmasını sağlayan stil */
+        }
+</style>
 
 </head>
 
@@ -27,12 +34,26 @@
                 <p>Kvalitetssikring Registreringer</p>
             </div>
             <div class="col-md-6 text-right">
-                <button class="btn btn-primary">Skriv ut</button>
-
-                <button class="btn btn-primary">Fulført</button>
+                <button class="btn btn-primary" id="printButton">Skriv ut</button>
+                <!-- "Fulført" knappen som vil utløse en JavaScript funksjon -->
+                <button type="button" class="btn btn-primary" id="completeButton">Fulført</button>
             </div>
         </div>
 
+        <!-- Usynlig form som vil sende data når siden lastes -->
+        <form id="completedServiceForm" class="hidden-form" action="/CompletedService/RegisterCompletedService" method="post">
+            <!-- Skjulte input-felt for å holde på dataen som hentes dynamisk -->
+            <input type="hidden" id="ServiceOrderIdInput" name="ServiceOrderId" value="" />
+            <input type="hidden" id="OrdrenummerInput" name="Ordrenummer" value="" />
+            <input type="hidden" id="ProdukttypeInput" name="Produkttype" value="" />
+            <input type="hidden" id="FornavnInput" name="Fornavn" value="" />
+            <input type="hidden" id="EtternavnInput" name="Etternavn" value="" />
+            <input type="hidden" id="MottattDatoInput" name="MottattDato" value="" />
+            <input type="hidden" id="FeilbeskrivelseInput" name="Feilbeskrivelse" value="" />
+            <input type="hidden" id="AvtaltLeveringInput" name="AvtaltLevering" value="" />
+            <input type="hidden" id="StatusInput" name="Status" value="" />
+            <input type="hidden" id="ServiceSkjemaInput" name="ServiceSkjema" value="" />
+        </form>
 
         <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Service Skjema</div>
         <div>
@@ -61,7 +82,6 @@
                 </div>
             </div>
         </div>
-
 
         <div class="row mt-3">
             <div class="col-md-12">
@@ -98,6 +118,46 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
+
+            $("#completeButton").click(function () {
+                // AJAX-kall for å hente data
+                $.ajax({
+                    url: "http://localhost:5002/api/ServiceSkjema/" + getIdFromUrl(),
+                    type: "GET",
+                    beforeSend: function () {
+                        console.log("Henter data...");
+                    },
+                    success: function (data) {
+                        if (data.serviceOrders && data.serviceOrders.length > 0) {
+                            var order = data.serviceOrders[0];
+                            // Fyll ut skjemaet med data
+                            $('#ServiceOrderIdInput').val(order.serviceOrderId);
+                            $('#OrdrenummerInput').val(order.ordrenummer);
+                            $('#ProdukttypeInput').val(order.produkttype);
+                            $('#FornavnInput').val(order.fornavn);
+                            $('#EtternavnInput').val(order.etternavn);
+                            $('#MottattDatoInput').val(new Date(order.mottattDato).toISOString().split('T')[0]);
+                            $('#FeilbeskrivelseInput').val(order.feilbeskrivelse);
+                            $('#AvtaltLeveringInput').val(new Date(order.mottattDato).toISOString().split('T')[0]);
+                            $('#StatusInput').val(order.status);
+                            $('#ServiceSkjemaInput').val(order.serviceSkjema);
+                            // Send skjemaet
+                            $("#completedServiceForm").submit();
+                        }
+                    },
+                    error: function (error) {
+                        alert("En feil oppsto! Vennligst prøv igjen.");
+                        console.error("Feil:", error);
+                    }
+                });
+            });
+
+            // Funksjon for å hente ID fra URL
+            function getIdFromUrl() {
+                var url = window.location.pathname;
+                var id = url.substring(url.lastIndexOf('/') + 1);
+                return id;
+            }
 
             var serviceOrdreId = getIdFromUrl();  // URL'den ID'yi al
             fetchServiceData(serviceOrdreId);     // Alınan ID ile veriyi yükle
@@ -138,17 +198,17 @@
                     var tableBody = $("#dataBody");
                     tableBody.empty();
 
+                    console.log(data)
+
                     if (data.serviceOrders && data.serviceOrders.length > 0) {
                         var order = data.serviceOrders[0];
                         $("#personName").text(order.fornavn);
                         $("#personSurname").text(order.etternavn);
                         $("#orderNumber").text(order.ordrenummer);
-
                         $("#productType").text(order.produkttype);    
                         $("#serialNumber").text(order.serienummer);
                         $("#receivedDate").text(order.mottattDato);
                     }
-
 
                     var mappings = {
                         mechanicals: "Mechanical",
@@ -166,7 +226,7 @@
                     }
                 },
                 error: function (error) {
-                    alert("Something went wrong! Please try again.");
+                    alert("Bir hata oluştu! Lütfen tekrar deneyin.");
                 }
             });
         }
@@ -185,28 +245,6 @@
                                   <td><input type="checkbox" name="checkbox-group-${index}" ${defektChecked} onclick="uncheckOthers(this)"></td>
                                </tr>`;
                 tableBody.append(row);
-            });
-        }
-        function fulforService(serviceOrdreId) {
-            $("#fulfortButton").click(function () {
-
-            $.ajax({
-                url: "http://localhost:5002/api/ActiveService/" + serviceOrdreId,
-                type: "DELETE",
-                success: function () {
-                    // Şimdi veriyi Fulførte sayfasına ekleyin.
-                    // Örnek olarak, POST metoduyla yeni bir kayıt ekleyeceğiz.
-                    $.ajax({
-                        url: "http://localhost:5002/api/Fulforte/",
-                        type: "POST",
-                        data: { "serviceOrdreId": serviceOrdreId },
-                        success: function () {
-                            alert("Service başarıyla tamamlandı!");
-                            // Kullanıcıyı Fulførte sayfasına yönlendirin veya sayfayı yenileyin.
-                            window.location.reload();
-                        }
-                    });
-                }
             });
         }
 
