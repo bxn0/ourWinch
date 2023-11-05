@@ -14,9 +14,6 @@ public class ActiveServiceController : Controller
     private const int PageSize = 10; // Her sayfada gösterilecek öğe sayısı.
 
 
-
-
-
     public ActiveServiceController(AppDbContext context)
     {
         _context = context;
@@ -31,42 +28,21 @@ public class ActiveServiceController : Controller
 
     public async Task<IActionResult> ActiveService(int page = 1)
     {
-        if (page <= 0)
-        {
-            return BadRequest("Invalid page number.");
-        }
-
-        var totalItems = await _context.ServiceOrders.CountAsync();
-        if (totalItems == 0)
-        {
-            throw new Exception("ServiceOrders tablosunda kayıt yok!");
-        }
+        var query = _context.ActiveServices; // ya da ActiveService ile ilgili doğru query
+        var totalItems = await query.CountAsync();
 
         var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
+        page = Math.Clamp(page, 1, totalPages); // Sayfa sayısını sınırlandır
 
-        if (page <= 0 || page > totalPages)
-        {
-            throw new Exception($"Geçersiz sayfa numarası: {page}. Toplam sayfa sayısı: {totalPages}");
-        }
+        var activeServices = await query
+            .Skip((page - 1) * PageSize)
+            .Take(PageSize)
+            .ToListAsync();
 
-        {
-            return BadRequest("Page number exceeds total page count.");
-        }
-
-        var serviceOrders = await _context.ServiceOrders
-          .Skip((page - 1) * PageSize)
-          .Take(PageSize)
-          .ToListAsync();
-
-        if (!serviceOrders.Any())
-        {
-            throw new Exception("ServiceOrders sorgusu boş sonuç döndürdü!");
-        }
-
-        ViewBag.CurrentPage = page;
         ViewBag.TotalPages = totalPages;
+        ViewBag.CurrentPage = page;
 
-        return View(serviceOrders);
+        return View(activeServices);
     }
 
 

@@ -3,7 +3,40 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalPages = ViewBag.TotalPages;
+    var currentPage = ViewBag.CurrentPage;
 }
+<style>
+    /* Pagination styling */
+    .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination-link {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .active-page {
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
+
+    /* Hover effect for pagination links */
+    .pagination-link:hover {
+        background-color: #007bff;
+        color: white;
+    }
+</style>
 
 <div class="col-md-9 col-lg-10 mx-auto mt-4">
     <!-- Completed Servicer Başlığı -->
@@ -45,4 +78,14 @@
                 }
             </tbody>
         </table>
+        <nav>
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", "CompletedService", new { page = i })">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
     </div>
