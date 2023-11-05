@@ -2,21 +2,23 @@
 using ourWinch.Models.Dashboard;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging; // Logger için gerekli namespace
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
-using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 [Authorize]
 public class CompletedServiceController : Controller
 {
     private readonly AppDbContext _context;
-    private readonly ILogger<CompletedServiceController> _logger; // Logger nesnesi
+    private readonly ILogger<CompletedServiceController> _logger;
+    private const int PageSize = 7;
 
-    // Dependency injection ile AppDbContext ve ILogger nesnelerini al
     public CompletedServiceController(AppDbContext context, ILogger<CompletedServiceController> logger)
     {
         _context = context;
-        _logger = logger; // Enjekte edilen logger nesnesini ata
+        _logger = logger;
     }
 
     // GET: Gösterilen dashboard
@@ -52,4 +54,24 @@ public class CompletedServiceController : Controller
         };
         return View("Error", errorViewModel);
     }
+    [HttpGet]
+    public async Task<IActionResult> Index(int page = 1)
+    {
+        var totalItems = await _context.CompletedServices.CountAsync();
+        var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
+        page = Math.Clamp(page, 1, totalPages);
+
+        var completedServices = await _context.CompletedServices
+            .OrderByDescending(cs => cs.MottattDato)
+            .Skip((page - 1) * PageSize)
+            .Take(PageSize)
+            .ToListAsync();
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
+
+        return View("~/Views/Dashboard/CompletedService.cshtml", completedServices);
+    }
+
+
 }

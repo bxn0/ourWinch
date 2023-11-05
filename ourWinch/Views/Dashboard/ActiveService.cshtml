@@ -1,29 +1,49 @@
 ﻿@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
 
+
+@{
+    ViewData["Title"] = "Active Services";
+    var totalPages = ViewBag.TotalPages;
+    var currentPage = ViewBag.CurrentPage;
+}
+
 @{
     var currentController = ViewContext.RouteData.Values["controller"].ToString();
     var currentAction = ViewContext.RouteData.Values["action"].ToString();
 }
 <style>
-    .pagination-link {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        border: 1px solid #000;
-        border-radius: 50%;
-        margin: 5px;
-        text-decoration: none;
-        color: #000;
-        transition: background-color 0.4s;
+    /* Pagination styling */
+    .pagination-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
 
-        .pagination-link:hover {
-            background-color: white;
-        }
+    .pagination-link {
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid #ddd;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .active-page {
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
+
+    /* Hover effect for pagination links */
+    .pagination-link:hover {
+        background-color: #007bff;
+        color: white;
+    }
 </style>
+
                       <div class="container mt-4">
                           <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Aktive Servicer</div>
 
@@ -97,38 +117,22 @@
                               }
     </div>
 
-    <div>
-        Current Page: @((ViewBag.CurrentPage as int?) ?? 1)
-        Total Pages: @((ViewBag.TotalPages as int?) ?? 1)
-    </div>
-
-
-    @if (ViewBag.CurrentPage != null && ViewBag.TotalPages != null)
+    <!-- Pagination -->
+    @if (totalPages > 1)
     {
-        <div class="pagination-container">
-            @try
+        <div class="pagination-wrapper">
+            @for (var i = 1; i <= totalPages; i++)
             {
-                int currentPage = (int)ViewBag.CurrentPage;
-                int totalPages = (int)ViewBag.TotalPages;
-
-                if (totalPages > 0 && currentPage > 0)
+                if (i == currentPage)
                 {
-                    for (var i = 1; i <= totalPages; i++)
-                    {
-                        <a class="pagination-link @(currentPage == i ? "active-page" : "")" asp-controller="Dashboard" asp-action="ActiveService" asp-route-page="@i"
-                           style="background-color: @(currentPage == i ? "#3498db" : "#B9B9B9");">@i</a>
-                    }
+                    <span class="active-page">@i</span>
                 }
                 else
                 {
-                    <div style="color:red;">It is error.</div>
+                    <a class="pagination-link" href="@Url.Action("ActiveService", "ActiveService", new { page = i })">@i</a>
                 }
-            }
-            catch (Exception ex)
-            {
-                <div style="color:red;">Error: @ex.Message</div>
             }
         </div>
     }
 
-</div>
+    
