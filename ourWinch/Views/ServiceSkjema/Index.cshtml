@@ -133,6 +133,8 @@
                     var tableBody = $("#dataBody");
                     tableBody.empty();
 
+                    console.log(data)
+
                     if (data.serviceOrders && data.serviceOrders.length > 0) {
                         var order = data.serviceOrders[0];
                         $("#personName").text(order.fornavn);

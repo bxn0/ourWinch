@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [Authorize]
 
-public class CompletedController : Controller
+public class CompletedServiceController : Controller
 {
     public IActionResult Dashboard()
     {
