@@ -19,6 +19,18 @@
         background-color: black;
     }
 
+/* Add transition to dropdown for smoother animation */
+#brukerOperasjonerSubmenu {
+    transition: visibility 0.5s, opacity 0.5s linear;
+}
+
+   
+
+/* CSS rule to change cursor to pointer on hover */
+.nav-link:hover {
+    cursor: pointer;
+}
+
         .sidebar .nav-link:hover {
             color: #A8C29C;
         }

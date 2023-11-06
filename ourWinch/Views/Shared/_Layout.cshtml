@@ -30,6 +30,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/2368a3baef.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 
@@ -41,132 +45,132 @@
     <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
 </head>
 <body>
-    <!-- Navbar Kısmı -->
-    <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-1 shadow">
-        <div class="navbar-brand col-sm-3 col-md-2 mr-0">
-            <img class="logo-image" src="/img/nøsted1.png" alt="nøsted Logo" style="border-radius: 10px;">
+<!-- Navbar Kısmı -->
+<nav class="navbar navbar-dark bg-dark flex-md-nowrap p-1 shadow">
+    <div class="navbar-brand col-sm-3 col-md-2 mr-0">
+        <img class="logo-image" src="/img/nøsted1.png" alt="nøsted Logo" style="border-radius: 10px;">
 
-        </div>
-        <div class="search-wrapper position-relative ml-auto">
-            <div class="input-group">
-                <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <span class="input-group-text bg-dark border-0">
-                        <i class="fa fa-search text-white"></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="user-info d-flex align-items-center ml-3">
-            <i class="fas fa-bell text-white mr-3"></i>
-            <div class="user-icon-name d-flex align-items-center mr-3">
-                <i class="fas fa-user text-white mr-2"></i>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <span class="text-white user-name">@($"{user?.Fornavn} {user?.Etternavn}")</span>
-                }
-            </div>
-            <form id="logoutForm" method="post" class="form-inline d-flex align-items-center" asp-controller="Account" asp-action="Logout">
-                <button type="submit" class="btn-logout text-danger ml-auto border-0 bg-transparent">Logout</button>
-            </form>
-        </div>
-
-
-    </nav>
-    <!-- Sidebar Kısmı -->
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block sidebar">
-                <div class="sidebar-sticky">
-                    <ul class="nav flex-column mb-3" style="list-style-type: none; padding-left: 0;">
-                        <li class="nav-item my-3" style="border-top: 1px solid #728791; border-bottom: 1px solid #728791;">
-                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
-                                <i class="fas fa-home"></i> Hjem
-                            </a>
-                        <li class="nav-item mt-3">
-                            <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
-                                <i class="fas fa-cog"></i> Aktive Servicer
-                            </a>
-                        </li>
-                        <li class="nav-item mt-3">
-                            <a asp-controller="CompletedService" asp-action="Index" class="nav-link">
-                                <i class="fas fa-check-circle"></i> Fulførte Servicer
-                            </a>
-                        </li>
-
-                        <li class="nav-item mt-3">
-                            <a asp-controller="NewService" asp-action="Dashboard" class="nav-link">
-                                <i class="fas fa-pen"></i> Ny service
-                            </a>
-                        </li>
-
-                        @if(isAdmin){
-                            <li class="nav-item mt-3">
-                                <!-- "Rapporter" bağlantısı -->
-                                <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
-                                    <i class="fa fa-bar-chart"></i> Rapporter
-                                </a>
-
-                                <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
-                                <ul id="kunderSubmenu" class="collapse">
-                                    <li style="max-height: 10px" class="nav-item mt-3">
-                                        <a asp-controller="Customers" asp-action="Dashboard" class="nav-link">
-                                            <i class="fa fa-address-card"></i> Kunder
-                                        </a>
-                                    </li>
-                                    <li class="nav-item mt-3">
-                                        <a asp-controller="ServiceType" asp-action="Dashboard" class="nav-link">
-                                            <i class="fa fa-filter"></i> Tjenestetype
-                                        </a>
-                                    </li>
-                                </ul>
-
-                            </li>
-                            }
-
-
-
-                       
-                    </ul>
-                    
-                    @if(isAdmin){
-
-                        <ul class="nav flex-column mt-9">
-
-                           
-
-                            <li class="nav-item">
-                                <a asp-controller="Account" asp-action="Register" class="nav-link">
-
-                                    <i class="fas fa-users"></i> Registrering
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav flex-column mt-9">
-                            <li class="nav-item">
-                                <a asp-controller="User" asp-action="Index" class="nav-link">
-
-
-                                    <i class="fas fa-users"></i> Brukere
-                                </a>
-                            </li>
-                        </ul>
-
-
-                    }
-                </div>
-            </nav>
-
-            <div class="col-md-10 p-3">
-                @RenderBody()
+    </div>
+    <div class="search-wrapper position-relative ml-auto">
+        <div class="input-group">
+            <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <span class="input-group-text bg-dark border-0">
+                    <i class="fa fa-search text-white"></i>
+                </span>
             </div>
         </div>
     </div>
+    <div class="user-info d-flex align-items-center ml-3">
+        <i class="fas fa-bell text-white mr-3"></i>
+        <div class="user-icon-name d-flex align-items-center mr-3">
+            <i class="fas fa-user text-white mr-2"></i>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <span class="text-white user-name">@($"{user?.Fornavn} {user?.Etternavn}")</span>
+            }
+        </div>
+        <form id="logoutForm" method="post" class="form-inline d-flex align-items-center" asp-controller="Account" asp-action="Logout" style="background-color: #bfd0d7;
+        border-radius: 20px; padding: 10px;">
+            <button type="submit" class="btn-logout text-danger ml-auto border-0 bg-transparent" style="font-weight: bold;">Logout</button>
+        </form>
+    </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js"></script>
 
-    @RenderSection("Scripts", required: false)
+</nav>
+<!-- Sidebar Kısmı -->
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column mb-3" style="list-style-type: none; padding-left: 0;">
+                    <li class="nav-item my-3" style="border-top: 1px solid #728791; border-bottom: 1px solid #728791;">
+                    <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                        <i class="fas fa-home"></i> Hjem
+                    </a>
+                    <li class="nav-item mt-3">
+                        <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                            <i class="fas fa-cog"></i> Aktive Servicer
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <a asp-controller="CompletedService" asp-action="Index" class="nav-link">
+                            <i class="fas fa-check-circle"></i> Fulførte Servicer
+                        </a>
+                    </li>
+
+                    <li class="nav-item mt-3">
+                        <a asp-controller="NewService" asp-action="Dashboard" class="nav-link">
+                            <i class="fas fa-pen"></i> Ny service
+                        </a>
+                    </li>
+
+                    @if(isAdmin){
+                        <li class="nav-item mt-3">
+                            <!-- "Rapporter" bağlantısı -->
+                            <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
+                                <i class="fa fa-bar-chart"></i> Rapporter
+                            </a>
+
+                            <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
+                            <ul id="kunderSubmenu" class="collapse">
+                                <li style="max-height: 10px" class="nav-item mt-3">
+                                    <a asp-controller="Customers" asp-action="Dashboard" class="nav-link">
+                                        <i class="fa fa-address-card"></i> Kunder
+                                    </a>
+                                </li>
+                                <li class="nav-item mt-3">
+                                    <a asp-controller="ServiceType" asp-action="Dashboard" class="nav-link">
+                                        <i class="fa fa-filter"></i> Tjenestetype
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+                    }
+                    
+                    @if(isAdmin){
+                            
+                            <!-- "Brukeroperasjoner" link -->
+                            <li class="nav-item mt-3">
+                                <a href="#brukerSubmenu" data-bs-toggle="collapse" data-bs-target="#brukerSubmenu" class="nav-link">
+                                    <i class="fas fa-users-cog"></i> Brukeroperasjoner
+                                </a>
+                                <!-- "Brukeroperasjoner" submenu (default is closed) -->
+                                <ul id="brukerSubmenu" class="collapse list-unstyled">
+                                    <li class="nav-item mt-3 ps-4">
+                                        <a asp-controller="Account" asp-action="Register" class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Account" && ViewContext.RouteData.Values["Action"].ToString() == "Register") ? "active" : "")">
+                                            <i class="fas fa-user-plus"></i> Registrering
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mt-3 ps-4">
+                                        <a asp-controller="User" asp-action="Index" class="nav-link">
+                                            <i class="fas fa-users"></i> Brukere
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        
+                    }
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="col-md-10 p-3">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js"></script>
+
+@RenderSection("Scripts", required: false)
 </body>
+
 </html>
+<!-- Include jQuery if it's not already included -->
+
