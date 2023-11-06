@@ -66,8 +66,9 @@
                     <span class="text-white user-name">@($"{user?.Fornavn} {user?.Etternavn}")</span>
                 }
             </div>
-            <form id="logoutForm" method="post" class="form-inline d-flex align-items-center" asp-controller="Account" asp-action="Logout">
-                <button type="submit" class="btn-logout text-danger ml-auto border-0 bg-transparent">Logout</button>
+            <form id="logoutForm" method="post" class="form-inline d-flex align-items-center" asp-controller="Account" asp-action="Logout" style="background-color: #bfd0d7;
+        border-radius: 20px; padding: 10px;">
+                <button type="submit" class="btn-logout text-danger ml-auto border-0 bg-transparent" style="font-weight: bold;">Logout</button>
             </form>
         </div>
 
