@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 public class ActiveServiceController : Controller
 {
     private readonly AppDbContext _context;
-    private const int PageSize = 10; // Her sayfada gösterilecek öğe sayısı.
+    private const int PageSize = 10; // 
 
 
     public ActiveServiceController(AppDbContext context)
