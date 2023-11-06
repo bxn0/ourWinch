@@ -30,30 +30,43 @@ public class CompletedServiceController : Controller
     }
 
     // POST: Fullført tjeneste kaydı için
-    [HttpPost]
-    public IActionResult RegisterCompletedService(CompletedService completedService)
+   [HttpPost]
+public IActionResult RegisterCompletedService(CompletedService completedService)
+{
+    if (ModelState.IsValid)
     {
-        if (ModelState.IsValid)
+        // Model doğruysa, veritabanına ekle
+        _context.CompletedServices.Add(completedService);
+        _context.SaveChanges(); // Değişiklikleri kaydet
+
+        // İlgili ActiveService kaydını bul
+        var activeService = _context.ActiveServices
+                                    .FirstOrDefault(a => a.ServiceOrderId == completedService.ServiceOrderId);
+
+        // Eğer varsa, ActiveService kaydını sil
+        if (activeService != null)
         {
-            // Model doğruysa, veritabanına ekle
-            _context.CompletedServices.Add(completedService);
-            _context.SaveChanges(); // Değişiklikleri kaydet
-            return RedirectToAction("Index", "CompletedService");
+            _context.ActiveServices.Remove(activeService);
+            _context.SaveChanges(); // Silme işlemini kaydet
         }
 
-        // ModelState geçerli değilse, hataları logla
-        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-        {
-            _logger.LogError(error.ErrorMessage); // Hata mesajlarını logla
-        }
-
-        // Hatalı model ile Error view'ını döndür
-        var errorViewModel = new ErrorViewModel
-        {
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-        };
-        return View("Error", errorViewModel);
+        return RedirectToAction("Index", "CompletedService");
     }
+
+    // ModelState geçerli değilse, hataları logla
+    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+    {
+        _logger.LogError(error.ErrorMessage); // Hata mesajlarını logla
+    }
+
+    // Hatalı model ile Error view'ını döndür
+    var errorViewModel = new ErrorViewModel
+    {
+        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+    };
+    return View("Error", errorViewModel);
+}
+
     [HttpGet]
     public async Task<IActionResult> Index(int page = 1)
     {
