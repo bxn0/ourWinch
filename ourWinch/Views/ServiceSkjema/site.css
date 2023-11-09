@@ -1,0 +1,18 @@
+﻿.main-container {
+    max-height: 80vh; /* Maximum height at 80% of the screen height */
+    overflow-y: auto; /*Enable vertical scrollbar */
+}
+
+/* Diğer stil tanımları */
+
+@media print {
+    .main-container {
+        max-height: none;
+        overflow-y: visible; /* Hide the scrollbar during printing */
+    }
+
+    #buttons {
+        display: none; /* Hide the 'Skriv ut' and 'Fullført' buttons during printing */
+    }
+
+}
