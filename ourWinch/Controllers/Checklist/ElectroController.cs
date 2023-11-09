@@ -100,7 +100,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
-                    TempData["SuccessMessageHydroulic"] = "Elektrosjekklisten ble lagret med suksess.";
+                    TempData["SuccessMessageElektro"] = "Elektrosjekklisten ble lagret med suksess.";
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
 
                     return RedirectToAction("Create", "FunksjonsTest", new { serviceOrderId = viewModel.ServiceOrderId, category = "FunksjonsTest" });
