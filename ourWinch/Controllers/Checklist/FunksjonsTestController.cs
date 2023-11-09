@@ -107,7 +107,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(funksjonsTest);
                     }
                     await _context.SaveChangesAsync();
-
+                    TempData["SuccessMessageFunksjons"] = "Funksjons test sjekklisten ble lagret med suksess.";
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Trykk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Trykk" });
                 }
