@@ -48,6 +48,10 @@ namespace ourWinch.Controllers.Checklist
         [Route("FunksjonsTest/Create/{serviceOrderId}/{category?}")]
         public IActionResult Create(int serviceOrderId, string category = "FunksjonsTest")
         {
+            if (TempData["SuccessMessageElektro"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessageElektro"].ToString();
+            }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
             {
