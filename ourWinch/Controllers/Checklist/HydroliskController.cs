@@ -87,10 +87,7 @@ namespace ourWinch.Controllers.Checklist
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HydroliskListViewModel viewModel, int serviceOrderId, string category)
         {
-            if (TempData["SuccessMessage"] != null)
-            {
-                ViewBag.SuccessMessage = TempData["SuccessMessageMechanical"].ToString();
-            }
+          
             if (ModelState.IsValid)
             {
                 bool isFirst = true;
@@ -112,6 +109,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(hydrolisk);
                     }
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessageHydroulic"] = "Hydrauliskesjekklisten ble lagret med suksess.";
                     await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId); // Eklediğimiz yeni servis metodunu çağırıyoruz
                     return RedirectToAction("Create", "Electro", new { serviceOrderId = viewModel.ServiceOrderId, category = "Electro" });
                 }
