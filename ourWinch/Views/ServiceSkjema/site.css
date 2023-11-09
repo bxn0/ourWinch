@@ -1,0 +1,17 @@
+﻿.main-container {
+    max-height: 80vh; /* Ekranın %80 yüksekliğinde maksimum yükseklik */
+    overflow-y: auto; /* Dikey kaydırma çubuğu aktif hale getirildi */
+}
+
+/* Diğer stil tanımları */
+
+@media print {
+    .main-container {
+        max-height: none;
+        overflow-y: visible; /* Yazdırma için kaydırma çubuğunu gizle */
+    }
+
+    .no-print, .btn {
+        display: none; /* Yazdırma sırasında gizlenecek öğeler */
+    }
+}
