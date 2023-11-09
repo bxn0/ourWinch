@@ -47,10 +47,15 @@ namespace ourWinch.Controllers.Checklist
             return View(hydrolisk);
         }
 
+        [HttpGet]
         // GET: Hydrolisk/Create
         [Route("Hydrolisk/Create/{serviceOrderId}/{category?}")]
         public IActionResult Create(int serviceOrderId, string category = "Hydrolisk")
         {
+            if (TempData["SuccessMessageMechanical"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessageMechanical"].ToString();
+            }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
             {
@@ -82,6 +87,10 @@ namespace ourWinch.Controllers.Checklist
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HydroliskListViewModel viewModel, int serviceOrderId, string category)
         {
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessageMechanical"].ToString();
+            }
             if (ModelState.IsValid)
             {
                 bool isFirst = true;

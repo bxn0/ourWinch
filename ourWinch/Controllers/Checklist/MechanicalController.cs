@@ -121,6 +121,9 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
+                    //sweatalert feedback
+                    TempData["SuccessMessageMechanical"] = "Mekanikesjekklisten ble lagret med suksess."; 
+
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Hydrolisk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Hydrolisk" });
                 }
