@@ -55,10 +55,10 @@
         <form method="get" action="@Url.Action("Dashboard", "Customers")">
             <div class="search-wrapper">
                 <input type="search" name="query" placeholder="Search" />
-                <select name="filter">
-                    <option value="name">kort av: Navn</option>
+                @* <select name="filter">
+                     <option value="name"></option> 
                     <!-- Other options -->
-                </select>
+                </select> *@
                 <button type="submit">Search</button>
             </div>
         </form>

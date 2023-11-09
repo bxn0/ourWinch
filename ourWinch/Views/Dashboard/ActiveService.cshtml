@@ -43,23 +43,47 @@
             color: #333;
         }
 
-        .active-page {
-            padding: 5px 10px;
-            margin: 0 5px;
-            background-color: #007bff;
-            color: white;
-            border: 1px solid #007bff;
-        }
 
-        /* Hover effect for pagination links */
-        .pagination-link:hover {
-            background-color: #007bff;
-            color: white;
-        }
-    </style>
+    /* Hover effect for pagination links */
+    .pagination-link:hover {
+        background-color: #007bff;
+        color: white;
+    }
 
-    <div class="container mt-4">
-        <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Aktive Servicer</div>
+    .heading {
+        background-color: #C0D0D7;
+        border-radius: 10px;
+        display: block;
+        padding: 10px 30px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 32px;
+        margin: 10px auto;
+        width: fit-content;
+    }
+
+}
+</style>
+
+<div class="container mt-4">
+    <div class="heading">Aktive Servicer</div>
+    <div class="row">
+        <div class="col-12 col-md-9">
+            <!-- Sağdaki içerikler buraya -->
+        </div>
+        <!-- Arama kutusunu sol tarafa al -->
+        <div class="col-12 col-md-3">
+            <div class="search-wrapper">
+                <form method="get">
+                    <input type="search" name="query" placeholder="Search" class="mr-2" />
+                    <button type="submit" class="btn btn-primary p-2">Search</button>
+                </form>
+            </div>
+        </div>
+        <!-- Diğer içerikler sağ tarafa gelebilir -->
+        
+    </div>                          <div class="table-responsive">
+
 
         <div class="table-responsive">
 
