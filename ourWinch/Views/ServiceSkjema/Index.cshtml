@@ -119,6 +119,11 @@
     <script>
         $(document).ready(function () {
 
+            //To print, it listens to the "Skriv ut" button and directs it to the printer.
+            $("#printButton").click(function () {
+                window.print();
+            });
+
             $("#completeButton").click(function () {
                 // AJAX-kall for å hente data
                 $.ajax({
@@ -145,11 +150,14 @@
                             $("#completedServiceForm").submit();
                         }
                     },
+                    
                     error: function (error) {
                         alert("En feil oppsto! Vennligst prøv igjen.");
                         console.error("Feil:", error);
                     }
                 });
+
+                
             });
 
             // Funksjon for å hente ID fra URL
