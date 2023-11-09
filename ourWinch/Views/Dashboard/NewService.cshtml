@@ -1,4 +1,5 @@
 ﻿
+
 <div class="container mt-3 container-max-height" style="background-color: #C0D0D7; max-width: 800px; border-radius: 5px;   max-height: 110vh; overflow-y: auto;">
     <form action="/ServiceOrder/Create" method="post">
         @Html.AntiForgeryToken()
@@ -118,32 +119,85 @@
         </div>
     </form>
 </div>
- <script>
 
-    document.addEventListener("DOMContentLoaded", function() {
+@*
+    <script>
 
-        let bookedDates = @Html.Raw(ViewBag.BookedDates);
-
-
-        function formatToShortDate(dateString) {
-            return dateString.split('T')[0];
-        }
-
-
-        let shortBookedDates = bookedDates.map(formatToShortDate);
-
-
-        let dateInput = document.getElementById("datepicker");
-
-
-        dateInput.addEventListener("change", function() {
-            if(shortBookedDates.includes(this.value)) {
-                alert("Denne datoen er booket! Vennligst velg en annen dato.");
-                this.value = "";
-            }
+    document.addEventListener('DOMContentLoaded', function() {
+        var bookedDates = JSON.parse('@Html.Raw(ViewBag.BookedDates)').map(function(date) {
+            // Tarihleri 'yyyy-MM-dd' formatına dönüştürün
+            return new Date(date).toISOString().split('T')[0];
         });
+        var dateInput = document.getElementById('datepicker');
+
+        if (dateInput) {
+            dateInput.addEventListener('change', function() {
+                var selectedDate = new Date(this.value).toISOString().split('T')[0];
+                var isBooked = bookedDates.includes(selectedDate);
+
+                if (isBooked) {
+                    console.log('Seçilen tarih zaten alınmış.');
+                    Swal.fire({
+                        title: 'Bu tarih mevcut!',
+                        text: 'Lütfen başka bir tarih seçin.',
+                        icon: 'warning',
+                        confirmButtonText: 'Tamam'
+                    });
+                    this.value = ''; // Input değerini temizle
+                } else {
+                    console.log('Seçilen tarih uygun.');
+                }
+            });
+        } else {
+            console.error('Date input not found.');
+        }
+    });
+    </script>
+*@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var bookedDates = JSON.parse('@Html.Raw(ViewBag.BookedDates)').map(function(date) {
+            return new Date(date).toISOString().split('T')[0]; 
+        });
+
+        var dateInput = document.getElementById('datepicker');
+
+        if (dateInput) {
+            dateInput.addEventListener('change', function() {
+                var selectedDate = new Date(this.value).toISOString().split('T')[0];
+                var isBooked = bookedDates.includes(selectedDate);
+
+                if (isBooked) {
+                    var availableDates = getAvailableDates(selectedDate, bookedDates);
+                    Swal.fire({
+                        title: 'Datoen er ikke tilgjengelig!',
+                        html: 'Vennligst velg en annen dato. Tilgjengelige alternative datoer: <b>' + availableDates.join(', ') + '</b>',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                    this.value = ''; 
+                }
+            });
+        } else {
+            console.error('Date input not found.');
+        }
     });
 
+    function getAvailableDates(selectedDate, bookedDates) {
+        var availableDates = [];
+        var currentDate = new Date(selectedDate);
+        var maxDateRange = 30; 
+        var count = 0;
 
+        while (availableDates.length < 3 && count < maxDateRange) {
+            currentDate.setDate(currentDate.getDate() + 1); 
+            var dateStr = currentDate.toISOString().split('T')[0];
 
- </script>
+            if (!bookedDates.includes(dateStr)) {
+                availableDates.push(dateStr);
+            }
+            count++;
+        }
+        return availableDates;
+    }
+</script>
