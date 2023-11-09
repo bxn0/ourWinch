@@ -101,6 +101,7 @@ public class AccountController : Controller
 
             if (result.Succeeded)
             {
+                TempData["SuccessMessageLogin"] = "Innloggingen er vellykket";
                 return RedirectToAction("Index", "Dashboard");
             }
             if (result.IsLockedOut)

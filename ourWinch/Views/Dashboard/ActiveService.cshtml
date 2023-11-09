@@ -13,7 +13,8 @@
     var currentAction = ViewContext.RouteData.Values["action"].ToString();
     }
     @{
- var SuccessMessage = ViewBag.SuccessMessage;
+    var SuccessMessage = ViewBag.SuccessMessage;
+    var SuccessMessageLogin = ViewBag.SuccessMessageLogin;
     }
     @if (SuccessMessage != null)
 {
@@ -26,36 +27,59 @@
         });
     </script>
 }
+    @if (SuccessMessageLogin != null)
+{
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-start",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: "Signed in successfully"
+        });
+    </script>
+}
     <style>
-        /* Pagination styling */
-        .pagination-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
 
-        .pagination-link {
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 0 5px;
-            border: 1px solid #ddd;
-            text-decoration: none;
-            color: #333;
-        }
+  
+  
+    /* Pagination styling */
+    .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    }
 
-        .active-page {
-            padding: 5px 10px;
-            margin: 0 5px;
-            background-color: #007bff;
-            color: white;
-            border: 1px solid #007bff;
-        }
+    .pagination-link {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+    }
 
-        /* Hover effect for pagination links */
-        .pagination-link:hover {
-            background-color: #007bff;
-            color: white;
-        }
+    .active-page {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+    }
+
+    /* Hover effect for pagination links */
+    .pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+    }
     </style>
 
     <div class="container mt-4">

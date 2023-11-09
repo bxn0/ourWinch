@@ -24,6 +24,10 @@ public class DashboardController : Controller
         {
             ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
         }
+        if (TempData["SuccessMessageLogin"] != null)
+        {
+            ViewBag.SuccessMessage = TempData["SuccessMessageLogin"].ToString();
+        }
         var serviceOrders = _context.ServiceOrders.ToList();
         return View("~/Views/Dashboard/ActiveService.cshtml", serviceOrders);
     }
