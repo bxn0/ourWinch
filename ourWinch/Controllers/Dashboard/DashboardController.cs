@@ -20,6 +20,10 @@ public class DashboardController : Controller
     
     public IActionResult Index()
     {
+        if (TempData["SuccessMessage"] != null)
+        {
+            ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+        }
         var serviceOrders = _context.ServiceOrders.ToList();
         return View("~/Views/Dashboard/ActiveService.cshtml", serviceOrders);
     }
