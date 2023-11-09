@@ -112,6 +112,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessageTrykk"] = "Trykk sjekklisten ble lagret med suksess.";
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Mechanical", new { serviceOrderId = viewModel.ServiceOrderId, category = "Mechanical" });
                 }
