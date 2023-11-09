@@ -48,10 +48,15 @@ namespace ourWinch.Controllers.Checklist
             return View(trykk);
         }
 
+        [HttpGet]
         // GET: Trykk/Create
         [Route("Trykk/Create/{serviceOrderId}/{category?}")]
         public IActionResult Create(int serviceOrderId, string category = "Trykk")
         {
+            if (TempData["SuccessMessageFunksjons"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessageFunksjons"].ToString();
+            }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
             {
@@ -107,6 +112,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessageTrykk"] = "Trykk sjekklisten ble lagret med suksess.";
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Mechanical", new { serviceOrderId = viewModel.ServiceOrderId, category = "Mechanical" });
                 }

@@ -31,6 +31,7 @@ namespace ourWinch.Controllers.Checklist
         // GET: Details
         public IActionResult Details(int id, string category = "Mechanical")
         {
+            
             var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
             if (serviceOrder == null)
             {
@@ -62,10 +63,14 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Mechanical/Create
-
+        
         [Route("Mechanical/Create/{serviceOrderId}/{category?}")]
         public IActionResult Create(int serviceOrderId, string category = "Mechanical")
         {
+            if (TempData["SuccessMessageTrykk"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessageTrykk"].ToString();
+            }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
             {
@@ -121,6 +126,9 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(mechanical);
                     }
                     await _context.SaveChangesAsync();
+                    //sweatalert feedback
+                    TempData["SuccessMessageMechanical"] = "Mekanikesjekklisten ble lagret med suksess."; 
+
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Hydrolisk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Hydrolisk" });
                 }

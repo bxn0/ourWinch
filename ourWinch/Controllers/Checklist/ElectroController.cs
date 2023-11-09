@@ -40,10 +40,15 @@ namespace ourWinch.Controllers.Checklist
 
             return View(electro);
         }
-
+        [HttpGet]
         [Route("Electro/Create/{serviceOrderId}/{category?}")]
         public IActionResult Create(int serviceOrderId, string category = "Electro")
         {
+
+            if (TempData["SuccessMessageHydroulic"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessageHydroulic"].ToString();
+            }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
             {
@@ -95,7 +100,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
-
+                    TempData["SuccessMessageElektro"] = "Elektrosjekklisten ble lagret med suksess.";
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
 
                     return RedirectToAction("Create", "FunksjonsTest", new { serviceOrderId = viewModel.ServiceOrderId, category = "FunksjonsTest" });

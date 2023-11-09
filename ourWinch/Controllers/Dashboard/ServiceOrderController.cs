@@ -32,7 +32,7 @@ public class ServiceOrderController : Controller
 
         serviceOrder.Ordrenummer = newOrderNumber;
         serviceOrder.Status = "Process";
-
+        TempData["SuccessMessage"] = "Bestillingen er vellykket registrert! Bestillingsnummer: " + newOrderNumber;
         _context.ServiceOrders.Add(serviceOrder);
         _context.SaveChanges();
 
@@ -40,7 +40,7 @@ public class ServiceOrderController : Controller
         var serviceManager = new ServiceManager(_context);
         serviceManager.SaveToActiveService(serviceOrder.ServiceOrderId);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index", "Dashboard");
     }
 
 
