@@ -21,6 +21,12 @@ namespace ourWinch.Services
             var isMechanicalCompleted = await _context.Mechanicals.AnyAsync(m => m.ServiceOrderId == serviceOrderId && m.OK);
             var isTrykkCompleted = await _context.Trykks.AnyAsync(t => t.ServiceOrderId == serviceOrderId && t.OK);
 
+            Console.WriteLine($"isElectroCompleted: {isElectroCompleted}");
+            Console.WriteLine($"isFunksjonCompleted: {isFunksjonCompleted}");
+            Console.WriteLine($"isHydroliskCompleted: {isHydroliskCompleted}");
+            Console.WriteLine($"isMechanicalCompleted: {isMechanicalCompleted}");
+            Console.WriteLine($"isTrykkCompleted: {isTrykkCompleted}");
+
             if (isElectroCompleted && isFunksjonCompleted && isHydroliskCompleted && isMechanicalCompleted && isTrykkCompleted)
             {
                 var serviceOrder = await _context.ServiceOrders.FirstOrDefaultAsync(s => s.ServiceOrderId == serviceOrderId);
@@ -29,6 +35,10 @@ namespace ourWinch.Services
                     serviceOrder.ServiceSkjema = "Ja";
                     await _context.SaveChangesAsync();
                 }
+            }
+            else
+            {
+                Console.WriteLine("Service order not found!");
             }
         }
     }
