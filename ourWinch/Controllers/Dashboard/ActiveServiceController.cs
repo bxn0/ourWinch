@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 public class ActiveServiceController : Controller
 {
     private readonly AppDbContext _context;
-    private const int PageSize = 10; // 
+    private const int PageSize = 5; // 
 
 
     public ActiveServiceController(AppDbContext context)
@@ -26,23 +26,42 @@ public class ActiveServiceController : Controller
         }
     }
 
-    public async Task<IActionResult> ActiveService(int page = 1)
+    // public async Task<IActionResult> ActiveService(int page = 1)
+    // {
+    //   var query = _context.ActiveServices; // ya da ActiveService ile ilgili doğru query
+    //var totalItems = await query.CountAsync();
+
+    //    var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
+    //page = Math.Clamp(page, 1, totalPages); // Sayfa sayısını sınırlandır
+
+    //    var activeServices = await query
+    //           .Skip((page - 1) * PageSize)
+    //          .Take(PageSize)
+    //         .ToListAsync();
+
+    // ViewBag.TotalPages = totalPages;
+    //ViewBag.CurrentPage = page;
+
+    //  return View(activeServices);
+    //}
+
+    [HttpGet]
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var query = _context.ActiveServices; // ya da ActiveService ile ilgili doğru query
-        var totalItems = await query.CountAsync();
-
+        var totalItems = await _context.ActiveServices.CountAsync();
         var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
-        page = Math.Clamp(page, 1, totalPages); // Sayfa sayısını sınırlandır
+        page = Math.Clamp(page, 1, totalPages);
 
-        var activeServices = await query
+        var activServices = await _context.ActiveServices
+            .OrderByDescending(cs => cs.MottattDato)
             .Skip((page - 1) * PageSize)
             .Take(PageSize)
             .ToListAsync();
 
-        ViewBag.TotalPages = totalPages;
         ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
 
-        return View(activeServices);
+        return View("~/Views/Dashboard/ActiveService.cshtml", activServices);
     }
 
 

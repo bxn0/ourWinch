@@ -1,5 +1,5 @@
 ﻿@using ourWinch.Models.Dashboard;
-@model IEnumerable<ServiceOrder>
+@model IEnumerable<ActiveService>
 
 
     @{
@@ -42,7 +42,13 @@
             text-decoration: none;
             color: #333;
         }
-
+         .active-page {
+        padding: 5px 10px;
+        margin: 0 5px;
+        background-color: #007bff;
+        color: white;
+        border: 1px solid #007bff;
+    }
 
     /* Hover effect for pagination links */
     .pagination-link:hover {
@@ -71,14 +77,25 @@
         <div class="col-4">  </div>
         <div class="col-4 heading">Aktive Servicer</div>
 
+        <style>
+            .search-wrapper form {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
 
+            .search-wrapper input,
+            .search-wrapper button {
+                margin-left: 5px; /* İstediğiniz aralığı ayarlayabilirsiniz */
+            }
+        </style>
         <!-- Sağdaki içerikler buraya -->
         <!-- Arama kutusunu sol tarafa al -->
-        <div class="col-4">
+        <div class="col-4"> 
             <div class="search-wrapper">
                 <form method="get">
-                    <input type="search" name="query" placeholder="Søk på navn" class="mr-2 p-1" />
-                    <button type="submit" class="btn btn-primary p-2">Søk</button>
+                    <input type="search" name="query" placeholder="Søk på navn" class="mr-2 p-1"  />
+                    <button type="submit" class="btn btn-primary p-2" >Søk</button>
                 </form>
             </div>
         </div>
@@ -169,7 +186,7 @@
                 }
                 else
                 {
-            <a class="pagination-link" href="@Url.Action("ActiveService", "ActiveService", new { page = i })">@i</a>
+            <a class="pagination-link" href="@Url.Action("Index", "ActiveService", new { page = i })">@i</a>
                 }
             }
         </div>
