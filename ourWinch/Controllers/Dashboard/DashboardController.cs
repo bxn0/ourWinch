@@ -26,11 +26,11 @@ public class DashboardController : Controller
         }
 
 
-        var totalItems = _context.ActiveServices.Count();
+        var totalItems = _context.ServiceOrders.Count();
         var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
         page = Math.Clamp(page, 1, totalPages);
 
-        var activServices =_context.ActiveServices
+        var serviceOrders = _context.ServiceOrders
             .OrderByDescending(cs => cs.MottattDato)
         .Skip((page - 1) * PageSize)
         .Take(PageSize)
@@ -39,7 +39,7 @@ public class DashboardController : Controller
         ViewBag.CurrentPage = page;
         ViewBag.TotalPages = totalPages;
 
-        return View("~/Views/Dashboard/ActiveService.cshtml", activServices);
+        return View("~/Views/Dashboard/ActiveService.cshtml", serviceOrders);
 
     }
 

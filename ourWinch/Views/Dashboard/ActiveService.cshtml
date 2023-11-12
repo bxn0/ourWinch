@@ -1,5 +1,5 @@
 ﻿@using ourWinch.Models.Dashboard;
-@model IEnumerable<ActiveService>
+@model IEnumerable<ServiceOrder>
 
 
     @{
@@ -186,7 +186,7 @@
                 }
                 else
                 {
-            <a class="pagination-link" href="@Url.Action("Index", "ActiveService", new { page = i })">@i</a>
+            <a class="pagination-link" href="@Url.Action("Index", "Dashboard", new { page = i })">@i</a>
                 }
             }
         </div>
