@@ -6,23 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Kontrol Sayfası</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-  .main-container {
-    max-height: 80vh;  /* Ekranın %80 yüksekliğinde maksimum yükseklik */
-    overflow-y: auto;  /* Dikey kaydırma çubuğu aktif hale getirildi */
-  }
-
-        .main-container {
-            max-height: 80vh; /* Ekranın %80 yüksekliğinde maksimum yükseklik */
-            overflow-y: auto; /* Dikey kaydırma çubuğu aktif hale getirildi */
-        }
-
-        .hidden-form {
-            display: none; /* Formun görünmez olmasını sağlayan stil */
-        }
-</style>
-
+    <link href=".../ourWinch/Views/ServiceSkjema/site.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -33,7 +17,7 @@
                 <h4>Nøsted & avd. Jåbæk</h4>
                 <p>Kvalitetssikring Registreringer</p>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-6 text-right" id="buttons">
                 <button class="btn btn-primary" id="printButton">Skriv ut</button>
                 <!-- "Fulført" knappen som vil utløse en JavaScript funksjon -->
                 <button type="button" class="btn btn-primary" id="completeButton">Fulført</button>
@@ -119,6 +103,11 @@
     <script>
         $(document).ready(function () {
 
+            //To print, it listens to the "Skriv ut" button and directs it to the printer.
+            $("#printButton").click(function () {
+                window.print();
+            });
+
             $("#completeButton").click(function () {
                 // AJAX-kall for å hente data
                 $.ajax({
@@ -145,11 +134,14 @@
                             $("#completedServiceForm").submit();
                         }
                     },
+                    
                     error: function (error) {
                         alert("En feil oppsto! Vennligst prøv igjen.");
                         console.error("Feil:", error);
                     }
                 });
+
+                
             });
 
             // Funksjon for å hente ID fra URL

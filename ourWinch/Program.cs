@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
-
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
@@ -67,7 +67,13 @@ namespace ourWinch
 
             // Add the DbContext to the DI container.
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            {
+                options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
+                {
+                    sqlOptions.CommandTimeout(30); // Veritabanı komutlarının zaman aşımı süresini ayarla
+                })
+                .LogTo(Console.WriteLine); // Bu satırı .UseSqlServer çağrısından sonra ve ayrı bir satırda ekle
+            });
 
             // Register ServiceSkjemaService for DI.
             builder.Services.AddScoped<ServiceSkjemaService>();

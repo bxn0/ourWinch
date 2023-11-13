@@ -2,137 +2,176 @@
 @model IEnumerable<ServiceOrder>
 
 
-@{
+    @{
     ViewData["Title"] = "Active Services";
     var totalPages = ViewBag.TotalPages;
     var currentPage = ViewBag.CurrentPage;
-}
+    }
 
-@{
+    @{
     var currentController = ViewContext.RouteData.Values["controller"].ToString();
     var currentAction = ViewContext.RouteData.Values["action"].ToString();
+    }
+    @{
+ var SuccessMessage = ViewBag.SuccessMessage;
+    }
+    @if (SuccessMessage != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Vellykket',
+            text: '@SuccessMessage',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        });
+    </script>
 }
-<style>
-    /* Pagination styling */
-    .pagination-wrapper {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
+    <style>
+        /* Pagination styling */
+        .pagination-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-    .pagination-link {
-        display: inline-block;
-        padding: 5px 10px;
-        margin: 0 5px;
-        border: 1px solid #ddd;
-        text-decoration: none;
-        color: #333;
-    }
+        .pagination-link {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            text-decoration: none;
+            color: #333;
+        }
 
-    .active-page {
-        padding: 5px 10px;
-        margin: 0 5px;
-        background-color: #007bff;
-        color: white;
-        border: 1px solid #007bff;
-    }
 
     /* Hover effect for pagination links */
     .pagination-link:hover {
         background-color: #007bff;
         color: white;
     }
+
+    .heading {
+        background-color: #C0D0D7;
+        border-radius: 10px;
+        display: block;
+        padding: 10px 30px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 32px;
+        margin: 10px auto;
+        width: fit-content;
+    }
+
+}
 </style>
 
-                      <div class="container mt-4">
-                          <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Aktive Servicer</div>
+<div class="container mt-4 mb-2">
+    <div class="row align-items-center mb-1 mt-5 ">
 
-                          <div class="table-responsive">
+        <div class="col-4">  </div>
+        <div class="col-4 heading">Aktive Servicer</div>
 
-                              @if (Model != null && Model.Any())
+
+        <!-- Sağdaki içerikler buraya -->
+        <!-- Arama kutusunu sol tarafa al -->
+        <div class="col-4">
+            <div class="search-wrapper">
+                <form method="get">
+                    <input type="search" name="query" placeholder="Søk på navn" class="mr-2 p-1" />
+                    <button type="submit" class="btn btn-primary p-2">Søk</button>
+                </form>
+            </div>
+        </div>
+        <!-- Diğer içerikler sağ tarafa gelebilir -->
+
+    </div>                <div class="table-responsive">
+
+
+        <div class="table-responsive">
+
+            @if (Model != null && Model.Any())
 
              {
-                              <table class="table table-bordered">
-                                  <thead style="background-color: #B9B9B9;">
-                                      <tr>
-                                          <th style="border: 2px solid #000;">OrderID</th>
-                                          <th style="border: 2px solid #000;">Product Type</th>
-                                          <th style="border: 2px solid #000;">Kunde</th>
-                                          <th style="border: 2px solid #000;">Mottatt Dato</th>
-                                          <th style="border: 2px solid #000;">Feilbeskriving</th>
-                                          <th style="border: 2px solid #000;">Avtalt Levering</th>
-                                          <th style="border: 2px solid #000;">Status</th>
-                                          <th style="border: 2px solid #000;">Service Skjema</th>
-                                          <th style="border: 2px solid #000;">Timer</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      @foreach (var item in Model)
+            <table class="table table-bordered">
+                <thead style="background-color: #B9B9B9;">
+                    <tr>
+                        <th style="border: 2px solid #000;">OrderID</th>
+                        <th style="border: 2px solid #000;">Product Type</th>
+                        <th style="border: 2px solid #000;">Kunde</th>
+                        <th style="border: 2px solid #000;">Mottatt Dato</th>
+                        <th style="border: 2px solid #000;">Feilbeskriving</th>
+                        <th style="border: 2px solid #000;">Avtalt Levering</th>
+                        <th style="border: 2px solid #000;">Status</th>
+                        <th style="border: 2px solid #000;">Service Skjema</th>
+                        <th style="border: 2px solid #000;">Timer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                             {
-                        <tr data-orderid="@item.Ordrenummer" data-kunde="@item.Fornavn @item.Etternavn" data-dato="@item.MottattDato">
-                            <td>
-                                <div class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Ordrenummer</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item @(currentController == "Mechanical" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Mechanical" asp-action="Create" asp-route-id="@item.ServiceOrderId">Mechanical</a>
-                                        <a class="dropdown-item @(currentController == "Hydrolisk" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Hydrolisk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Hydrolisk</a>
-                                        <a class="dropdown-item @(currentController == "Electro" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Electro" asp-action="Create" asp-route-id="@item.ServiceOrderId">Electro</a>
-                                        <a class="dropdown-item @(currentController == "FunksjonsTest" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="FunksjonsTest" asp-action="Create" asp-route-id="@item.ServiceOrderId">FunksjonsTest</a>
-                                        <a class="dropdown-item @(currentController == "Trykk" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Trykk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Trykk</a>
-                                    </div>
+                    <tr data-orderid="@item.Ordrenummer" data-kunde="@item.Fornavn @item.Etternavn" data-dato="@item.MottattDato">
+                        <td>
+                            <div class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Ordrenummer</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item @(currentController == "Mechanical" && currentAction == "Create" ? "active-link" : "")"
+                                       asp-controller="Mechanical" asp-action="Create" asp-route-id="@item.ServiceOrderId">Mechanical</a>
+                                    <a class="dropdown-item @(currentController == "Hydrolisk" && currentAction == "Create" ? "active-link" : "")"
+                                       asp-controller="Hydrolisk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Hydrolisk</a>
+                                    <a class="dropdown-item @(currentController == "Electro" && currentAction == "Create" ? "active-link" : "")"
+                                       asp-controller="Electro" asp-action="Create" asp-route-id="@item.ServiceOrderId">Elektro</a>
+                                    <a class="dropdown-item @(currentController == "FunksjonsTest" && currentAction == "Create" ? "active-link" : "")"
+                                       asp-controller="FunksjonsTest" asp-action="Create" asp-route-id="@item.ServiceOrderId">FunksjonsTest</a>
+                                    <a class="dropdown-item @(currentController == "Trykk" && currentAction == "Create" ? "active-link" : "")"
+                                       asp-controller="Trykk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Trykk</a>
                                 </div>
-                            </td>
+                            </div>
+                        </td>
 
 
-                                          <td>@item.Produkttype</td>
-                                          <td>@item.Fornavn @item.Etternavn</td>
-                                          <td>@item.MottattDato.ToShortDateString()</td>
-                                          <td>@item.Feilbeskrivelse</td>
-                                          <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
-                                          <td>Process</td>
-                            <td>
-                                @if (@item.ServiceSkjema == "Ja")
+                        <td>@item.Produkttype</td>
+                        <td>@item.Fornavn @item.Etternavn</td>
+                        <td>@item.MottattDato.ToShortDateString()</td>
+                        <td>@item.Feilbeskrivelse</td>
+                        <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
+                        <td>Aktiv</td>
+                        <td>
+                            @if (@item.ServiceSkjema == "Ja")
                                 {
-                                    <a href="@Url.Action("Index", "ServiceSkjema", new { id = @item.ServiceOrderId })">@item.ServiceSkjema</a>
+                            <a href="@Url.Action("Index", "ServiceSkjema", new { id = @item.ServiceOrderId })">@item.ServiceSkjema</a>
                                 }
                                 else
                                 {
-                                    @item.ServiceSkjema
+                            @item.ServiceSkjema
                                 }
-                            </td>
-                                          <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
-                                      </tr>
+                        </td>
+                        <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
+                    </tr>
                                            }
-                                  </tbody>
-                              </table>
+                </tbody>
+            </table>
                               }
                               else
                               {
-                              <p>No service orders available.</p>
+            <p>No service orders available.</p>
                               }
-    </div>
+        </div>
 
-    <!-- Pagination -->
-    @if (totalPages > 1)
+        <!-- Pagination -->
+        @if (totalPages > 1)
     {
         <div class="pagination-wrapper">
             @for (var i = 1; i <= totalPages; i++)
             {
                 if (i == currentPage)
                 {
-                    <span class="active-page">@i</span>
+            <span class="active-page">@i</span>
                 }
                 else
                 {
-                    <a class="pagination-link" href="@Url.Action("ActiveService", "ActiveService", new { page = i })">@i</a>
+            <a class="pagination-link" href="@Url.Action("ActiveService", "ActiveService", new { page = i })">@i</a>
                 }
             }
         </div>
     }
 
-    
