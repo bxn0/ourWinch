@@ -45,7 +45,6 @@ public class ActiveServiceController : Controller
         return View(activeServices);
     }
 
-
     [HttpDelete]
     public async Task<IActionResult> DeleteService(int id)
     {
