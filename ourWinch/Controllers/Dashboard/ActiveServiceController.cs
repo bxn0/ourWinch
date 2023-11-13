@@ -64,7 +64,6 @@ public class ActiveServiceController : Controller
         return View("~/Views/Dashboard/ActiveService.cshtml", activServices);
     }
 
-
     [HttpDelete]
     public async Task<IActionResult> DeleteService(int id)
     {

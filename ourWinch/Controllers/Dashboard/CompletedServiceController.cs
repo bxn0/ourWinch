@@ -32,40 +32,43 @@ public class CompletedServiceController : Controller
     // POST: Fullført tjeneste kaydı için
    [HttpPost]
     [HttpPost]
-    public IActionResult RegisterCompletedService(CompletedService completedService)
-    {
-        if (ModelState.IsValid)
-        {
-            // Önce ilgili ActiveService kaydını bul
-            var activeService = _context.ActiveServices.FirstOrDefault(a => a.ServiceOrderId == completedService.ServiceOrderId);
-            // Eğer varsa ve daha önce tamamlanmamışsa, işlemleri yap
-            if (activeService != null && activeService.Status != "Completed")
-            {
-                // Model doğruysa, veritabanına ekle
-                _context.CompletedServices.Add(completedService);
-                // ActiveService kaydını sil
-                _context.ActiveServices.Remove(activeService);
-                _context.SaveChanges(); // Değişiklikleri kaydet
-                return RedirectToAction("Index", "CompletedService");
-            }
-        }
-        // ModelState geçerli değilse veya işlem zaten tamamlanmışsa, hataları logla
-        foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-        {
-            _logger.LogError(error.ErrorMessage); // Hata mesajlarını logla
-        }
-        // Hatalı model veya zaten tamamlanmış işlem ile Error view'ını döndür
-        return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    //public IActionResult RegisterCompletedService(CompletedService completedService)
+    //{
+    //    if (ModelState.IsValid)
+    //    {
+    //        // Önce ilgili ActiveService kaydını bul
+    //        var activeService = _context.ActiveServices.FirstOrDefault(a => a.ServiceOrderId == completedService.ServiceOrderId);
+    //        // Eğer varsa ve daha önce tamamlanmamışsa, işlemleri yap
+    //        if (activeService != null && activeService.Status != "Completed")
+    //        {
+    //            // Model doğruysa, veritabanına ekle
+    //            _context.CompletedServices.Add(completedService);
+    //            // ActiveService kaydını sil
+    //            _context.ActiveServices.Remove(activeService);
+    //            _context.SaveChanges(); // Değişiklikleri kaydet
+    //            return RedirectToAction("Index", "CompletedService");
+    //        }
+    //    }
+    //    // ModelState geçerli değilse veya işlem zaten tamamlanmışsa, hataları logla
+    //    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+    //    {
+    //        _logger.LogError(error.ErrorMessage); // Hata mesajlarını logla
+    //    }
+    //    // Hatalı model veya zaten tamamlanmış işlem ile Error view'ını döndür
+    //    return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    //}
 
     [HttpGet]
     public async Task<IActionResult> Index(int page = 1)
     {
-        var totalItems = await _context.CompletedServices.CountAsync();
+        // 'Fulfort' olarak ayarlanmış tüm servisleri getir
+        var query = _context.ServiceOrders.Where(so => so.Status == "Fulfort");
+
+        var totalItems = await query.CountAsync();
         var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
         page = Math.Clamp(page, 1, totalPages);
 
-        var completedServices = await _context.CompletedServices
+        var completedServices = await query
             .OrderByDescending(cs => cs.MottattDato)
             .Skip((page - 1) * PageSize)
             .Take(PageSize)

@@ -151,7 +151,7 @@
                         <td>@item.MottattDato.ToShortDateString()</td>
                         <td>@item.Feilbeskrivelse</td>
                         <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
-                        <td>Aktiv</td>
+                                <td>@item.Status</td>
                         <td>
                             @if (@item.ServiceSkjema == "Ja")
                                 {
