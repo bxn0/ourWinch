@@ -1,5 +1,5 @@
 ﻿@using ourWinch.Models.Dashboard;
-@model IEnumerable<CompletedService>
+@model IEnumerable<ServiceOrder>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -70,7 +70,7 @@
                         <td>@service.Fornavn @service.Etternavn</td>
                         <td>@service.MottattDato.ToString("dd/MM/yyyy")</td>
                         <td>@service.Feilbeskrivelse</td>
-                        <td>@service.AvtaltLevering.ToString("dd/MM/yyyy")</td>
+                       @*  <td>@service.AvtaltLevering.ToString("dd/MM/yyyy")</td> *@
                         <td class="status-@service.Status.ToLowerInvariant()">@(service.Status)</td>
                         <td>@service.ServiceSkjema</td>
                         
