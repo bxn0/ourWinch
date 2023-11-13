@@ -11,27 +11,37 @@ using Microsoft.AspNetCore.Authorization;
 public class DashboardController : Controller
 {
     private readonly AppDbContext _context;
-
+    private const int PageSize = 5; 
     public DashboardController(AppDbContext context)
     {
         _context = context;
     }
 
     
-    public IActionResult Index()
+    public IActionResult Index(int page = 1)
     {
         if (TempData["SuccessMessage"] != null)
         {
             ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
         }
-        var serviceOrders = _context.ServiceOrders.ToList();
+
+
+        var totalItems = _context.ServiceOrders.Count();
+        var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
+        page = Math.Clamp(page, 1, totalPages);
+
+        var serviceOrders = _context.ServiceOrders
+            .OrderByDescending(cs => cs.MottattDato)
+        .Skip((page - 1) * PageSize)
+        .Take(PageSize)
+        .ToList();
+
+        ViewBag.CurrentPage = page;
+        ViewBag.TotalPages = totalPages;
+
         return View("~/Views/Dashboard/ActiveService.cshtml", serviceOrders);
+
     }
 
-
-    public IActionResult Page(int page = 1)
-    {
-        return View("~/Views/Dashboard/ActiveService.cshtml");
-    }
 
 }
