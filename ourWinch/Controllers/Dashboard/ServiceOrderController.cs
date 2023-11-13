@@ -43,6 +43,20 @@ public class ServiceOrderController : Controller
         return RedirectToAction("Index", "Dashboard");
     }
 
+    //Change "Status"
+    [HttpPost]
+    public IActionResult UpdateStatus(int id, string newStatus)
+    {
+        var serviceOrder = _context.ServiceOrders.FirstOrDefault(so => so.ServiceOrderId == id);
+        if (serviceOrder != null)
+        {
+            serviceOrder.Status = newStatus;
+            _context.SaveChanges();
+            return Ok(); // Başarılı güncelleme yanıtı
+        }
+        return NotFound(); // Servis bulunamazsa hata yanıtı
+    }
+
 
     // GET: ServiceOrder/index
     public IActionResult Index()
