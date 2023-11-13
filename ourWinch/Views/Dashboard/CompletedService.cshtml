@@ -53,7 +53,7 @@
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Kunde</th>
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Mottatt Dato</th>
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Feilbeskriving</th>
-                    <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Avtalt Levering</th>
+                    @* <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Avtalt Levering</th> *@
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Status</th>
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Service Skjema</th>
                     
@@ -70,7 +70,7 @@
                         <td>@service.Fornavn @service.Etternavn</td>
                         <td>@service.MottattDato.ToString("dd/MM/yyyy")</td>
                         <td>@service.Feilbeskrivelse</td>
-                       @*  <td>@service.AvtaltLevering.ToString("dd/MM/yyyy")</td> *@
+                        @* <td>@service.AvtaltLevering.ToString("dd/MM/yyyy")</td> *@
                         <td class="status-@service.Status.ToLowerInvariant()">@(service.Status)</td>
                         <td>@service.ServiceSkjema</td>
                         
