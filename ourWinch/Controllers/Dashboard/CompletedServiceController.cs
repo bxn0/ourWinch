@@ -61,11 +61,14 @@ public class CompletedServiceController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(int page = 1)
     {
-        var totalItems = await _context.CompletedServices.CountAsync();
+        // 'Fulfort' olarak ayarlanmış tüm servisleri getir
+        var query = _context.ServiceOrders.Where(so => so.Status == "Fulfort");
+
+        var totalItems = await query.CountAsync();
         var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
         page = Math.Clamp(page, 1, totalPages);
 
-        var completedServices = await _context.CompletedServices
+        var completedServices = await query
             .OrderByDescending(cs => cs.MottattDato)
             .Skip((page - 1) * PageSize)
             .Take(PageSize)
