@@ -25,6 +25,13 @@ public class DashboardController : Controller
             ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
         }
 
+        var message = TempData["LoginSuccessMessage"] as string;
+        // Hvis meldingen ikke er null, send denne meldingen for å se den
+        if (!string.IsNullOrEmpty(message))
+        {
+            ViewBag.LoginSuccessMessage = message;
+        }
+
 
         var totalItems = _context.ServiceOrders.Count();
         var totalPages = (int)Math.Ceiling((double)totalItems / PageSize);
