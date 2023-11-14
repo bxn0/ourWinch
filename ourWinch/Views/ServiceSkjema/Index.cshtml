@@ -109,39 +109,23 @@
             });
 
             $("#completeButton").click(function () {
-                // AJAX-kall for å hente data
+                var serviceOrderId = getIdFromUrl();
+
                 $.ajax({
-                    url: "http://localhost:5002/api/ServiceSkjema/" + getIdFromUrl(),
-                    type: "GET",
-                    beforeSend: function () {
-                        console.log("Henter data...");
+                    url: '/ServiceOrder/UpdateStatus', // Güncellenmiş URL
+                    type: 'POST', // HTTP metodu POST olarak değiştirildi
+                    data: {
+                        id: serviceOrderId, // ServiceOrder ID
+                        newStatus: 'Fulfort' // Yeni durum
                     },
-                    success: function (data) {
-                        if (data.serviceOrders && data.serviceOrders.length > 0) {
-                            var order = data.serviceOrders[0];
-                            // Fyll ut skjemaet med data
-                            $('#ServiceOrderIdInput').val(order.serviceOrderId);
-                            $('#OrdrenummerInput').val(order.ordrenummer);
-                            $('#ProdukttypeInput').val(order.produkttype);
-                            $('#FornavnInput').val(order.fornavn);
-                            $('#EtternavnInput').val(order.etternavn);
-                            $('#MottattDatoInput').val(new Date(order.mottattDato).toISOString().split('T')[0]);
-                            $('#FeilbeskrivelseInput').val(order.feilbeskrivelse);
-                            $('#AvtaltLeveringInput').val(new Date(order.mottattDato).toISOString().split('T')[0]);
-                            $('#StatusInput').val(order.status);
-                            $('#ServiceSkjemaInput').val(order.serviceSkjema);
-                            // Send skjemaet
-                            $("#completedServiceForm").submit();
-                        }
+                    success: function (response) {
+                        alert('Status updated to completed!');
+                        location.reload(); // Sayfayı yenile
                     },
-                    
                     error: function (error) {
-                        alert("En feil oppsto! Vennligst prøv igjen.");
-                        console.error("Feil:", error);
+                        alert('An error occurred while updating the status.');
                     }
                 });
-
-                
             });
 
             // Funksjon for å hente ID fra URL

@@ -49,8 +49,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
         [HttpGet]
-        // GET: Trykk/Create
-        [Route("Trykk/Create/{serviceOrderId}/{category?}")]
+        [Route("Trykk/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "Trykk")
         {
             if (TempData["SuccessMessageFunksjons"] != null)

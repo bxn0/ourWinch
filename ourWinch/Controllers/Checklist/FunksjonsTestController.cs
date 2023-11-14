@@ -45,7 +45,8 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: FunksjonsTest/Create
-        [Route("FunksjonsTest/Create/{serviceOrderId}/{category?}")]
+        [HttpGet]
+        [Route("FunksjonsTest/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "FunksjonsTest")
         {
             if (TempData["SuccessMessageElektro"] != null)
