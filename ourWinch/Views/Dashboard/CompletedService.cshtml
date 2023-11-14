@@ -1,11 +1,11 @@
 ﻿@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var totalPages = ViewBag.TotalPages;
     var currentPage = ViewBag.CurrentPage;
-}
+    ViewBag.Title = "Fulførte Servicer";
+}}
 <style>
     /* Pagination styling */
     .pagination-wrapper {
