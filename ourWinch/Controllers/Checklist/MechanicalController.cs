@@ -63,8 +63,8 @@ namespace ourWinch.Controllers.Checklist
         }
 
         // GET: Mechanical/Create
-        
-        [Route("Mechanical/Create/{serviceOrderId}/{category?}")]
+
+        [Route("Mechanical/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "Mechanical")
         {
             if (TempData["SuccessMessageTrykk"] != null)

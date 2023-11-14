@@ -48,8 +48,7 @@ namespace ourWinch.Controllers.Checklist
         }
 
         [HttpGet]
-        // GET: Hydrolisk/Create
-        [Route("Hydrolisk/Create/{serviceOrderId}/{category?}")]
+        [Route("Hydrolisk/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "Hydrolisk")
         {
             if (TempData["SuccessMessageMechanical"] != null)
