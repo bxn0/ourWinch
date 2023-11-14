@@ -2,11 +2,12 @@
 @model IEnumerable<ServiceOrder>
 
 
-    @{
+@{
     ViewData["Title"] = "Active Services";
+    ViewBag.Title = "Aktive Servicer";
     var totalPages = ViewBag.TotalPages;
     var currentPage = ViewBag.CurrentPage;
-    }
+}
 
     @{
     var currentController = ViewContext.RouteData.Values["controller"].ToString();
