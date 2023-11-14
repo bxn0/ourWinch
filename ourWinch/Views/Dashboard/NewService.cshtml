@@ -15,12 +15,12 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="text-dark">Fornavn</label>
-                    <input type="text" name="Fornavn" class="form-control form-control-sm rounded-input" placeholder="Fornavn">
+                    <input type="text" name="Fornavn" class="form-control form-control-sm rounded-input" placeholder="Fornavn" required>
                 </div>
 
                 <div class="form-group">
                     <label class="text-dark">Etternavn</label>
-                    <input type="text" name="Etternavn" class="form-control form-control-sm" placeholder="Etternavn">
+                    <input type="text" name="Etternavn" class="form-control form-control-sm" placeholder="Etternavn" required>
                 </div>
 
                 <div class="form-group">
@@ -30,17 +30,17 @@
 
                 <div class="form-group">
                     <label class="text-dark">Email</label>
-                    <input type="email" name="Email" class="form-control form-control-sm" placeholder="Email">
+                    <input type="email" name="Email" class="form-control form-control-sm" placeholder="Email" required>
                 </div>
 
                 <div class="form-group">
                     <label class="text-dark">Adresse</label>
-                    <input type="text" name="Adresse" class="form-control form-control-sm" placeholder="Adresse">
+                    <input type="text" name="Adresse" class="form-control form-control-sm" placeholder="Adresse" required>
                 </div>
 
                 <div class="form-group">
                     <label class="text-dark mt-2">Feilbeskrivelse</label>
-                    <textarea name="Feilbeskrivelse" class="form-control form-control-sm flex-textarea-feil mt-1" rows="5" placeholder="Feilbeskrivelse"></textarea>
+                    <textarea name="Feilbeskrivelse" class="form-control form-control-sm flex-textarea-feil mt-1" rows="5" placeholder="Feilbeskrivelse" required></textarea>
                 </div>
             </div>
 
@@ -59,11 +59,11 @@
 
                 <div class="form-group">
                     <label class="text-dark">Serienummer</label>
-                    <input type="text" name="Serienummer" class="form-control form-control-sm" placeholder="Serienummer">
+                    <input type="text" name="Serienummer" class="form-control form-control-sm" placeholder="Serienummer" required>
                 </div>
 
                 <div class="form-group d-flex align-items-start justify-content-between">
-                    <div class="mottatt-dato">
+                    <div class="mottatt-dato" required>
                         <label class="text-dark">Mottatt Dato</label>
                         <div class="input-group">
                             <input type="date" id="datepicker" name="MottattDato" class="form-control form-control-sm">
