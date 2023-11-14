@@ -84,10 +84,9 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
             margin: 10px auto;
             width: fit-content;
         }
-        }
     </style>
 
-    <div class="container mt-4 mb-2">
+   
         <div class="row align-items-center mb-1 mt-5 ">
 
             <div class="col-4">  </div>
@@ -117,10 +116,9 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
             </div>
             <!-- Other content can be placed on the right side -->
 
-        </div>                <div class="table-responsive">
-
-
-            <div class="table-responsive">
+        </div>   
+        
+       <div class="table-responsive">
 
                 @if (Model != null && Model.Any())
 
@@ -170,7 +168,7 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                             <td>@item.Fornavn @item.Etternavn</td>
                             <td>@item.MottattDato.ToShortDateString()</td>
                             <td>@item.Feilbeskrivelse</td>
-                                <td>@(item.MottattDato != null ? item.MottattDato.AddDays(7).ToShortDateString() : "N/A")</td>
+                             <td>@(item.MottattDato != null ? item.MottattDato.AddDays(7).ToShortDateString() : "N/A")</td>
 
                             <td>@item.Status</td>
                             <td>

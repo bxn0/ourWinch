@@ -77,7 +77,7 @@ namespace ourWinch.Controllers.Checklist
         [HttpPost]
         [Route("Electro/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ElectroListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(ElectroListViewModel viewModel, int serviceOrderId)
         {
             if (ModelState.IsValid)
             {

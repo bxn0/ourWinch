@@ -15,13 +15,16 @@ namespace ourWinch.Controllers.Checklist
     {
         private readonly AppDbContext _context;
         private readonly ServiceSkjemaService _serviceSkjemaService;
+        private readonly ILogger<TrykkController> _logger;
 
         // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
-        public TrykkController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
+        public TrykkController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, ILogger<TrykkController> logger)
         {
             _context = context;
             _serviceSkjemaService = serviceSkjemaService;
+            _logger = logger;
         }
+
 
         // GET: Trykk
         public async Task<IActionResult> Index()
@@ -85,7 +88,7 @@ namespace ourWinch.Controllers.Checklist
         [HttpPost]
         [Route("Trykk/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TrykkListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(TrykkListViewModel viewModel, int serviceOrderId)
         {
             if (ModelState.IsValid)
             {
@@ -211,11 +214,19 @@ namespace ourWinch.Controllers.Checklist
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var trykk = await _context.Trykks.FindAsync(id);
-            _context.Trykks.Remove(trykk);
-            await _context.SaveChangesAsync();
+            if (trykk != null)
+            {
+                _context.Trykks.Remove(trykk);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Handle the case when 'trykk' is null, for example, log an error or return a not found response.
+                _logger.LogWarning("Tried to delete Trykk with ID {ID}, but it does not exist.", id);
+                return NotFound();
+            }
             return RedirectToAction(nameof(Index));
         }
-
         private bool ElectroExists(int id)
         {
             return _context.Trykks.Any(e => e.Id == id);

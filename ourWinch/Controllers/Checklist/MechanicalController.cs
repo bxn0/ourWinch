@@ -100,7 +100,7 @@ namespace ourWinch.Controllers.Checklist
         [HttpPost]
         [Route("Mechanical/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MechanicalListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(MechanicalListViewModel viewModel, int serviceOrderId)
         {
             if (ModelState.IsValid)
             {
