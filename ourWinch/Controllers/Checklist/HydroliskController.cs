@@ -84,7 +84,7 @@ namespace ourWinch.Controllers.Checklist
         [HttpPost]
         [Route("Hydrolisk/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(HydroliskListViewModel viewModel, int serviceOrderId, string category)
+        public async Task<IActionResult> Create(HydroliskListViewModel viewModel, int serviceOrderId)
         {
           
             if (ModelState.IsValid)
