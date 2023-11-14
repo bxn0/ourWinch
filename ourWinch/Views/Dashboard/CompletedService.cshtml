@@ -74,7 +74,16 @@
                         <td>@service.Feilbeskrivelse</td>
                         @* <td>@service.AvtaltLevering.ToString("dd/MM/yyyy")</td> *@
                         <td class="status-@service.Status.ToLowerInvariant()">@(service.Status)</td>
-                        <td>@service.ServiceSkjema</td>
+                        <td>
+                            @if (@service.ServiceSkjema == "Ja")
+                            {
+                                <a href="@Url.Action("Index", "ServiceSkjema", new { id = @service.ServiceOrderId })">@service.ServiceSkjema</a>
+                            }
+                            else
+                            {
+                                @service.ServiceSkjema
+                            }
+                        </td>
 
                     </tr>
                 }
