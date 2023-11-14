@@ -147,16 +147,21 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                                 <div class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.Ordrenummer</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item @(currentController == "Mechanical" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Mechanical" asp-action="Create" asp-route-id="@item.ServiceOrderId">Mechanical</a>
-                                        <a class="dropdown-item @(currentController == "Hydrolisk" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Hydrolisk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Hydrolisk</a>
-                                        <a class="dropdown-item @(currentController == "Electro" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Electro" asp-action="Create" asp-route-id="@item.ServiceOrderId">Elektro</a>
-                                        <a class="dropdown-item @(currentController == "FunksjonsTest" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="FunksjonsTest" asp-action="Create" asp-route-id="@item.ServiceOrderId">FunksjonsTest</a>
-                                        <a class="dropdown-item @(currentController == "Trykk" && currentAction == "Create" ? "active-link" : "")"
-                                           asp-controller="Trykk" asp-action="Create" asp-route-id="@item.ServiceOrderId">Trykk</a>
+                                            <a class="dropdown-item @(currentController == "Mechanical" && currentAction == "Create" ? "active-link" : "")"
+                                               asp-controller="Mechanical" asp-action="Create" asp-route-serviceOrderId="@item.ServiceOrderId" asp-route-category="Mechanical">Mechanical</a>
+
+                                            <a class="dropdown-item @(currentController == "Hydrolisk" && currentAction == "Create" ? "active-link" : "")"
+                                               asp-controller="Hydrolisk" asp-action="Create" asp-route-serviceOrderId="@item.ServiceOrderId" asp-route-category="Hydrolisk">Hydrolisk</a>
+
+                                            <a class="dropdown-item @(currentController == "Electro" && currentAction == "Create" ? "active-link" : "")"
+                                               asp-controller="Electro" asp-action="Create" asp-route-serviceOrderId="@item.ServiceOrderId" asp-route-category="Electro">Electro</a>
+
+                                            <a class="dropdown-item @(currentController == "FunksjonsTest" && currentAction == "Create" ? "active-link" : "")"
+                                               asp-controller="FunksjonsTest" asp-action="Create" asp-route-serviceOrderId="@item.ServiceOrderId" asp-route-category="FunksjonsTest">FunksjonsTest</a>
+
+                                            <a class="dropdown-item @(currentController == "Trykk" && currentAction == "Create" ? "active-link" : "")"
+                                               asp-controller="Trykk" asp-action="Create" asp-route-serviceOrderId="@item.ServiceOrderId" asp-route-category="Trykk">Trykk</a>
+
                                     </div>
                                 </div>
                             </td>

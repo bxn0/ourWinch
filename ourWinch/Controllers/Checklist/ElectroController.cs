@@ -41,7 +41,7 @@ namespace ourWinch.Controllers.Checklist
             return View(electro);
         }
         [HttpGet]
-        [Route("Electro/Create/{serviceOrderId}/{category?}")]
+        [Route("Electro/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "Electro")
         {
 
