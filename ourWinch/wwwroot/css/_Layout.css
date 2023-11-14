@@ -9,16 +9,17 @@
     color: #9CB7C2;
     height: 120vh;
     padding-top: 0px; /* Bu değeri ayarlayarak "Hjem" öğesinin konumunu kontrol edebilirsiniz. */
+    overflow-y: auto;
 }
 
-/* ... diğer CSS kodları ... 
+
 
 
     .sidebar .nav-link {
         color: #9CB7C2;
         background-color: black;
     }
-        */
+        
 
 /* Add transition to dropdown for smoother animation */
 #brukerOperasjonerSubmenu {
