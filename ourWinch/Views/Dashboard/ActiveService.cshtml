@@ -136,7 +136,6 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                             <th style="border: 2px solid #000;">Avtalt Levering</th>
                             <th style="border: 2px solid #000;">Status</th>
                             <th style="border: 2px solid #000;">Service Skjema</th>
-                            <th style="border: 2px solid #000;">Timer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,7 +170,8 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                             <td>@item.Fornavn @item.Etternavn</td>
                             <td>@item.MottattDato.ToShortDateString()</td>
                             <td>@item.Feilbeskrivelse</td>
-                            <td>@(item.MottattDato != null ? item.MottattDato.ToShortDateString() : "N/A")</td>
+                                <td>@(item.MottattDato != null ? item.MottattDato.AddDays(7).ToShortDateString() : "N/A")</td>
+
                             <td>@item.Status</td>
                             <td>
                                 @if (@item.ServiceSkjema == "Ja")
@@ -183,7 +183,6 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                                 @item.ServiceSkjema
                                 }
                             </td>
-                            <td>4</td> <!-- Timer kısmı boş bırakıldı. -->
                         </tr>
                                            }
                     </tbody>
