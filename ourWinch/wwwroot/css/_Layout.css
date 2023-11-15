@@ -144,9 +144,9 @@
     }
 }
 
-@media (max-width: 991px) { /* Bootstrap'ın md breakpoint'i */
+@media (max-width: 991px) { 
     .navbar-collapse {
-        background-color: #343a40; /* Bootstrap 'bg-dark' sınıfının varsayılan arka plan rengi */
+        background-color: #000000; 
         width: 100%;
     }
 }
