@@ -43,10 +43,16 @@
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
     <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
+
+    
+    <title>@(ViewBag.Title) </title>
+
+    <!-- Favicon eklenen kod -->
+    <link rel="icon" type="image/png" href="/img/logo-næsted.png" />
 </head>
 <body>
 <!-- Navbar Kısmı -->
-    <nav class=" bg-dark flex-md-nowrap navbar navbar-dark p-1 position-sticky shadow  top-0 w-100" style="z-index: 1000; ">
+    <nav class=" bg-dark flex-nowrap navbar navbar-dark p-1 position-sticky shadow justify-content-between top-0 w-100" style="z-index: 1000; ">
     <div class="navbar-brand col-sm-3 col-md-2 mr-0">
         <img class="logo-image" src="/img/nøsted1.png" alt="nøsted Logo" style="border-radius: 10px;">
 
@@ -165,6 +171,8 @@
         </div>
     </div>
 </div>
+
+    
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -13,11 +13,13 @@ namespace ourWinch.Controllers.Checklist
     public class ServiceSkjemaController : Controller
     {
         private readonly AppDbContext _context;
-
-        public ServiceSkjemaController(AppDbContext context)
+        private readonly ILogger<ServiceSkjemaController> _logger;
+        public ServiceSkjemaController(AppDbContext context, ILogger<ServiceSkjemaController> logger)
         {
             _context = context;
+            _logger = logger; // Logger burada tanımlandı
         }
+
 
         public IActionResult Index()
         {
@@ -28,6 +30,8 @@ namespace ourWinch.Controllers.Checklist
         [HttpGet("api/ServiceSkjema/{id}")]
         public async Task<ActionResult<ServiceSkjema>> GetServiceSkjema(int id)
         {
+            _logger.LogInformation("GetServiceSkjema çağrıldı, ID: {ID}", id);
+
             var mechanicals = await _context.Mechanicals.Where(m => m.ServiceOrderId == id).ToListAsync();
             var hydrolisks = await _context.Hydrolisks.Where(h => h.ServiceOrderId == id).ToListAsync();
             var electros = await _context.Electros.Where(e => e.ServiceOrderId == id).ToListAsync();
@@ -37,6 +41,7 @@ namespace ourWinch.Controllers.Checklist
 
             if (!mechanicals.Any() && !hydrolisks.Any() && !electros.Any() && !funksjonsTests.Any() && !trykks.Any())
             {
+                _logger.LogWarning("ServiceSkjema bulunamadı, ID: {ID}", id);
                 return NotFound();
             }
 
@@ -49,7 +54,7 @@ namespace ourWinch.Controllers.Checklist
                 Trykks = trykks,
                 ServiceOrders = serviceOrders
             };
-
+            _logger.LogInformation("ServiceSkjema found and returned, ID: {ID}", id);
             return serviceSkjema;
         }
     }

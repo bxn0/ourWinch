@@ -1,10 +1,10 @@
 ﻿@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var totalPages = ViewBag.TotalPages;
     var currentPage = ViewBag.CurrentPage;
+    ViewBag.Title = "Fulførte Servicer";
 }
 <style>
     /* Pagination styling */
@@ -38,12 +38,14 @@
     }
 </style>
 
+
 <div class="col-md-9 col-lg-10 mx-auto mt-4">
-    
+
 
     <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Fulførte Servicer</div>
 
-    <!-- Tablo -->
+
+    <!-- Table -->
     <div class="table-responsive mt-2">
         <table class="custom-table table table-bordered" style="font-size: 16px;">
             <thead style="background-color: #B9B9B9;">
@@ -56,14 +58,14 @@
                     @* <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Avtalt Levering</th> *@
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Status</th>
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">Service Skjema</th>
-                    
+
                 </tr>
             </thead>
 
             <tbody>
                 @foreach (var service in Model)
                 {
-                    <!-- Model'den gelen verileri döngü ile listele -->
+                    <!-- Iterate through the data from the Model and list it -->
                     <tr>
                         <td>@service.ServiceOrderId</td>
                         <td>@service.Produkttype</td>
@@ -72,8 +74,17 @@
                         <td>@service.Feilbeskrivelse</td>
                         @* <td>@service.AvtaltLevering.ToString("dd/MM/yyyy")</td> *@
                         <td class="status-@service.Status.ToLowerInvariant()">@(service.Status)</td>
-                        <td>@service.ServiceSkjema</td>
-                        
+                        <td>
+                            @if (@service.ServiceSkjema == "Ja")
+                            {
+                                <a href="@Url.Action("Index", "ServiceSkjema", new { id = @service.ServiceOrderId })">@service.ServiceSkjema</a>
+                            }
+                            else
+                            {
+                                @service.ServiceSkjema
+                            }
+                        </td>
+
                     </tr>
                 }
             </tbody>

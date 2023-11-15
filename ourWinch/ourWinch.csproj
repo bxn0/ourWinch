@@ -12,6 +12,12 @@
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
 	<ItemGroup>
+	  <Content Remove="wwwroot\img\logo.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="wwwroot\img\logo-næsted.png" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Mailjet.Api" Version="3.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.24" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.24" />

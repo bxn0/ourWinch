@@ -2,11 +2,12 @@
 @model IEnumerable<ServiceOrder>
 
 
-    @{
+@{
     ViewData["Title"] = "Active Services";
+    ViewBag.Title = "Aktive Servicer";
     var totalPages = ViewBag.TotalPages;
     var currentPage = ViewBag.CurrentPage;
-    }
+}
 
     @{
     var currentController = ViewContext.RouteData.Values["controller"].ToString();
@@ -84,10 +85,9 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
             margin: 10px auto;
             width: fit-content;
         }
-        }
     </style>
 
-    <div class="container mt-4 mb-2">
+   
         <div class="row align-items-center mb-1 mt-5 ">
 
             <div class="col-4">  </div>
@@ -102,11 +102,11 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
 
                 .search-wrapper input,
                 .search-wrapper button {
-                    margin-left: 5px; /* İstediğiniz aralığı ayarlayabilirsiniz */
+                    margin-left: 5px; /* You can adjust the desired range */
                 }
             </style>
-            <!-- Sağdaki içerikler buraya -->
-            <!-- Arama kutusunu sol tarafa al -->
+            <!--The contents on the right go here. -->
+            <!-- Move the search box to the left side -->
             <div class="col-4">
                 <div class="search-wrapper">
                     <form method="get">
@@ -115,12 +115,11 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                     </form>
                 </div>
             </div>
-            <!-- Diğer içerikler sağ tarafa gelebilir -->
+            <!-- Other content can be placed on the right side -->
 
-        </div>                <div class="table-responsive">
-
-
-            <div class="table-responsive">
+        </div>   
+        
+       <div class="table-responsive">
 
                 @if (Model != null && Model.Any())
 
@@ -170,7 +169,7 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
                             <td>@item.Fornavn @item.Etternavn</td>
                             <td>@item.MottattDato.ToShortDateString()</td>
                             <td>@item.Feilbeskrivelse</td>
-                                <td>@(item.MottattDato != null ? item.MottattDato.AddDays(7).ToShortDateString() : "N/A")</td>
+                             <td>@(item.MottattDato != null ? item.MottattDato.AddDays(7).ToShortDateString() : "N/A")</td>
 
                             <td>@item.Status</td>
                             <td>

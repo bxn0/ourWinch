@@ -1,4 +1,11 @@
-﻿<style>
+﻿@{
+
+    ViewBag.Title = "Kunder";
+
+}
+
+
+<style>
     /* Sample styling (customize as needed) */
     .statistics-wrapper {
         display: flex;
@@ -44,12 +51,12 @@
 </style>
 
 <div class="container">
-    <!-- Kunde Statistics -->
+    <!-- customer Statistics -->
     <div class="statistics-wrapper">
         <!-- ... Your statistics components ... -->
     </div>
 
-    <!-- Kunde Table -->
+    <!-- customer Table -->
     <div class="kunde-wrapper">
         <h2>Kunder</h2>
         <form method="get" action="@Url.Action("Dashboard", "Customers")">
