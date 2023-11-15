@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ourWinch;
 using ourWinch.Models.Account;
 
 
@@ -14,13 +16,16 @@ public class AccountController : Controller
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly INotyfService _irisService;
     //private readonly IEmailSender _emailSender;
-    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,  RoleManager<IdentityRole> roleManager)
+    public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,  RoleManager<IdentityRole> roleManager, INotyfService irisService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
        // _emailSender = emailSender;
         _roleManager = roleManager;
+        //notfity
+        _irisService = irisService;
     }
 
     [Authorize]
@@ -101,7 +106,10 @@ public class AccountController : Controller
 
             if (result.Succeeded)
             {
-                TempData["LoginSuccessMessage"] = "Vellykket innlogging!";
+               // TempData[SD.Success] = "Login Successfull!";
+               // TempData[SD.Warning] = "Logged out!";
+                //TempData["LoginSuccessMessage"] = "Vellykket innlogging!";
+                _irisService.Success("Successfully Logged in", 1);
                 return RedirectToAction("Index", "Dashboard");
             }
             if (result.IsLockedOut)
@@ -128,7 +136,9 @@ public class AccountController : Controller
     {
 
        await _signInManager.SignOutAsync();
-       return RedirectToAction("Login", "Account");
+       
+        return RedirectToAction("Login", "Account");
+        
     }
 
 

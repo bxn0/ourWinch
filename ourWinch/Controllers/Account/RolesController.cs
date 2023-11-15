@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ourWinch.Models.Account;
 
@@ -10,14 +11,16 @@ namespace ourWinch.Controllers.Account
         private readonly AppDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly INotyfService _irisService;
 
 
 
-        public RolesController(AppDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public RolesController(AppDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, INotyfService irisService)
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
+            _irisService = irisService;
         }
 
         public IActionResult Index()
@@ -43,6 +46,42 @@ namespace ourWinch.Controllers.Account
                 return View(objFromDb);
             }
             
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(IdentityRole roleObj)
+        {
+            if (await _roleManager.RoleExistsAsync(roleObj.Name))
+            {
+                //error
+                _irisService.Error("Rollen eksisterer allerede!", 3);
+                return RedirectToAction(nameof(Index));
+            }
+
+            if (string.IsNullOrEmpty(roleObj.Id))
+            {
+                //create
+                await _roleManager.CreateAsync(new IdentityRole() { Name = roleObj.Name });
+                _irisService.Success("Rollen ble lagt!", 3);
+
+            }
+            else
+            {
+                var objRoleFromDb = _db.Roles.FirstOrDefault(u => u.Id == roleObj.Id);
+                if (objRoleFromDb==null)
+                {
+                    _irisService.Error("Rollen ble ikke funnet!", 3);
+                    return RedirectToAction(nameof(Index));
+                }
+                objRoleFromDb.Name = roleObj.Name;
+                objRoleFromDb.NormalizedName = roleObj.Name.ToUpper();
+                var result = await _roleManager.UpdateAsync(objRoleFromDb);
+                _irisService.Success("Rollen oppdatert!", 3);
+            }
+
+            return RedirectToAction(nameof(Index));
+
         }
     }
 }
