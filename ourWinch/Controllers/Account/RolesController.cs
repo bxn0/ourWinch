@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ourWinch.Models.Account;
@@ -80,6 +81,28 @@ namespace ourWinch.Controllers.Account
                 _irisService.Success("Rollen oppdatert!", 3);
             }
 
+            return RedirectToAction(nameof(Index));
+
+        }
+        [HttpPost]
+        //[Authorize(Policy = "OnlySuperAdminChecker")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var objFromDb = _db.Roles.FirstOrDefault(u => u.Id == id);
+            if (objFromDb == null)
+            {
+              _irisService.Error("Rollen ble ikke Funnet",2);
+                return RedirectToAction(nameof(Index));
+            }
+            var userRolesForThisRole = _db.UserRoles.Where(u => u.RoleId == id).Count();
+            if (userRolesForThisRole > 0)
+            {
+                _irisService.Warning("Kan ikke slette rollen fordi det er brukere tildelt den!", 2);
+                return RedirectToAction(nameof(Index));
+            }
+            await _roleManager.DeleteAsync(objFromDb);
+            _irisService.Success("Rollen ble sletted!", 2);
             return RedirectToAction(nameof(Index));
 
         }
