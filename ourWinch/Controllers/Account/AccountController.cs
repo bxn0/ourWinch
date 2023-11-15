@@ -53,7 +53,7 @@ public class AccountController : Controller
         {
             var user = new ApplicationUser
             {
-                UserName = model.MobilNo, Fornavn = model.Fornavn, Etternavn = model.Etternavn,
+                UserName = model.Fornavn, Fornavn = model.Fornavn, Etternavn = model.Etternavn,
                 MellomNavn = model.MellomNavn, Email = model.Email, PhoneNumber = model.MobilNo
             };
 

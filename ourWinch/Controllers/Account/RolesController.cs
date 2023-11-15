@@ -26,5 +26,23 @@ namespace ourWinch.Controllers.Account
 
             return View(roles);
         }
+
+
+        [HttpGet]
+        public IActionResult Upsert(string id)
+        {
+
+            if (String.IsNullOrEmpty(id))
+            {
+                return View();
+            }
+            else
+            {
+                //updating the role
+                var objFromDb = _db.Roles.FirstOrDefault(u => u.Id == id);
+                return View(objFromDb);
+            }
+            
+        }
     }
 }

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+
+@{
+
+    ViewBag.Title = "Roles";
+
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<div class="container mt-5" style="background-color: #C0D0D7; max-width: 800px; border-radius: 10px; padding: 20px; height: 500px; overflow-y: auto;">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center my-3">
+            <img class="logo-image rounded" src="/img/nøsted2.jpeg" alt="nøsted Logo" width="200" style="border-radius: 10px;">
+            <h2 class="font-weight-bold mt-4" style="font-size: 2em; font-weight: 600;">Roller List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-action="Upsert" asp-controller="Roles" class="btn btn-primary">Lag en ny roll</a>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            @if (Model.Any())
+            {
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>
+                           ID
+                        </th>
+                        <th>
+                            Navn
+                        </th>
+                        
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>
