@@ -33,6 +33,8 @@
     <!-- Bootstrap JS with Popper -->
 
     <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js "></script>
+    <!-- Toastr-->
+    <link rel="stylesheet" href="~/css/toastr.css" crossorigin="anonymous" />
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
@@ -149,24 +151,31 @@
                         @if(isAdmin){
 
                             <!-- "Brukeroperasjoner" link -->
-                        <li class="nav-item mt-3">
-                            <a href="#brukerSubmenu" data-bs-toggle="collapse" data-bs-target="#brukerSubmenu" class="nav-link">
-                                <i class="fas fa-users-cog"></i> Brukeroperasjoner
-                            </a>
-                            <!-- "Brukeroperasjoner" submenu (default is closed) -->
-                            <ul id="brukerSubmenu" class="collapse list-unstyled">
-                                <li class="nav-item mt-3 ps-4">
-                                    <a asp-controller="Account" asp-action="Register" class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Account" && ViewContext.RouteData.Values["Action"].ToString() == "Register") ? "active" : "")">
-                                        <i class="fas fa-user-plus"></i> Registrering
-                                    </a>
-                                </li>
-                                <li class="nav-item mt-3 ps-4">
-                                    <a asp-controller="User" asp-action="Index" class="nav-link">
-                                        <i class="fas fa-users"></i> Brukere
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+
+                            <li class="nav-item mt-3">
+                                <a href="#brukerSubmenu" data-bs-toggle="collapse" data-bs-target="#brukerSubmenu" class="nav-link">
+                                    <i class="fas fa-users-cog"></i> Brukeroperasjoner
+                                </a>
+                                <!-- "Brukeroperasjoner" submenu (default is closed) -->
+                                <ul id="brukerSubmenu" class="collapse list-unstyled">
+                                    <li class="nav-item mt-3 ps-4">
+                                        <a asp-controller="Account" asp-action="Register" class="nav-link @((ViewContext.RouteData.Values["Controller"].ToString() == "Account" && ViewContext.RouteData.Values["Action"].ToString() == "Register") ? "active" : "")">
+                                            <i class="fas fa-user-plus"></i> Registrering
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mt-3 ps-4">
+                                        <a asp-controller="User" asp-action="Index" class="nav-link">
+                                            <i class="fas fa-users"></i> Brukere
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mt-3 ps-4">
+                                        <a asp-controller="Roles" asp-action="Index" class="nav-link">
+                                            <i class="fas fa-users"></i> Roller
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                
 
                     }
 
@@ -175,13 +184,21 @@
                 </div>
             </nav>
 
-            <div class="col-md-10 render-body ">
-                @RenderBody()
-            </div>
+
+        <div class="col-md-10 p-3">
+          
+                @await Component.InvokeAsync("Notyf")
+            @RenderBody()
+
         </div>
     </div>
 
-    @RenderSection("Scripts", required: false)
+
+
+
+@RenderSection("Scripts", required: false)
+
+ 
 </body>
 
 </html>
