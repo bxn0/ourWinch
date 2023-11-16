@@ -103,6 +103,21 @@ namespace ourWinch.Controllers.Account
             return View(user);
         }
 
+        [HttpPost]
+        public IActionResult Delete(string userId)
+        {
+            var objFromDb = _db.ApplicationUser.FirstOrDefault(u => u.Id == userId);
+            if (objFromDb == null)
+            {
+                return NotFound();
+            }
+            _db.ApplicationUser.Remove(objFromDb);
+            _db.SaveChanges();
+          _irisService.Success("Brukeren ble sletted!", 2);
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
     }
 }
