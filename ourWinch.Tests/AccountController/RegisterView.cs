@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ public class RegisterView
     private readonly Mock<UserManager<ApplicationUser>> _userManagerMock = MockUserManager();
     private readonly Mock<SignInManager<ApplicationUser>> _signInManagerMock = MockSignInManager();
     private readonly Mock<RoleManager<IdentityRole>> _roleManagerMock = MockRoleManager();
+    private readonly Mock<INotyfService> _notyfServiceMock;
 
     public RegisterView()
     {
@@ -30,6 +32,8 @@ public class RegisterView
         _roleManagerMock = new Mock<RoleManager<IdentityRole>>(
             Mock.Of<IRoleStore<IdentityRole>>(),
             null, null, null, null);
+
+        _notyfServiceMock = new Mock<INotyfService>(MockBehavior.Strict);
     }
     [Fact]
     public async Task Register_Post_ValidModel_CreatesUserAndReturnsRedirect()
@@ -44,7 +48,7 @@ public class RegisterView
             .ReturnsAsync(IdentityResult.Success);
 
         // Instantiate the controller with the mocked dependencies
-        var controller = new AccountController(_userManagerMock.Object, _signInManagerMock.Object, _roleManagerMock.Object);
+        var controller = new AccountController(_userManagerMock.Object, _signInManagerMock.Object, _roleManagerMock.Object,_notyfServiceMock.Object);
 
         // Act
         var result = await controller.Register(model);

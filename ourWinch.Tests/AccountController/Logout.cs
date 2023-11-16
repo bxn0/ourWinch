@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -13,6 +14,8 @@ namespace ourWinch.Tests.AccountController
         // Arrange: Mock necessary services and create an instance of the controller
         private readonly global::AccountController _controller;
         private readonly Mock<SignInManager<ApplicationUser>> _signInManagerMock;
+        private readonly Mock<INotyfService> _notyfServiceMock;
+
 
         public Logout()
         {
@@ -31,10 +34,13 @@ namespace ourWinch.Tests.AccountController
             var roleManagerMock = new Mock<RoleManager<IdentityRole>>(
                 Mock.Of<IRoleStore<IdentityRole>>(), null, null, null, null);
 
+            _notyfServiceMock = new Mock<INotyfService>();
+
             _controller = new global::AccountController(
                 userManagerMock.Object,
                 _signInManagerMock.Object,
-                roleManagerMock.Object);
+                roleManagerMock.Object,
+                _notyfServiceMock.Object);
         }
 
         [Fact]
