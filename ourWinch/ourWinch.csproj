@@ -12,9 +12,6 @@
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
 	<ItemGroup>
-	  <Content Remove="wwwroot\img\logo.png" />
-	</ItemGroup>
-	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="wwwroot\img\logo-næsted.png" />
 	</ItemGroup>
 	<ItemGroup>
