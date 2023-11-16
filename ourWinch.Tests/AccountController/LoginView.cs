@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -13,6 +14,7 @@ namespace ourWinch.Tests.AccountController
         private readonly Mock<UserManager<ApplicationUser>> _userManagerMock;
         private readonly Mock<SignInManager<ApplicationUser>> _signInManagerMock;
         private readonly Mock<RoleManager<IdentityRole>> _roleManagerMock;
+        private readonly Mock<INotyfService> _notyfServiceMock;
 
         // The AccountController that we'll be testing
         private readonly global::AccountController _controller;
@@ -36,11 +38,14 @@ namespace ourWinch.Tests.AccountController
             _roleManagerMock = new Mock<RoleManager<IdentityRole>>(
                 roleStoreMock.Object, null, null, null, null);
 
+            _notyfServiceMock = new Mock<INotyfService>();
+
             // Instantiate the AccountController with the mocked dependencies
             _controller = new global::AccountController(
                 _userManagerMock.Object,
                 _signInManagerMock.Object,
-                _roleManagerMock.Object);
+                _roleManagerMock.Object,
+                _notyfServiceMock.Object);
 
             // Clear the ModelState to ensure it's valid for tests (remove this if you want to test model validation logic)
             _controller.ModelState.Clear();
