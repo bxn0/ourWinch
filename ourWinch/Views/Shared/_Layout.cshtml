@@ -68,7 +68,7 @@
             </button>
 
             <!-- Navbar links -->
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <div class="collapse navbar-collapse " id="collapsibleNavbar">
                 <ul class="navbar-nav ml-auto">
                     <!-- Optionally, you can add navbar items here -->
                     <!--   <li class="nav-item">
@@ -78,21 +78,26 @@
                 </ul>
 
                 <!-- User Info & Logout -->
-                <ul class="user-info d-flex  justify-content-center">
-                    <i class="fas fa-bell  mr-3"></i>
+                <ul class="user-info d-flex justify-content-center">
+                    <i class="fas fa-bell mt-3"></i>
                 </ul>
                 <ul class="user-icon-name d-flex justify-content-center mr-3 ">
-                    <i class="fas fa-user mr-2"></i>
+                    <i class="fas fa-user" style="margin-top: 20px;"></i>
                     <!-- User name will be inserted here -->
                     @if (SignInManager.IsSignedIn(User))
             {
-                    <span class=" user-name">@($"{user?.Fornavn} {user?.Etternavn}")</span>
+                    <span class=" user-name mt-3 ml-2">@($"{user?.Fornavn} {user?.Etternavn}")</span>
             }
                 </ul>
                 <ul class="d-flex justify-content-center">
-                    <form id="logoutForm" method="post" class="form-inline" asp-controller="Account" asp-action="Logout">
-                        <button type="submit" class="btn-logout text-light border-0 bg-transparent" style="font-weight: bold;">Logg ut</button>
-                    </form>
+
+                    <form id="logoutForm" method="post" class="form-inline mt-3" asp-controller="Account" asp-action="Logout">
+
+                        <div class="logout-button">
+                            <button type="submit" class="text-light border-0 bg-transparent" style="font-weight: bold;">Logg ut</button>
+
+                        </div>
+                   </form>   
                 </ul>
             </div>
         </div>
