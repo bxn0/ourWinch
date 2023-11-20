@@ -1,4 +1,8 @@
-﻿@model HydroliskListViewModel
+﻿@* // C# MVC View Model declaration *@
+
+@model HydroliskListViewModel
+@* 
+// Check for errors and display an alert if there are any *@
 @if (ViewBag.Errors != null && ViewBag.Errors.Count > 0)
 {
 <div class="alert alert-danger">
@@ -10,9 +14,12 @@
     </ul>
 </div>
 }
+
+@* // Check for success message and display a success alert *@
 @if (ViewBag.SuccessMessage != null)
 {
 <script>
+        @* // Use SweetAlert to display a success message *@
         Swal.fire({
             title: 'Vellykket',
             text: '@ViewBag.SuccessMessage',
@@ -85,8 +92,9 @@
 </style>
 
 <script>
-    var someServiceOrderId = @Model.ServiceOrderId;
-    var someCategory = "@ViewBag.ActiveButton";
+  
+    var someServiceOrderId = @Model.ServiceOrderId;   // Set someServiceOrderId from the model
+    var someCategory = "@ViewBag.ActiveButton";  // Set someCategory from the ViewBag
 </script>
 <main class="dflex mx-auto mt-3">
 
@@ -131,7 +139,7 @@
 
     </div>
     <section class="mt-3">
-        <!--************************* BUTONLAR ******************************** -->
+        <!--************************* BUTONS ******************************** -->
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
@@ -291,12 +299,17 @@
     <!-- JavaScript -->
 
     <script>
+        // Counter for dynamically adding form items
+         
         let counter = 3;
+                 // Function to add form items dynamically based on user input
+                // param { string } formId - The ID of the form to which items will be added
 
         function addItem(formId) {
             let inputDiv;
             let userInputField;
             let inputRow;
+            // Switch based on the form ID to get corresponding elements
             switch (formId) {
                 case 'Hydrolisks':
                     inputDiv = document.getElementById("inputDiv1");
@@ -324,7 +337,7 @@
                     inputRow = document.getElementById("inputRow5");
                     break;
             }
-
+            
             inputDiv.style.display = "flex";
             let labelText = userInputField.value;
             if (labelText === '') return;
@@ -356,11 +369,13 @@
                                     </div>
                                 </div>
                             `;
-
+            // Insert the new item before the input row
             inputRow.parentNode.insertBefore(newItem, inputRow);
             userInputField.value = '';
             counter++;
         }
+        // Event handler for radio button selections
+        // param{ Event } event - The event object
 
         const eventHandler = (event) => {
             if (event.target.type === 'radio') {
@@ -368,12 +383,16 @@
             }
         }
 
+        /**
+         * Function to set an active class for buttons
+         * param {HTMLElement} button - The button element to set as active
+         */
         function setActive(button) {
             var buttons = document.querySelectorAll('.form-button');
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
         }
-
+        // Event listener for form submission
         document.getElementById('hydrolisks').addEventListener('submit', function (event) {
             if (!isFormSubmitted) {
                 event.preventDefault();
@@ -381,8 +400,10 @@
                 inputs.forEach(function (input) {
                     console.log(input.name + ": " + input.value);
                 });
+                // Set the action URL based on someServiceOrderId and someCategory
                 const actionUrl = `/Hydrolisks/Create/${someServiceOrderId}/${someCategory}`;
 
+                // Set the form action attribute and submit the form
                 this.setAttribute('action', actionUrl);
                 isFormSubmitted = true;
                 this.submit();
