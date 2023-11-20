@@ -19,3 +19,14 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "ourWinch.dll"]
+
+
+
+# docker build -t umity/ourwinch:tag .
+# docker login
+# docker push umity/ourwinch:tag
+
+# På terminal må skrives
+# docker pull umity/ourwinch:tag
+# docker run -d -p 8080:5002 umity/ourwinch:tag
+# docker ps

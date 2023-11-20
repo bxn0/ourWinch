@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AspNetCoreHero.ToastNotification;
+using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.AspNetCore.Builder;
@@ -64,6 +65,12 @@ namespace ourWinch
             builder.Services.AddControllersWithViews();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddNotyf(config =>
+            {
+                config.DurationInSeconds = 10;
+                config.IsDismissable = true;
+                config.Position = NotyfPosition.TopCenter;
+            });
 
             // Add the DbContext to the DI container.
             builder.Services.AddDbContext<AppDbContext>(options =>

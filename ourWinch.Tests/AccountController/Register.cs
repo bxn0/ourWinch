@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ourWinch.Models.Account;
@@ -13,6 +14,7 @@ namespace ourWinch.Tests.AccountController
         private readonly Mock<UserManager<ApplicationUser>> userManagerMock;
         private readonly Mock<SignInManager<ApplicationUser>> signInManagerMock;
         private readonly Mock<RoleManager<IdentityRole>> roleManagerMock;
+        private readonly Mock<INotyfService> _notyfServiceMock;
 
         // Constructor sets up the mock objects for each test.
         public Register()
@@ -20,6 +22,7 @@ namespace ourWinch.Tests.AccountController
             userManagerMock = MockUserManager();
             signInManagerMock = MockSignInManager(userManagerMock);
             roleManagerMock = MockRoleManager();
+            _notyfServiceMock = new Mock<INotyfService>();
         }
 
         // This test ensures that calling the Register method returns the RegisterViewModel.
@@ -30,7 +33,8 @@ namespace ourWinch.Tests.AccountController
             var controller = new global::AccountController(
                 userManagerMock.Object,
                 signInManagerMock.Object,
-                roleManagerMock.Object);
+                roleManagerMock.Object,
+                _notyfServiceMock.Object);
 
             // Act: Call the Register method
             var result = await controller.Register();
@@ -52,7 +56,7 @@ namespace ourWinch.Tests.AccountController
             var controller = new global::AccountController(
                 userManagerMock.Object,
                 signInManagerMock.Object,
-                roleManagerMock.Object);
+                roleManagerMock.Object, _notyfServiceMock.Object);
 
             // Act
             await controller.Register();
