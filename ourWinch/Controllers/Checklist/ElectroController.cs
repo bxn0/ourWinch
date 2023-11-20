@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using ourWinch.Services;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace ourWinch.Controllers.Checklist
 {
@@ -12,12 +13,14 @@ namespace ourWinch.Controllers.Checklist
     {
         private readonly AppDbContext _context;
         private readonly ServiceSkjemaService _serviceSkjemaService;
+        private readonly INotyfService _irisService;
 
         // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
-        public ElectroController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
+        public ElectroController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, INotyfService irisService)
         {
             _context = context;
             _serviceSkjemaService = serviceSkjemaService;
+            _irisService = irisService;
         }
 
         public async Task<IActionResult> Index()
@@ -47,7 +50,7 @@ namespace ourWinch.Controllers.Checklist
 
             if (TempData["SuccessMessageHydroulic"] != null)
             {
-                ViewBag.SuccessMessage = TempData["SuccessMessageHydroulic"].ToString();
+                _irisService.Success("SuccessMessageHydroulic", 3);
             }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -100,7 +103,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(electro);
                     }
                     await _context.SaveChangesAsync();
-                    TempData["SuccessMessageElektro"] = "Elektrosjekklisten ble lagret med suksess.";
+                    _irisService.Success("Listen ble lagret med suksess.",3);
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
 
                     return RedirectToAction("Create", "FunksjonsTest", new { serviceOrderId = viewModel.ServiceOrderId, category = "FunksjonsTest" });

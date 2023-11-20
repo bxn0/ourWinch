@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ourWinch.Models.Dashboard;
@@ -14,12 +15,14 @@ namespace ourWinch.Controllers.Checklist
     {
         private readonly AppDbContext _context;
         private readonly ServiceSkjemaService _serviceSkjemaService;
+        private readonly INotyfService _irisService;
 
         // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
-        public MechanicalController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
+        public MechanicalController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, INotyfService irisService)
         {
             _context = context;
             _serviceSkjemaService = serviceSkjemaService;
+            _irisService = irisService;
         }
 
         // GET: Mechanical
@@ -69,7 +72,7 @@ namespace ourWinch.Controllers.Checklist
         {
             if (TempData["SuccessMessageTrykk"] != null)
             {
-                ViewBag.SuccessMessage = TempData["SuccessMessageTrykk"].ToString();
+                _irisService.Success("SuccessMessageHydroulic", 3);
             }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -127,7 +130,7 @@ namespace ourWinch.Controllers.Checklist
                     }
                     await _context.SaveChangesAsync();
                     //sweatalert feedback
-                    TempData["SuccessMessageMechanical"] = "Mekanikesjekklisten ble lagret med suksess."; 
+                    _irisService.Success("Listen ble lagret med suksess.", 3);
 
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Hydrolisk", new { serviceOrderId = viewModel.ServiceOrderId, category = "Hydrolisk" });
