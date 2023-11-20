@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ourWinch.Services;
@@ -16,13 +17,15 @@ namespace ourWinch.Controllers.Checklist
         private readonly AppDbContext _context;
         private readonly ServiceSkjemaService _serviceSkjemaService;
         private readonly ILogger<TrykkController> _logger;
+        private readonly INotyfService _irisService;
 
         // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
-        public TrykkController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, ILogger<TrykkController> logger)
+        public TrykkController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, ILogger<TrykkController> logger, INotyfService irisService)
         {
             _context = context;
             _serviceSkjemaService = serviceSkjemaService;
             _logger = logger;
+            _irisService = irisService;
         }
 
 
@@ -57,7 +60,7 @@ namespace ourWinch.Controllers.Checklist
         {
             if (TempData["SuccessMessageFunksjons"] != null)
             {
-                ViewBag.SuccessMessage = TempData["SuccessMessageFunksjons"].ToString();
+                _irisService.Success("SuccessMessageFunksjons", 3);
             }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -114,7 +117,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(trykk);
                     }
                     await _context.SaveChangesAsync();
-                    TempData["SuccessMessageTrykk"] = "Trykk sjekklisten ble lagret med suksess.";
+                    _irisService.Success("Listen ble lagret med suksess.", 3);
                     await UpdateServicejemaIfAllCompleted(serviceOrderId);
                     return RedirectToAction("Create", "Mechanical", new { serviceOrderId = viewModel.ServiceOrderId, category = "Mechanical" });
                 }

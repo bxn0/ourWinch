@@ -65,6 +65,7 @@ public class AccountController : Controller
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
+
             if (result.Succeeded)
             {
 
@@ -79,6 +80,7 @@ public class AccountController : Controller
 
                 await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Dashboard");
+
             }
             AddErrors(result);
            
