@@ -38,12 +38,12 @@
     }
 </style>
 
-    <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; width: fit-content;">Fulførte Servicer</div>
+    <div class="heading" style="background-color: #C0D0D7; border-radius: 10px; display: block; padding: 10px 30px; text-align: center; font-weight: bold; font-size: 32px; margin: 10px auto; margin-top: 5%; width: fit-content;">Fulførte Servicer</div>
 
 
     <!-- Table -->
     <div class="table-responsive mt-2">
-        <table class="custom-table table table-bordered" style="font-size: 16px;">
+        <table class=" table table-bordered text-center" style="font-size: 16px;">
             <thead style="background-color: #B9B9B9;">
                 <tr>
                     <th style="border-bottom: 2px solid #000; border-top: 2px solid #000; border-right: 2px solid #000;">OrderID</th>
@@ -58,7 +58,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="text-center">
                 @foreach (var service in Model)
                 {
                     <!-- Iterate through the data from the Model and list it -->
