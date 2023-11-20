@@ -70,9 +70,9 @@ namespace ourWinch
             {
                 options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
                 {
-                    sqlOptions.CommandTimeout(30); // Veritabanı komutlarının zaman aşımı süresini ayarla
+                    sqlOptions.CommandTimeout(30); // Set the timeout duration for database commands.
                 })
-                .LogTo(Console.WriteLine); // Bu satırı .UseSqlServer çağrısından sonra ve ayrı bir satırda ekle
+                .LogTo(Console.WriteLine); //Add this line after the .UseSqlServer call and on a separate line
             });
 
             // Register ServiceSkjemaService for DI.
@@ -92,7 +92,7 @@ namespace ourWinch
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
-                app.UseDeveloperExceptionPage();  // Bu satırı ekledik.
+                app.UseDeveloperExceptionPage();  // You have added this line.
             }
             else
             {
