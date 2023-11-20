@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ourWinch.Services;
@@ -14,12 +15,14 @@ namespace ourWinch.Controllers.Checklist
     {
         private readonly AppDbContext _context;
         private readonly ServiceSkjemaService _serviceSkjemaService; // Eklediğimiz yeni servis
+        private readonly INotyfService _irisService;
 
         // Düzenlediğimiz constructor
-        public HydroliskController(AppDbContext context, ServiceSkjemaService serviceSkjemaService)
+        public HydroliskController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, INotyfService irisService)
         {
             _context = context;
             _serviceSkjemaService = serviceSkjemaService;
+                _irisService = irisService;
         }
 
         // GET: Hydrolisk
@@ -53,7 +56,7 @@ namespace ourWinch.Controllers.Checklist
         {
             if (TempData["SuccessMessageMechanical"] != null)
             {
-                ViewBag.SuccessMessage = TempData["SuccessMessageMechanical"].ToString();
+                _irisService.Success("SuccessMessageMechanical", 3);
             }
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
             if (serviceOrder == null)
@@ -108,7 +111,7 @@ namespace ourWinch.Controllers.Checklist
                         _context.Add(hydrolisk);
                     }
                     await _context.SaveChangesAsync();
-                    TempData["SuccessMessageHydroulic"] = "Hydrauliskesjekklisten ble lagret med suksess.";
+                    _irisService.Success("Listen ble lagret med suksess.", 3);
                     await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId); // Eklediğimiz yeni servis metodunu çağırıyoruz
                     return RedirectToAction("Create", "Electro", new { serviceOrderId = viewModel.ServiceOrderId, category = "Electro" });
                 }

@@ -41,7 +41,7 @@
         color: #FFFFFF !important;
     }
 
-    form {
+    .form {
         background-color: #bfd0d7;
         border-radius: 20px;
         padding: 10px;
@@ -169,7 +169,7 @@
     <div class="container mt-3" onclick="eventHandler(event)">
 
         <!-- Form 1 -->
-        <form class="row" id="form1" asp-controller="Mechanical" asp-action="Create" method="post">
+        <form class="row form" id="form1" asp-controller="Mechanical" asp-action="Create" method="post">
 
             @Html.AntiForgeryToken()
 
