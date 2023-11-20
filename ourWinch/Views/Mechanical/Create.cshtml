@@ -12,16 +12,18 @@
 }
 @if (ViewBag.SuccessMessage != null)
 {
+
+    <!-- Display a success message using the Swal (SweetAlert2) library -->
 <script>
         Swal.fire({
-            title: 'Vellykket',
+            title: 'Vellykket', @*  // Title of the success message *@
             text: '@ViewBag.SuccessMessage',
             icon: 'success',
-            confirmButtonText: 'OK'
+            confirmButtonText: 'OK'  @* // Set the text for the confirmation button *@
         });
 </script>
 }
-
+ 
 <style>
     .form-button {
         background-color: #d17242;
@@ -131,7 +133,7 @@
 
     </div>
     <section class="mt-3">
-        <!--************************* BUTONLAR ******************************** -->
+        <!--************************* BUTONS ******************************** -->
         <div class="container text-light">
             <div class="row">
                 <div class="col-2 col-md-2 col-lg-2.4">
@@ -293,13 +295,14 @@
     <!-- JavaScript -->
 
     <script>
+        // Counter to track the number of items
         let counter = 3;
 
-        function addItem(formId) {
+        function addItem(formId) {  // Function to add a new item to the form dynamically
             let inputDiv;
             let userInputField;
             let inputRow;
-            switch (formId) {
+            switch (formId) {   // Switch case to identify the form based on the provided formId
                 case 'Mechanicals':
                     inputDiv = document.getElementById("inputDiv1");
                     userInputField = document.getElementById('userInput1');
@@ -331,7 +334,7 @@
             let labelText = userInputField.value;
             if (labelText === '') return;
 
-            let newItem = document.createElement('div');
+            let newItem = document.createElement('div');  // Create a new item with dynamic content
             newItem.classList.add('col-md-12', 'd-flex', 'align-items-center');
 
             newItem.innerHTML = `
@@ -359,30 +362,32 @@
                             </div>
                         `;
 
-            inputRow.parentNode.insertBefore(newItem, inputRow);
+            inputRow.parentNode.insertBefore(newItem, inputRow);  // Insert the new item before the inputRow
             userInputField.value = '';
             counter++;
         }
-
+        // Event handler function for radio button events
         const eventHandler = (event) => {
             if (event.target.type === 'radio') {
                 console.log(event.target.value);
             }
         }
-
+        // Function to set an active class to a button
         function setActive(button) {
             var buttons = document.querySelectorAll('.form-button');
             buttons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
         }
-
+        // Event listener for the form submission
         document.getElementById('mechanicals').addEventListener('submit', function (event) {
             if (!isFormSubmitted) {
                 event.preventDefault();
+                // Log input values to the console
                 var inputs = this.querySelectorAll('input[type="text"], input[type="radio"]:checked, textarea');
                 inputs.forEach(function (input) {
                     console.log(input.name + ": " + input.value);
                 });
+                // Construct the action URL based on someServiceOrderId and someCategory
                 const actionUrl = `/Mechanicals/Create/${someServiceOrderId}/${someCategory}`;
 
                 this.setAttribute('action', actionUrl);
