@@ -26,8 +26,8 @@ public class ServiceOrderController : Controller
     public IActionResult NewService()
     {
         // Retrieve the highest ServiceOrderId from the database and increment it to get the new order number
-        var lastOrder = _context.ServiceOrders.OrderByDescending(u => u.ServiceOrderId).FirstOrDefault();
-        var newOrderNumber = (lastOrder != null) ? lastOrder.ServiceOrderId + 1 : 1;
+        var lastOrder = _context.ServiceOrders.OrderByDescending(u => u.Ordrenummer).FirstOrDefault();
+        var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230136;
 
 
         // Create a new ServiceOrder object with the new order number
@@ -45,8 +45,8 @@ public class ServiceOrderController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(ServiceOrder serviceOrder)
     {
-       var lastOrder = _context.ServiceOrders.OrderByDescending(o => o.ServiceOrderId).FirstOrDefault();
-        var newOrderNumber = (lastOrder != null) ? lastOrder.ServiceOrderId + 1 : 1;
+       var lastOrder = _context.ServiceOrders.OrderByDescending(o => o.Ordrenummer).FirstOrDefault();
+        var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230136;
 
         serviceOrder.Ordrenummer = newOrderNumber;
         serviceOrder.Status = "Process";
