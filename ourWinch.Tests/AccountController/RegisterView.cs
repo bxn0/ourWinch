@@ -17,10 +17,14 @@ public class RegisterView
 
     public RegisterView()
     {
+      
+
         // Use 'this' to reference the current instance's fields
         _userManagerMock = new Mock<UserManager<ApplicationUser>>(
             Mock.Of<IUserStore<ApplicationUser>>(),
             null, null, null, null, null, null, null, null);
+
+       
 
         // You need to create signInManagerMock here instead of using field initializer
         _signInManagerMock = new Mock<SignInManager<ApplicationUser>>(
@@ -38,6 +42,9 @@ public class RegisterView
     [Fact]
     public async Task Register_Post_ValidModel_CreatesUserAndReturnsRedirect()
     {
+
+        
+        _notyfServiceMock.Setup(s => s.Success(It.IsAny<string>(), It.IsAny<int?>())).Verifiable();
         // Arrange
         var model = new RegisterViewModel
         {
@@ -57,6 +64,8 @@ public class RegisterView
         // The result should be a redirect to the Dashboard's Index action
         result.Should().BeOfType<RedirectToActionResult>();
         var redirectToActionResult = result as RedirectToActionResult;
+        _notyfServiceMock.Setup(s => s.Success(It.IsAny<string>(), It.IsAny<int?>())).Verifiable();
+
         redirectToActionResult.ControllerName.Should().Be("Dashboard");
         redirectToActionResult.ActionName.Should().Be("Index");
         // Verify that CreateUser was called once
