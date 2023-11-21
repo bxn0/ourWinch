@@ -58,7 +58,7 @@ public class AccountController : Controller
         {
             var user = new ApplicationUser
             {
-                UserName = model.Fornavn, Fornavn = model.Fornavn, Etternavn = model.Etternavn,
+                UserName = model.MobilNo, Fornavn = model.Fornavn, Etternavn = model.Etternavn,
                 MellomNavn = model.MellomNavn, Email = model.Email, PhoneNumber = model.MobilNo
             };
 
@@ -78,7 +78,7 @@ public class AccountController : Controller
                     await _userManager.AddToRoleAsync(user, "Ansatt");
                 }
 
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                _irisService.Success("Brukeren ble registrert!",3);
                 return RedirectToAction("Index", "Dashboard");
 
             }
