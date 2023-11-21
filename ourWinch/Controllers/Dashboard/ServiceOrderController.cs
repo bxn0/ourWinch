@@ -16,19 +16,37 @@ public class ServiceOrderController : Controller
         _context = context;
     }
 
+    public IActionResult Dashboard()
+    {
+        List<DateTime> bookedDates = _context.ServiceOrders.Select(s => s.MottattDato).ToList();
+        ViewBag.BookedDates = Newtonsoft.Json.JsonConvert.SerializeObject(bookedDates);
+        return View("~/Views/Dashboard/NewService.cshtml");
+    }
+
     public IActionResult NewService()
     {
-        ServiceOrder model = new ServiceOrder();
-        // Modelinizde özel başlangıç değerleri atamak isterseniz bu kısmı kullanabilirsiniz
-        return View(model);
+        // Retrieve the highest ServiceOrderId from the database and increment it to get the new order number
+        var lastOrder = _context.ServiceOrders.OrderByDescending(u => u.ServiceOrderId).FirstOrDefault();
+        var newOrderNumber = (lastOrder != null) ? lastOrder.ServiceOrderId + 1 : 1;
+
+
+        // Create a new ServiceOrder object with the new order number
+        ServiceOrder model = new ServiceOrder
+        {
+            Ordrenummer = newOrderNumber // Make sure this property exists and is the correct one
+            // Initialize other necessary properties, if any
+        };
+
+        // Pass the model to the view
+        return View("~/Views/Dashboard/NewService.cshtml", model);
     }
     // POST: ServiceOrder/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(ServiceOrder serviceOrder)
     {
-        var lastOrder = _context.ServiceOrders.OrderByDescending(o => o.Ordrenummer).FirstOrDefault();
-        var newOrderNumber = (lastOrder != null) ? lastOrder.Ordrenummer + 1 : 230001;
+       var lastOrder = _context.ServiceOrders.OrderByDescending(o => o.ServiceOrderId).FirstOrDefault();
+        var newOrderNumber = (lastOrder != null) ? lastOrder.ServiceOrderId + 1 : 1;
 
         serviceOrder.Ordrenummer = newOrderNumber;
         serviceOrder.Status = "Process";

@@ -1,7 +1,7 @@
-﻿@{
+﻿@model ourWinch.Models.Dashboard.ServiceOrder
 
+@{
     ViewBag.Title = "Ny Service";
-
 }
 
 <div class="container mt-3 container-max-height" style="background-color: #C0D0D7; max-width: 800px; border-radius: 5px;   max-height: 110vh; overflow-y: auto;">
@@ -51,8 +51,9 @@
             <!-- Right Section-->
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="text-dark">Ordrenummer</label>
-                    <input type="text" name="Ordrenummer" value="@Model?.Ordrenummer" readonly class="form-control form-control-sm" />
+                    <label asp-for="Ordrenummer">Ordrenummer</label>
+                    <input type="text" class="form-control form-control-sm" value="@Model.Ordrenummer" readonly />
+
                 </div>
 
 
