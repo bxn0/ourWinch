@@ -1,6 +1,10 @@
 ﻿@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
 
+/**
+ * Represents a view displaying a list of service orders.
+ * model IEnumerable<ServiceOrder> - The model representing a collection of service orders.
+ */
 
 <div class="container mt-5">
     <!-- The Bootstrap container class has been added.. -->
@@ -30,7 +34,10 @@
                     <!-- If you want to add buttons for other actions, such as editing or deleting, you can also add those columns here. -->
                 </tr>
             </thead>
-            <tbody>
+                <tbody>
+                    /**
+                    * Iterates over each service order in the model and generates a table row for display.
+                    */
                 @foreach (var item in Model)
                 {
                     <tr>
