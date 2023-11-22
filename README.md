@@ -541,6 +541,6 @@ Sep 17 Oct 08 Oct 29 Nov 19
 
 ## Traffic
  
-![Alt text](wwwroot/img/image-1.png)
+(wwwroot/img/image-1.png)
 
 ```
