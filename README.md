@@ -515,7 +515,7 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 ## Sep 10, 2023 – Nov 22, 2023
 
 
-![Alt text](wwwroot/img/image(6).png)
+![image (6)](https://github.com/bxn0/ourWinch/assets/112567741/f52a14ef-8ad4-4c78-9aae-2284116c3990)
 
 
 
@@ -541,6 +541,6 @@ Sep 17 Oct 08 Oct 29 Nov 19
 
 ## Traffic
  
-`(wwwroot/img/image-1.png)`
+![image-1](https://github.com/bxn0/ourWinch/assets/112567741/2108d592-3e0b-4685-85aa-cd5f2c07d304)
 
 ```
