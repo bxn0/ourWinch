@@ -340,6 +340,7 @@ We have listed the dependencies and packages used in our project to specify the 
 - Microsoft.VisualStudio.Web.CodeGeneration
 
 
+![image-2](https://github.com/bxn0/ourWinch/assets/112567741/9f067d54-61ec-42d5-b589-06b66185b3a8)
 
 
 # Installation Instructions
