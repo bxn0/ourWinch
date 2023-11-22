@@ -96,15 +96,19 @@ var LoginSuccessMessage = ViewBag.LoginSuccessMessage;
         .search-wrapper button {
             margin-left: 5px; /* You can adjust the desired range */
         }
+
+    .heading {
+        margin-right: 120px !important;
+    }
     </style>
 
    
         <div class="row align-items-center mb-1 mt-5 ">
 
-            <div class="col-12 col-lg-9 heading">Aktive Servicer</div>
+    <div class="col-12 col-lg-9 heading mr-5" style="margin-right: 40px;">Aktive Servicer</div>
 
-            <div class="col-12 col-lg-3">
-                <div class="search-wrapper">
+    <div class="col-12 col-lg-3">
+                <div class="search-wrapper ">
                     <form method="get">
                         <input type="search" name="query" placeholder="Søk på navn" class="mr-2 p-1" />
                         <button type="submit" class="btn btn-primary p-2">Søk</button>
