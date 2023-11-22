@@ -441,10 +441,10 @@ else
 
 ## Descriptions:
 
-# GetConnectionString: Gets the database connection string.
-# AddDbContext: Adds the DbContext to the DI container.
-# UseSqlServer: Used for database interaction with SQL Server.
-# LogTo: Sets logging settings.
+### GetConnectionString: Gets the database connection string.
+### AddDbContext: Adds the DbContext to the DI container.
+### UseSqlServer: Used for database interaction with SQL Server.
+### LogTo: Sets logging settings.
 
 
 ## Security and Authorization
