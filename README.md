@@ -337,7 +337,8 @@ We have listed the dependencies and packages used in our project to specify the 
 - Microsoft.VisualStudio.Azure.Cont
 - Microsoft.VisualStudio.Web.CodeGeneration
 
-![Alt text](image-2.png)
+![A![image-2](https://github.com/bxn0/ourWinch/assets/112567741/e69f99a7-d7d9-4ee6-ada5-42fac301f90e)
+
 # Installation Instructions
 
 To start the project and install dependencies, follow the step-by-step instructions below.
