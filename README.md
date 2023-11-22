@@ -455,7 +455,7 @@ else
 ## Authentication and Authorization Mechanisms
 This section covers various account management and authorization processes at Nøsted & AS.
 
-# User Registration (Register)
+## User Registration (Register)
 The registration page allows users to sign up for the system. Users with the admin role can access this page.
 
 <!-- Show registration page if the user has the admin role -->
@@ -478,7 +478,7 @@ Controller containing role management pages. Accessible only by users with speci
 [Authorize(Policy = "OnlySuperAdminChecker")]
 public IActionResult Index()
 
-# CSRF Protection
+## CSRF Protection
 
 The application includes measures to protect against Cross-Site Request Forgery (CSRF) attacks. These measures involve adding unique tokens (CSRF tokens) to user sessions and requests to enhance security and prevent unauthorized requests.
 
@@ -492,7 +492,7 @@ For example, CSRF tokens are placed inside forms such as registration forms or l
 
 
 
-# XSS Protection
+## XSS Protection
 
 The application provides protection against Cross-Site Scripting (XSS) attacks by appropriately filtering or escaping user inputs and outputs, preventing potentially dangerous content within the application.
 
