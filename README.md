@@ -75,7 +75,7 @@ Repair or maintenance requests are digitally displayed by mechanical teams. Mech
 ### * Reporting and Improvement Suggestions
 
 The system generates reports based on completed repairs, maintenance, and customer feedback. Warranty Service conducts analysis under the headings of Repair and Maintenance. Improvement suggestions, such as (OK, Should Be Changed, Defective), are added by mechanical teams and presented to customers.
-##  * User-Friendly Interface and Mobile Access
+###  * User-Friendly Interface and Mobile Access
 
 A user-friendly interface for both office administrators and field mechanic teams. Easily accessible from PCs and smartphones. Responsive design.
 
@@ -197,7 +197,7 @@ Controller classes like AccountController receive HTTP requests, initiate proces
 
 The Identity service added with the AddIdentity method handles user management and authorization processes, including operations like user registration, login, and role management.
 
-# Migration for Adding Identity Tables
+## Migration for Adding Identity Tables
 
 This migration script adds the necessary tables for ASP.NET Core Identity. It includes tables for roles, users, role claims, user claims, user logins, user roles, and user tokens.
 
@@ -277,6 +277,7 @@ Interactions between these main components occur through HTTP requests and are h
 The directory structure below represents the organization of a C#/.NET application project. Each subdirectory and file has a specific responsibility.
 
 ## OurWinch-Nøsted-App (GitHub Repository Root)
+
 <pre>
 Root
 │
@@ -317,6 +318,7 @@ Root
 │   ├── (Dockerfile used to create the Docker container for the application)
 ├── Program.cs
 │   ├── (the entry point file for the application)
+
 </pre>
 
 This directory structure logically organizes different parts of the application, making it easier to maintain, extend, and understand. Each subdirectory and file has a specific responsibility, ensuring clean and organized project management.
@@ -337,7 +339,8 @@ We have listed the dependencies and packages used in our project to specify the 
 - Microsoft.VisualStudio.Azure.Cont
 - Microsoft.VisualStudio.Web.CodeGeneration
 
-[image-2](https://github.com/bxn0/ourWinch/assets/112567741/e69f99a7-d7d9-4ee6-ada5-42fac301f90e)
+
+
 
 # Installation Instructions
 
@@ -366,7 +369,7 @@ dotnet ef migrations add InitialCreate
 ## 6. Run the Project:
 dotnet run
 
-### Configuration File
+## Configuration File
 
 Create an appsettings.json file with the following content:
 
@@ -390,10 +393,10 @@ Create an appsettings.json file with the following content:
 
 ## Descriptions:
 
-# LogLevel: Determines the logging levels.
-# AllowedHosts: Specifies the allowed hosts.
-# ConnectionStrings: Contains the database connection string.
-# MailJet: Contains MailJet API keys.
+### LogLevel: Determines the logging levels.
+### AllowedHosts: Specifies the allowed hosts.
+### ConnectionStrings: Contains the database connection string.
+### MailJet: Contains MailJet API keys.
 
 
 ## Environment Variables and Configuration Management
@@ -437,7 +440,7 @@ else
     app.UseHsts();
 }
 
-// ...
+// 
 
 
 ## Descriptions:
@@ -475,7 +478,7 @@ Controller containing role management pages. Accessible only by users with speci
 [Authorize(Policy = "OnlySuperAdminChecker")]
 public IActionResult Index()
 
-## CSRF Protection
+# CSRF Protection
 
 The application includes measures to protect against Cross-Site Request Forgery (CSRF) attacks. These measures involve adding unique tokens (CSRF tokens) to user sessions and requests to enhance security and prevent unauthorized requests.
 
