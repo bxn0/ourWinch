@@ -129,22 +129,19 @@
 
                         @if(isAdmin){
                         <li class="nav-item mt-3">
-                            <!-- "Rapporter" link -->
-                                <a href="#kunderSubmenu" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
-                                    <i class="fa fa-bar-chart"></i> Rapporter
-                                </a>
-                            @* <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
+                            <!-- "Rapporter" bağlantısı -->
+                            <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
                                 <i class="fa fa-bar-chart"></i> Rapporter
-                            </a> *@
+                            </a>
 
-                                <!-- "Kunder" sub-tab (off by default) -->
-                                <ul id="kunderSubmenu" class="collapse list-unstyled">
-                                <li class="nav-item mt-3 ps-4">
+                            <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
+                            <ul id="kunderSubmenu" class="collapse">
+                                <li style="max-height: 10px" class="nav-item mt-3">
                                     <a asp-controller="Customers" asp-action="Dashboard" class="nav-link">
                                         <i class="fa fa-address-card"></i> Kunder
                                     </a>
                                 </li>
-                                <li class="nav-item mt-3 ps-4">
+                                <li class="nav-item mt-3">
                                     <a asp-controller="ServiceType" asp-action="Dashboard" class="nav-link">
                                         <i class="fa fa-filter"></i> Tjenestetype
                                     </a>
