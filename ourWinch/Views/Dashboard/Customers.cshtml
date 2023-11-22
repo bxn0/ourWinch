@@ -48,9 +48,15 @@
         color: blue;
         font-weight: bold;
     }
+
+    .btn {
+
+    }
+
+
 </style>
 
-<div class="container">
+<div class="container mt-5" style="background-color: #C0D0D7; max-width: 800px; border-radius: 10px; padding: 20px; height: auto; overflow-y: auto;">
     <!-- customer Statistics -->
     <div class="statistics-wrapper">
         <!-- ... Your statistics components ... -->
@@ -58,7 +64,7 @@
 
     <!-- customer Table -->
     <div class="kunde-wrapper">
-        <h2>Kunder</h2>
+        <h1 class="text-center fw-bold">Kunder</h1>
         <form method="get" action="@Url.Action("Dashboard", "Customers")">
             <div class="search-wrapper">
                 <input type="search" name="query" class="p-1 h-25" placeholder="Søk på navn" />
