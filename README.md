@@ -514,7 +514,8 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 
 ## Sep 10, 2023 – Nov 22, 2023
 
-![Alt text](wwwroot/img/image (6).png)
+
+![Alt text](wwwroot/img/image(6).png)
 
 
 
