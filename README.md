@@ -464,7 +464,7 @@ The registration page allows users to sign up for the system. Users with the adm
 
 }
 
-# Login
+## Login
 The login page allows users to log into the system. It includes mechanisms for username and password authentication.
 
 <!-- Login form -->
