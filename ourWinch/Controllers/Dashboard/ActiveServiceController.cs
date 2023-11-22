@@ -16,7 +16,7 @@ public class ActiveServiceController : Controller
     /// <summary>
     /// Constant defining the number of items per page for pagination.
     /// </summary>
-    private const int PageSize = 5;
+    private const int PageSize = 7;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ActiveServiceController"/> class.
