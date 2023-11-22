@@ -514,7 +514,7 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 
 ## Sep 10, 2023 – Nov 22, 2023
 
-![Alt text](wwwroot/images/image (6).png)
+![Alt text](wwwroot/img/image (6).png)
 
 
 
@@ -540,6 +540,6 @@ Sep 17 Oct 08 Oct 29 Nov 19
 
 ## Traffic
  
-![Alt text](wwwroot/images/image-1.png)
+![Alt text](wwwroot/img/image-1.png)
 
 ```
