@@ -337,7 +337,8 @@ We have listed the dependencies and packages used in our project to specify the 
 - Microsoft.VisualStudio.Azure.Cont
 - Microsoft.VisualStudio.Web.CodeGeneration
 
-![Alt text](image-2.png)
+[image-2](https://github.com/bxn0/ourWinch/assets/112567741/e69f99a7-d7d9-4ee6-ada5-42fac301f90e)
+
 # Installation Instructions
 
 To start the project and install dependencies, follow the step-by-step instructions below.
@@ -515,7 +516,7 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 ## Sep 10, 2023 – Nov 22, 2023
 
 
-![Alt text](wwwroot/img/image(6).png)
+![image (6)](https://github.com/bxn0/ourWinch/assets/112567741/f52a14ef-8ad4-4c78-9aae-2284116c3990)
 
 
 
@@ -541,6 +542,6 @@ Sep 17 Oct 08 Oct 29 Nov 19
 
 ## Traffic
  
-`(wwwroot/img/image-1.png)`
+![image-1](https://github.com/bxn0/ourWinch/assets/112567741/2108d592-3e0b-4685-85aa-cd5f2c07d304)
 
 ```
