@@ -40,10 +40,6 @@ public class CustomersController : Controller
     {
         int pageSize = 10;
 
-        // Fetch and serialize booked dates for service orders.
-        List<DateTime> bookedDates = _context.ServiceOrders.Select(s => s.MottattDato).ToList();
-        ViewBag.BookedDates = JsonConvert.SerializeObject(bookedDates);
-
         // Create a query for service orders.
         var serviceOrdersQuery = _context.ServiceOrders.AsQueryable();
 
