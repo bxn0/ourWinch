@@ -6,19 +6,35 @@ using Microsoft.Build.Utilities;
 
 namespace ourWinch.Services
 {
+
+    /// <summary>
+    /// Service class to handle operations related to service orders.
+    /// </summary>
     public class ServiceSkjemaService
     {
         private readonly AppDbContext _context;
         private readonly ILogger<ServiceSkjemaService> _logger;
+
+
+        /// <summary>
+        /// Initializes a new instance of the ServiceSkjemaService class.
+        /// </summary>
+        /// <param name="context">Database context to interact with the underlying database.</param>
+        /// <param name="logger">Logger for logging information and activities.</param>
         public ServiceSkjemaService(AppDbContext context, ILogger<ServiceSkjemaService> logger)
         {
             _context = context;
             _logger = logger; // Logger burada tanımlandı
         }
 
-
+        /// <summary>
+        /// Asynchronously updates the service order status if all associated checks are completed.
+        /// </summary>
+        /// <param name="serviceOrderId">The ID of the service order to update.</param>
         public async System.Threading.Tasks.Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
+
+            // Check if all required operations (Electro, Funksjon, Hydrolisk, Mechanical, Trykk) are completed.
             var isElectroCompleted = await _context.Electros.AnyAsync(e => e.ServiceOrderId == serviceOrderId && e.OK);
             var isFunksjonCompleted = await _context.FunksjonsTests.AnyAsync(f => f.ServiceOrderId == serviceOrderId && f.OK);
             var isHydroliskCompleted = await _context.Hydrolisks.AnyAsync(h => h.ServiceOrderId == serviceOrderId && h.OK);
@@ -31,6 +47,8 @@ namespace ourWinch.Services
             _logger.LogInformation("isMechanicalCompleted: {Status}", isMechanicalCompleted);
             _logger.LogInformation("isTrykkCompleted: {Status}", isTrykkCompleted);
 
+
+            // If all checks are completed, update the service order.
             if (isElectroCompleted && isFunksjonCompleted && isHydroliskCompleted && isMechanicalCompleted && isTrykkCompleted)
             {
                 var serviceOrder = await _context.ServiceOrders.FirstOrDefaultAsync(s => s.ServiceOrderId == serviceOrderId);
