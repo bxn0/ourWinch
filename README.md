@@ -189,7 +189,7 @@ public async Task<IActionResult> Logout()
 </pre>
 
 
-# Service Order Controller
+## Service Order Controller
 
 This controller manages service order operations, including creating, updating status, and listing.
 
@@ -448,7 +448,7 @@ This directory structure logically organizes different parts of the application,
 
 We have listed the dependencies and packages used in our project to specify the essential libraries and tools needed to run the project.
 
-# Used Dependencies
+## Used Dependencies
 
 - Microsoft.AspNetCore.Identity.EntityFrame
 - Microsoft.AspNetCore.Identity.UI
