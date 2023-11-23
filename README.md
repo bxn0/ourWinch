@@ -92,9 +92,32 @@ https://uia.instructure.com/courses/14002/files/2264630?module_item_id=514890
 
 # Technological Structure
 
+
+## At the end of the project, following topics are to be covered;
+
+## - C# 
+
+## - GitHub 
+
+## - Visual Studio 2022
+
+## - ASP.NET Core
+
+## - HTML
+
+## - Bootstrap - CSS
+
+## - JavaScript
+
+## - Azure Data Studio
+
+## - SQL Server Management Studio (SSMS)
+
+## - NuGet Package Manager
+
 ## Programming Language and Version
-1. Programming language: C#
-   - Version: .NET 6.0
+** Programming language: C#
+  ## - Version: .NET 6.0
 
 ## Used Technologies and Libraries
 
@@ -516,6 +539,14 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 
 
 # Contributors
+
+ 
+## - Burak Seymen    (https://github.com/bxn0)
+## - Umit Yildirim   (https://github.com/yildirimsinop)
+## - Bunyamin Genc   (https://github.com/Bunyamin54)
+## - Orhan Yildirim  (https://github.com/Orhanyil)
+## - Tahir Aslan     (https://github.com/aslnthir)
+## - Samet Demirezen (https://github.com/sametdemirezen
 
 ## Sep 10, 2023 – Nov 22, 2023
 
