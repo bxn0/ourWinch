@@ -6,13 +6,38 @@ using ourWinch.Models.Account;
 
 namespace ourWinch.Controllers.Account
 {
+
+    /// <summary>
+    /// Controller responsible for managing user-related operations within the application.
+    /// This includes user management tasks such as creating, editing, and deleting user accounts.
+    /// </summary>
     public class UserController : Controller
     {
-
+        /// <summary>
+        /// The database context used for data access operations related to users.
+        /// </summary>
         private readonly AppDbContext _db;
+
+        /// <summary>
+        /// Manages user accounts for the application, including creation, deletion, and user role assignments.
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+
+        /// <summary>
+        /// Service for sending notifications, useful for informing users about user management operations.
+        /// </summary>
         private readonly INotyfService _irisService;
 
+
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// This constructor injects the database context, user manager, and notification service
+        /// required for user management operations within the application.
+        /// </summary>
+        /// <param name="db">The database context used for user-related data operations.</param>
+        /// <param name="userManager">The user manager for handling operations related to user accounts.</param>
+        /// <param name="irisService">The notification service used for sending notifications related to user management.</param>
         public UserController(AppDbContext db, UserManager<ApplicationUser> userManager, INotyfService irisService)
         {
             _db = db;
