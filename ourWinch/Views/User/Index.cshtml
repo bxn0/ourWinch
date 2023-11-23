@@ -12,8 +12,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
+
+<!-- Main container for the user list -->
 <div class="container mt-5" style="background-color: #C0D0D7; max-width: 800px; border-radius: 10px; padding: 20px; height: 500px; overflow-y: auto;">
     <div class="row justify-content-center">
+        
+        <!-- Main container for the user list -->
         <div class="col-12 text-center my-3">
             <img class="logo-image rounded" src="/img/nøsted2.jpeg" alt="nøsted Logo" width="200" style="border-radius: 10px;">
             <h2 class="font-weight-bold mt-4" style="font-size: 2em; font-weight: 600;">User List</h2>
@@ -21,8 +25,12 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-12">
+            
+            <!-- Check if there are any users to display -->
             @if (Model.Count() > 0)
             {
+
+                <!-- Table to display user details -->
                 <table class="table table-striped border">
                     <tr class="table-secondary">
                         <th>
@@ -39,6 +47,8 @@
                         </th>
                         <th></th>
                     </tr>
+                    
+                    <!-- Loop through each user and display their details -->
                     @foreach (var item in Model)
                     {
                         <tr>
@@ -56,6 +66,8 @@
                             </td>
                             <td>
                                 <div >
+                                    
+                                    <!-- Form for deleting the user -->
                                     <form asp-action="Delete" asp-route-userId="@item.Id">
                                         <a asp-action="Edit" asp-route-userId="@item.Id" class="btn btn-info text-white" style="cursor:pointer">
                                             Rediger
