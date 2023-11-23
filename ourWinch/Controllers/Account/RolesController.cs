@@ -146,8 +146,21 @@ namespace ourWinch.Controllers.Account
             return RedirectToAction(nameof(Index));
 
         }
+
+
+
+        /// <summary>
+        /// Handles the deletion of a role.
+        /// Checks if the role exists and whether there are users assigned to it.
+        /// If the role does not exist or if there are users assigned to it, an appropriate message is displayed.
+        /// If it's safe to delete, the role is removed from the database.
+        /// </summary>
+        /// <param name="id">The ID of the role to delete.</param>
+        /// <returns>
+        /// A redirection to the index view after processing the request.
+        /// If an error occurs or if deletion is not feasible, it returns an error/warning message and redirects to the index.
+        /// </returns>
         [HttpPost]
-        //[Authorize(Policy = "OnlySuperAdminChecker")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
