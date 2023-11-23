@@ -6,16 +6,46 @@ using ourWinch.Models.Account;
 
 namespace ourWinch.Controllers.Account
 {
+
+    /// <summary>
+    /// Controller responsible for managing user roles within the application.
+    /// This includes operations like creating, editing, and deleting roles.
+    /// </summary>
+    ///
+
+    [Authorize]
     public class RolesController : Controller
     {
-
+        /// <summary>
+        /// The database context used for data access operations.
+        /// </summary>
         private readonly AppDbContext _db;
+
+        /// <summary>
+        /// Manages user accounts for the application, particularly in relation to role assignment.
+        /// </summary>
         private readonly UserManager<ApplicationUser> _userManager;
+
+        /// <summary>
+        /// Manages roles within the application, including role creation and deletion.
+        /// </summary>
         private readonly RoleManager<IdentityRole> _roleManager;
+
+        /// <summary>
+        /// Service for sending notifications, useful for informing users about role management operations.
+        /// </summary>
         private readonly INotyfService _irisService;
 
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RolesController"/> class.
+        /// This constructor injects the database context, user manager, role manager, and notification service 
+        /// needed for role management operations within the application.
+        /// </summary>
+        /// <param name="db">The database context used for data operations related to roles.</param>
+        /// <param name="userManager">The user manager for handling user-related operations, especially in relation to roles.</param>
+        /// <param name="roleManager">The role manager for handling role creation, deletion, and assignment.</param>
+        /// <param name="irisService">The notification service used for sending notifications related to role management.</param>
         public RolesController(AppDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, INotyfService irisService)
         {
             _db = db;
@@ -24,6 +54,12 @@ namespace ourWinch.Controllers.Account
             _irisService = irisService;
         }
 
+
+        /// <summary>
+        /// Displays the index view with a list of all roles.
+        /// Retrieves roles from the database and passes them to the view.
+        /// </summary>
+        /// <returns>The index view populated with a list of roles.</returns>
         public IActionResult Index()
         {
             var roles = _db.Roles.ToList();
