@@ -119,6 +119,104 @@ https://uia.instructure.com/courses/14002/files/2264630?module_item_id=514890
 ** Programming language: C#
   ## - Version: .NET 6.0
 
+## Constructor
+
+## AppDbContext
+This class represents the database context for the application, derived from IdentityDbContext for user management.
+public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+{
+    // Constructor logic.
+}
+
+## Account Controller
+
+This ASP.NET Core application includes an account controller that handles user account management operations.
+
+## Registration
+
+To register users and assign roles, use the `Register` method.
+<pre>
+[Authorize]
+[HttpGet]
+public async Task<IActionResult> Register()
+{
+    await EnsureRolesExist();
+
+    return View(new RegisterViewModel());
+}
+
+[Authorize]
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Register(RegisterViewModel model)
+{
+    // Registration process
+}
+      </pre>   
+
+
+## Login
+
+<pre>
+To log users into the system, use the Login method.
+[HttpGet]
+public IActionResult Login()
+{
+    return View();
+}
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginViewModel model)
+{
+    // Login process
+}
+
+ </pre>
+
+ ## Logout
+
+<pre>
+
+To log out of the system, use the Logout method.
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Logout()
+{
+    // Logout process
+}
+</pre>
+
+
+# Service Order Controller
+
+This controller manages service order operations, including creating, updating status, and listing.
+
+## Create a New Service Order
+
+<pre> 
+
+public IActionResult NewService()
+{
+    // Logic for creating a new service order
+}
+</pre>
+
+
+
+## Update Service Order Status
+
+<pre> 
+[HttpPost]
+public IActionResult UpdateStatus(int id, string newStatus)
+{
+    // Logic for updating the status of a service order
+}
+
+</pre>
+
+
 ## Used Technologies and Libraries
 
 - **ASP.NET Core Framework:**
