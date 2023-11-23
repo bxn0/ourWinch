@@ -46,6 +46,13 @@ namespace ourWinch.Controllers.Account
 
         }
 
+
+        /// <summary>
+        /// Displays the index view with a list of all users and their associated roles.
+        /// Retrieves users from the database, determines each user's role, and passes the data to the view.
+        /// If a user does not have an assigned role, 'None' is set as their role.
+        /// </summary>
+        /// <returns>The index view populated with a list of users and their roles.</returns>
         public IActionResult Index()
         {
             var userList = _db.ApplicationUser.ToList();
