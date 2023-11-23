@@ -84,21 +84,42 @@ namespace ourWinch.Controllers.Checklist
             return View(electro);
         }
 
-
+        /// <summary>
+        /// Initiates the creation of a new Electro record, pre-populating the form with data from an associated service order.
+        /// </summary>
+        /// <param name="serviceOrderId">The ID of the service order to associate with the new Electro record.</param>
+        /// <param name="category">The category of the item, with a default value of "Electro".</param>
+        /// <returns>
+        /// If the service order is not found, NotFound (HTTP 404) is returned.
+        /// Otherwise, returns the Create view pre-populated with data from the service order.
+        /// </returns>
+        /// <remarks>
+        /// This method also checks for a success message from previous operations stored in TempData and 
+        /// uses the notification service to display it.
+        /// </remarks>
         [HttpGet]
         [Route("Electro/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "Electro")
         {
+            // Check for a success message from TempData and display it using the notification service.
+
 
             if (TempData["SuccessMessageHydroulic"] != null)
             {
                 _irisService.Success("SuccessMessageHydroulic", 3);
             }
+
+            // Find the service order by ID.
             var serviceOrder = _context.ServiceOrders.Find(serviceOrderId);
+
+            // If the service order with the given ID doesn't exist, return NotFound (HTTP 404).
+
             if (serviceOrder == null)
             {
                 return NotFound();
             }
+
+            // Create and populate the view model with data from the service order.
 
             var viewModel = new ElectroListViewModel
             {
@@ -115,18 +136,39 @@ namespace ourWinch.Controllers.Checklist
                 KommentarFraKunde = serviceOrder.KommentarFraKunde
             };
 
+            // Set the active button in the view.
             ViewBag.ActiveButton = category;
+
+            // Return the Create view with the view model.
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Handles the post request to create new Electro records based on the provided view model.
+        /// </summary>
+        /// <param name="viewModel">The view model containing the data for the new Electro records.</param>
+        /// <param name="serviceOrderId">The ID of the service order to associate with the new Electro records.</param>
+        /// <returns>
+        /// If the model state is valid and the operation is successful, redirects to the Create action of the FunksjonsTest controller.
+        /// If the last service order cannot be found, adds a model error.
+        /// If the model state is not valid, displays the same view with errors.
+        /// </returns>
+        /// <remarks>
+        /// This method performs additional operations such as updating the service schema if all components are completed,
+        /// and displays a success message upon saving the list.
+        /// </remarks>
+       
         [HttpPost]
         [Route("Electro/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ElectroListViewModel viewModel, int serviceOrderId)
         {
+            // Check if the provided data in the view model is valid.
             if (ModelState.IsValid)
             {
                 bool isFirst = true;
+                // Retrieve the last service order by descending order.
+
                 var lastServiceOrder = _context.ServiceOrders.OrderByDescending(o => o.ServiceOrderId).FirstOrDefault();
 
                 if (lastServiceOrder != null)
