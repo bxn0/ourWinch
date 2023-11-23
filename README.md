@@ -75,7 +75,7 @@ Repair or maintenance requests are digitally displayed by mechanical teams. Mech
 ### * Reporting and Improvement Suggestions
 
 The system generates reports based on completed repairs, maintenance, and customer feedback. Warranty Service conducts analysis under the headings of Repair and Maintenance. Improvement suggestions, such as (OK, Should Be Changed, Defective), are added by mechanical teams and presented to customers.
-##  * User-Friendly Interface and Mobile Access
+###  * User-Friendly Interface and Mobile Access
 
 A user-friendly interface for both office administrators and field mechanic teams. Easily accessible from PCs and smartphones. Responsive design.
 
@@ -92,9 +92,130 @@ https://uia.instructure.com/courses/14002/files/2264630?module_item_id=514890
 
 # Technological Structure
 
+
+## At the end of the project, following topics are to be covered;
+
+### - C# 
+
+### - GitHub
+
+### - Visual Studio 2022
+
+### - ASP.NET Core
+
+### - HTML
+
+### - Bootstrap - CSS
+
+### - JavaScript
+
+### - Azure Data Studio
+
+### - SQL Server Management Studio (SSMS)
+
+### - NuGet Package Manager
+
 ## Programming Language and Version
-1. Programming language: C#
-   - Version: .NET 6.0
+** Programming language: C#
+  ## - Version: .NET 6.0
+
+## Constructor
+
+## AppDbContext
+This class represents the database context for the application, derived from IdentityDbContext for user management.
+public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+{
+    // Constructor logic.
+}
+
+## Account Controller
+
+This ASP.NET Core application includes an account controller that handles user account management operations.
+
+## Registration
+
+To register users and assign roles, use the `Register` method.
+<pre>
+[Authorize]
+[HttpGet]
+public async Task<IActionResult> Register()
+{
+    await EnsureRolesExist();
+
+    return View(new RegisterViewModel());
+}
+
+[Authorize]
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Register(RegisterViewModel model)
+{
+    // Registration process
+}
+      </pre>   
+
+
+## Login
+
+<pre>
+To log users into the system, use the Login method.
+[HttpGet]
+public IActionResult Login()
+{
+    return View();
+}
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Login(LoginViewModel model)
+{
+    // Login process
+}
+
+ </pre>
+
+ ## Logout
+
+<pre>
+
+To log out of the system, use the Logout method.
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Logout()
+{
+    // Logout process
+}
+</pre>
+
+
+## Service Order Controller
+
+This controller manages service order operations, including creating, updating status, and listing.
+
+## Create a New Service Order
+
+<pre> 
+
+public IActionResult NewService()
+{
+    // Logic for creating a new service order
+}
+</pre>
+
+
+
+## Update Service Order Status
+
+<pre> 
+[HttpPost]
+public IActionResult UpdateStatus(int id, string newStatus)
+{
+    // Logic for updating the status of a service order
+}
+
+</pre>
+
 
 ## Used Technologies and Libraries
 
@@ -197,7 +318,7 @@ Controller classes like AccountController receive HTTP requests, initiate proces
 
 The Identity service added with the AddIdentity method handles user management and authorization processes, including operations like user registration, login, and role management.
 
-# Migration for Adding Identity Tables
+## Migration for Adding Identity Tables
 
 This migration script adds the necessary tables for ASP.NET Core Identity. It includes tables for roles, users, role claims, user claims, user logins, user roles, and user tokens.
 
@@ -277,6 +398,7 @@ Interactions between these main components occur through HTTP requests and are h
 The directory structure below represents the organization of a C#/.NET application project. Each subdirectory and file has a specific responsibility.
 
 ## OurWinch-Nøsted-App (GitHub Repository Root)
+
 <pre>
 Root
 │
@@ -317,6 +439,7 @@ Root
 │   ├── (Dockerfile used to create the Docker container for the application)
 ├── Program.cs
 │   ├── (the entry point file for the application)
+
 </pre>
 
 This directory structure logically organizes different parts of the application, making it easier to maintain, extend, and understand. Each subdirectory and file has a specific responsibility, ensuring clean and organized project management.
@@ -325,7 +448,7 @@ This directory structure logically organizes different parts of the application,
 
 We have listed the dependencies and packages used in our project to specify the essential libraries and tools needed to run the project.
 
-# Used Dependencies
+## Used Dependencies
 
 - Microsoft.AspNetCore.Identity.EntityFrame
 - Microsoft.AspNetCore.Identity.UI
@@ -337,7 +460,9 @@ We have listed the dependencies and packages used in our project to specify the 
 - Microsoft.VisualStudio.Azure.Cont
 - Microsoft.VisualStudio.Web.CodeGeneration
 
-[image-2](https://github.com/bxn0/ourWinch/assets/112567741/e69f99a7-d7d9-4ee6-ada5-42fac301f90e)
+
+![image-2](https://github.com/bxn0/ourWinch/assets/112567741/9f067d54-61ec-42d5-b589-06b66185b3a8)
+
 
 # Installation Instructions
 
@@ -366,7 +491,7 @@ dotnet ef migrations add InitialCreate
 ## 6. Run the Project:
 dotnet run
 
-### Configuration File
+## Configuration File
 
 Create an appsettings.json file with the following content:
 
@@ -390,10 +515,10 @@ Create an appsettings.json file with the following content:
 
 ## Descriptions:
 
-# LogLevel: Determines the logging levels.
-# AllowedHosts: Specifies the allowed hosts.
-# ConnectionStrings: Contains the database connection string.
-# MailJet: Contains MailJet API keys.
+### LogLevel: Determines the logging levels.
+### AllowedHosts: Specifies the allowed hosts.
+### ConnectionStrings: Contains the database connection string.
+### MailJet: Contains MailJet API keys.
 
 
 ## Environment Variables and Configuration Management
@@ -437,22 +562,22 @@ else
     app.UseHsts();
 }
 
-// ...
+// 
 
 
 ## Descriptions:
 
-# GetConnectionString: Gets the database connection string.
-# AddDbContext: Adds the DbContext to the DI container.
-# UseSqlServer: Used for database interaction with SQL Server.
-# LogTo: Sets logging settings.
+### GetConnectionString: Gets the database connection string.
+### AddDbContext: Adds the DbContext to the DI container.
+### UseSqlServer: Used for database interaction with SQL Server.
+### LogTo: Sets logging settings.
 
 
 ## Security and Authorization
 ## Authentication and Authorization Mechanisms
 This section covers various account management and authorization processes at Nøsted & AS.
 
-# User Registration (Register)
+## User Registration (Register)
 The registration page allows users to sign up for the system. Users with the admin role can access this page.
 
 <!-- Show registration page if the user has the admin role -->
@@ -460,7 +585,7 @@ The registration page allows users to sign up for the system. Users with the adm
 
 }
 
-# Login
+## Login
 The login page allows users to log into the system. It includes mechanisms for username and password authentication.
 
 <!-- Login form -->
@@ -489,7 +614,7 @@ For example, CSRF tokens are placed inside forms such as registration forms or l
 
 
 
-# XSS Protection
+## XSS Protection
 
 The application provides protection against Cross-Site Scripting (XSS) attacks by appropriately filtering or escaping user inputs and outputs, preventing potentially dangerous content within the application.
 
@@ -512,6 +637,14 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 
 
 # Contributors
+
+ 
+## - Burak Seymen    (https://github.com/bxn0)
+## - Umit Yildirim   (https://github.com/yildirimsinop)
+## - Bunyamin Genc   (https://github.com/Bunyamin54)
+## - Orhan Yildirim  (https://github.com/Orhanyil)
+## - Tahir Aslan     (https://github.com/aslnthir)
+## - Samet Demirezen (https://github.com/sametdemirezen
 
 ## Sep 10, 2023 – Nov 22, 2023
 
