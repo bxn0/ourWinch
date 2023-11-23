@@ -11,19 +11,44 @@ using System.Threading.Tasks;
 
 namespace ourWinch.Services
 {
+
+    /// <summary>
+    /// A service for sending emails using the Mailjet API.
+    /// </summary>
     public class MailJetEmailSender : IEmailSender
     {
+
+        // Configuration object to access application settings.
         private readonly IConfiguration _configuration;
+
+        // Options object to hold MailJet API credentials.
         public MailJetOptions _mailJetOptions;
+
+        /// <summary>
+        /// Initializes a new instance of the MailJetEmailSender class.
+        /// </summary>
+        /// <param name="configuration">The configuration object to access application settings.</param>
         public MailJetEmailSender(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+
+
+
+        /// <summary>
+        /// Asynchronously sends an email using the Mailjet API.
+        /// </summary>
+        /// <param name="email">The recipient's email address.</param>
+        /// <param name="subject">The subject of the email.</param>
+        /// <param name="htmlMessage">The HTML message body of the email.</param>
+        /// <returns>A Task representing the asynchronous operation.</returns>
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-
+            // Retrieve MailJet configuration options from the application settings.
             _mailJetOptions = _configuration.GetSection("MailJet").Get<MailJetOptions>();
 
+
+            // Initialize the Mailjet client with API credentials.
             MailjetClient client = new MailjetClient(_mailJetOptions.ApiKey, _mailJetOptions.SecretKey)
             {
                 //Version = ApiVersion.V3_1,
@@ -62,19 +87,9 @@ namespace ourWinch.Services
       },
      }
              });
+
+            // Execute the request asynchronously using the Mailjet client.
             await client.PostAsync(request);
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Console.WriteLine(string.Format("Total: {0}, Count: {1}\n", response.GetTotal(), response.GetCount()));
-            //    Console.WriteLine(response.GetData());
-            //}
-            //else
-            //{
-            //    Console.WriteLine(string.Format("StatusCode: {0}\n", response.StatusCode));
-            //    Console.WriteLine(string.Format("ErrorInfo: {0}\n", response.GetErrorInfo()));
-            //    Console.WriteLine(response.GetData());
-            //    Console.WriteLine(string.Format("ErrorMessage: {0}\n", response.GetErrorMessage()));
-            //}
         }
     }
 }
