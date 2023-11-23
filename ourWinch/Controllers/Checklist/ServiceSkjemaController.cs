@@ -17,7 +17,7 @@ namespace ourWinch.Controllers.Checklist
         public ServiceSkjemaController(AppDbContext context, ILogger<ServiceSkjemaController> logger)
         {
             _context = context;
-            _logger = logger; // Logger burada tanımlandı
+            _logger = logger; 
         }
 
 
@@ -30,7 +30,7 @@ namespace ourWinch.Controllers.Checklist
         [HttpGet("api/ServiceSkjema/{id}")]
         public async Task<ActionResult<ServiceSkjema>> GetServiceSkjema(int id)
         {
-            _logger.LogInformation("GetServiceSkjema çağrıldı, ID: {ID}", id);
+            _logger.LogInformation("GetServiceSkjema call, ID: {ID}", id);
 
             var mechanicals = await _context.Mechanicals.Where(m => m.ServiceOrderId == id).ToListAsync();
             var hydrolisks = await _context.Hydrolisks.Where(h => h.ServiceOrderId == id).ToListAsync();
