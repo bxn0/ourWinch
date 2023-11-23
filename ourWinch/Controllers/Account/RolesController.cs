@@ -68,12 +68,24 @@ namespace ourWinch.Controllers.Account
         }
 
 
+        /// <summary>
+        /// Displays a view for creating a new role or updating an existing role.
+        /// If no ID is provided, it returns a view for creating a new role.
+        /// If an ID is provided, it fetches and returns a view for editing the corresponding role.
+        /// </summary>
+        /// <param name="id">The ID of the role to edit. If null or empty, the method assumes a new role is being created.</param>
+        /// <returns>
+        /// A view for creating a new role if the ID is null or empty, 
+        /// or a view for editing an existing role if an ID is provided.
+        /// </returns>
         [HttpGet]
         public IActionResult Upsert(string id)
         {
 
             if (String.IsNullOrEmpty(id))
             {
+
+                // Return the view for creating a new role.
                 return View();
             }
             else
@@ -85,26 +97,40 @@ namespace ourWinch.Controllers.Account
             
         }
 
+
+        /// <summary>
+        /// Processes the submission for creating a new role or updating an existing role.
+        /// If the role already exists, an error is displayed and redirected back to the index.
+        /// If creating a new role, it adds the role to the database.
+        /// If updating an existing role, it updates the role details in the database.
+        /// </summary>
+        /// <param name="roleObj">The role object containing the role's details.</param>
+        /// <returns>
+        /// A redirection to the index view after processing the request.
+        /// If an error occurs or if the role already exists, it returns an error message and redirects to the index.
+        /// </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upsert(IdentityRole roleObj)
         {
             if (await _roleManager.RoleExistsAsync(roleObj.Name))
             {
-                //error
+                // If the role already exists, show an error message.
                 _irisService.Error("Rollen eksisterer allerede!", 3);
                 return RedirectToAction(nameof(Index));
             }
 
             if (string.IsNullOrEmpty(roleObj.Id))
             {
-                //create
+                // If the role ID is null or empty, create a new role.
                 await _roleManager.CreateAsync(new IdentityRole() { Name = roleObj.Name });
                 _irisService.Success("Rollen ble lagt!", 3);
 
             }
             else
             {
+
+                // If updating an existing role, update its details.
                 var objRoleFromDb = _db.Roles.FirstOrDefault(u => u.Id == roleObj.Id);
                 if (objRoleFromDb==null)
                 {
