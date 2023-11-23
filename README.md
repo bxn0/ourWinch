@@ -95,25 +95,25 @@ https://uia.instructure.com/courses/14002/files/2264630?module_item_id=514890
 
 ## At the end of the project, following topics are to be covered;
 
-## - C# 
+### - **C# 
 
-## - GitHub 
+### - **GitHub 
 
-## - Visual Studio 2022
+### - **Visual Studio 2022
 
-## - ASP.NET Core
+### - **ASP.NET Core
 
-## - HTML
+### - **HTML
 
-## - Bootstrap - CSS
+### - **Bootstrap - CSS
 
-## - JavaScript
+### - **JavaScript
 
-## - Azure Data Studio
+### - **Azure Data Studio
 
-## - SQL Server Management Studio (SSMS)
+### - **SQL Server Management Studio (SSMS)
 
-## - NuGet Package Manager
+### - **NuGet Package Manager
 
 ## Programming Language and Version
 ** Programming language: C#
