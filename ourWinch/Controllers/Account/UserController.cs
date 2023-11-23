@@ -193,16 +193,37 @@ namespace ourWinch.Controllers.Account
             return View(user);
         }
 
+
+        /// <summary>
+        /// Handles the deletion of a user based on their ID.
+        /// If the user is not found, a 'NotFound' response is returned.
+        /// Otherwise, the user is removed from the database.
+        /// </summary>
+        /// <param name="userId">The ID of the user to delete.</param>
+        /// <returns>
+        /// A redirection to the index view on successful deletion,
+        /// or a 'NotFound' response if the user does not exist.
+        /// </returns>
         [HttpPost]
         public IActionResult Delete(string userId)
         {
+
+            // Attempt to find the user in the database based on the provided userId.
             var objFromDb = _db.ApplicationUser.FirstOrDefault(u => u.Id == userId);
+
+            // If no user is found with the provided ID, return a NotFound result.
             if (objFromDb == null)
             {
                 return NotFound();
             }
+
+            // Remove the user from the database.
             _db.ApplicationUser.Remove(objFromDb);
+
+            //save the data
             _db.SaveChanges();
+
+            //notify
           _irisService.Success("Brukeren ble sletted!", 2);
             return RedirectToAction(nameof(Index));
         }
