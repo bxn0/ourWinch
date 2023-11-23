@@ -41,7 +41,7 @@ namespace ourWinch.Controllers.Checklist
 
             if (!mechanicals.Any() && !hydrolisks.Any() && !electros.Any() && !funksjonsTests.Any() && !trykks.Any())
             {
-                _logger.LogWarning("ServiceSkjema bulunamadı, ID: {ID}", id);
+                _logger.LogWarning("ServiceSkjema not found, ID: {ID}", id);
                 return NotFound();
             }
 

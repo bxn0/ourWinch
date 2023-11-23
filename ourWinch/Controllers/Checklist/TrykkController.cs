@@ -124,7 +124,7 @@ namespace ourWinch.Controllers.Checklist
                 else
                 {
                     // Eğer hiç ServiceOrder bulunamazsa bir hata mesajı döndürebilirsiniz.
-                    ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
+                    ModelState.AddModelError(string.Empty, "ServiceOrder not found.");
                 }
             }
             // ModelState.IsValid değilse hataları yazdırıyoruz.

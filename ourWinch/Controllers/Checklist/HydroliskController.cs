@@ -198,7 +198,7 @@ namespace ourWinch.Controllers.Checklist
                 else
                 {
                     // If no last service order is found, add a model error.
-                    ModelState.AddModelError(string.Empty, "ServiceOrder bulunamadı.");
+                    ModelState.AddModelError(string.Empty, "ServiceOrder not found.");
                 }
             }
             else
