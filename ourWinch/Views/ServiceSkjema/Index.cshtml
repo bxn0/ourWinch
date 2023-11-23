@@ -19,14 +19,14 @@
             </div>
             <div class="col-md-6 text-right" id="buttons">
                 <button class="btn btn-primary" id="printButton">Skriv ut</button>
-                <!-- "Completed" button that will trigger a JavaScript function -->
+                <!-- "Fulført" knappen som vil utløse en JavaScript funksjon -->
                 <button type="button" class="btn btn-primary" id="completeButton">Fulført</button>
             </div>
         </div>
 
-        <!-- Invisible form that will send data when page loads -->
+        <!-- Usynlig form som vil sende data når siden lastes -->
         <form id="completedServiceForm" class="hidden-form" action="/CompletedService/RegisterCompletedService" method="post">
-            <!-- Hidden input field to hold the data that is fetched dynamically -->
+            <!-- Skjulte input-felt for å holde på dataen som hentes dynamisk -->
             <input type="hidden" id="ServiceOrderIdInput" name="ServiceOrderId" value="" />
             <input type="hidden" id="OrdrenummerInput" name="Ordrenummer" value="" />
             <input type="hidden" id="ProdukttypeInput" name="Produkttype" value="" />
@@ -80,7 +80,7 @@
                         </tr>
                     </thead>
                     <tbody id="dataBody">
-                        <!-- Rows will be added here dynamically -->
+                        <!-- Dinamik olarak buraya satırlar eklenecek -->
                     </tbody>
                 </table>
             </div>
@@ -97,14 +97,13 @@
             </div>
         </div>
     </div>
-    <!-- Including jQuery and Bootstrap CSS -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        // Document ready function using jQuery
         $(document).ready(function () {
 
-    
+            //To print, it listens to the "Skriv ut" button and directs it to the printer.
             $("#printButton").click(function () {
                 window.print();
             });
@@ -113,31 +112,32 @@
                 var serviceOrderId = getIdFromUrl();
 
                 $.ajax({
-                    url: '/ServiceOrder/UpdateStatus', // Updated URL
-                    type: 'POST', // New status
+                    url: '/ServiceOrder/UpdateStatus', // Güncellenmiş URL
+                    type: 'POST', // HTTP metodu POST olarak değiştirildi
                     data: {
                         id: serviceOrderId, // ServiceOrder ID
-                        newStatus: 'Fulfort' 
+                        newStatus: 'Fulfort' // Yeni durum
                     },
                     success: function (response) {
                         alert('Status updated to completed!');
-                        location.reload();// Refresh the page
+                        location.reload(); // Sayfayı yenile
+                    },
                     error: function (error) {
                         alert('An error occurred while updating the status.');
                     }
                 });
             });
 
-            // Function to extract ID from URL
+            // Funksjon for å hente ID fra URL
             function getIdFromUrl() {
                 var url = window.location.pathname;
                 var id = url.substring(url.lastIndexOf('/') + 1);
                 return id;
             }
 
-            var serviceOrdreId = getIdFromUrl();  // Get service order ID from URL
-            fetchServiceData(serviceOrdreId);     // Load data with the obtained ID
-            // Click event for the "Load Data" button
+            var serviceOrdreId = getIdFromUrl();  // URL'den ID'yi al
+            fetchServiceData(serviceOrdreId);     // Alınan ID ile veriyi yükle
+
             $("#lastInnData").click(function () {
                 var serviceOrdreId = $("#serviceOrdreIdInput").val();
 
@@ -147,20 +147,20 @@
                     alert("Vennligst skriv inn en service ordre ID.");
                 }
             });
-            // Click event for links containing 'Yes'
+
             $("a:contains('Ja')").click(function (event) {
-                event.preventDefault(); // Prevent the default behavior of the link
-                let serviceOrderId = $(this).closest('tr').data('orderid'); // Get the data-orderid value from the clicked link's row
+                event.preventDefault(); // Linkin varsayılan davranışını engelle
+                let serviceOrderId = $(this).closest('tr').data('orderid'); // Tıklanılan linkin bulunduğu satırdan data-orderid değerini al
                 fetchServiceData(serviceOrderId);
             });
         });
-        // Function to extract ID from URL (repeated for clarity)
+
         function getIdFromUrl() {
             var url = window.location.pathname;
             var id = url.substring(url.lastIndexOf('/') + 1);
             return id;
         }
-        // Function to fetch service data from the API
+
         function fetchServiceData(orderId) {
             var url = "http://localhost:5002/api/ServiceSkjema/" + orderId;
 
@@ -202,19 +202,17 @@
                     }
                 },
                 error: function (error) {
-                    alert("An error occurred! Please try again.");
+                    alert("Bir hata oluştu! Lütfen tekrar deneyin.");
                 }
             });
         }
-        // Function to append data to the table
+
         function appendDataToTable(dataList, tableBody, avdeling) {
             dataList.forEach((item, index) => {
-                // Determine the checked status based on item properties
                 var okChecked = item.ok ? 'checked' : '';
                 var borSkiftesChecked = (item.borSkiftes && !item.ok) ? 'checked' : '';
                 var defektChecked = (!item.ok && !item.borSkiftes) ? 'checked' : '';
-                
-                // Construct the table row HTML
+
                 var row = `<tr>
                                   <td>${avdeling}</td>
                                   <td>${item.checklistItem}</td>
@@ -222,10 +220,10 @@
                                   <td><input type="checkbox" name="checkbox-group-${index}" ${borSkiftesChecked} onclick="uncheckOthers(this)"></td>
                                   <td><input type="checkbox" name="checkbox-group-${index}" ${defektChecked} onclick="uncheckOthers(this)"></td>
                                </tr>`;
-                tableBody.append(row); // Append the row to the table body
+                tableBody.append(row);
             });
         }
-        // Function to uncheck other checkboxes in the same group
+
         function uncheckOthers(checkbox) {
             let checkboxes = document.querySelectorAll(`input[name="${checkbox.name}"]`);
             checkboxes.forEach(cb => {

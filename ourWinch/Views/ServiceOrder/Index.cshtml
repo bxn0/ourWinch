@@ -1,44 +1,52 @@
 ﻿@using ourWinch.Models.Dashboard;
 @model IEnumerable<ServiceOrder>
 
-/**
- * Represents a view displaying a list of service orders.
- * model IEnumerable<ServiceOrder> - The model representing a collection of service orders.
- */
+    @*
+        This Razor view displays a list of service orders in a table format.
 
-<div class="container mt-5">
-    <!-- The Bootstrap container class has been added.. -->
-    <h2 class="text-center">Service Orders List</h2> <!-- The title has been centered. -->
+        Features:
+        - The view is contained within a Bootstrap container for styling and alignment.
+        - A title "Service Orders List" is displayed at the top and is centered.
+        - The table is responsive, making it scrollable horizontally on smaller screens.
+        - Table headers include fields such as ID, First Name, Last Name, Mobile Number, Email, etc.
+        - Data rows are generated using a foreach loop, displaying each service order's properties.
+        - Special formatting is applied to date fields and boolean fields for readability.
+        - Comments within the code suggest where additional action buttons like edit or delete can be added.
 
-    <div class="table-responsive">
-        <!-- Wrapper for a responsive table. -->
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Fornavn</th>
-                    <th>Etternavn</th>
-                    <th>Mobil No</th>
-                    <th>Email</th>
-                    <th>Adresse</th>
-                    <th>Feilbeskrivelse</th>
-                    <th>Ordrenummer</th>
-                    <th>Produkttype</th>
-                    <th>Serienummer</th>
-                    <th>Mottatt Dato</th>
-                    <th>Årsmodell</th>
-                    <th>Garanti</th>
-                    <th>Servis</th>
-                    <th>Reperasjon</th>
-                    <th>Kommentar Fra Kunde</th>
-                    <!-- If you want to add buttons for other actions, such as editing or deleting, you can also add those columns here. -->
-                </tr>
-            </thead>
+        Usage:
+        - This view is typically rendered by a controller action that passes an IEnumerable<ServiceOrder> to it.
+        - It is suitable for pages where a list of service orders needs to be displayed in a structured and readable format.
+    *@
+    <div class="container mt-5">
+        <!-- The Bootstrap container class has been added.. -->
+        <h2 class="text-center">Service Orders List</h2> <!-- The title has been centered. -->
+
+        <div class="table-responsive">
+            <!-- Wrapper for a responsive table. -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fornavn</th>
+                        <th>Etternavn</th>
+                        <th>Mobil No</th>
+                        <th>Email</th>
+                        <th>Adresse</th>
+                        <th>Feilbeskrivelse</th>
+                        <th>Ordrenummer</th>
+                        <th>Produkttype</th>
+                        <th>Serienummer</th>
+                        <th>Mottatt Dato</th>
+                        <th>Årsmodell</th>
+                        <th>Garanti</th>
+                        <th>Servis</th>
+                        <th>Reperasjon</th>
+                        <th>Kommentar Fra Kunde</th>
+                        <!-- If you want to add buttons for other actions, such as editing or deleting, you can also add those columns here. -->
+                    </tr>
+                </thead>
                 <tbody>
-                    /**
-                    * Iterates over each service order in the model and generates a table row for display.
-                    */
-                @foreach (var item in Model)
+                    @foreach (var item in Model)
                 {
                     <tr>
                         <td>@item.ServiceOrderId</td>
@@ -60,5 +68,5 @@
                         <!-- If you want to add buttons for other operations, such as editing or deleting, you can also add those columns here.. -->
                     </tr>
                 }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
