@@ -7,6 +7,7 @@
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<UserSecretsId>3abf215e-5233-4b7a-b2e5-dabf49f53942</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
