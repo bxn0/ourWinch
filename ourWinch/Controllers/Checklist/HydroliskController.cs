@@ -283,7 +283,7 @@ namespace ourWinch.Controllers.Checklist
                 catch (DbUpdateConcurrencyException)
                 {
                     // Check if the Hydrolisk entity still exists.
-                    if (!ElectroExists(hydrolisk.Id)) // Should be HydroliskExists, not ElectroExists.
+                    if (!HydroliskExists(hydrolisk.Id)) // Should be HydroliskExists, not ElectroExists.
                     {
                         return NotFound();
                     }
@@ -365,7 +365,7 @@ namespace ourWinch.Controllers.Checklist
         /// </summary>
         /// <param name="id">The ID of the Hydrolisk entity to check for existence.</param>
         /// <returns>True if the entity exists; otherwise, false.</returns>
-        private bool ElectroExists(int id) // The method name should reflect the entity it checks for, e.g., HydroliskExists.
+        private bool HydroliskExists(int id) // The method name should reflect the entity it checks for, e.g., HydroliskExists.
 
         {
             // Use LINQ to check for the existence of the Hydrolisk entity with the given ID.
