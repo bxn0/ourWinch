@@ -10,16 +10,35 @@ namespace ourWinch.Controllers.Checklist
 {
 
 
-
+    /// <summary>
+    /// Controller responsible for handling pressure ("Trykk") related operations within the application.
+    /// Access to the controller's actions requires authorization.
+    /// </summary>
     [Authorize]
     public class TrykkController : Controller
     {
+        /// <summary>The database context used for data operations.</summary>
         private readonly AppDbContext _context;
+
+        /// <summary>A service for managing service schematics.</summary>
         private readonly ServiceSkjemaService _serviceSkjemaService;
+
+        /// <summary>A logger for logging information, warnings, and errors.</summary>
         private readonly ILogger<TrykkController> _logger;
+
+        /// <summary>A notification service for user communication.</summary>
         private readonly INotyfService _irisService;
 
-        // Dependency Injection ile AppDbContext ve ServiceSkjemaService ekleniyor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TrykkController"/> class.
+        /// </summary>
+        /// <param name="context">The application's database context for data operations.</param>
+        /// <param name="serviceSkjemaService">The service for managing service schematics.</param>
+        /// <param name="logger">The logger for capturing log information.</param>
+        /// <param name="irisService">The notification service for user communication.</param>
+        /// <remarks>
+        /// Dependency injection is used to provide the controller with the necessary services and context for operation.
+        /// </remarks>
         public TrykkController(AppDbContext context, ServiceSkjemaService serviceSkjemaService, ILogger<TrykkController> logger, INotyfService irisService)
         {
             _context = context;
