@@ -55,7 +55,7 @@
 </head>
 <body>
     <!-- Navbar Kısmı -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark m-0 p-0 text-light">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark m-0 p-0 text-light  fixed-top">
         <div class="container-fluid ">
             <!-- Brand/logo -->
             <a class="navbar-brand" href="#">
@@ -205,21 +205,38 @@
 </body>
 
 </html>
-<!-- Include jQuery if it's not already included -->
 <script>
+    /**
+     * <summary>
+     * Adjusts the top margin of the main content panel based on the navbar's collapsed or expanded state.
+     * </summary>
+     *
+     * <functionality>
+     * - Listens for the 'DOMContentLoaded' event to ensure the DOM is fully loaded before executing.
+     * - Selects the navbar toggler button and the main content panel.
+     * - Adds a 'click' event listener to the navbar toggler.
+     * - Checks the state of the navbar (collapsed or expanded) on each click.
+     * - Adjusts the top margin of the content panel: sets to 0px if navbar is expanded, or to 90px if collapsed.
+     * </functionality>
+     *
+     * <usage>
+     * - Enhances webpage responsiveness and visual appearance, especially on smaller screens.
+     * - Prevents content panel overlap with an expanded navbar, maintaining UI integrity and usability.
+     * </usage>
+     */
     document.addEventListener("DOMContentLoaded", function () {
         var navbarToggler = document.querySelector('.navbar-toggler');
-        var contentPanel = document.querySelector('.render-body'); // Bu sınıflar içeriğinizi temsil ediyor
+        var contentPanel = document.querySelector('.render-body');
 
         navbarToggler.addEventListener('click', function () {
             var navbarCollapsed = document.querySelector('.navbar-collapse').classList.contains('show');
 
             if (navbarCollapsed) {
-                // Navbar açık, içeriği aşağı kaydır
-                contentPanel.style.marginTop = '0px'; // Navbar kapalı olduğunda margin'i kaldır
+                
+                contentPanel.style.marginTop = '0px'; // Remove margin when Navbar is closed
             } else {
-                // Navbar kapalı, içeriği yukarı çek
-                contentPanel.style.marginTop = '90px'; // Navbar açık olduğunda içeriği aşağı itecek margin değeri
+                
+                contentPanel.style.marginTop = '90px'; // Margin value that will push down the content when the Navbar is open
             }
         });
     });
