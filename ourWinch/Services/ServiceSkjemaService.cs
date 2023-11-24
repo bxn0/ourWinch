@@ -24,13 +24,20 @@ namespace ourWinch.Services
         public ServiceSkjemaService(AppDbContext context, ILogger<ServiceSkjemaService> logger)
         {
             _context = context;
-            _logger = logger; // Logger burada tanımlandı
+            _logger = logger; 
         }
 
         /// <summary>
-        /// Asynchronously updates the service order status if all associated checks are completed.
+        /// Asynchronously checks if all service tasks associated with a given service order ID are marked as completed.
         /// </summary>
-        /// <param name="serviceOrderId">The ID of the service order to update.</param>
+        /// <param name="serviceOrderId">The ID of the service order to check.</param>
+        /// <returns>
+        /// A task representing the asynchronous operation without a return value.
+        /// </returns>
+        /// <remarks>
+        /// The method checks for completion of tasks across various categories including Electro, Funksjon, Hydrolisk, Mechanical, and Trykk.
+        /// It logs the completion status of each category.
+        /// </remarks>
         public async System.Threading.Tasks.Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
 
@@ -41,6 +48,7 @@ namespace ourWinch.Services
             var isMechanicalCompleted = await _context.Mechanicals.AnyAsync(m => m.ServiceOrderId == serviceOrderId && m.OK);
             var isTrykkCompleted = await _context.Trykks.AnyAsync(t => t.ServiceOrderId == serviceOrderId && t.OK);
 
+            // Log the completion status of each category.
             _logger.LogInformation("isElectroCompleted: {Status}", isElectroCompleted);
             _logger.LogInformation("isFunksjonCompleted: {Status}", isFunksjonCompleted);
             _logger.LogInformation("isHydroliskCompleted: {Status}", isHydroliskCompleted);
