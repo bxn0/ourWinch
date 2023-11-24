@@ -125,40 +125,7 @@
     </form>
 </div>
 
-@*
-    <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var bookedDates = JSON.parse('@Html.Raw(ViewBag.BookedDates)').map(function(date) {
-            // Tarihleri 'yyyy-MM-dd' formatına dönüştürün
-            return new Date(date).toISOString().split('T')[0];
-        });
-        var dateInput = document.getElementById('datepicker');
-
-        if (dateInput) {
-            dateInput.addEventListener('change', function() {
-                var selectedDate = new Date(this.value).toISOString().split('T')[0];
-                var isBooked = bookedDates.includes(selectedDate);
-
-                if (isBooked) {
-                    console.log('Seçilen tarih zaten alınmış.');
-                    Swal.fire({
-                        title: 'Bu tarih mevcut!',
-                        text: 'Lütfen başka bir tarih seçin.',
-                        icon: 'warning',
-                        confirmButtonText: 'Tamam'
-                    });
-                    this.value = ''; // Input değerini temizle
-                } else {
-                    console.log('Seçilen tarih uygun.');
-                }
-            });
-        } else {
-            console.error('Date input not found.');
-        }
-    });
-    </script>
-*@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var bookedDates = JSON.parse('@Html.Raw(ViewBag.BookedDates)').map(function(date) {
