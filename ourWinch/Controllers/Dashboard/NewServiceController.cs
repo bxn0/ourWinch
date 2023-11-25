@@ -17,7 +17,7 @@ public class NewServiceController : Controller
     private readonly AppDbContext _context;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="NewServiceController"/> class.
+    /// Initializes a new instance of the <see cref="NewServiceController" /> class.
     /// </summary>
     /// <param name="context">The database context to be used by this controller.</param>
     public NewServiceController(AppDbContext context)
@@ -29,7 +29,7 @@ public class NewServiceController : Controller
     /// Displays the dashboard for new services.
     /// </summary>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the dashboard view for new services.
+    /// An <see cref="IActionResult" /> that renders the dashboard view for new services.
     /// </returns>
     public IActionResult Dashboard()
     {

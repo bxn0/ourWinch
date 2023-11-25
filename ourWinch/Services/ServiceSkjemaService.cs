@@ -12,7 +12,13 @@ namespace ourWinch.Services
     /// </summary>
     public class ServiceSkjemaService
     {
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly AppDbContext _context;
+        /// <summary>
+        /// The logger
+        /// </summary>
         private readonly ILogger<ServiceSkjemaService> _logger;
 
 
