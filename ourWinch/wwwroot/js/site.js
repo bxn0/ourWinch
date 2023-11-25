@@ -1,20 +1,20 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
 
-    // Şu anki sayfanın yolunu al
+    // Get the current page's path.
     var currentPath = window.location.pathname;
 
-    // Tüm menü öğelerini döngüye al
+    // Loop through all menu items.
     var navLinks = document.querySelectorAll(".nav-link");
     for (let i = 0; i < navLinks.length; i++) {
         if (navLinks[i].getAttribute('href') === currentPath) {
             navLinks[i].classList.add("active-link");
         }
         navLinks[i].addEventListener("click", function () {
-            // Tüm menülerden aktifliği kaldır
+            // Remove the active state from all menus
             for (let j = 0; j < navLinks.length; j++) {
                 navLinks[j].classList.remove("active-link");
             }
-            // Tıklanan menüye aktifliği ekle
+            // Add the active state to the clicked menu.
             this.classList.add("active-link");
         });
     }
