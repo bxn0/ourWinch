@@ -1,4 +1,4 @@
-﻿/* Fulførte Servicer başlığı için stil tanımlamaları */
+﻿/* Style definitions for the "Completed Services" heading. */
 .heading {
     color: black;
     border: 1px solid #C0D0D7;
@@ -7,7 +7,7 @@
     margin-bottom: 20px;
 }
 
-/* Tablo için stil tanımlamaları */
+/* Style definitions for the table */
 .custom-table {
     width: 100%;
     border-collapse: collapse;
@@ -26,7 +26,7 @@
     color: #3989E5;
 }
 
-/* Sayfa numaralandırma için stil tanımlamaları */
+/* Style definitions for page numbering. */
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -73,14 +73,20 @@
     }
 
     main {
-        max-width: 1200px !important; /* istediğiniz genişliği belirleyebilirsiniz */
+        max-width: 1200px !important; /* You can specify the desired width. */
         margin: 0 auto;
         padding-left: 20px;
         padding-right: 20px;
     }
 
     .table-responsive {
-        overflow-x: auto; /* Ekstra içeriği yatay kaydırma ile göstermek için */
+        overflow-x: auto; /* To display extra content with horizontal scrolling."
+
+
+
+
+
+ */
     }
 
     .main-content {
