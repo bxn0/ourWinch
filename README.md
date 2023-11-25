@@ -5,7 +5,8 @@
 ## mobil: [94717177]  pass: [Icardi1990!]
 
 # Demonstration of the app:
-![IGLAND WINCH](https://github.com/bxn0/ourWinch/assets/82652466/ee33a86f-190b-4c80-8056-2b5fe61da9a5)
+![IGLAND WINCH](https://github.com/bxn0/ourWinch/assets/60920330/c181b8ad-c9f2-4631-b318-283dbac411de)
+)
 
 <pre>
   ## OurWinch-Nøsted-App (GitHub Repository Root) 
