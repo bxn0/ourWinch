@@ -635,9 +635,19 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 
 //_logger.LogInformation("GetServiceSkjema called, ID: {ID}", id);
 
+## Functionalities in the application.
+
+### User Registiration & Authentication
+User registration and editing can only be done by administrators. Administrators can add, delete, or edit new administrators and mechanics in the system. Registered users can securely log into the system, see the interface according to their roles, and perform operations.
+
+### Dashboard Operations
+- The admin can access the customer reports pages, along with other pages, and can view and edit the information there.
+- Users can see active and completed service orders.
+- Users can create new service requests.
+- Mechanics can access checklist pages through active service orders and can safely perform their checks and save them along with their own comments.
+- For orders with completed checks, the service schema can be accessed again through the active service page, and the results of the service can be viewed here. The output of this page can be printed and sent to the customer along with some recommendations, providing information on the changes made and those that are recommended.
 
 # Contributors
-
  
 ## - Burak Seymen    (https://github.com/bxn0)
 ## - Umit Yildirim   (https://github.com/yildirimsinop)
