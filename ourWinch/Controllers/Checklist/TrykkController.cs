@@ -222,7 +222,7 @@ namespace ourWinch.Controllers.Checklist
                     var fieldName = modelState.Key;
                     foreach (var error in modelState.Value.Errors)
                     {
-                        Console.WriteLine($"Alan: {fieldName}, Hata Mesajı: {error.ErrorMessage}");
+                        Console.WriteLine($"Field: {fieldName}, Error message: {error.ErrorMessage}");
                     }
                 }
                 // If the model state is not valid, collect and display the error messages.

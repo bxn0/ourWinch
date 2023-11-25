@@ -102,9 +102,11 @@ namespace ourWinch
             {
                 options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
                 {
-                    sqlOptions.CommandTimeout(30); 
+
+                    sqlOptions.CommandTimeout(50);
                 })
-                .LogTo(Console.WriteLine); 
+                .LogTo(Console.WriteLine);
+
             });
 
             // Register ServiceSkjemaService for DI.
