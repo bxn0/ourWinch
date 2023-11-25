@@ -635,7 +635,7 @@ Logging Messages: Logging messages are carefully crafted to express the event in
 
 //_logger.LogInformation("GetServiceSkjema called, ID: {ID}", id);
 
-## Functionalities in the application.
+# Functionalities in the application.
 
 ### User Registiration & Authentication
 User registration and editing can only be done by administrators. Administrators can add, delete, or edit new administrators and mechanics in the system. Registered users can securely log into the system, see the interface according to their roles, and perform operations.
