@@ -77,9 +77,9 @@ namespace ourWinch
             {
                 options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
                 {
-                    sqlOptions.CommandTimeout(30); // Veritabanı komutlarının zaman aşımı süresini ayarla
+                    sqlOptions.CommandTimeout(50);
                 })
-                .LogTo(Console.WriteLine); // Bu satırı .UseSqlServer çağrısından sonra ve ayrı bir satırda ekle
+                .LogTo(Console.WriteLine);
             });
 
             // Register ServiceSkjemaService for DI.
