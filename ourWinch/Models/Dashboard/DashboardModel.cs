@@ -10,11 +10,17 @@ namespace ourWinch.Models.Dashboard
         /// <summary>
         /// Gets or sets the title of the dashboard.
         /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
         public string? Title { get; set; }
 
         /// <summary>
         /// Gets or sets the items to be displayed in the side menu of the dashboard.
         /// </summary>
+        /// <value>
+        /// The side menu items.
+        /// </value>
         public List<string> SideMenuItems { get; set; } = new List<string>();
     }
 }

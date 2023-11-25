@@ -14,23 +14,32 @@ namespace ourWinch.Controllers.Checklist
     /// Controller responsible for handling pressure ("Trykk") related operations within the application.
     /// Access to the controller's actions requires authorization.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class TrykkController : Controller
     {
-        /// <summary>The database context used for data operations.</summary>
+        /// <summary>
+        /// The database context used for data operations.
+        /// </summary>
         private readonly AppDbContext _context;
 
-        /// <summary>A service for managing service schematics.</summary>
+        /// <summary>
+        /// A service for managing service schematics.
+        /// </summary>
         private readonly ServiceSkjemaService _serviceSkjemaService;
 
-        /// <summary>A logger for logging information, warnings, and errors.</summary>
+        /// <summary>
+        /// A logger for logging information, warnings, and errors.
+        /// </summary>
         private readonly ILogger<TrykkController> _logger;
 
-        /// <summary>A notification service for user communication.</summary>
+        /// <summary>
+        /// A notification service for user communication.
+        /// </summary>
         private readonly INotyfService _irisService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TrykkController"/> class.
+        /// Initializes a new instance of the <see cref="TrykkController" /> class.
         /// </summary>
         /// <param name="context">The application's database context for data operations.</param>
         /// <param name="serviceSkjemaService">The service for managing service schematics.</param>
@@ -51,7 +60,7 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously retrieves all Mechanical entities from the database and provides them to the Index view for the Trykk section.
         /// </summary>
         /// <returns>
-        /// A task that represents the asynchronous operation. 
+        /// A task that represents the asynchronous operation.
         /// The task result contains the IActionResult for the Index view, which displays a list of Mechanical entities.
         /// </returns>
         // GET: Trykk
@@ -341,7 +350,7 @@ namespace ourWinch.Controllers.Checklist
         /// </summary>
         /// <param name="id">The ID of the Trykk entity to delete.</param>
         /// <returns>
-        /// A task that represents the asynchronous delete operation. 
+        /// A task that represents the asynchronous delete operation.
         /// The task result contains an IActionResult that redirects to the Index action upon successful deletion.
         /// If the Trykk entity is not found, NotFound (HTTP 404) is returned.
         /// </returns>
@@ -372,7 +381,9 @@ namespace ourWinch.Controllers.Checklist
         /// Checks if a Trykk entity with the specified ID exists in the database.
         /// </summary>
         /// <param name="id">The ID of the Trykk entity to check for existence.</param>
-        /// <returns>True if the entity exists; otherwise false.</returns>
+        /// <returns>
+        /// True if the entity exists; otherwise false.
+        /// </returns>
         private bool TrykkExists(int id)
         {
             // Use LINQ to check for the existence of the Trykk entity with the given ID.
@@ -382,7 +393,9 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously updates the service schema to reflect completion status for all associated tasks of a given service order.
         /// </summary>
         /// <param name="serviceOrderId">The ID of the service order for which the service schema is to be updated.</param>
-        /// <returns>A task that represents the asynchronous operation of updating the service schema.</returns>
+        /// <returns>
+        /// A task that represents the asynchronous operation of updating the service schema.
+        /// </returns>
         private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
             // Call the service method to update the service schema if all related tasks are completed.
