@@ -1,5 +1,8 @@
 namespace ourWinch.Models
 {
+    /// <summary>
+    /// models the error view
+    /// </summary>
     public class ErrorViewModel
 
     {/// <summary>
@@ -8,8 +11,12 @@ namespace ourWinch.Models
         public string? RequestId { get; set; }
 
         // <summary>
-        /// Gets a value indicating whether the request ID should be shown.
+        /// <summary>
+        /// Gets a value indicating whether [show request identifier].
         /// </summary>
+        /// <value>
+        ///   <c>true</c> if [show request identifier]; otherwise, <c>false</c>.
+        /// </value>
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

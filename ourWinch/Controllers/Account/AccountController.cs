@@ -10,13 +10,28 @@ using ourWinch.Models.Account;
 
 
 
+/// <summary>
+/// Controller responsible for managing user accounts and authentication in the application.
+/// </summary>
 public class AccountController : Controller
 {
-    
 
+
+    /// <summary>
+    /// The user manager
+    /// </summary>
     private readonly UserManager<ApplicationUser> _userManager;
+    /// <summary>
+    /// The role manager
+    /// </summary>
     private readonly RoleManager<IdentityRole> _roleManager;
+    /// <summary>
+    /// The sign in manager
+    /// </summary>
     private readonly SignInManager<ApplicationUser> _signInManager;
+    /// <summary>
+    /// The iris service
+    /// </summary>
     private readonly INotyfService _irisService;
     //private readonly IEmailSender _emailSender;
 
@@ -24,7 +39,7 @@ public class AccountController : Controller
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// Initializes a new instance of the <see cref="AccountController" /> class.
     /// This constructor injects multiple manager services for handling user accounts,
     /// authentication, roles, and notifications.
     /// </summary>
@@ -49,7 +64,9 @@ public class AccountController : Controller
     /// This method checks if the 'Admin' and 'Ansatt' roles exist and creates them if they do not.
     /// It then presents a registration view model to the user.
     /// </summary>
-    /// <returns>A view for the registration process with the registration view model.</returns>
+    /// <returns>
+    /// A view for the registration process with the registration view model.
+    /// </returns>
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> Register()
@@ -125,6 +142,10 @@ public class AccountController : Controller
         // Return the view with the model to display any validation errors.
         return View(model);
     }
+    /// <summary>
+    /// Logins this instance.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     public  IActionResult Login()
     {
@@ -225,7 +246,9 @@ public class AccountController : Controller
     /// Displays the view for the password reset process.
     /// This method is called when a user requests the page to reset their password.
     /// </summary>
-    /// <returns>The 'ForgotPassword' view.</returns>
+    /// <returns>
+    /// The 'ForgotPassword' view.
+    /// </returns>
     [HttpGet]
     public IActionResult ForgotPassword()
     {
@@ -273,6 +296,10 @@ public class AccountController : Controller
         return View(model);
     }
 
+    /// <summary>
+    /// Forgots the password confirmation.
+    /// </summary>
+    /// <returns></returns>
     [HttpGet]
     [AllowAnonymous]
     public IActionResult ForgotPasswordConfirmation()
@@ -287,7 +314,10 @@ public class AccountController : Controller
     /// This method is called to inform the user that the password reset process has been initiated,
     /// and instructions have been sent to their email, if applicable.
     /// </summary>
-    /// <returns>The 'ForgotPasswordConfirmation' view.</returns>
+    /// <param name="result">The result.</param>
+    /// <returns>
+    /// The 'ForgotPasswordConfirmation' view.
+    /// </returns>
     private void AddErrors(IdentityResult result)
     {
         foreach (var error in result.Errors)

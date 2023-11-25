@@ -1,24 +1,42 @@
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// models a login view
+/// </summary>
 public class LoginViewModel
 {
 
 
-    // 'Mobilno' represents the mobile number of the user. It's validated as a phone number.
-    // While not marked as 'Required', it's typically essential for logging in.
+
+    /// <summary>
+    /// Gets or sets the mobilno.
+    /// </summary>
+    /// <value>
+    /// The mobilno.
+    /// </value>
     [Phone]
     public string Mobilno { get; set; }
 
 
-    // 'Password' is a required field and is treated as a password data type, 
-    // which means it can be used to input passwords in a secure manner in the UI.
+
+    /// <summary>
+    /// Gets or sets the password.
+    /// </summary>
+    /// <value>
+    /// The password.
+    /// </value>
     [Required]
     [DataType(DataType.Password)]
     public string Password { get; set; }
 
 
-    // 'RememberMe' is a boolean indicating whether the user's login information 
-    // should be remembered by the application, typically for convenience in future logins.
+
+    /// <summary>
+    /// Gets or sets a value indicating whether [remember me].
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if [remember me]; otherwise, <c>false</c>.
+    /// </value>
     public bool RememberMe { get; set; }
 
 

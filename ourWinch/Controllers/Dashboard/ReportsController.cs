@@ -17,7 +17,7 @@ public class ReportsController : Controller
     private readonly AppDbContext _context;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ReportsController"/> class.
+    /// Initializes a new instance of the <see cref="ReportsController" /> class.
     /// </summary>
     /// <param name="context">The database context to be used by this controller.</param>
     public ReportsController(AppDbContext context)
@@ -29,7 +29,7 @@ public class ReportsController : Controller
     /// Displays the dashboard for reports.
     /// </summary>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the reports dashboard view.
+    /// An <see cref="IActionResult" /> that renders the reports dashboard view.
     /// </returns>
     public IActionResult Dashboard()
     {
