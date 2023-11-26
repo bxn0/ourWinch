@@ -7,12 +7,12 @@
 
 @{
     ApplicationUser user = null;
-    bool isAdmin = false; // isAdmin değişkenini burada tanımlayın ve varsayılan değeri false olarak ayarlayın.
+    bool isAdmin = false; 
 
     if (SignInManager.IsSignedIn(User))
     {
         user = await UserManager.GetUserAsync(User);
-        isAdmin = await UserManager.IsInRoleAsync(user, "Admin"); // isAdmin değerini burada ayarlayın.
+        isAdmin = await UserManager.IsInRoleAsync(user, "Admin"); 
     }
 }
 
