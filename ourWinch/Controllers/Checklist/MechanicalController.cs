@@ -176,6 +176,7 @@ namespace ourWinch.Controllers.Checklist
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MechanicalListViewModel viewModel, int serviceOrderId)
         {
+            // var errors = ModelState.Values.SelectMany(x => x.Errors);
             // Check if the provided data in the view model is valid.
             if (ModelState.IsValid)
             {
