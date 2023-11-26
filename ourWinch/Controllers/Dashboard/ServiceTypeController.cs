@@ -7,12 +7,16 @@ namespace ourWinch.Controllers
     /// <summary>
     /// Controller for managing and displaying various types of services.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class ServiceTypeController : Controller
     {
+        /// <summary>
+        /// The context
+        /// </summary>
         private readonly AppDbContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServiceTypeController"/> class.
+        /// Initializes a new instance of the <see cref="ServiceTypeController" /> class.
         /// Injects the AppDbContext class for database operations.
         /// </summary>
         /// <param name="context">The database context to be used by this controller.</param>
@@ -25,7 +29,7 @@ namespace ourWinch.Controllers
         /// Displays the dashboard with counts of different types of service orders.
         /// </summary>
         /// <returns>
-        /// An <see cref="IActionResult"/> that renders the service type dashboard view.
+        /// An <see cref="IActionResult" /> that renders the service type dashboard view.
         /// </returns>
         public IActionResult Dashboard()
         {

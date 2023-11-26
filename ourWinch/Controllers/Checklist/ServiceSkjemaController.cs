@@ -15,15 +15,20 @@ namespace ourWinch.Controllers.Checklist
     /// Controller responsible for handling service schema operations.
     /// Authorization is required to access its methods.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class ServiceSkjemaController : Controller
     {
-        /// <summary>The database context used for data operations.</summary>
+        /// <summary>
+        /// The database context used for data operations.
+        /// </summary>
         private readonly AppDbContext _context;
-        /// <summary>The logger used to log information or errors.</summary>
+        /// <summary>
+        /// The logger used to log information or errors.
+        /// </summary>
         private readonly ILogger<ServiceSkjemaController> _logger;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ServiceSkjemaController"/> with the specified database context and logger.
+        /// Initializes a new instance of the <see cref="ServiceSkjemaController" /> with the specified database context and logger.
         /// </summary>
         /// <param name="context">The database context to be used for data operations.</param>
         /// <param name="logger">The logger for logging information or errors.</param>
@@ -36,7 +41,9 @@ namespace ourWinch.Controllers.Checklist
         /// <summary>
         /// Displays the default view for the Service Schema index page.
         /// </summary>
-        /// <returns>The Index view.</returns>
+        /// <returns>
+        /// The Index view.
+        /// </returns>
         public IActionResult Index()
         {
             // Return the default Index view.

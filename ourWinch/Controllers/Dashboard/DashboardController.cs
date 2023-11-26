@@ -23,7 +23,7 @@ public class DashboardController : Controller
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="DashboardController"/> class.
+    /// Initializes a new instance of the <see cref="DashboardController" /> class.
     /// </summary>
     /// <param name="context">The database context to be used by this controller.</param>
     public DashboardController(AppDbContext context)
@@ -36,7 +36,7 @@ public class DashboardController : Controller
     /// </summary>
     /// <param name="page">The current page number for pagination. Defaults to 1 if not specified.</param>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the dashboard view with the paginated list of service orders.
+    /// An <see cref="IActionResult" /> that renders the dashboard view with the paginated list of service orders.
     /// </returns>
     [HttpGet]
     public IActionResult Index(int page = 1)

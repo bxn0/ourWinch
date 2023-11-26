@@ -11,7 +11,7 @@ namespace ourWinch.Controllers.Account
     /// Controller responsible for managing user roles within the application.
     /// This includes operations like creating, editing, and deleting roles.
     /// </summary>
-    ///
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
 
     [Authorize]
     public class RolesController : Controller
@@ -38,8 +38,8 @@ namespace ourWinch.Controllers.Account
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RolesController"/> class.
-        /// This constructor injects the database context, user manager, role manager, and notification service 
+        /// Initializes a new instance of the <see cref="RolesController" /> class.
+        /// This constructor injects the database context, user manager, role manager, and notification service
         /// needed for role management operations within the application.
         /// </summary>
         /// <param name="db">The database context used for data operations related to roles.</param>
@@ -59,7 +59,9 @@ namespace ourWinch.Controllers.Account
         /// Displays the index view with a list of all roles.
         /// Retrieves roles from the database and passes them to the view.
         /// </summary>
-        /// <returns>The index view populated with a list of roles.</returns>
+        /// <returns>
+        /// The index view populated with a list of roles.
+        /// </returns>
         public IActionResult Index()
         {
             var roles = _db.Roles.ToList();
@@ -75,7 +77,7 @@ namespace ourWinch.Controllers.Account
         /// </summary>
         /// <param name="id">The ID of the role to edit. If null or empty, the method assumes a new role is being created.</param>
         /// <returns>
-        /// A view for creating a new role if the ID is null or empty, 
+        /// A view for creating a new role if the ID is null or empty,
         /// or a view for editing an existing role if an ID is provided.
         /// </returns>
         [HttpGet]

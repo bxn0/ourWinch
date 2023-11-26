@@ -12,6 +12,7 @@ namespace ourWinch.Controllers.Checklist
     /// The ElectroController handles all the electro-related operations.
     /// It requires authorization to access its methods.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class ElectroController : Controller
     {
@@ -31,7 +32,7 @@ namespace ourWinch.Controllers.Checklist
         // Constructors, methods, and other members would follow with similar documentation.
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ElectroController"/> class.
+        /// Initializes a new instance of the <see cref="ElectroController" /> class.
         /// </summary>
         /// <param name="context">The database context to be used for data operations.</param>
         /// <param name="serviceSkjemaService">The service for handling service schematics.</param>
@@ -46,7 +47,9 @@ namespace ourWinch.Controllers.Checklist
         /// <summary>
         /// Asynchronously gets the list of Mechanicals from the database context and returns the Index view.
         /// </summary>
-        /// <returns>A task that represents the asynchronous operation. The task result contains the IActionResult of the Index view.</returns>
+        /// <returns>
+        /// A task that represents the asynchronous operation. The task result contains the IActionResult of the Index view.
+        /// </returns>
 
         public async Task<IActionResult> Index()
         {
@@ -94,7 +97,7 @@ namespace ourWinch.Controllers.Checklist
         /// Otherwise, returns the Create view pre-populated with data from the service order.
         /// </returns>
         /// <remarks>
-        /// This method also checks for a success message from previous operations stored in TempData and 
+        /// This method also checks for a success message from previous operations stored in TempData and
         /// uses the notification service to display it.
         /// </remarks>
         [HttpGet]
@@ -157,7 +160,7 @@ namespace ourWinch.Controllers.Checklist
         /// This method performs additional operations such as updating the service schema if all components are completed,
         /// and displays a success message upon saving the list.
         /// </remarks>
-       
+
         [HttpPost]
         [Route("Electro/Create/{serviceOrderId}/{category}")]
         [ValidateAntiForgeryToken]
@@ -360,7 +363,9 @@ namespace ourWinch.Controllers.Checklist
         /// Checks if an Electro entity with the specified ID exists in the database.
         /// </summary>
         /// <param name="id">The ID of the Electro entity to check.</param>
-        /// <returns>True if the Electro entity exists; otherwise, false.</returns>
+        /// <returns>
+        /// True if the Electro entity exists; otherwise, false.
+        /// </returns>
         private bool ElectroExists(int id)
         {
             return _context.Electros.Any(e => e.Id == id);
@@ -370,7 +375,9 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously updates the service schema to reflect completion if all associated tasks are completed.
         /// </summary>
         /// <param name="serviceOrderId">The ID of the service order to check for completion.</param>
-        /// <returns>A task that represents the asynchronous update operation.</returns>
+        /// <returns>
+        /// A task that represents the asynchronous update operation.
+        /// </returns>
         private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
             await _serviceSkjemaService.UpdateServicejemaIfAllCompleted(serviceOrderId);

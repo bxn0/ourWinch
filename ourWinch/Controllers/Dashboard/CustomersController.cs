@@ -18,7 +18,7 @@ public class CustomersController : Controller
     private readonly AppDbContext _context;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CustomersController"/> class.
+    /// Initializes a new instance of the <see cref="CustomersController" /> class.
     /// </summary>
     /// <param name="context">The database context to be used by this controller.</param>
     public CustomersController(AppDbContext context)
@@ -33,7 +33,7 @@ public class CustomersController : Controller
     /// <param name="filter">The type of filter to apply, e.g., 'name'. Default is 'name'.</param>
     /// <param name="page">The current page number for pagination. Defaults to 1.</param>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the customers dashboard view with the filtered and paginated service orders.
+    /// An <see cref="IActionResult" /> that renders the customers dashboard view with the filtered and paginated service orders.
     /// </returns>
     [HttpGet]
     public IActionResult Dashboard(string query = "", string filter = "name", int page = 1)

@@ -7,6 +7,10 @@ using ourWinch.Services;
 namespace ourWinch.Controllers.Checklist
 {
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class FunksjonsTestController : Controller
     {
@@ -15,12 +19,18 @@ namespace ourWinch.Controllers.Checklist
         /// Authorization is required to access its methods.
         /// </summary>
         private readonly AppDbContext _context;
+        /// <summary>
+        /// The service skjema service
+        /// </summary>
         private readonly ServiceSkjemaService _serviceSkjemaService;
+        /// <summary>
+        /// The iris service
+        /// </summary>
         private readonly INotyfService _irisService;
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FunksjonsTestController"/> class.
+        /// Initializes a new instance of the <see cref="FunksjonsTestController" /> class.
         /// </summary>
         /// <param name="context">The application's database context.</param>
         /// <param name="serviceSkjemaService">A service for handling service schematics operations.</param>
@@ -36,7 +46,7 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously retrieves all Mechanical entities from the database and provides them to the Index view.
         /// </summary>
         /// <returns>
-        /// A task that represents the asynchronous operation. 
+        /// A task that represents the asynchronous operation.
         /// The task result contains the IActionResult for the Index view, which displays a list of Mechanical entities.
         /// </returns>
         // GET: FunksjonsTest
@@ -90,7 +100,7 @@ namespace ourWinch.Controllers.Checklist
         /// Otherwise, the Create view is returned with the FunksjonsTestListViewModel pre-populated with the service order data.
         /// </returns>
         /// <remarks>
-        /// The method also checks for a success message from previous operations stored in TempData and 
+        /// The method also checks for a success message from previous operations stored in TempData and
         /// uses the notification service to display it.
         /// </remarks>
         // GET: FunksjonsTest/Create
@@ -366,7 +376,9 @@ namespace ourWinch.Controllers.Checklist
         /// Checks if a FunksjonsTest entity with the specified ID exists in the database.
         /// </summary>
         /// <param name="id">The ID of the FunksjonsTest entity to check for existence.</param>
-        /// <returns>True if the entity exists; otherwise, false.</returns>
+        /// <returns>
+        /// True if the entity exists; otherwise, false.
+        /// </returns>
         private bool FunksjonsTestExists(int id)
         {
             // Use LINQ to check for the existence of the FunksjonsTest entity with the given ID.
@@ -378,7 +390,9 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously updates the service schema to reflect that all associated tasks are completed if applicable.
         /// </summary>
         /// <param name="serviceOrderId">The ID of the service order to check and update.</param>
-        /// <returns>A task that represents the asynchronous update operation.</returns>
+        /// <returns>
+        /// A task that represents the asynchronous update operation.
+        /// </returns>
         private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
             // Await the completion of the update operation on the service schema.
