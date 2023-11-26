@@ -34,7 +34,7 @@ namespace ourWinch
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
                 serverOptions.AddServerHeader = false;
-                Console.WriteLine("Kestrel is now configured to listen on port 5002 for any IP address.");
+                
             });
 
 
