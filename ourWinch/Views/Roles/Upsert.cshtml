@@ -37,18 +37,19 @@
                 <div class="form-group row py-2 ">
                     <div class="col-8 offset-4 row">
                         <div class="col">
+
                             @if (Model != null && !String.IsNullOrEmpty(Model.Id))
                             {
-                               
-                            //update
-                                <input type="submit" class="btn btn-info w-100" value="Oppdater" />
-                                
+
+                                //update
+                                <input type="submit" class="btn btn-info w-100" value="Oppdater"/>
+
                             }
                             else
                             {
                                 //create
                                 var title = "Lag Roll";
-                                <input type="submit" class="btn btn-primary w-100" value="Lag" />
+                                <input type="submit" class="btn btn-primary w-100" value="Lag"/>
 
                             }
                         </div>

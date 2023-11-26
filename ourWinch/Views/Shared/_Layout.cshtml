@@ -7,12 +7,12 @@
 
 @{
     ApplicationUser user = null;
-    bool isAdmin = false; // isAdmin değişkenini burada tanımlayın ve varsayılan değeri false olarak ayarlayın.
+    bool isAdmin = false; 
 
     if (SignInManager.IsSignedIn(User))
     {
         user = await UserManager.GetUserAsync(User);
-        isAdmin = await UserManager.IsInRoleAsync(user, "Admin"); // isAdmin değerini burada ayarlayın.
+        isAdmin = await UserManager.IsInRoleAsync(user, "Admin"); 
     }
 }
 
@@ -21,41 +21,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css " rel="stylesheet">
-    <!-- Bootstrap JS ve bağımlılıkları -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/2368a3baef.js" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS with Popper -->
-
     <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js "></script>
-    <!-- Toastr-->
     <link rel="stylesheet" href="~/css/toastr.css" crossorigin="anonymous" />
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-
-    <!-- FontAwesome (ikonlar için) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/_Layout.css" />
     <link rel="stylesheet" href="~/css/Dashboard/completed.css" />
     <link rel="stylesheet" href="~/css/ServiceOrder/checklist.css" />
-
+    <link rel="icon" type="image/png" href="~/img/logo.png" />
 
     <title>@(ViewBag.Title) </title>
 
-    <!-- Favicon eklenen kod -->
-    <link rel="icon" type="image/png" href="~/img/logo.png" />
-
 </head>
 <body>
-    <!-- Navbar Kısmı -->
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark m-0 p-0 text-light">
+                                                                        <!-- Navbar Section -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark m-0 p-0 text-light  ">
         <div class="container-fluid ">
             <!-- Brand/logo -->
             <a class="navbar-brand" href="#">
@@ -80,8 +68,7 @@
                 <!-- User Info & Logout -->
                 
                 <ul class="user-icon-name d-flex justify-content-center mr-3 ">
-                    <i class="fas fa-user" style="margin-top: 20px;"></i>
-                    <!-- User name will be inserted here -->
+                    <i class="fas fa-user" style="margin-top: 20px;"></i>                   
                     @if (SignInManager.IsSignedIn(User))
             {
                     <span class=" user-name mt-3 ml-2">@($"{user?.Fornavn} {user?.Etternavn}")</span>
@@ -100,7 +87,7 @@
             </div>
         </div>
     </nav>
-    <!-- Sidebar Kısmı -->
+                                                                        <!-- Sidebar Section -->
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-2 d-none d-md-block sidebar width:250px">
@@ -129,12 +116,12 @@
 
                         @if(isAdmin){
                         <li class="nav-item mt-3">
-                            <!-- "Rapporter" bağlantısı -->
+                            <!-- "Rapporter" -->
                             <a asp-controller="Reports" asp-action="Dashboard" data-bs-toggle="collapse" data-bs-target="#kunderSubmenu" class="nav-link">
                                 <i class="fa fa-bar-chart"></i> Rapporter
                             </a>
 
-                            <!-- "Kunder" alt sekmesi (varsayılan olarak kapalı) -->
+                            <!-- "Kunder" submenu -->
                                 <ul id="kunderSubmenu" class="collapse list-unstyled">
                                 <li class="nav-item mt-3 ps-4">
                                     <a asp-controller="Customers" asp-action="Dashboard" class="nav-link">
@@ -205,21 +192,38 @@
 </body>
 
 </html>
-<!-- Include jQuery if it's not already included -->
 <script>
+    /**
+     * <summary>
+     * Adjusts the top margin of the main content panel based on the navbar's collapsed or expanded state.
+     * </summary>
+     *
+     * <functionality>
+     * - Listens for the 'DOMContentLoaded' event to ensure the DOM is fully loaded before executing.
+     * - Selects the navbar toggler button and the main content panel.
+     * - Adds a 'click' event listener to the navbar toggler.
+     * - Checks the state of the navbar (collapsed or expanded) on each click.
+     * - Adjusts the top margin of the content panel: sets to 0px if navbar is expanded, or to 90px if collapsed.
+     * </functionality>
+     *
+     * <usage>
+     * - Enhances webpage responsiveness and visual appearance, especially on smaller screens.
+     * - Prevents content panel overlap with an expanded navbar, maintaining UI integrity and usability.
+     * </usage>
+     */
     document.addEventListener("DOMContentLoaded", function () {
         var navbarToggler = document.querySelector('.navbar-toggler');
-        var contentPanel = document.querySelector('.render-body'); // Bu sınıflar içeriğinizi temsil ediyor
+        var contentPanel = document.querySelector('.render-body');
 
         navbarToggler.addEventListener('click', function () {
             var navbarCollapsed = document.querySelector('.navbar-collapse').classList.contains('show');
 
             if (navbarCollapsed) {
-                // Navbar açık, içeriği aşağı kaydır
-                contentPanel.style.marginTop = '0px'; // Navbar kapalı olduğunda margin'i kaldır
+                
+                contentPanel.style.marginTop = '0px'; // Remove margin when Navbar is closed
             } else {
-                // Navbar kapalı, içeriği yukarı çek
-                contentPanel.style.marginTop = '90px'; // Navbar açık olduğunda içeriği aşağı itecek margin değeri
+                
+                contentPanel.style.marginTop = '90px'; // Margin value that will push down the content when the Navbar is open
             }
         });
     });
