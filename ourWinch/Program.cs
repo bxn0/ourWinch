@@ -19,35 +19,33 @@ namespace ourWinch
         
         public static void Main(string[] args)
         {
-
-            
-
-
+            // Initialize a new WebApplication builder with the passed arguments.
             var builder = WebApplication.CreateBuilder(args);
 
-            
-
-            // App Configuration
+            // Retrieve the connection string from the application's configuration
+            // and ensure it is not null or empty.
             string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             if (string.IsNullOrEmpty(connectionString))
             {
                 throw new InvalidOperationException("Connection string is missing.");
             }
 
-
+            // Set up the identity system for the application, adding default token providers.
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            //builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
-
+            // Configure logging to include console and debug output.
             builder.Services.AddLogging(loggingBuilder =>
             {
                 loggingBuilder.AddConsole();
                 loggingBuilder.AddDebug();
             });
+
+            // Register an email sender service as a transient dependency.
             builder.Services.AddTransient<IEmailSender, MailJetEmailSender>();
+
+            // Configure identity options, such as password requirements and lockout settings.
             builder.Services.Configure<IdentityOptions>(opt =>
             {
                 opt.Password.RequiredLength = 5;
@@ -60,11 +58,15 @@ namespace ourWinch
 
 
 
-            // Add services to the container.
+            // Add essential MVC services to the application's service collection.
             builder.Services.AddControllers();
             builder.Services.AddControllersWithViews();
+
+            // Enable API exploration and Swagger for API documentation.
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Configure toast notifications with specified duration, dismissibility, and position.
             builder.Services.AddNotyf(config =>
             {
                 config.DurationInSeconds = 10;
@@ -72,51 +74,56 @@ namespace ourWinch
                 config.Position = NotyfPosition.TopCenter;
             });
 
-            // Add the DbContext to the DI container.
+            // Add Entity Framework context for the application with specific options,
+            // such as connection string and command timeout settings.
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
                 {
-                    sqlOptions.CommandTimeout(30); // Veritabanı komutlarının zaman aşımı süresini ayarla
+                    sqlOptions.CommandTimeout(30); // Set the timeout period for database commands
                 })
-                .LogTo(Console.WriteLine); // Bu satırı .UseSqlServer çağrısından sonra ve ayrı bir satırda ekle
+                .LogTo(Console.WriteLine); // Log EF Core operations to the console.
             });
 
-            // Register ServiceSkjemaService for DI.
+            // Register a custom service as a scoped dependency for dependency injection.
             builder.Services.AddScoped<ServiceSkjemaService>();
 
-            // Set the server to listen on 0.0.0.0:5002
+            // Configure the Kestrel web server to listen on all network interfaces on port 5002.
             builder.WebHost.ConfigureKestrel(serverOptions =>
             {
                 serverOptions.ListenAnyIP(5002);
                 Console.WriteLine("Kestrel is now configured to listen on port 5002 for any IP address.");
             });
 
+            // Build the web application using the configured services and middlewares.
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline based on whether the environment is development or production.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name v1"));
-                app.UseDeveloperExceptionPage();  // Bu satırı ekledik.
+                app.UseDeveloperExceptionPage();  // Use the developer exception page for detailed error information.
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                app.UseExceptionHandler("/Home/Error"); // Use a generic error handler page.
+                app.UseHsts(); // Use HTTP Strict Transport Security.
             }
 
+            // Middlewares for handling HTTPS redirection, serving static files, routing, authentication, and authorization.
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
 
+            // Define the default route for the application.
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}");
 
+            // Run the application.
             app.Run();
         }
     }
