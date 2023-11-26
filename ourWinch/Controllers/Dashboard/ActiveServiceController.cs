@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 
-[Authorize]
+
+
 /// <summary>
 /// The controller in the application for managing active services.
 /// </summary>
+[Authorize]
 public class ActiveServiceController : Controller
 {
     /// <summary>

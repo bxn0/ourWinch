@@ -15,13 +15,20 @@ namespace ourWinch.Services
     /// <summary>
     /// A service for sending emails using the Mailjet API.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Identity.UI.Services.IEmailSender" />
     public class MailJetEmailSender : IEmailSender
     {
 
         // Configuration object to access application settings.
+        /// <summary>
+        /// The configuration
+        /// </summary>
         private readonly IConfiguration _configuration;
 
         // Options object to hold MailJet API credentials.
+        /// <summary>
+        /// The mail jet options
+        /// </summary>
         public MailJetOptions _mailJetOptions;
 
         /// <summary>
@@ -41,7 +48,9 @@ namespace ourWinch.Services
         /// <param name="email">The recipient's email address.</param>
         /// <param name="subject">The subject of the email.</param>
         /// <param name="htmlMessage">The HTML message body of the email.</param>
-        /// <returns>A Task representing the asynchronous operation.</returns>
+        /// <returns>
+        /// A Task representing the asynchronous operation.
+        /// </returns>
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             // Retrieve MailJet configuration options from the application settings.

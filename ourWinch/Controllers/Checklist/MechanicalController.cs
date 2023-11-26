@@ -13,19 +13,26 @@ namespace ourWinch.Controllers.Checklist
     /// Controller for managing mechanical-related operations within the application.
     /// Access to the controller's actions requires authorization.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class MechanicalController : Controller
     {
-        /// <summary>The database context used for data operations.</summary>
+        /// <summary>
+        /// The database context used for data operations.
+        /// </summary>
         private readonly AppDbContext _context;
-        /// <summary>The service for managing service forms related to mechanical components.</summary>
+        /// <summary>
+        /// The service for managing service forms related to mechanical components.
+        /// </summary>
         private readonly ServiceSkjemaService _serviceSkjemaService;
-        /// <summary>The notification service for sending user notifications.</summary>
+        /// <summary>
+        /// The notification service for sending user notifications.
+        /// </summary>
         private readonly INotyfService _irisService;
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MechanicalController"/> with the specified services.
+        /// Initializes a new instance of the <see cref="MechanicalController" /> with the specified services.
         /// </summary>
         /// <param name="context">The database context to be used for data operations.</param>
         /// <param name="serviceSkjemaService">The service for managing service forms.</param>
@@ -43,7 +50,7 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously retrieves all Mechanical entities from the database and provides them to the Index view.
         /// </summary>
         /// <returns>
-        /// A task that represents the asynchronous operation. 
+        /// A task that represents the asynchronous operation.
         /// The task result contains the IActionResult for the Index view, which displays a list of Mechanical entities.
         /// </returns>
         // GET: Mechanical
@@ -176,6 +183,7 @@ namespace ourWinch.Controllers.Checklist
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MechanicalListViewModel viewModel, int serviceOrderId)
         {
+            // var errors = ModelState.Values.SelectMany(x => x.Errors);
             // Check if the provided data in the view model is valid.
             if (ModelState.IsValid)
             {
@@ -381,7 +389,9 @@ namespace ourWinch.Controllers.Checklist
         /// Checks if a Mechanical entity with the specified ID exists in the database.
         /// </summary>
         /// <param name="id">The ID of the Mechanical entity to check for existence.</param>
-        /// <returns>True if the entity exists; otherwise, false.</returns>
+        /// <returns>
+        /// True if the entity exists; otherwise, false.
+        /// </returns>
         private bool MechanicalExists(int id)
         {
             // Use LINQ to check for the existence of the Mechanical entity with the given ID.
@@ -392,7 +402,9 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously updates the service schema to reflect that all associated tasks are completed if applicable.
         /// </summary>
         /// <param name="serviceOrderId">The ID of the service order to check and update.</param>
-        /// <returns>A task that represents the asynchronous update operation.</returns>
+        /// <returns>
+        /// A task that represents the asynchronous update operation.
+        /// </returns>
         private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
             // Await the completion of the update operation on the service schema.

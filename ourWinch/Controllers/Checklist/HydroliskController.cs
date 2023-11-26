@@ -10,6 +10,10 @@ namespace ourWinch.Controllers.Checklist
 {
 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     public class HydroliskController : Controller
     {
@@ -20,11 +24,17 @@ namespace ourWinch.Controllers.Checklist
         private readonly AppDbContext _context;
 
         // Newly added service
-        private readonly ServiceSkjemaService _serviceSkjemaService; 
+        /// <summary>
+        /// The service skjema service
+        /// </summary>
+        private readonly ServiceSkjemaService _serviceSkjemaService;
+        /// <summary>
+        /// The iris service
+        /// </summary>
         private readonly INotyfService _irisService;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HydroliskController"/> class with necessary dependencies.
+        /// Initializes a new instance of the <see cref="HydroliskController" /> class with necessary dependencies.
         /// </summary>
         /// <param name="context">The database context used for data access operations.</param>
         /// <param name="serviceSkjemaService">A service for managing service schematics within the application.</param>
@@ -156,6 +166,7 @@ namespace ourWinch.Controllers.Checklist
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HydroliskListViewModel viewModel, int serviceOrderId)
         {
+            // var errors = ModelState.Values.SelectMany(x => x.Errors);
             // Check if the provided data in the view model is valid.
 
             if (ModelState.IsValid)
@@ -364,7 +375,9 @@ namespace ourWinch.Controllers.Checklist
         /// Checks if a Hydrolisk entity with the specified ID exists in the database.
         /// </summary>
         /// <param name="id">The ID of the Hydrolisk entity to check for existence.</param>
-        /// <returns>True if the entity exists; otherwise, false.</returns>
+        /// <returns>
+        /// True if the entity exists; otherwise, false.
+        /// </returns>
         private bool HydroliskExists(int id) // The method name should reflect the entity it checks for, e.g., HydroliskExists.
 
         {
@@ -375,7 +388,9 @@ namespace ourWinch.Controllers.Checklist
         /// Asynchronously updates the service schema to reflect that all associated tasks are completed if applicable.
         /// </summary>
         /// <param name="serviceOrderId">The ID of the service order to check and update.</param>
-        /// <returns>A task that represents the asynchronous update operation.</returns>
+        /// <returns>
+        /// A task that represents the asynchronous update operation.
+        /// </returns>
         private async Task UpdateServicejemaIfAllCompleted(int serviceOrderId)
         {
             // Await the completion of the update operation on the service schema.

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
-[Authorize]
+
 /// <summary>
 /// Controller for managing completed services in the application.
 /// </summary>
+[Authorize]
 public class CompletedServiceController : Controller
 {
     /// <summary>
