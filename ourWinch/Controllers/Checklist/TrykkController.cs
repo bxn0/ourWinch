@@ -117,6 +117,7 @@ namespace ourWinch.Controllers.Checklist
         [Route("Trykk/Create/{serviceOrderId}/{category}")]
         public IActionResult Create(int serviceOrderId, string category = "Trykk")
         {
+            // var errors = ModelState.Values.SelectMany(x => x.Errors);
             // Display success message from TempData if it exists.
             if (TempData["SuccessMessageFunksjons"] != null)
             {
