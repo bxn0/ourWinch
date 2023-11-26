@@ -1,10 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using ourWinch;
 using ourWinch.Models.Account;
 
 
@@ -147,6 +144,7 @@ public class AccountController : Controller
     /// </summary>
     /// <returns></returns>
     [HttpGet]
+  
     public  IActionResult Login()
     {
         
@@ -232,6 +230,7 @@ public class AccountController : Controller
     /// The 'ForgotPassword' view along with the model and an indication of whether the code was sent.
     /// </returns>
     [HttpPost]
+   
     public IActionResult SendCode(ForgotPasswordViewModel model)
     {
         if (ModelState.IsValid)
@@ -302,6 +301,7 @@ public class AccountController : Controller
     /// <returns></returns>
     [HttpGet]
     [AllowAnonymous]
+    [ValidateAntiForgeryToken]
     public IActionResult ForgotPasswordConfirmation()
     {
         return View();
