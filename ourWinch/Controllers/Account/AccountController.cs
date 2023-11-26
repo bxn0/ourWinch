@@ -126,6 +126,7 @@ public class AccountController : Controller
         return View(model);
     }
     [HttpGet]
+  
     public  IActionResult Login()
     {
         
@@ -211,6 +212,7 @@ public class AccountController : Controller
     /// The 'ForgotPassword' view along with the model and an indication of whether the code was sent.
     /// </returns>
     [HttpPost]
+   
     public IActionResult SendCode(ForgotPasswordViewModel model)
     {
         if (ModelState.IsValid)
@@ -275,6 +277,7 @@ public class AccountController : Controller
 
     [HttpGet]
     [AllowAnonymous]
+    [ValidateAntiForgeryToken]
     public IActionResult ForgotPasswordConfirmation()
     {
         return View();
