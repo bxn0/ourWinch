@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification;
+using Microsoft.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -25,7 +26,18 @@ namespace ourWinch
 
             var builder = WebApplication.CreateBuilder(args);
 
-            
+
+
+            //removing headers
+
+
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.AddServerHeader = false;
+                Console.WriteLine("Kestrel is now configured to listen on port 5002 for any IP address.");
+            });
+
+
 
             // App Configuration
             string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -94,6 +106,20 @@ namespace ourWinch
 
             var app = builder.Build();
 
+
+
+            //adding headers
+            app.Use(async (context, next) =>
+            {
+                context.Response.Headers.Add("X-Xss-Protection", "1");
+                context.Response.Headers.Add("X-Frame-Options", "DENY");
+                context.Response.Headers.Add("Referrer-Policy", "no-referrer");
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+              
+                await next();
+            });
+            
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -112,10 +138,14 @@ namespace ourWinch
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+          
+          
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}");
+
+          
 
             app.Run();
         }
