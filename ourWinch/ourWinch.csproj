@@ -7,6 +7,10 @@
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<UserSecretsId>3abf215e-5233-4b7a-b2e5-dabf49f53942</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile></DocumentationFile>
+		<StartupObject>ourWinch.Program</StartupObject>
+		<RootNamespace>ourWinch</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
@@ -29,6 +33,7 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.2.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

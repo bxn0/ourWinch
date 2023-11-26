@@ -16,7 +16,7 @@ public class ServiceOrderController : Controller
     private readonly AppDbContext _context;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ServiceOrderController"/> class.
+    /// Initializes a new instance of the <see cref="ServiceOrderController" /> class.
     /// </summary>
     /// <param name="context">The database context to be used by this controller.</param>
     public ServiceOrderController(AppDbContext context)
@@ -28,7 +28,7 @@ public class ServiceOrderController : Controller
     /// Displays the dashboard for service orders.
     /// </summary>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the service order dashboard view.
+    /// An <see cref="IActionResult" /> that renders the service order dashboard view.
     /// </returns>
     public IActionResult Dashboard()
     {
@@ -40,7 +40,7 @@ public class ServiceOrderController : Controller
     /// Creates a new service order and displays the form for entering its details.
     /// </summary>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the view for creating a new service order.
+    /// An <see cref="IActionResult" /> that renders the view for creating a new service order.
     /// </returns>
     public IActionResult NewService()
     {
@@ -125,7 +125,7 @@ public class ServiceOrderController : Controller
     /// Displays a list of all service orders.
     /// </summary>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the view with the list of all service orders.
+    /// An <see cref="IActionResult" /> that renders the view with the list of all service orders.
     /// </returns>
     public IActionResult Index()
     {
@@ -139,7 +139,7 @@ public class ServiceOrderController : Controller
     /// <param name="id">The ID of the service order to display.</param>
     /// <param name="category">The category of the service order, defaulting to 'Mechanical'.</param>
     /// <returns>
-    /// An <see cref="IActionResult"/> that renders the view for the specific category of the service order.
+    /// An <see cref="IActionResult" /> that renders the view for the specific category of the service order.
     /// Returns 'NotFound' if the service order does not exist or the category is not recognized.
     /// </returns>
     public IActionResult Details(int id, string category = "Mechanical")

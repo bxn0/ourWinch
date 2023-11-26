@@ -11,6 +11,7 @@ namespace ourWinch.Controllers.Account
     /// Controller responsible for managing user-related operations within the application.
     /// This includes user management tasks such as creating, editing, and deleting user accounts.
     /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class UserController : Controller
     {
         /// <summary>
@@ -31,7 +32,7 @@ namespace ourWinch.Controllers.Account
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserController"/> class.
+        /// Initializes a new instance of the <see cref="UserController" /> class.
         /// This constructor injects the database context, user manager, and notification service
         /// required for user management operations within the application.
         /// </summary>
@@ -52,7 +53,9 @@ namespace ourWinch.Controllers.Account
         /// Retrieves users from the database, determines each user's role, and passes the data to the view.
         /// If a user does not have an assigned role, 'None' is set as their role.
         /// </summary>
-        /// <returns>The index view populated with a list of users and their roles.</returns>
+        /// <returns>
+        /// The index view populated with a list of users and their roles.
+        /// </returns>
         public IActionResult Index()
         {
             var userList = _db.ApplicationUser.ToList();

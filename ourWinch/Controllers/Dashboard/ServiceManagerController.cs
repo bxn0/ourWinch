@@ -13,6 +13,10 @@ public class ServiceManager
     /// </summary>
     private readonly AppDbContext _context;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ServiceManager"/> class.
+    /// </summary>
+    /// <param name="context">The context.</param>
     public ServiceManager(AppDbContext context)
     {
         _context = context;
