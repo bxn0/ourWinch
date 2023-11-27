@@ -381,6 +381,13 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ApplicationUser> ApplicationUser { get; set; }
 }
 
+## Docker
+
+
+https://github.com/bxn0/ourWinch/assets/110263792/420d4cc8-90ab-4f90-8065-0bd7b6e4fe43
+
+
+
 ## Swagger and Notyf Service
 
 Swagger is used to generate and view API documentation (AddSwaggerGen, UseSwagger, UseSwaggerUI). The Notyf service is used for managing notifications (AddNotyf).
