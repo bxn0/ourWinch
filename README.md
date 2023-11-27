@@ -5,7 +5,7 @@
 ## mobil: [94717177]  pass: [Icardi1990!]
 
 # Demonstration of the app:
-<!--> ![IGLAND WINCH]![My-Movie-2-2](https://github.com/bxn0/ourWinch/assets/60920330/1b61cd29-58e9-475f-9295-c3993a5faee2) </>
+
 ![Nøsted App Demonstrasjon1](https://github.com/bxn0/ourWinch/assets/112567741/e7902160-44ac-4bb9-a276-c5c9e6fee8ae)
 
 
