@@ -5,7 +5,7 @@
 ## mobil: [94717177]  pass: [Icardi1990!]
 
 # Demonstration of the app:
-![Nøsted App Demonstrasjon1](https://github.com/bxn0/ourWinch/assets/112567741/76883913-cd8c-4342-a82c-b3bf321fc848)
+   ![Nøsted App Demonstrasjon1](https://github.com/bxn0/ourWinch/assets/112567741/76883913-cd8c-4342-a82c-b3bf321fc848)
 
 
 
