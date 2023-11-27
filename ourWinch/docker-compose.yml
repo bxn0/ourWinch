@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  app:
+    image: your-app-image
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:5002"
+      - "443:5002"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=db;Initial Catalog=NostedDB;User ID=sa;Password=MyStrongPass123!;Encrypt=False;TrustServerCertificate=True;
+      
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      SA_PASSWORD: MyStrongPass123!
+      ACCEPT_EULA: Y
+    ports:
+      - "1433:1433"
+    volumes:
+      - dbdata:/var/opt/mssql
+
+volumes:
+  dbdata:
